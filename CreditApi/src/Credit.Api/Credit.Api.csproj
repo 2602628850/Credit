@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>../../../Credit.Api.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Commons\Data.Core\Data.Core.csproj" />
+    <ProjectReference Include="..\Commons\Data.FreeSql\FreeSql.Core.csproj" />
+    <ProjectReference Include="..\Commons\Swagger.UI\Swagger.UI.csproj" />
+    <ProjectReference Include="..\Services\Credit.UserServices\Credit.UserServices.csproj" />
+  </ItemGroup>
+
+</Project>
