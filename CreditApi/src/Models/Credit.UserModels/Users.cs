@@ -2,12 +2,15 @@
 
 namespace Credit.UserModels
 {
-    [Table(Name = "users")]
+    /// <summary>
+    ///  用户
+    /// </summary>
     public class Users
     {
         /// <summary>
         /// 
         /// </summary>
+       [Column(IsPrimary = true)]
         public long Id { get; set; }
 
         /// <summary>

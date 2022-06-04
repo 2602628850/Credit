@@ -1,5 +1,6 @@
 ﻿using Credit.UserModels;
 using Credit.UserServices.Dtos;
+using Data.Commons.Helpers;
 
 namespace Credit.UserServices
 {
@@ -21,14 +22,17 @@ namespace Credit.UserServices
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public void CreateUser(UserInput input)
+        public async Task CreateUser(UserInput input)
         {
-            _freeSql.Insert(new Users { 
-                Id = input.Id,
+            var user = new Users
+            {
+                Id = IdHelper.GetId(),
                 Nickname = input.Nickname,
                 Username = input.Username,
                 Password = input.Password
-            });
+            };
+            var sql = _freeSql.Insert(user).ToSql();
+            await _freeSql.Insert(user).ExecuteInsertedAsync();
         }
     }
 }

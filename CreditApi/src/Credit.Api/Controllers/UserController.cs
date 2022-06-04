@@ -1,14 +1,14 @@
 ﻿using Credit.UserServices.Dtos;
 using Credit.UserServices;
 using Microsoft.AspNetCore.Mvc;
+using Data.Core.Controllers;
 
 namespace Credit.Api.Controllers
 {
     /// <summary>
     ///  用户管理
     /// </summary>
-    [ApiController]
-    [Route("v1/[controller]")]
+    [Route("v1/[controller]/[action]")]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -25,10 +25,10 @@ namespace Credit.Api.Controllers
         ///  用户新增
         /// </summary>
         /// <param name="input"></param>
-        [HttpPost("CreateUser")]
-        public void CreateUser([FromBody] UserInput input)
+        [HttpPost]
+        public async Task CreateUser([FromBody] UserInput input)
         { 
-            _userService.CreateUser(input);
+            await _userService.CreateUser(input);
         }
 
 
@@ -36,7 +36,7 @@ namespace Credit.Api.Controllers
         ///  获取用户信息
         /// </summary>
         /// <returns></returns>
-        [HttpGet("GetUserInfo")]
+        [HttpGet]
         public object GetUserInfo()
         {
             return new { name = "111111" };

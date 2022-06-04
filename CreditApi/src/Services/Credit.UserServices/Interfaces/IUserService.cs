@@ -14,6 +14,6 @@ namespace Credit.UserServices
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        void CreateUser(UserInput input);
+        Task CreateUser(UserInput input);
     }
 }
