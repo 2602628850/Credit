@@ -20,7 +20,7 @@
             </summary>
             <param name="input"></param>
         </member>
-        <member name="M:Credit.Api.Controllers.UserController.GetUserInfo">
+        <member name="M:Credit.Api.Controllers.UserController.GetUserInfo(System.Int64)">
             <summary>
              获取用户信息
             </summary>

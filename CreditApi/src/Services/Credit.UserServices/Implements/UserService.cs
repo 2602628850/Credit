@@ -1,5 +1,6 @@
 ﻿using Credit.UserModels;
 using Credit.UserServices.Dtos;
+using Data.Commons.Extensions;
 using Data.Commons.Helpers;
 
 namespace Credit.UserServices
@@ -33,6 +34,19 @@ namespace Credit.UserServices
             };
             var sql = _freeSql.Insert(user).ToSql();
             await _freeSql.Insert(user).ExecuteInsertedAsync();
+        }
+
+        /// <summary>
+        ///  获取用户信息
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<UserDto> GetUserById(long userId)
+        {
+            var user = await _freeSql.Select<Users>()
+                    .Where(s => s.Id == userId)
+                    .ToOneAsync();
+            return user.MapTo<UserDto>();
         }
     }
 }

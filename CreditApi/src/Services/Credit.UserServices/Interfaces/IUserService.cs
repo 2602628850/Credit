@@ -15,5 +15,12 @@ namespace Credit.UserServices
         /// <param name="input"></param>
         /// <returns></returns>
         Task CreateUser(UserInput input);
+
+        /// <summary>
+        ///  获取用户信息
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task<UserDto> GetUserById(long userId);
     }
 }

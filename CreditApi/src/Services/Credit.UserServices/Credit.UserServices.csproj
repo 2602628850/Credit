@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FreeSql.Provider.MySql" Version="3.2.661" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Commons\Data.Commons\Data.Commons.csproj" />
     <ProjectReference Include="..\..\Models\Credit.UserModels\Credit.UserModels.csproj" />
   </ItemGroup>

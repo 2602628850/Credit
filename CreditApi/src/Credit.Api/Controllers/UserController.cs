@@ -37,9 +37,9 @@ namespace Credit.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public object GetUserInfo()
+        public async Task<UserDto> GetUserInfo([FromQuery]long userId)
         {
-            return new { name = "111111" };
+            return await _userService.GetUserById(userId);
         }
     }
 }
