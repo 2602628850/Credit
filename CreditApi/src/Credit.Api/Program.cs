@@ -4,21 +4,26 @@ using System.Reflection;
 using FreeSql.Core;
 using Credit.Api;
 using Data.Commons.Helpers;
+using Data.Commons.Attributes;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMvc();
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(typeof(ApiResultAttribute));
+});
 builder.Services.AddEndpointsApiExplorer();
-//ÅäÖÃÎÄ¼ş¼ÓÔØ
+//åŠ è½½jsonæ–‡ä»¶
 builder.Configuration.LoadJsonFile();
-//SwaggerÅäÖÃ
+//Swaggeré…ç½®
 builder.Services.AddSwaggerService($"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
-//FreeSql×¢Èë
+
+//FreeSql×¢åˆå§‹åŒ–
 var dbConnection = builder.Configuration.GetSection("ConnectionStrings:Credit").Value;
 builder.Services.FreeSqlInit(dbConnection);
 builder.Services.AddTransients();
-//Ñ©»¨Ëã·¨
+//idåˆå§‹åŒ–
 IdHelper.Init(1,1);
 var app = builder.Build();
 
