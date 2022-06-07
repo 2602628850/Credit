@@ -27,7 +27,7 @@ namespace Data.Commons.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static IList<T> MapToList<T>(this object obj)
+        public static List<T> MapToList<T>(this object obj)
         {
             if (obj is IEnumerable<object>)
             {

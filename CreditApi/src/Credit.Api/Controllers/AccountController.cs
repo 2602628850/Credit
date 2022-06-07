@@ -1,0 +1,43 @@
+using Credit.UserServices;
+using Credit.UserServices.Dtos;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Credit.Api.Controllers;
+
+/// <summary>
+///  账号管理
+/// </summary>
+[Route("v1/[controller]/[action]")]
+public class AccountController : Controller
+{
+    private readonly IUserService _userService;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public AccountController(IUserService userService)
+    {
+        _userService = userService;
+    }
+
+    /// <summary>
+    ///  账号注册
+    /// </summary>
+    /// <param name="input"></param>
+    [HttpPost]
+    public async Task RegisterAccount([FromBody]RegisterUserInput input)
+    {
+        await _userService.RegisterUser(input);
+    }
+
+    /// <summary>
+    ///  用户登录
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public async Task<UserLoginOutput> UserLogin([FromBody]UserLoginInput input)
+    {
+        return await _userService.UserLogin(input);
+    }
+}

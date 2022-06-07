@@ -1,14 +1,27 @@
 ﻿using Credit.UserServices.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Data.Commons.Dtos;
 
 namespace Credit.UserServices
 {
+    /// <summary>
+    ///  用户管理接口定义
+    /// </summary>
     public interface IUserService
     {
+        /// <summary>
+        ///  注册用户
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task RegisterUser(RegisterUserInput input);
+
+        /// <summary>
+        ///  用户登录
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<UserLoginOutput> UserLogin(UserLoginInput input);
+        
         /// <summary>
         ///  用户新增
         /// </summary>
@@ -22,5 +35,12 @@ namespace Credit.UserServices
         /// <param name="userId"></param>
         /// <returns></returns>
         Task<UserDto> GetUserById(long userId);
+        
+        /// <summary>
+        ///  获取用户列表
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PagedOutput<UserDto>> GetUserPagedList(PagedInput input);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Credit.UserServices.Dtos;
 using Credit.UserServices;
+using Data.Commons.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Data.Core.Controllers;
 
@@ -40,6 +41,17 @@ namespace Credit.Api.Controllers
         public async Task<UserDto> GetUserInfo([FromQuery]long userId)
         {
             return await _userService.GetUserById(userId);
+        }
+        
+        /// <summary>
+        ///  获取用户列表
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<PagedOutput<UserDto>> GetUserPagedList([FromQuery]PagedInput input)
+        {
+            return await _userService.GetUserPagedList(input);
         }
     }
 }

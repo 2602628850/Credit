@@ -4,6 +4,29 @@
         <name>Credit.Api</name>
     </assembly>
     <members>
+        <member name="T:Credit.Api.Controllers.AccountController">
+            <summary>
+             账号管理
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.AccountController.#ctor(Credit.UserServices.IUserService)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.AccountController.RegisterAccount(Credit.UserServices.Dtos.RegisterUserInput)">
+            <summary>
+             账号注册
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AccountController.UserLogin(Credit.UserServices.Dtos.UserLoginInput)">
+            <summary>
+             用户登录
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:Credit.Api.Controllers.UserController">
             <summary>
              用户管理
@@ -24,6 +47,13 @@
             <summary>
              获取用户信息
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.GetUserPagedList(Data.Commons.Dtos.PagedInput)">
+            <summary>
+             获取用户列表
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:Credit.Api.ServicesTransient">

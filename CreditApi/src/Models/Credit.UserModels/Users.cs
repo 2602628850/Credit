@@ -22,5 +22,20 @@ namespace Credit.UserModels
         ///  昵称
         /// </summary>
         public string Nickname { get; set; } = string.Empty;
+
+        /// <summary>
+        ///  头像
+        /// </summary>
+        public string HeadImage { get; set; } = string.Empty;
+
+        /// <summary>
+        ///  可用余额
+        /// </summary>
+        public decimal Balance { get; set; }
+        
+        /// <summary>
+        ///  是否管理员
+        /// </summary>
+        public int IsAdmin { get; set; }
     }
 }
