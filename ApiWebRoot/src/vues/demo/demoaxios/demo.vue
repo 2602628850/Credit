@@ -1,4 +1,5 @@
 <template>
+<el-button type="primary">Primary</el-button>
 <h1>axios</h1>
 </template>
 <script>
@@ -40,7 +41,7 @@ export default {
   },
   mounted(){
      //this.getdata(); //post提交
-     //this.getdataquery(); //get提交
+     this.getdataquery(); //get提交
   }
 };
 </script>

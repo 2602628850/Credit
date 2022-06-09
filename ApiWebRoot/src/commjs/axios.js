@@ -15,7 +15,7 @@ export default{
 
     Axios.interceptors.request.use(
       config => {
-        //登录成功后需要把Access-Token存到缓存里面,以后每次请求都需要带上token
+        //登录成功后(Vue.ls.set('Access-Token','abcde'))需要把Access-Token存到缓存里面,以后每次请求都需要带上token
         var token=Vue.ls.get('Access-Token');
         if(token){
         //后期会把下面代码放出来
