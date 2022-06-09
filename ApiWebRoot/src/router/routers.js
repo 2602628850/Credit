@@ -22,7 +22,7 @@ const router = createRouter({
 export default{
   router,
   install(Vue){
-  //添加路由防守,防止未登录就随意进入系统页面
+  //添加路由防守,防止未登录就随意进入系统页面,登录注册页面除外
 router.beforeEach((to,form,next)=>{
   if(to.path.indexOf('/login') !=-1||to.path.indexOf('/register') !=-1){
     return next();
