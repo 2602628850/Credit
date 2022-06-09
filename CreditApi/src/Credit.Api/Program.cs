@@ -5,6 +5,7 @@ using FreeSql.Core;
 using Credit.Api;
 using Data.Commons.Helpers;
 using Data.Commons.Attributes;
+using Data.Commons.Runtime;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,5 +50,6 @@ app.AddSeaggerConfigure();
 
 app.MapControllers();
 
+app.UseAllRoadApiExceptionHandler();
 
 app.Run();

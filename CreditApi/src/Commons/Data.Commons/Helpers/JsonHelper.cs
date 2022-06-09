@@ -35,5 +35,15 @@ namespace Data.Commons.Helpers
         {
             return JsonConvert.DeserializeAnonymousType(value, anonymousTypeObject);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string SerializeObject(object value)
+        { 
+            return JsonConvert.SerializeObject(value);
+        }
     }
 }

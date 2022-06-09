@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyModel;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace Swagger.UI
 {
@@ -36,8 +38,18 @@ namespace Swagger.UI
                     }
                 });
                 //文档注释
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                option.IncludeXmlComments(xmlPath, true);
+                var xmlAssemblies = DependencyContext.Default.CompileLibraries
+                        .Where(s => s.Type != "package")
+                        .Where(s => s.Name.EndsWith(".Api") || s.Name.EndsWith("Services"));
+                foreach (var assembly in xmlAssemblies)
+                {
+                    var path = assembly.Name;
+                    var xmlPath = Path.Combine(AppContext.BaseDirectory, $"{assembly.Name}.xml");
+                    if (File.Exists(xmlPath))
+                    {
+                        option.IncludeXmlComments(xmlPath, true);
+                    }
+                }
                 option.OrderActionsBy(o => o.RelativePath);
             });
         }

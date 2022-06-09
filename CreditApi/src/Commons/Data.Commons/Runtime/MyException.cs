@@ -26,3 +26,28 @@ public class MyException : Exception
     /// </summary>
     public string ErrorMessage { get; private set; }
 }
+
+/// <summary>
+///   登录异常信息处理
+/// </summary>
+public class LoginException : Exception
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    public LoginException() { }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="message"></param>
+    public LoginException(string message) : base(message)
+    {
+        ErrorMessage = message;
+    }
+
+   
+    /// <summary>
+    /// 异常信息
+    /// </summary>
+    public string ErrorMessage { get; private set; }
+}
