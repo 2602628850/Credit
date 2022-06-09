@@ -1,5 +1,5 @@
 <template>
-<router-link :to="`/vuedemo`" >路由demoto</router-link>
+<router-link :to="`/axioxdemo`" >测试axios</router-link>
 </template>
 <script>
 export default {
