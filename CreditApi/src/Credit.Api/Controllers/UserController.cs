@@ -1,6 +1,7 @@
 ﻿using Credit.UserServices.Dtos;
 using Credit.UserServices;
 using Data.Commons.Dtos;
+using Data.Commons.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Data.Core.Controllers;
 
@@ -10,14 +11,16 @@ namespace Credit.Api.Controllers
     ///  用户管理
     /// </summary>
     [Route("v1/[controller]/[action]")]
-    public class UserController : Controller
+    public class UserController : BaseUserController
     {
         private readonly IUserService _userService;
 
         /// <summary>
         /// 
         /// </summary>
-        public UserController(IUserService userService)
+        public UserController(
+            ITokenManager tokenManager
+            ,IUserService userService) : base(tokenManager)
         {
             _userService = userService;
         }
@@ -38,9 +41,9 @@ namespace Credit.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<UserDto> GetUserInfo([FromQuery]long userId)
+        public async Task<UserDto> GetUserInfo()
         {
-            return await _userService.GetUserById(userId);
+            return await _userService.GetUserById(CurrentUser.UserId);
         }
         
         /// <summary>

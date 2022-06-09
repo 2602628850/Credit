@@ -32,7 +32,7 @@
              用户管理
             </summary>
         </member>
-        <member name="M:Credit.Api.Controllers.UserController.#ctor(Credit.UserServices.IUserService)">
+        <member name="M:Credit.Api.Controllers.UserController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.UserServices.IUserService)">
             <summary>
             
             </summary>
@@ -43,7 +43,7 @@
             </summary>
             <param name="input"></param>
         </member>
-        <member name="M:Credit.Api.Controllers.UserController.GetUserInfo(System.Int64)">
+        <member name="M:Credit.Api.Controllers.UserController.GetUserInfo">
             <summary>
              获取用户信息
             </summary>

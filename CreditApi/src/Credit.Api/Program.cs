@@ -20,11 +20,20 @@ builder.Configuration.LoadJsonFile();
 builder.Services.AddSwaggerService($"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
 
 //FreeSqlע初始化
-var dbConnection = builder.Configuration.GetSection("ConnectionStrings:Credit").Value;
-builder.Services.FreeSqlInit(dbConnection);
+var dbConnectionString = builder.Configuration.GetSection("ConnectionStrings:Credit").Value;
+builder.Services.FreeSqlInit(dbConnectionString);
 builder.Services.AddTransients();
 //id初始化
 IdHelper.Init(1,1);
+//Redis初始化
+var redisConnectionString = builder.Configuration.GetSection("Redis:Connection").Value;
+//var redisRoadPrefix = builder.Configuration.GetSection("Redis:hangfirePrefix").Value;
+//builder.Services.AddRedisService(options =>
+//{
+    //options.ConnectionString = redisConnectionString;
+    //options.Prefix = redisRoadPrefix;
+//});
+RedisService.Init(redisConnectionString);
 var app = builder.Build();
 
 

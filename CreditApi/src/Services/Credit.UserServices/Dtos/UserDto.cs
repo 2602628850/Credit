@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
+using Data.Commons.Helpers;
 
 namespace Credit.UserServices.Dtos
 {
@@ -27,7 +28,7 @@ namespace Credit.UserServices.Dtos
     /// <summary>
     ///  用户登录信息
     /// </summary>
-    public class UserLoginDto : UserLoginInput
+    public class UserLoginDto : UserLoginInput,ITokenUser
     {
         /// <summary>
         ///  用户id

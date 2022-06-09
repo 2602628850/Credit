@@ -21,6 +21,13 @@ namespace Credit.UserServices
         /// <param name="input"></param>
         /// <returns></returns>
         Task<UserLoginOutput> UserLogin(UserLoginInput input);
+
+        /// <summary>
+        ///  管理员用户登录
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<UserLoginOutput> AdminUserLogin(UserLoginInput input);
         
         /// <summary>
         ///  用户新增

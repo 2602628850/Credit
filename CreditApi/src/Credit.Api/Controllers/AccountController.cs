@@ -1,5 +1,6 @@
 using Credit.UserServices;
 using Credit.UserServices.Dtos;
+using Data.Core.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Credit.Api.Controllers;
@@ -8,7 +9,7 @@ namespace Credit.Api.Controllers;
 ///  账号管理
 /// </summary>
 [Route("v1/[controller]/[action]")]
-public class AccountController : Controller
+public class AccountController : BaseController
 {
     private readonly IUserService _userService;
 
@@ -40,4 +41,15 @@ public class AccountController : Controller
     {
         return await _userService.UserLogin(input);
     }
+
+    /// <summary>
+    ///  管理员登录
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public async Task<UserLoginOutput> AdminUserLogin([FromBody]UserLoginInput input)
+    {
+        return await _userService.AdminUserLogin(input);
+    }   
 }

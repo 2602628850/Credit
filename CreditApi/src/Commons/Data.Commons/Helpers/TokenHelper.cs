@@ -16,12 +16,6 @@ namespace Data.Commons.Helpers
         /// 用户id
         /// </summary>
         long UserId { get; set; }
-
-        /// <summary>
-        ///  是否代理充值
-        /// </summary>
-        bool IsAgentRecharge { get; set; }
-
     }
 
     /// <summary>
