@@ -1,17 +1,22 @@
 ﻿using FreeSql.Internal;
 using Microsoft.Extensions.DependencyInjection;
+using MySql.Data.MySqlClient;
 
 namespace FreeSql.Core
 {
     public static class FreesqlBuilder
     {
-        public static void FreeSqlInit(this IServiceCollection services,string dbConnection)
+        public static void FreeSqlInit(this IServiceCollection services,string connectionString)
         {
 
             FreesqlStatic.FreeSql = new FreeSqlBuilder()
-                  .UseConnectionString(DataType.MySql, dbConnection)
                   .UseAutoSyncStructure(true)
                   .UseNameConvert(NameConvertType.PascalCaseToUnderscoreWithLower)
+                  .UseConnectionFactory(DataType.MySql, () =>
+                  {
+                      var conn = new MySqlConnection(connectionString);
+                      return conn;
+                  })
                   .Build();
             FreesqlStatic.FreeSql.Aop.ConfigEntityProperty += (s, e) =>
             {

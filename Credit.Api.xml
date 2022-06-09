@@ -27,6 +27,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:Credit.Api.Controllers.AccountController.AdminUserLogin(Credit.UserServices.Dtos.UserLoginInput)">
+            <summary>
+             管理员登录
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:Credit.Api.Controllers.UserController">
             <summary>
              用户管理
