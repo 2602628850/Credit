@@ -35,8 +35,21 @@ var redisConnectionString = builder.Configuration.GetSection("Redis:Connection")
     //options.Prefix = redisRoadPrefix;
 //});
 RedisService.Init(redisConnectionString);
-var app = builder.Build();
 
+#region 跨域,目前允许所ip访问api,以后上线了在appsettings.json配置允许访问的ip
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder
+        .SetIsOriginAllowed(origin => true)
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials());
+});
+#endregion
+var app = builder.Build();
+//启用跨域
+app.UseCors("AllowSpecificOrigin");
 
 if (!app.Environment.IsDevelopment())
 {
