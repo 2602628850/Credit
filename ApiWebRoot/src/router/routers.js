@@ -3,9 +3,10 @@ import {createRouter,createWebHashHistory} from 'vue-router'
  const App1 =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/demo/demorouter/demo.vue')
  const App2 =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/demo/demorouter/demoto.vue')
  const App3 =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/demo/demoaxios/demo.vue')
- const LoginPath =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/user/login.vue')
 //-------路由加载都采用赖加载,避免首页加载页面过多出现卡顿，测试
- //创建路由, hash 模式。
+const LoginPath =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/user/login.vue')
+const RegisterPath =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/user/register.vue') 
+//创建路由, hash 模式。
 const router = createRouter({
   history: createWebHashHistory(),
   routes:[
@@ -16,6 +17,7 @@ const router = createRouter({
    { path: '/axioxdemo', component: App3,name:"toapp3"  },
    //--测试
    { path: '/login', component: LoginPath,name:"LoginPath"  },
+   { path: '/register', component: RegisterPath,name:"RegisterPath"  },
 
   ]
 })
