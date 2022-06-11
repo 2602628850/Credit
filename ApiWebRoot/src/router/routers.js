@@ -7,6 +7,7 @@ import {createRouter,createWebHashHistory} from 'vue-router'
 const IndexPath =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/creditindex/index.vue')
 const LoginPath =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/user/login.vue')
 const RegisterPath =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/user/register.vue') 
+const UserAgreementPath =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/user/useragreement.vue') 
 //创建路由, hash 模式。
 const router = createRouter({
   history: createWebHashHistory(),
@@ -19,6 +20,7 @@ const router = createRouter({
    //--测试
    { path: '/login', component: LoginPath,name:"LoginPath"  },
    { path: '/register', component: RegisterPath,name:"RegisterPath"  },
+   { path: '/register', component: UserAgreementPath,name:"UserAgreementPath"  },
 
   ]
 })
