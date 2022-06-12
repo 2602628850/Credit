@@ -112,12 +112,13 @@ namespace Credit.UserServices
                 throw new MyException("Username does not exist");
             if (user.Password != input.Password)
                 throw new MyException("Wrong password");
-            var userToken = new UserLoginDto
+            var userToken = new AdminLoginDto
             {
                 UserId = user.Id,
                 Username = user.Username,
                 Nickname = user.Nickname,
-                HeadImage = user.HeadImage
+                HeadImage = user.HeadImage,
+                IsAdmin = 1
             };
             var token = await _tokenManager.GenerateToken(userToken,24*608*60);
             var output = new UserLoginOutput

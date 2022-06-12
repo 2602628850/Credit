@@ -17,7 +17,7 @@ namespace Data.Core.Controllers
     }
 
     /// <summary>
-    ///  用户控制器
+    ///  用户基础控制器
     /// </summary>
     public class BaseUserController : BaseController
     {
@@ -68,10 +68,71 @@ namespace Data.Core.Controllers
             base.OnActionExecuting(context);
 
             if (string.IsNullOrWhiteSpace(Token))
-                throw new MyException("login expired");
+                throw new LoginException("login expired");
 
             if (CurrentUser == null)
-                throw new MyException("login expired");
+                throw new LoginException("login expired");
+        }
+    }
+
+    /// <summary>
+    ///  管理员基础控制器
+    /// </summary>
+    public class BaseAdminController : BaseController
+    {
+        private readonly ITokenManager _tokenManager;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tokenManager"></param>
+        public BaseAdminController(ITokenManager tokenManager)
+        {
+            _tokenManager = tokenManager;
+        }
+
+        private string _token;
+        private static object _lock = new object();
+
+        private string GetToken()
+        {
+            lock (_lock)
+            {
+                if (string.IsNullOrEmpty(_token))
+                    _token = Request.Headers["Token"].FirstOrDefault();
+                return _token;
+            }
+        }
+
+        public string Token => GetToken();
+
+        private ITokenAdmin _admin;
+
+        public ITokenAdmin CurrentAdmin {
+            get
+            {
+                if (!string.IsNullOrEmpty(Token))
+                    _admin = _tokenManager.DeserializeToken<AdminLoginDto>(Token).Result;
+                return _admin;
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <exception cref="MyException"></exception>
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            base.OnActionExecuting(context);
+
+            if (string.IsNullOrWhiteSpace(Token))
+                throw new LoginException("login expired");
+
+            if (CurrentAdmin == null)
+                throw new LoginException("login expired");
+            if (CurrentAdmin.IsAdmin == 0)
+                throw new LoginException("login expired");
         }
     }
 }

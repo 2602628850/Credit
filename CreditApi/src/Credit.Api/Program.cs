@@ -61,6 +61,8 @@ app.UseRouting();
 
 app.AddSeaggerConfigure();
 
+app.UseAllRoadApiExceptionHandler();
+
 app.MapControllers();
 
 app.UseAllRoadApiExceptionHandler();

@@ -28,12 +28,17 @@ namespace Credit.UserServices.Dtos
     /// <summary>
     ///  用户登录信息
     /// </summary>
-    public class UserLoginDto : UserLoginInput,ITokenUser
+    public class UserLoginDto : ITokenUser
     {
         /// <summary>
         ///  用户id
         /// </summary>
         public long UserId { get; set; }
+
+        /// <summary>
+        ///  账号
+        /// </summary>
+        public string Username { get; set; } = string.Empty;
 
         /// <summary>
         ///  昵称
@@ -45,10 +50,17 @@ namespace Credit.UserServices.Dtos
         /// </summary>
         public string HeadImage { get; set; } = string.Empty;
         
-        /// <summary>
-        ///  是否管理员
-        /// </summary>
-        public int IsAdmin { get; set; }
+    }
+    
+    /// <summary>
+    ///   管理员登录信息
+    /// </summary>
+    public class AdminLoginDto : UserLoginDto,ITokenAdmin
+    {
+            /// <summary>
+            ///  是否管理员
+            /// </summary>
+            public int IsAdmin { get; set; }
     }
 
     /// <summary>

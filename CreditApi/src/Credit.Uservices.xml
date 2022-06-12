@@ -29,6 +29,11 @@
              用户id
             </summary>
         </member>
+        <member name="P:Credit.UserServices.Dtos.UserLoginDto.Username">
+            <summary>
+             账号
+            </summary>
+        </member>
         <member name="P:Credit.UserServices.Dtos.UserLoginDto.Nickname">
             <summary>
              昵称
@@ -39,7 +44,12 @@
              头像
             </summary>
         </member>
-        <member name="P:Credit.UserServices.Dtos.UserLoginDto.IsAdmin">
+        <member name="T:Credit.UserServices.Dtos.AdminLoginDto">
+            <summary>
+              管理员登录信息
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.AdminLoginDto.IsAdmin">
             <summary>
              是否管理员
             </summary>

@@ -1,5 +1,4 @@
 ﻿using Data.Commons.Models;
-using FreeSql.DataAnnotations;
 
 namespace Credit.UserModels
 {
@@ -32,6 +31,11 @@ namespace Credit.UserModels
         ///  可用余额
         /// </summary>
         public decimal Balance { get; set; }
+
+        /// <summary>
+        ///  冻结资金
+        /// </summary>
+        public decimal FreezeFunds { get; set; }
         
         /// <summary>
         ///  是否管理员

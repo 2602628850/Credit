@@ -45,5 +45,6 @@ namespace Data.Commons.Helpers
         { 
             return JsonConvert.SerializeObject(value);
         }
+        
     }
 }

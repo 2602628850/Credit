@@ -10,9 +10,8 @@
     <PackageReference Include="CSRedisCore" Version="3.8.2" />
     <PackageReference Include="FreeSql" Version="3.2.661" />
     <PackageReference Include="Mapster" Version="7.3.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Snowflake.Core" Version="2.0.0" />
   </ItemGroup>
 

@@ -26,7 +26,7 @@ namespace Data.Commons.Helpers
         /// <summary>
         /// 是否是管理员
         /// </summary>
-        bool IsAdmin { get; set; }
+        int IsAdmin { get; set; }
     }
 
     /// <summary>
