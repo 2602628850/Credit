@@ -23,5 +23,10 @@ namespace Data.Commons.Models
         ///  删除 0 未删除  1 已删除
         /// </summary>
         public int IsDeleted { get; set; } = 0;
+
+        /// <summary>
+        ///  删除用户Id
+        /// </summary>
+        public long DeleteUserId { get; set; }
     }
 }

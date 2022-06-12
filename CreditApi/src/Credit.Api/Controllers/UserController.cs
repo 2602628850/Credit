@@ -8,9 +8,8 @@ using Data.Core.Controllers;
 namespace Credit.Api.Controllers
 {
     /// <summary>
-    ///  用户管理
+    ///  用户接口管理
     /// </summary>
-    [Route("v1/[controller]/[action]")]
     public class UserController : BaseUserController
     {
         private readonly IUserService _userService;

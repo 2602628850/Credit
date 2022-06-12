@@ -8,7 +8,7 @@ namespace Credit.Api.Controllers;
 /// <summary>
 ///  账号管理
 /// </summary>
-[Route("v1/[controller]/[action]")]
+//[Route("v1/[controller]/[action]")]
 public class AccountController : BaseController
 {
     private readonly IUserService _userService;

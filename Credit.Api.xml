@@ -34,9 +34,127 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:Credit.Api.Controllers.AdminBankController">
+            <summary>
+             银行接口管理
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminBankController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.BankServices.IBankService)">
+            <summary>
+            
+            </summary>
+            <param name="tokenManager"></param>
+            <param name="bankService"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminBankController.BankCreate(Credit.BankServices.Dtos.BankInput)">
+            <summary>
+             银行添加
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminBankController.BankUpdate(Credit.BankServices.Dtos.BankInput)">
+            <summary>
+             银行修改
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminBankController.BankDelete(System.Int64)">
+            <summary>
+             银行删除
+            </summary>
+            <param name="bankId"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminBankController.GetBankById(System.Int64)">
+            <summary>
+             获取银行信息
+            </summary>
+            <param name="bankId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminBankController.GetBankPagedList(Credit.BankServices.Dtos.BankPagedInput)">
+            <summary>
+             获取银行列表信息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminBankController.GetBankList">
+            <summary>
+             获取可选银行
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminBankController.BankEnable(System.Collections.Generic.List{System.Int64})">
+            <summary>
+             银行启用
+            </summary>
+            <param name="bankIds"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminBankController.BankDisabled(System.Collections.Generic.List{System.Int64})">
+            <summary>
+             银行禁用
+            </summary>
+            <param name="bankIds"></param>
+        </member>
+        <member name="T:Credit.Api.Controllers.AdminPayeeBankCardController">
+            <summary>
+             收款银行卡信息管理
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminPayeeBankCardController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.PayeeBankCardServices.IPayeeBankCardService)">
+            <summary>
+             
+            </summary>
+            <param name="tokenManager"></param>
+            <param name="payeeBankCardService"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminPayeeBankCardController.PayeeBankCardCreate(Credit.PayeeBankCardServices.Dtos.PayeeBankCardInput)">
+            <summary>
+             收款银行卡信息添加
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminPayeeBankCardController.PayeeBankCardUpdate(Credit.PayeeBankCardServices.Dtos.PayeeBankCardInput)">
+            <summary>
+             收款银行卡信息编辑
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminPayeeBankCardController.PayeeBankCardDelete(System.Int64)">
+            <summary>
+             收款银行卡删除
+            </summary>
+            <param name="bankCardId"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminPayeeBankCardController.PayeeBankCardEnable(System.Collections.Generic.List{System.Int64})">
+            <summary>
+             收款银行卡启用
+            </summary>
+            <param name="bankCardIds"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminPayeeBankCardController.PayeeBankCardDisabled(System.Collections.Generic.List{System.Int64})">
+            <summary>
+             收款银行卡禁用
+            </summary>
+            <param name="bankCardIds"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminPayeeBankCardController.GetPayeeBankCardById(System.Int64)">
+            <summary>
+             获取收款银行卡信息
+            </summary>
+            <param name="bankCardId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminPayeeBankCardController.GetPayeeBankCardPagedList(Credit.PayeeBankCardServices.Dtos.PayeeBankCardPagedInput)">
+            <summary>
+             获取收款银行卡列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:Credit.Api.Controllers.UserController">
             <summary>
-             用户管理
+             用户接口管理
             </summary>
         </member>
         <member name="M:Credit.Api.Controllers.UserController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.UserServices.IUserService)">
