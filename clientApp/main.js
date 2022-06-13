@@ -4,6 +4,10 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
 import * as API from '/common/js/API/API.js'
+import * as storeUtil from "./common/js/Utils/StoreUtil";
+
+// 多语言
+import i18n from './i18n'
 
 
 // #ifndef VUE3
@@ -39,9 +43,15 @@ export function createApp() {
     app.config.globalProperties.$screenWidth = uni.getSystemInfoSync().screenWidth;
     app.config.globalProperties.$statusBarHeight = uni.getSystemInfoSync().statusBarHeight;
     app.config.globalProperties.$pixelRatio = uni.getSystemInfoSync().windowWidth / 750;
+    // 多语言
+    app.config.globalProperties.$i18n = i18n;
     // API
     app.config.globalProperties.$Api = API;
+    // 工具
+    app.config.globalProperties.$StoreUtil = storeUtil;
+
     app.use(ElementPlus)
+    app.use(i18n)
 
     return {
         app
