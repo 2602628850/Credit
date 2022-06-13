@@ -1,6 +1,9 @@
 <script>
+	import interceptor from './common/js/interceptor/interceptor'
+
 	export default {
 		onLaunch: function() {
+			interceptor()
 			console.log('App Launch')
 		},
 		onShow: function() {
