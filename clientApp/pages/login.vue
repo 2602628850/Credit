@@ -15,7 +15,6 @@
 				})
 			},
 			changeLang() {
-				debugger
 				let oldLang = this.$StoreUtil.get('lang');
 				if (!oldLang) {
 					oldLang = 'en';
