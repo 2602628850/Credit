@@ -1,5 +1,5 @@
 <template>
-<view> 这里是登录页面 </view>
+	<view> 这里是登录页面 </view>
 	<el-button @click="goIndex">{{ $t('login.button') }}</el-button>
 	<el-button @click="changeLang">修改显示</el-button>
 </template>
@@ -10,8 +10,8 @@
 		methods: {
 			goIndex() {
 				// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
-					uni.navigateTo({
-					url: '/pages/index/index'
+				uni.navigateTo({
+					url: '/pages/register/index'
 				})
 			},
 			changeLang() {
@@ -22,12 +22,11 @@
 
 				if (oldLang == 'en') {
 					this.$i18n.locale = 'zh';
-					this.$StoreUtil.set('lang','zh');
+					this.$StoreUtil.set('lang', 'zh');
 				} else {
 					this.$i18n.locale = 'en';
-					this.$StoreUtil.set('lang','en');
+					this.$StoreUtil.set('lang', 'en');
 				}
-
 			}
 		}
 	}

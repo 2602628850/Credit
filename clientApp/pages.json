@@ -12,7 +12,30 @@
 				"navigationBarTitleText": "custom"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/register/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        },
+		{
+			"path": "pages/register/agreement",
+			"style": {
+                "navigationBarTitleText": "custom"
+			}
+		}
+        ,{
+            "path" : "pages/prohall/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": ""
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationStyle": "custom",
 		"navigationBarTextStyle": "black",
