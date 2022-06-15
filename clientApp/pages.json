@@ -12,6 +12,12 @@
 				"navigationBarTitleText": "custom"
 		}
 		  },
+		  {
+		  	"path": "pages/index/tes",
+		  	"style": {
+		  		"navigationBarTitleText": "custom"
+		  }
+		    },
 		{
 			"path": "pages/login",
 			"style": {
