@@ -52,11 +52,12 @@ public interface IPayeeBankCardService
     Task<PayeeBankCardDto> GetPayeeBankCardById(long bankCardId);
 
     /// <summary>
-    ///  获取可用银行卡信息
+    ///  
     /// </summary>
     /// <param name="amount"></param>
+    /// <param name="bankCardId"></param>
     /// <returns></returns>
-    Task<List<PayeeBankCardSelectDto>> GetAvailablePayeeBankCards(decimal? amount);
+    Task<PayeeBankCardSelectDto> GetAvailablePayeeBankCards(decimal? amount = null,long? bankCardId = null);
 
     /// <summary>
     ///  获取收款银行信息卡列表
