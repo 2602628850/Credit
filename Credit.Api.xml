@@ -157,7 +157,7 @@
              用户接口管理
             </summary>
         </member>
-        <member name="M:Credit.Api.Controllers.UserController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.UserServices.IUserService)">
+        <member name="M:Credit.Api.Controllers.UserController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.UserServices.IUserService,Credit.UserWalletServices.IUserWalletService)">
             <summary>
             
             </summary>
@@ -180,6 +180,18 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.UserRecharge(Credit.UserWalletServices.Dtos.UserMoneyApplyInput)">
+            <summary>
+            用户充值
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.UserWithdrawal(Credit.UserWalletServices.Dtos.UserMoneyApplyInput)">
+            <summary>
+             用户提款
+            </summary>
+            <param name="input"></param>
         </member>
         <member name="T:Credit.Api.ServicesTransient">
             <summary>

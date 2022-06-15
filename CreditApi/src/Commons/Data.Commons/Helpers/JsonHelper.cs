@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data.Commons.Converters.JsonConverters;
 
 namespace Data.Commons.Helpers
 {
@@ -43,8 +44,12 @@ namespace Data.Commons.Helpers
         /// <returns></returns>
         public static string SerializeObject(object value)
         { 
-            return JsonConvert.SerializeObject(value);
+            return JsonConvert.SerializeObject(value, new JsonSerializerSettings 
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver(), 
+                DateFormatString = "yyyy/MM/dd HH:mm:ss",
+                Converters = new List<JsonConverter> { new IdToStringConverter() }
+            });
         }
-        
     }
 }

@@ -110,7 +110,13 @@ public class UserWalletService : IUserWalletService
             moneyApply.Id = IdHelper.GetId();
             moneyApply.AuditStatus = AuditStatusEnums.Default;
             moneyApply.ChangeType = WalletChangeEnums.Out;
-            await _freeSql.Insert(moneyApply).AsTable(table => $"{table}_{year}").ExecuteAffrowsAsync();
+            _freeSql.Transaction(() =>
+            {
+                //冻结资金
+                _freeSql.Update<Users>(user).ExecuteAffrows();
+                //添加申请
+                _freeSql.Insert(moneyApply).AsTable(table => $"{table}_{year}").ExecuteAffrows();
+            });
         }
         else
         {
