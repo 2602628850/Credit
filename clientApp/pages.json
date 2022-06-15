@@ -1,6 +1,18 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/user/login",
+			"style": {
+				"navigationBarTitleText": "custom"
+			}
+		},
+		{
+			"path": "pages/index/indexPage",
+			"style": {
+				"navigationBarTitleText": "custom"
+		}
+		  },
+		{
 			"path": "pages/login",
 			"style": {
 				"navigationBarTitleText": "custom"
@@ -11,31 +23,27 @@
 			"style": {
 				"navigationBarTitleText": "custom"
 			}
-		}
-	    ,{
-            "path" : "pages/register/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },
+		}, {
+			"path": "pages/register/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
 		{
 			"path": "pages/register/agreement",
 			"style": {
-                "navigationBarTitleText": "custom"
+				"navigationBarTitleText": "custom"
 			}
+		}, {
+			"path": "pages/prohall/index",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+
 		}
-        ,{
-            "path" : "pages/prohall/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": ""
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationStyle": "custom",
 		"navigationBarTextStyle": "black",
