@@ -1,8 +1,8 @@
 <template>
 	<navigation-bar :title="$t('agree.title')"></navigation-bar>
 	<view>
-		<el-card class="box-card" >
-		<div style="text-align:left;overflow: auto" >
+		<el-card class="box-card"  style="text-align:left;overflow: auto" >
+		<div >
 			<p>第一用户注册</p>
 			<p>1.1用户下载平台并根据平台的注册规则完成注册流程（包括但不限于设置用户名称及密码）后
 				即有权通过平台发布、查看、接收图音频/视频信息或其他文件，或与其他用户进行延时/实时交流
