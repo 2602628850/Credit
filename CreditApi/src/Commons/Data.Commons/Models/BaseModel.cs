@@ -1,7 +1,7 @@
 ﻿using FreeSql.DataAnnotations;
 namespace Data.Commons.Models
 {
-    public class BaseMdel
+    public class BaseModel
     {
         /// <summary>
         ///  主键Id

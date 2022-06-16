@@ -1,5 +1,7 @@
 ﻿using Credit.BankServices;
+using Credit.PayeeBankCardServices;
 using Credit.UserServices;
+using Credit.UserWalletServices;
 using Data.Commons.Caching;
 using Data.Commons.Helpers;
 
@@ -18,6 +20,8 @@ namespace Credit.Api
         {
             services.AddTransient<IUserService, UserService>()
                 .AddTransient<IBankService,BankService>()
+                .AddTransient<IPayeeBankCardService,PayeeBankCardService>()
+                .AddTransient<IUserWalletService,UserWalletService>()
                 .AddTransient<ICacheManager,CacheManager>()
                 .AddTransient<ITokenManager,TokenManager>();
         }

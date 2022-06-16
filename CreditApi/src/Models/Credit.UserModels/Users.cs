@@ -5,7 +5,7 @@ namespace Credit.UserModels
     /// <summary>
     ///  用户
     /// </summary>
-    public class Users : BaseMdel
+    public class Users : BaseModel
     {
         /// <summary>
         ///  账号

@@ -168,22 +168,25 @@ public class PayeeBankCardService : IPayeeBankCardService
     }
 
     /// <summary>
-    ///  获取可用的收款银行卡信息
+    /// 获取可用的收款银行卡信息
     /// </summary>
     /// <param name="amount"></param>
+    /// <param name="bankCardId"></param>
     /// <returns></returns>
-    public async Task<List<PayeeBankCardSelectDto>> GetAvailablePayeeBankCards(decimal? amount)
+    public async Task<PayeeBankCardSelectDto> GetAvailablePayeeBankCards(decimal? amount = null,long? bankCardId = null)
     {
         var now = DateTime.UtcNow;
         var nowSpan = new TimeSpan(now.Hour,now.Minute,now.Second);
-        var bankCards = await _freeSql.Select<PayeeBankCard>()
+        var bankCard = await _freeSql.Select<PayeeBankCard>()
             .WhereIf(amount > 0,s => s.MinPayeeAmount <= amount && s.MaxPayeeAmount >= amount)
+            .WhereIf(bankCardId.HasValue, s => s.Id == bankCardId)
             .Where(s => nowSpan >= s.StartTime && nowSpan <= s.EndTime)
             .Where(s => s.IsEnable == 1)
             .Where(s => s.IsDeleted == 0)
-            .ToListAsync();
+            .OrderByRandom()
+            .ToOneAsync();
 
-        return bankCards.MapToList<PayeeBankCardSelectDto>();
+        return bankCard.MapTo<PayeeBankCardSelectDto>();
     }
 
     /// <summary>

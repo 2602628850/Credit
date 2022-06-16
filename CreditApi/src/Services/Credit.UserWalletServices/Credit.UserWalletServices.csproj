@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Commons\Data.Commons\Data.Commons.csproj" />
+      <ProjectReference Include="..\..\Models\Credit.PayeeInfoModels\Credit.PayeeInfoModels.csproj" />
+      <ProjectReference Include="..\..\Models\Credit.UserModels\Credit.UserModels.csproj" />
+      <ProjectReference Include="..\..\Models\Credit.UserWalletModels\Credit.UserWalletModels.csproj" />
+      <ProjectReference Include="..\Credit.PayeeBankCardServices\Credit.PayeeBankCardServices.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.6" />
+    </ItemGroup>
+
+</Project>
