@@ -3,11 +3,12 @@
 		<el-page-header title=""
 			style="margin-top:1px;position: fixed;background-color: #fff;width: 100%;height: 30px;" content="用户协议"
 			@click="Back()" />
-		<div style="text-align:left;overflow: auto" class="infinite-list">
+		<el-card class="box-card" >
+		<div style="text-align:left;overflow: auto" >
 			<p>第一条 用户注册</p>
 			<p>1.1用户下载平台并根据平台的注册规则完成注册流程（包括但不限于设置用户名称及密码）后，
 				即有权通过平台发布、查看、接收图文/音频/视频信息或其他文件，或与其他用户进行延时/实时交流。
-				用户在平台上有效注册（或有效变更注册）的用户名及密码共同构成用户在平台的唯一有效身份证明。
+				用户在平台上有效注册 （或有效变更注册）的用户名及密码共同构成用户在平台的唯一有效身份证明。
 			</p>
 			<p>1.2用户一旦完成注册，则视为用户允许平台方通过短信、电子邮件、
 				APP/服务器推送或其他方式向其发送与平台相关的信息。
@@ -123,6 +124,7 @@
 			</uni-resize-sensor>
 		</div>
 
+      </el-card>
 	</view>
 </template>
 <script>
