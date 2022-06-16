@@ -19,6 +19,7 @@
 	/*每个页面公共css */
 	@import "/common/css/flex.css";
 	@import "/common/css/public.css";
+	@import "/static/font/iconfont.css";
 
 	uni-app {
 		box-shadow: 0 0 10px rgba(0,0,0, 0.5);

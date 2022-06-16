@@ -5,6 +5,8 @@ import 'element-plus/dist/index.css'
 
 import * as API from '/common/js/API/API.js'
 import * as storeUtil from "./common/js/Utils/StoreUtil";
+import constUtil from "/common/js/const/Const"
+import * as langUtil from "/common/js/Utils/LangUtil"
 
 // 多语言
 import i18n from './i18n'
@@ -48,6 +50,8 @@ export function createApp() {
     app.config.globalProperties.$Api = API;
     // 工具
     app.config.globalProperties.$StoreUtil = storeUtil;
+    app.config.globalProperties.$Const = constUtil;
+    app.config.globalProperties.$LangUtil = langUtil;
 
     app.use(ElementPlus)
     app.use(i18n)
