@@ -1,74 +1,159 @@
 <template>
-	<view>
-		<div>
-			注册
-		</div>
-		<el-divider />
-		<el-form label-width="100px" style="max-width: 460px">
-			<el-form-item label="国家">
-				<el-select placeholder="Select" style="width:100%;">
-					<el-option placeholder="现在您的国籍" />
-				</el-select>
-			</el-form-item>
-			<el-form-item label="邮箱">
-				<el-input placeholder="输入您的邮箱" />
-			</el-form-item>
-			<el-form-item label="验证码">
-				<el-input placeholder="输入验证码">
-					<template #append>
-						<el-button>发送</el-button>
-					</template>
-				</el-input>
-			</el-form-item>
-			<el-form-item label="邀请码">
-				<el-input placeholder="输入邀请码" />
-			</el-form-item>
-			<el-form-item label="密码">
-				<el-input placeholder="输入密码" />
-			</el-form-item>
-			<el-form-item label="确认密码">
-				<el-input placeholder="请再次确认密码" />
-			</el-form-item>
-			<el-form-item>
-				<el-checkbox label="注册即代表您已阅读病同意" size="large" />
-				<el-link type="primary" @click="agreement()">用户协议</el-link>
-			</el-form-item>
-			<el-form-item>
-				<el-button type="success" plain style="width:80%;background-color: green;color: #fff;">注册</el-button>
-			</el-form-item>
-			<el-form-item>
-				已有账号？
-				<el-link type="primary" @click="Login()">登录</el-link>
-			</el-form-item>
-		</el-form>
+	<register-top-item :title="$t('register.wel')" :sub-title="$t('register.welSub')"></register-top-item>
+
+
+	<register-input-item :tip="$t('register.country')" style="margin-top: -20px">
+		<template v-slot:img>
+			<view class="input-icon iconfont icon-diqiu"></view>
+		</template>
+		<template v-slot:default>
+			<view class="flex-row-between" style="position: relative" @click="countryPickerShow">
+				<input disabled :placeholder="$t('register.countryTip')" class="input mgr" v-model="editItem.countryName"/>
+				<view class="text-tip iconfont icon-xiala" style="font-size: 16px" ></view>
+
+				<picker style="position: absolute;width: 100%;height: 100%;z-index: 9999;top: 0;left: 0;" :range="countryList" :index="countryIndex" range-key="name" @change="countryChange"></picker>
+			</view>
+		</template>
+	</register-input-item>
+
+	<register-input-item :tip="$t('public.mail')" class="mgt">
+		<template v-slot:img>
+			<view class="input-icon iconfont icon-youxiang"></view>
+		</template>
+		<template v-slot:default>
+			<input :placeholder="$t('public.mailTip')" class="input" v-model="editItem.mail"/>
+		</template>
+	</register-input-item>
+
+
+	<register-input-item :tip="$t('register.code')" class="mgt">
+		<template v-slot:img>
+			<view class="input-icon iconfont icon-yanzheng"></view>
+		</template>
+		<template v-slot:default>
+			<input :placeholder="$t('register.codeTip')" class="input" v-model="editItem.code"/>
+		</template>
+	</register-input-item>
+
+	<register-input-item :tip="$t('register.invCode')" class="mgt">
+		<template v-slot:img>
+			<view class="input-icon iconfont icon-JC_054"></view>
+		</template>
+		<template v-slot:default>
+			<input :placeholder="$t('register.invCodeTip')" class="input" v-model="editItem.invCode"/>
+		</template>
+	</register-input-item>
+
+	<register-input-item :tip="$t('public.pwd')" class="mgt">
+		<template v-slot:img>
+			<view class="input-icon iconfont icon-mima"></view>
+		</template>
+		<template v-slot:default>
+			<input :placeholder="$t('public.pwdTip')" class="input" v-model="editItem.pwd"/>
+		</template>
+	</register-input-item>
+
+	<register-input-item :tip="$t('register.rePwd')" class="mgt">
+		<template v-slot:img>
+			<view class="input-icon iconfont icon-mima"></view>
+		</template>
+		<template v-slot:default>
+			<input :placeholder="$t('register.rePwdTip')" class="input" v-model="editItem.pwd"/>
+		</template>
+	</register-input-item>
+
+
+	<view class="mgt w100 margin-left-right-20 flex-row-start text-small">
+		<el-checkbox v-model="isAgree"></el-checkbox>
+		<view class="mgl text-grey">{{$t('register.registerTip')}}</view>
+		<view class="mgl agree text-primary" @click="toAgree">{{$t('register.agree')}}</view>
 	</view>
+
+
+	<view class="button-primary margin-left-right-20 flex-row-center" @click="doRegister">
+		{{$t('public.register')}}
+	</view>
+
+	<view class="mgt flex-row-center text-small" style="padding-bottom: 30px">
+		<view class="mgr text-grey">{{$t('register.haveAccount')}}</view>
+		<view class="text-primary" @click="toLogin">{{$t('public.login')}}</view>
+	</view>
+
 </template>
 
 <script>
+	import RegisterTopItem from "./register-top-item";
+	import RegisterInputItem from "./register-input-item";
 	export default {
+		components: {RegisterInputItem, RegisterTopItem},
 		data() {
 			return {
-				options: {
-					key: '中国'
-				}
+				countryList: [
+					{
+						name: 'England',
+						code: 'U.K.'
+					},
+					{
+						name: 'United States',
+						code: 'USA'
+					},
+					{
+						name: '中国',
+						code: 'zh'
+					}
+				],
+				countryIndex: 0,
+				editItem: {
+					countryName: '',
+					countryCode: ''
+				},
+				isAgree: false
 			}
 		},
 		methods: {
-			Login() {
+			countryChange(e) {
+				this.countryIndex = e.detail.value;
+				let item = this.countryList[this.countryIndex];
+				this.editItem.countryCode = item.code;
+				this.editItem.countryName = item.name;
+			},
+			toLogin() {
 				// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
-				uni.navigateTo({
-					url: '/pages/login'
+				uni.reLaunch({
+					url: '/pages/login/login'
 				})
 			},
-			agreement() {
+			toAgree() {
 				uni.navigateTo({
 					url: '/pages/register/agreement'
 				})
+			},
+			doRegister() {
+
 			}
 		}
 	}
 </script>
 
 <style>
-
+	.input-icon {
+		font-size: 18px;
+	}
+	.input {
+		height: 44px;
+		font-size: 16px;
+		flex: 1;
+	}
+	.input-placeholder {
+		font-size: 12px;
+	}
+	.uni-input-input {
+		font-size: 12px;
+	}
+	.agree {
+		box-sizing: border-box;
+		border-bottom-color: #00875a;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+	}
 </style>
