@@ -1,5 +1,8 @@
 <template>
-	<view style="scroll-behavior: auto;">
+	<view style="user-select: none;width: 100%;height: 100%;">
+		<view style="padding-top: 2%;padding-left: 2%;font-weight:600;font-size: 21px;">
+		<text>Third Credit</text>
+		</view>
 		<!-- 首页轮播图 -->
 		<swiper
 		  indicator-dots
@@ -15,7 +18,6 @@
 			</swiper-item>
 		</swiper>
 		<!-- 首页轮播图 -->
-		
 		<uni-row class="demo-uni-row">
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
@@ -106,22 +108,92 @@
 				</view>
 			</uni-col>
 		</uni-row>
+		<view style="padding-top: 2%;padding-left: 2%;font-weight:600;font-size: 17px;padding-bottom: 2%;">
+		<text>Account</text>
+		</view>
+
+		<uni-row  class="demo-uni-row radios" style="border:1px solid darkgray;width: 97%;margin-left: 1.5%;">
+			<view style="padding: 20px 5px;">
+			<uni-col :span="3" :offset="1">
+				<view class="demo-uni-col-anniu dark">
+					<text style="color: green;">$10000</text><br/>
+					<text style="margin-left: 10%;">余额</text>
+				</view>
+			</uni-col>
+			<uni-col :span="9" :offset="3">
+				<view class="demo-uni-col-anniu light">
+					<text  style="margin-left: 40%;color: green;">3</text><br/>
+					<text>今日剩余查卡次数</text>
+				</view>
+			</uni-col>
+			<uni-col :span="5" :offset="2">
+				<view class="demo-uni-col-anniu light">
+					<text style="margin-left: 10%;color: green;">+$0</text><br/>
+					<text>今日收入</text>
+				</view>
+			</uni-col>
+			</view>
+		</uni-row>
 		
-		<uni-row class="demo-uni-row">
-			<uni-col>
-				<view class="demo-uni-col dark_deep">1</view>
+		<view style="padding-top: 2%;padding-left: 2%;font-weight:600;font-size: 17px;padding-bottom: 2%;">
+		<text>Product feature</text>
+		</view>
+		<uni-row  class="demo-uni-row radios" style="border:1px solid darkgray;width: 97%;margin-left: 1.5%;">
+			<uni-col :span="18" :offset="1">
+				<view class="demo-uni-col-anniu1 dark">
+					<text style="float: left;margin-top: 8%;background-color: #00875a;border-radius: 50%;width: 20px;font-size: 20px;text-align: center;color: wheat;">1</text>
+					<view style="margin-left: 10px;margin-top: 10%;">
+					<text style="font-size: 20px;margin-left: 10px;">产品介绍</text><br/>
+					<text style="margin-left: 10px;">什么是信用卡代还</text>
+					</view>
+					
+				</view>
+			</uni-col>
+			
+			<uni-col :span="5" style="margin-top: 10%;">
+				<text><image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image></text>
 			</uni-col>
 		</uni-row>
 		
-		<uni-row class="demo-uni-row">
-			<uni-col :span="12">
-				<view class="demo-uni-col dark">2</view>
+		
+		
+		<uni-row  class="demo-uni-row radios" style="border:1px solid darkgray;width: 97%;margin-left: 1.5%;">
+			<uni-col :span="18" :offset="1">
+				<view class="demo-uni-col-anniu1 dark">
+					<text style="float: left;margin-top: 8%;background-color: #00875a;border-radius: 50%;width: 20px;font-size: 20px;text-align: center;color: wheat;">2</text>
+					<view style="margin-left: 10px;margin-top: 10%;">
+					<text style="font-size: 20px;margin-left: 10px;">信用等级</text><br/>
+					<text style="margin-left: 10px;">有效客户通过完成“推荐人数”和“还款次数”提升自己的信用等级（VIP等级)</text>
+					</view>
+					
+				</view>
 			</uni-col>
-			<uni-col :span="12">
-				<view class="demo-uni-col light">3</view>
+			
+			<uni-col :span="5" style="margin-top: 10%;">
+				<text><image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image></text>
 			</uni-col>
 		</uni-row>
 		
+		
+		<uni-row  class="demo-uni-row radios" style="border:1px solid darkgray;width: 97%;margin-left: 1.5%;">
+			<uni-col :span="18" :offset="1">
+				<view class="demo-uni-col-anniu1 dark">
+					<text style="float: left;margin-top: 8%;background-color: #00875a;border-radius: 50%;width: 20px;font-size: 20px;text-align: center;color: wheat;">3</text>
+					<view style="margin-left: 10px;margin-top: 10%;">
+					<text style="font-size: 20px;margin-left: 10px;">官方白皮书</text><br/>
+					<text style="margin-left: 10px;">Third Credit坚信信用是一座永不枯竭金库，拥有信用就等于拥有财富！</text>
+					</view>
+					
+				</view>
+			</uni-col>
+			
+			<uni-col :span="5" style="margin-top: 10%;">
+				<text><image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image></text>
+			</uni-col>
+		</uni-row>
+		
+		<view style="padding: 0.1%;"></view>
+			
 	</view>
 </template>
 
@@ -184,6 +256,19 @@
 	border-radius: 4px;
 	
 }
+.demo-uni-col-anniu {
+	margin-top: 7px;
+	height: 70px;
+	
+}
+.demo-uni-col-anniu1 {
+	margin-top: 15px;
+	height: 120px;
+	
+}
+.radios{
+	border-radius: 9px;;
+}
 
 .dark_deep {
 	background-color: #FFFFFF;
@@ -195,5 +280,18 @@
 
 .light {
 	background-color: #FFFFFF;
+}
+
+.how-num {
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 13px;
+}
+.bg-primary {
+    background-color: #00875a;
+    color: #fff;
 }
 </style>
