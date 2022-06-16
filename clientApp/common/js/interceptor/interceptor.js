@@ -22,7 +22,7 @@ export default () => {
     uni.addInterceptor('onLoad', {
         invoke(e) {
             if (!hasPremission(e.url)) {
-                uni.navigateTo({
+                uni.reLaunch({
                     url: '/pages/login'
                 })
                 return false;
