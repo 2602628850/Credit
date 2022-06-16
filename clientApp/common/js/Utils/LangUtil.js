@@ -2,6 +2,8 @@
 import i18n from '/i18n'
 import * as storeUtil from '/common/js/Utils/StoreUtil'
 
+
+
 function getLangList() {
     let langList = [
         {

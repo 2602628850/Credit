@@ -18,6 +18,9 @@
 
 <script>
 
+	import i18n from "../i18n";
+	import * as storeUtil from "../common/js/Utils/StoreUtil";
+
 	export default {
 		name: "navigation-bar",
 		props: {
@@ -37,7 +40,9 @@
 			indexChange(e) {
 				this.langIndex = e.detail.value;
 				this.lang = this.langList[this.langIndex].value;
-				this.$LangUtil.setLang(this.lang);
+
+				this.$i18n.locale = this.lang;
+				this.$StoreUtil.set('lang', this.lang);
 			},
 			toServer() {
 				console.log('to Server')

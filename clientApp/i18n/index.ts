@@ -4,6 +4,7 @@ import zh from './text-zh'
 import en from './text-en'
 
 const i18n = createI18n({
+    globalInjection: true,
     locale: 'en', // set locale
     messages: {
         zh: zh,

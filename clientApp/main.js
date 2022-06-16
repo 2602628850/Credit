@@ -9,8 +9,20 @@ import constUtil from "/common/js/const/Const"
 import * as langUtil from "/common/js/Utils/LangUtil"
 
 // 多语言
-import i18n from './i18n'
 
+import {createI18n} from "vue-i18n"
+
+import zh from '/i18n/text-zh'
+import en from '/i18n/text-en'
+
+const i18n = createI18n({
+    globalInjection: true,
+    locale: langUtil.getLang() || "en",
+    messages: {
+        zh: zh,
+        en: en,
+    },
+})
 
 // #ifndef VUE3
 

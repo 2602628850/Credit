@@ -22,7 +22,7 @@
 	@import "/static/font/iconfont.css";
 
 	uni-app {
-		box-shadow: 0 0 10px rgba(0,0,0, 0.5);
+		box-shadow: 0 -15px 10px rgba(0,0,0, 0.5);
 	}
 
 	uni-page-body {

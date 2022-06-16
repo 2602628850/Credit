@@ -11,6 +11,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-back:before {
+  content: "\e679";
+}
+
 .icon-xiala:before {
   content: "\e624";
 }

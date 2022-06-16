@@ -1,6 +1,9 @@
 export default {
     login: {
-        button: "Login"
+        wel : '登录',
+        welSub: '欢迎您归来!',
+        remember: '记住用户名和密码',
+        register: '创建账号',
     },
     register: {
         wel : '注册',
@@ -15,7 +18,12 @@ export default {
         rePwd: '确认密码',
         rePwdTip: '请再次确认密码',
         registerTip: '注册即代表您已经阅读并同意',
-        agree: '用户协议'
+        agree: '用户协议',
+
+        haveAccount: '已有账号?'
+    },
+    agree: {
+        title: '用户协议'
     },
     public: {
         register: "注 册",

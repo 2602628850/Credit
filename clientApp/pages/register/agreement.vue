@@ -1,8 +1,6 @@
 <template>
+	<navigation-bar :title="$t('agree.title')"></navigation-bar>
 	<view>
-		<el-page-header title=""
-			style="margin-top:1px;position: fixed;background-color: #fff;width: 100%;height: 30px;" content="用户协议"
-			@click="Back()" />
 		<div style="text-align:left;overflow: auto" class="infinite-list">
 			<p>第一条 用户注册</p>
 			<p>1.1用户下载平台并根据平台的注册规则完成注册流程（包括但不限于设置用户名称及密码）后，
@@ -126,8 +124,10 @@
 	</view>
 </template>
 <script>
+	import NavigationBar from "../../components/navigation-bar";
 	export default {
 		name: "agreement",
+		components: {NavigationBar},
 		data() {
 			return {};
 		},

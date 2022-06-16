@@ -66,3 +66,11 @@
 .text-tip {
     color: #b4bac6;
 }
+
+.text-grey {
+    color: #666666;
+}
+
+.text-small {
+    font-size: 12px;
+}
