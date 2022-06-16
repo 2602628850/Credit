@@ -1,0 +1,62 @@
+.w100 {
+    width: 100%;
+}
+.h100 {
+    height: 100%;
+}
+.w-auto {
+    width: auto;
+}
+
+.mgt {
+    margin-top: 8px;
+}
+.mgb {
+    margin-bottom: 8px;
+}
+.mgl {
+    margin-left: 8px;
+}
+.mgr {
+    margin-right: 8px;
+}
+
+.margin-left-right-20 {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.padding-left-right-20 {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+
+
+.button-primary {
+    background-color: #00875a;
+    border: 1px solid #00875a!important;
+    color: #fff!important;
+    border-radius: 15px;
+    font-size: 15px;
+    height: 44px;
+    line-height: 44px;
+}
+
+.text-primary {
+    color: #00875a;
+}
+
+
+.button-second {
+    background-color: #f4f5f7;
+    border: 1px solid #f4f5f7!important;
+    color: #000!important;
+    border-radius: 15px;
+    font-size: 15px;
+    height: 44px;
+    line-height: 44px;
+}
+.text-second {
+    color: #000;
+}
