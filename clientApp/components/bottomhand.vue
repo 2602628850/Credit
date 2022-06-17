@@ -25,24 +25,24 @@
 					pagePath: "/pages/index/indexPage",
 					iconPath: "/static/image/tarbar/home.png",
 					selectedIconPath: "/static/image/tarbar/choose/home.png",
-					text: "首页"
+					text: this.$t('Tabbar.home')
 				}, {
 					pagePath: "/pages/prohall/index",
 					iconPath: "/static/image/tarbar/hall.png",
 					selectedIconPath: "/static/image/tarbar/choose/hall.png",
-					text: "大厅"
+					text: this.$t('Tabbar.hall')
 				},
 				 {
 					pagePath: "/pages/index/index",
 					iconPath: "/static/image/tarbar/team.png",
 					selectedIconPath: "/static/image/tarbar/choose/team.png",
-					text: "团队"
+					text: this.$t('Tabbar.team')
 				}, 
 				{
 					pagePath: "/pages/index/tes",
 					iconPath: "/static/image/tarbar/mine.png",
 					selectedIconPath: "/static/image/tarbar/choose/mine.png",
-					text: "我的"
+					text: this.$t('Tabbar.mine')
 				},
 				
 				]

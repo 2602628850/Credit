@@ -22,7 +22,7 @@
 						<image style="width: 5em;height: 5em;" src="../../static/image/index/order.png"></image>
 					</span>
 					<br />
-					<span style="margin-left: 7px;">
+					<span style="margin-left: 10px;">
 						{{$t('indexpages.order')}}
 					</span>
 				</view>
@@ -33,8 +33,8 @@
 						<image style="width: 5em;height: 5em;" src="../../static/image/index/share.png"></image>
 					</span>
 					<br />
-					<span style="margin-left: 7px;">
-						分享好友
+					<span style="margin-left: 17px;">
+						{{$t('indexpages.shar')}}
 					</span>
 				</view>
 			</uni-col>
@@ -44,8 +44,8 @@
 						<image style="width: 5em;height: 5em;" src="../../static/image/index/integral.png"></image>
 					</span>
 					<br />
-					<span style="margin-left: 7px;">
-						积分中心
+					<span >
+						{{$t('indexpages.integral')}}
 					</span>
 				</view>
 			</uni-col>
@@ -55,8 +55,8 @@
 						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-charts.png"></image>
 					</span>
 					<br />
-					<span style="margin-left: 7px;">
-						报表统计
+					<span style="margin-left: 10px;">
+						{{$t('indexpages.analysis')}}
 					</span>
 				</view>
 			</uni-col>
@@ -66,8 +66,8 @@
 						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-charts.png"></image>
 					</span>
 					<br />
-					<span style="margin-left: 24px;">
-						充值
+					<span style="margin-left: 20px;" >
+						{{$t('indexpages.recharge')}}
 					</span>
 				</view>
 			</uni-col>
@@ -78,8 +78,8 @@
 						</image>
 					</span>
 					<br />
-					<span style="margin-left: 24px;">
-						提现
+					<span style="margin-left: 20px;" >
+						{{$t('indexpages.withdraw')}}
 					</span>
 				</view>
 			</uni-col>
@@ -89,8 +89,8 @@
 						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-level.png"></image>
 					</span>
 					<br />
-					<span style="margin-left: 7px;">
-						信用等级
+					<span style="margin-left: 10px;">
+						{{$t('indexpages.creditlevel')}}
 					</span>
 				</view>
 			</uni-col>
@@ -100,8 +100,9 @@
 						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-service.png"></image>
 					</span>
 					<br />
-					<span style="margin-left: 7px;">
-						在线客服
+					<span >
+						<!-- style="margin-left: 7px;" -->
+						{{$t('indexpages.onlineservice')}}
 					</span>
 				</view>
 			</uni-col>
@@ -112,22 +113,22 @@
 
 		<uni-row class="demo-uni-row radios product" style="margin-left: 1.5%;">
 			<view style="padding: 20px 5px;">
-				<uni-col :span="3" :offset="1">
+				<uni-col :span="3" :offset="1" style="margin-top: 1px;">
 					<view class="demo-uni-col-anniu dark">
 						<text style="color: green;">$10000</text><br />
-						<text style="margin-left: 10%;">余额</text>
+						<text style="margin-left: 10%;">{{$t('indexpages.balance')}}</text>
 					</view>
 				</uni-col>
 				<uni-col :span="9" :offset="3">
 					<view class="demo-uni-col-anniu light">
 						<text style="margin-left: 40%;color: green;">3</text><br />
-						<text>今日剩余查卡次数</text>
+						<text>{{$t('indexpages.todayremain')}}</text>
 					</view>
 				</uni-col>
 				<uni-col :span="5" :offset="2">
 					<view class="demo-uni-col-anniu light">
 						<text style="margin-left: 10%;color: green;">+$0</text><br />
-						<text>今日收入</text>
+						<text>{{$t('indexpages.todayincome')}}</text>
 					</view>
 				</uni-col>
 			</view>
@@ -141,8 +142,8 @@
 				<view class="demo-uni-col-anniu1 dark">
 					<text class="productval">1</text>
 					<view class="productcont">
-						<text class="producttile">产品介绍</text><br />
-						<text class="marginleft10">什么是信用卡代还</text>
+						<text class="producttile">{{$t('indexpages.producejs')}}</text><br />
+						<text class="marginleft10">{{$t('indexpages.producejscontent')}}</text>
 					</view>
 
 				</view>
@@ -162,8 +163,8 @@
 				<view class="demo-uni-col-anniu1 dark">
 					<text class="productval">2</text>
 					<view class="productcont">
-						<text class="producttile">信用等级</text><br />
-						<text class="marginleft10">有效客户通过完成“推荐人数”和“还款次数”提升自己的信用等级（VIP等级)</text>
+						<text class="producttile">{{$t('indexpages.creditleavel')}}</text><br />
+						<text class="marginleft10">{{$t('indexpages.creditcontent')}}</text>
 					</view>
 
 				</view>
@@ -182,8 +183,8 @@
 				<view class="demo-uni-col-anniu1 dark">
 					<text class="productval">3</text>
 					<view class="productcont">
-						<text class="producttile">官方白皮书</text><br />
-						<text class="marginleft10">Third Credit坚信信用是一座永不枯竭金库，拥有信用就等于拥有财富！</text>
+						<text class="producttile">{{$t('indexpages.whitepeaper')}}</text><br />
+						<text class="marginleft10">{{$t('indexpages.whitepeapercontent')}}</text>
 					</view>
 
 				</view>

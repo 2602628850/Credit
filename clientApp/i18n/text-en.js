@@ -54,10 +54,29 @@ export default {
 	indexpages:{
 		order:'Order',
 		swipers:'1',
+		shar:'Share',
+		integral:'Integral',
+		analysis:"Analysis",
+		recharge:'Recharge',
+		withdraw:'Withdraw',
+		creditlevel:'Credit Level',
+		onlineservice:'Online service',
+		balance:"Balance",
+		todayremain:"Today remain check time",
+		todayincome:"Today's income",
+		producejs:"Product description",
+		producejscontent:"What is credit card repayment",
+		creditleavel:"Credit level",
+		creditcontent:"Valid customers by completing 'Number of Referrals' and 'Number of Repayments'can improve your credit level (VIP level)",
+		whitepeaper:"Official White Paper",
+		whitepeapercontent:"Third Credit firmly believes that credit is an inexhaustible treasury, and having credit is equal to having wealth!"
+		
 	},
 	Tabbar:{
-		Moneybag:"Home",
-		My:"hall"
+		home:"Home",
+		hall:"Hall",
+		team:"Team",
+		mine:"Mine"
 	}
     
 }

@@ -48,11 +48,30 @@ export default {
 	indexpages:{
 		order:'订单中心',
 		swipers:'0',
+		shar:'分享好友',
+		integral:'积分中心',
+		analysis:"报表统计",
+		recharge:'充值',
+		withdraw:'提现',
+		creditlevel:'信用等级',
+		onlineservice:'在线服务',
+		balance:"余额",
+		todayremain:"今日剩余查卡次数",
+		todayincome:"今日收入",
+		producejs:"产品介绍",
+		producejscontent:"什么是信用卡代还",
+		creditleavel:"信用等级",
+		creditcontent:"有效客户通过完成“推荐人数”和“还款次数”提升自己的信用等级（VIP等级)",
+		whitepeaper:"官方白皮书",
+		whitepeapercontent:"Third Credit坚信信用是一座永不枯竭金库，拥有信用就等于拥有财富！"
+		
 		
 	},
 	Tabbar:{
-		Moneybag:"首页",
-		My:"大厅"
+		home:"首页",
+		hall:"大厅",
+		team:"团队",
+		mine:"我的"
 	}
 	
 }
