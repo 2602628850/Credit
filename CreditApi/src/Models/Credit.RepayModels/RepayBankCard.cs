@@ -16,7 +16,7 @@ public class RepayBankCard : BaseModel
     /// <summary>
     ///  还款类型
     /// </summary>
-    public RepayTypeEnums RepayType { get; set; }
+    public RepayTypeEnums RepayType { get; set; } = RepayTypeEnums.Card;
 
     /// <summary>
     ///  银行Id
