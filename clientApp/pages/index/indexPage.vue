@@ -4,14 +4,14 @@
 			<text>Third Credit</text>
 		</view>
 		<!-- 首页轮播图 -->
-		<swiper indicator-dots indicator-active-color="#FFFFFF" circular autoplay>
-			<swiper-item v-for="item in rotation" :key="item.id">
-				<image :src="item.url"></image>
-			</swiper-item>
-		</swiper>
-		<!-- 首页轮播图 -->
-		<uni-row class="demo-uni-row">
-			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
+				<swiper style="text-align: center;" indicator-dots indicator-active-color="#FFFFFF" circular autoplay>
+					<swiper-item v-for="item in rotation" :key="item.id">
+						<image :src="item.url"></image>
+					</swiper-item>
+				</swiper>
+				<!-- 首页轮播图 -->
+		<uni-row class="demo-uni-row"  style="margin-left: 6%;">
+			<uni-col :xs="8" :sm="6" :md="5" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
 					<span>
 						<image style="width: 5em;height: 5em;" src="../../static/image/index/order.png"></image>
