@@ -47,6 +47,7 @@ export default {
 		buytitle:'SME Loans',
 		buycon:'Purchase enterprise options and obtain high return upon expiration',
 		buysend:'buy'
+    }
     },
 	indexpages:{
 		order:'Order',
