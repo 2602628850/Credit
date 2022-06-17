@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Commons\Data.Commons\Data.Commons.csproj" />
+      <ProjectReference Include="..\..\Models\Credit.PamentInfoModels\Credit.PamentInfoModels.csproj" />
       <ProjectReference Include="..\..\Models\Credit.PayeeInfoModels\Credit.PayeeInfoModels.csproj" />
       <ProjectReference Include="..\..\Models\Credit.UserModels\Credit.UserModels.csproj" />
       <ProjectReference Include="..\..\Models\Credit.UserWalletModels\Credit.UserWalletModels.csproj" />

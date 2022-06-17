@@ -90,7 +90,7 @@ namespace Credit.Api.Controllers
             await _walletService.MoneyApplyCreate(new MoneyApplyInput
             {
                 Amount = input.Amount,
-                WalletSource = WalletSourceEnums.Withdrawal,
+                WalletSource = WalletSourceEnums.WithdrawalApply,
                 PayeeCardId = input.PayeeCardId,
                 PaymentInfoId = input.PaymentInfoId,
                 Remark = input.Remark

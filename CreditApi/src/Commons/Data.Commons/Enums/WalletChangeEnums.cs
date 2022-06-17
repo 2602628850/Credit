@@ -18,8 +18,19 @@ public enum WalletSourceEnums
     /// <summary>
     ///  提款
     /// </summary>
-    [Description("充值")]
+    [Description("提款")]
     Withdrawal = 100,
+    /// <summary>
+    ///  提款退回
+    /// </summary>
+    [Description("提款退回")]
+    WithdrawalReturn = 110,
+    
+    /// <summary>
+    ///  提款申请
+    /// </summary>
+    [Description("提款申请")]
+    WithdrawalApply = 120,
 }
 
 /// <summary>
@@ -40,4 +51,28 @@ public enum WalletChangeEnums
     /// </summary>
     [Description("支出")]  
     Out = 10,
+}
+
+/// <summary>
+///  资金变动操作类型
+/// </summary>
+public enum WalletOperateEnums
+{
+    /// <summary>
+    ///  系统
+    /// </summary>
+    [Description("系统")]
+    Sytem = 0,
+    
+    /// <summary>
+    ///  管理员
+    /// </summary>
+    [Description("管理员")]
+    Admin = 10,
+    
+    /// <summary>
+    ///  用户
+    /// </summary>
+    [Description("用户")]
+    User = 20
 }
