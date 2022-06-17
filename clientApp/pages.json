@@ -64,9 +64,9 @@
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
-		"maxWidth": 500,
-		"rpxCalcBaseDeviceWidth": 500,
-		"rpxCalcMaxDeviceWidth": 500
+//		"maxWidth": 500,
+//		"rpxCalcBaseDeviceWidth": 500,
+//		"rpxCalcMaxDeviceWidth": 500
 	},
 	"tabBar": {
 	        "color": "#7A7E83", // tab 上的文字默认颜色

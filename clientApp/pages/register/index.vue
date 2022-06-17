@@ -1,4 +1,6 @@
 <template>
+
+
 	<register-top-item :title="$t('register.wel')" :sub-title="$t('register.welSub')"></register-top-item>
 
 

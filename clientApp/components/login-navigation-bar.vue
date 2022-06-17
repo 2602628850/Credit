@@ -1,4 +1,5 @@
 <template>
+	<view :style="{height: statusBarHeight}"></view>
 	<view class="flex-row-between navi" :style="{color: titleColor}">
 		<view class="h100 flex-row-start">
 			<el-image class="navi-logo mgl" fit="fill" :src="'/static/logo.png'"></el-image>
@@ -34,6 +35,7 @@
 				langList: [],
 				lang: '',
 				langIndex: '',
+				statusBarHeight: '0px',
 			}
 		},
 		methods: {
@@ -58,8 +60,12 @@
 					break;
 				}
 			}
-			console.log(this.langList)
-			console.log(this.langIndex)
+
+			this.statusBarHeight = this.$statusBarHeight - 49;
+			if (this.statusBarHeight <= 0) {
+				this.statusBarHeight = 0;
+			}
+			this.statusBarHeight += 'px';
 		}
 	}
 </script>

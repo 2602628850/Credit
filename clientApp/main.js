@@ -51,9 +51,9 @@ export function createApp() {
     const app = createSSRApp(App)
 
     app.config.globalProperties.$windowHeight = uni.getSystemInfoSync().windowHeight;
-    app.config.globalProperties.$windowWidth = uni.getSystemInfoSync().windowWidth > 500 ? 500 : uni.getSystemInfoSync().windowWidth;
+    app.config.globalProperties.$windowWidth = uni.getSystemInfoSync().windowWidth > 906 ? 500 : uni.getSystemInfoSync().windowWidth;
     app.config.globalProperties.$screenHeight = uni.getSystemInfoSync().screenHeight;
-    app.config.globalProperties.$screenWidth = uni.getSystemInfoSync().screenWidth > 500 ? 500 : uni.getSystemInfoSync().screenWidth;
+    app.config.globalProperties.$screenWidth = uni.getSystemInfoSync().screenWidth > 960 ? 500 : uni.getSystemInfoSync().screenWidth;
     app.config.globalProperties.$statusBarHeight = uni.getSystemInfoSync().statusBarHeight;
     app.config.globalProperties.$pixelRatio = uni.getSystemInfoSync().windowWidth / 750;
     // 多语言

@@ -1,4 +1,5 @@
 <template>
+	<view :style="{height: statusBarHeight}"></view>
 <!--通用导航栏-->
 	<view class="navi flex-row-between" :style="{backgroundColor: barColor,color: titleColor}" style="position: relative">
 		<view v-if="showBack" class="navi-back-icon mgl iconfont icon-back" @click="goBack"></view>
@@ -32,12 +33,24 @@
 				default: true
 			}
 		},
+		data() {
+			return {
+				statusBarHeight: '0px',
+			}
+		},
 		methods: {
 			goBack() {
 				uni.navigateBack({
 					delta: 1
 				})
 			}
+		},
+		created() {
+			this.statusBarHeight = this.$statusBarHeight - 49;
+			if (this.statusBarHeight <= 0) {
+				this.statusBarHeight = 0;
+			}
+			this.statusBarHeight += 'px';
 		}
 	}
 </script>

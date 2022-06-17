@@ -21,14 +21,23 @@
 	@import "/common/css/public.css";
 	@import "/static/font/iconfont.css";
 
-	uni-app {
-		box-shadow: 0 -15px 10px rgba(0,0,0, 0.5);
-	}
+	//uni-app {
+	//	box-shadow: 0 -15px 10px rgba(0,0,0, 0.5);
+	//}
 
 	uni-page-body {
 		width: 100%;
 		height: 100%;
 	}
 
+
+	@media screen and (min-width: 960px) {
+		uni-app {
+			max-width:500px;
+			overflow-y: scroll;
+			margin:auto;
+			box-shadow: 0 0 20px #aaa;
+		}
+	}
 
 </style>
