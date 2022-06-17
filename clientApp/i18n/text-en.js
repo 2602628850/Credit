@@ -1,37 +1,37 @@
 export default {
     login: {
-        wel : '登录',
-        welSub: '欢迎您归来!',
-        remember: '记住用户名和密码',
-        register: '创建账号',
+        wel : 'Let,s Sign You In',
+        welSub: 'Welcome back, you’ve been missed!',
+        remember: 'Remember username and password',
+        register: 'Create an account',
     },
     register: {
-        wel : '注册',
-        welSub: '创建账号开始使用!',
-        country: '国家',
-        countryTip: '请选择国家',
-        code: '验证码',
-        codeTip: '请输入验证码',
-        invCode: '邀请码',
-        invCodeTip: '请输入邀请码',
-        rePwd: '确认密码',
-        rePwdTip: '请再次确认密码',
-        registerTip: '注册即代表您已经阅读并同意',
-        agree: '用户协议',
+        wel : 'Sign In',
+        welSub: 'Create an account to continue !',
+        country: 'Contry',
+        countryTip: 'Select your contry',
+        code: 'Verification code',
+        codeTip: 'Enter a OTP',
+        invCode: 'Invitation code',
+        invCodeTip: 'Enter a invite code',
+        rePwd: 'Password',
+        rePwdTip: 'Enter your pass',
+        registerTip: 'By registering,have read and agreed',
+        agree: 'User agreement',
 
-        haveAccount: '已有账号?'
+        haveAccount: 'Already have an account?'
     },
     agree: {
-        title: '用户协议'
+        title: 'User agreement'
     },
     public: {
-        register: "注 册",
-        login: "登 录",
-        send: '发 送',
-        pwd: '密码',
-        pwdTip: '请输入密码',
-        mail: '邮箱',
-        mailTip: '请输入邮箱',
+        register: "Create an account",
+        login: "Sign In",
+        send: 'Send',
+        pwd: 'Password',
+        pwdTip: 'Enter your Password',
+        mail: 'Email',
+        mailTip: 'Enter your email',
     },
     prohall: {
         title: "hall",
@@ -45,4 +45,12 @@ export default {
 		buycon:'Purchase enterprise options and obtain high return upon expiration',
 		buysend:'buy'
     },
+	indexpages:{
+		order:'Order',
+		swipers:'1',
+	},
+	Tabbar:{
+		Moneybag:"Home",
+		My:"hall"
+	}
 }

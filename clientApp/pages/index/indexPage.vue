@@ -3,9 +3,14 @@
 		<view class="created">
 			<text>Third Credit</text>
 		</view>
-		<!-- 首页轮播图 -->
-				<swiper style="text-align: center;" indicator-dots indicator-active-color="#FFFFFF" circular autoplay>
+		<!-- 首页轮播图 indexpages.swipers控制显示中文还是英文图标-->
+				<swiper v-if="$t('indexpages.swipers')=='0'" style="text-align: center;" indicator-dots indicator-active-color="#FFFFFF" circular autoplay>
 					<swiper-item v-for="item in rotation" :key="item.id">
+						<image :src="item.url"></image>
+					</swiper-item>
+				</swiper>
+				<swiper v-if="$t('indexpages.swipers')=='1'" style="text-align: center;" indicator-dots indicator-active-color="#FFFFFF" circular autoplay>
+					<swiper-item v-for="item in enrotation" :key="item.id">
 						<image :src="item.url"></image>
 					</swiper-item>
 				</swiper>
@@ -18,7 +23,7 @@
 					</span>
 					<br />
 					<span style="margin-left: 7px;">
-						订单中心
+						{{$t('indexpages.order')}}
 					</span>
 				</view>
 			</uni-col>
@@ -191,8 +196,8 @@
 			</uni-col>
 		</uni-row>
 
-		<view style="padding: 7%;"></view>
-
+		
+        <tab-bar :selected="0"></tab-bar>
 	</view>
 </template>
 
@@ -216,6 +221,23 @@
 					{
 						id: 4,
 						url: '/static/image/lb4.jpg'
+					}
+				],
+				enrotation: [{
+						id: 1,
+						url: '/static/image/lben/lb1.png'
+					},
+					{
+						id: 2,
+						url: '/static/image/lben/lb2.png'
+					},
+					{
+						id: 3,
+						url: '/static/image/lben/lb3.png'
+					},
+					{
+						id: 4,
+						url: '/static/image/lben/lb4.png'
 					}
 				]
 			}

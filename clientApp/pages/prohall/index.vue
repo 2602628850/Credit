@@ -77,6 +77,7 @@
 		</el-row> 
       </el-card>
 	</view>
+	 <tab-bar :selected="1"></tab-bar>
 </template>
 
 <script>

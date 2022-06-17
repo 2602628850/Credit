@@ -2,7 +2,7 @@
 	"pages": [
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/login",
+			//"path": "pages/login",
 			"path": "pages/guide/guide",
 			"style": {
 				"navigationBarTitleText": "custom"
@@ -76,36 +76,36 @@
 //		"maxWidth": 500,
 //		"rpxCalcBaseDeviceWidth": 500,
 //		"rpxCalcMaxDeviceWidth": 500
-	},
-	"tabBar": {
-	        "color": "#7A7E83", // tab 上的文字默认颜色
-	        "selectedColor": "#3cc51f", // tab 上的文字选中时的颜色
-	        "borderStyle": "black", // tabbar 上边框的颜色，可选值 black/white
-	        "backgroundColor": "#ffffff",  // tab 的背景色
-	        "list": [{ // 最少2个、最多5个 tab
-	            "pagePath": "pages/index/indexPage", // 页面路径，必须在 pages 中先定义
-	            "iconPath": "static/image/tarbar/home.png", // 图片路径，icon 大小限制为40kb，建议尺寸为 81px * 81px
-	            "selectedIconPath": "static/image/tarbar/choose/home.png", // 选中时的图片路径
-	            "text": "首页" // tab 上按钮文字
-	        }, {
-	            "pagePath": "pages/prohall/index",
-	            "iconPath": "static/image/tarbar/hall.png",
-	            "selectedIconPath": "static/image/tarbar/choose/hall.png",
-	            "text": "大厅"
-	        },
-			{
-			    "pagePath": "pages/index/indexPage",
-			    "iconPath": "static/image/tarbar/team.png",
-			    "selectedIconPath": "static/image/tarbar/choose/team.png",
-			    "text": "团队"
-			},
-			{
-			    "pagePath": "pages/index/tes",
-			    "iconPath": "static/image/tarbar/mine.png",
-			    "selectedIconPath": "static/image/tarbar/choose/mine.png",
-			    "text": "我的"
-			}
+	}
+	// "tabBar": {
+	//         "color": "#7A7E83", // tab 上的文字默认颜色
+	//         "selectedColor": "#3cc51f", // tab 上的文字选中时的颜色
+	//         "borderStyle": "black", // tabbar 上边框的颜色，可选值 black/white
+	//         "backgroundColor": "#ffffff",  // tab 的背景色
+	//         "list": [{ // 最少2个、最多5个 tab
+	//             "pagePath": "pages/index/indexPage", // 页面路径，必须在 pages 中先定义
+	//             "iconPath": "static/image/tarbar/home.png", // 图片路径，icon 大小限制为40kb，建议尺寸为 81px * 81px
+	//             "selectedIconPath": "static/image/tarbar/choose/home.png", // 选中时的图片路径
+	//             "text": "首页" // tab 上按钮文字
+	//         }, {
+	//             "pagePath": "pages/prohall/index",
+	//             "iconPath": "static/image/tarbar/hall.png",
+	//             "selectedIconPath": "static/image/tarbar/choose/hall.png",
+	//             "text": "大厅"
+	//         },
+	// 		{
+	// 		    "pagePath": "pages/index/indexPage",
+	// 		    "iconPath": "static/image/tarbar/team.png",
+	// 		    "selectedIconPath": "static/image/tarbar/choose/team.png",
+	// 		    "text": "团队"
+	// 		},
+	// 		{
+	// 		    "pagePath": "pages/index/tes",
+	// 		    "iconPath": "static/image/tarbar/mine.png",
+	// 		    "selectedIconPath": "static/image/tarbar/choose/mine.png",
+	// 		    "text": "我的"
+	// 		}
 			
-			]
-	    }
+	// 		]
+	//     }
 }

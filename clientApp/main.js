@@ -14,6 +14,7 @@ import {createI18n} from "vue-i18n"
 
 import zh from '/i18n/text-zh'
 import en from '/i18n/text-en'
+import tabBar from '@/components/bottomhand.vue'
 
 const i18n = createI18n({
     globalInjection: true,
@@ -67,6 +68,7 @@ export function createApp() {
 
     app.use(ElementPlus)
     app.use(i18n)
+	app.component('tabBar', tabBar)
 
     return {
         app
