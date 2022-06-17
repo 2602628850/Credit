@@ -24,6 +24,9 @@ export default {
     agree: {
         title: '用户协议'
     },
+    credit: {
+        title: '信用代还专区'
+    },
     public: {
         register: "注 册",
         login: "登 录",
@@ -44,5 +47,5 @@ export default {
 		buytitle:'SME Loans',
 		buycon:'Purchase enterprise options and obtain high return upon expiration',
 		buysend:'buy'
-    },
+    }
 }

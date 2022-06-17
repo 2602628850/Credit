@@ -16,7 +16,7 @@
 		</div>
 		<div class="uni-placeholder"></div>
 	</uni-page-head>
-	<view style="margin-top:10px;">
+	<view style="margin-top:20px;"  @click="tocredit">
 		<el-card class="box-card" >
 		<el-row :gutter="20">
 			<el-col :span="6"> 
@@ -37,7 +37,7 @@
 		</el-row> 
       </el-card>
 	</view>
-	<view style="margin-top:10px;">
+	<view style="margin-top:20px;">
 		<el-card class="box-card" >
 		<el-row :gutter="20">
 			<el-col :span="6"> 
@@ -56,7 +56,7 @@
 		</el-row> 
       </el-card>
 	</view>
-	<view style="margin-top:10px;">
+	<view style="margin-top:20px;">
 		<el-card class="box-card" >
 		<el-row :gutter="20">
 			<el-col :span="6"> 
@@ -87,7 +87,12 @@
 			}
 		},
 		methods: {
-
+			tocredit() {
+				// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
+				uni.reLaunch({
+					url: '/pages/prohall/creditIndex'
+				})
+			}
 		}
 	}
 </script>
