@@ -57,13 +57,22 @@
 				"navigationBarTitleText": ""
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/prohall/creditIndex",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationStyle": "custom",
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
 //		"maxWidth": 500,
 //		"rpxCalcBaseDeviceWidth": 500,
 //		"rpxCalcMaxDeviceWidth": 500
@@ -79,7 +88,7 @@
 	            "selectedIconPath": "static/image/tarbar/choose/home.png", // 选中时的图片路径
 	            "text": "首页" // tab 上按钮文字
 	        }, {
-	            "pagePath": "pages/index/index",
+	            "pagePath": "pages/prohall/index",
 	            "iconPath": "static/image/tarbar/hall.png",
 	            "selectedIconPath": "static/image/tarbar/choose/hall.png",
 	            "text": "大厅"

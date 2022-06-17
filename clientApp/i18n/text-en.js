@@ -8,7 +8,6 @@ export default {
     register: {
         wel : '注册',
         welSub: '创建账号开始使用!',
-
         country: '国家',
         countryTip: '请选择国家',
         code: '验证码',
@@ -29,11 +28,21 @@ export default {
         register: "注 册",
         login: "登 录",
         send: '发 送',
-
         pwd: '密码',
         pwdTip: '请输入密码',
-
         mail: '邮箱',
         mailTip: '请输入邮箱',
-    }
+    },
+    prohall: {
+        title: "hall",
+		repayment:"Credit zone",
+		repaycon:"Repaying credit card bills for immediate income",
+		repaysend:"repay",
+		loantitle:"P2P zone",
+		loancon:"P2P short-term loan, safe and stable, daily return of income, interest before principal",
+		loansend:'Lend',
+		buytitle:'SME Loans',
+		buycon:'Purchase enterprise options and obtain high return upon expiration',
+		buysend:'buy'
+    },
 }

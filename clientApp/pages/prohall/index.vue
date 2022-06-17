@@ -8,7 +8,7 @@
 			</div>
 			<div class="uni-page-head-bd">
 				<div class="uni-page-head__title" style="font-size: 16px; opacity: 1;">
-					大厅
+					{{$t('prohall.title')}}
 				</div>
 			</div>
 			<!---->
@@ -26,13 +26,13 @@
 			</el-col>
 			<el-col :span="10">
 				<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-					信用卡代还专区
+					{{$t('prohall.repayment')}}
 				</div>
-				<view style="font-size: 8px"><span>代还信用卡账单,即时获取收益</span></view>
+				<view style="font-size: 8px"><span>{{$t('prohall.repaycon')}}</span></view>
 				
 				<view style="margin-top:30px;text-align: right;">
 					
-				<span>	<el-button type="primary">去还款</el-button></span></view>
+				<span>	<el-button type="primary">{{$t('prohall.repaysend')}}</el-button></span></view>
 			</el-col>
 		</el-row> 
       </el-card>
@@ -45,13 +45,13 @@
 			</el-col>
 			<el-col :span="16">
 				<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-					贷款代还专区
+					{{$t('prohall.loantitle')}}
 				</div>
-				<view style="font-size: 8px"><span>P2P短期借贷，安全稳定，每日返还收益，先息后本</span></view>
+				<view style="font-size: 8px"><span>{{$t('prohall.loancon')}}</span></view>
 				
 				<view style="margin-top:30px;text-align: right;">
 					
-				<span> <el-button type="primary">去借出</el-button> </span></view>
+				<span> <el-button type="primary">{{$t('prohall.loansend')}}</el-button> </span></view>
 			</el-col>
 		</el-row> 
       </el-card>
@@ -66,13 +66,13 @@
 			</el-col>
 			<el-col :span="12">
 				<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-					SME Loans
+					{{$t('prohall.buytitle')}}
 				</div>
-				<view style="font-size: 8px"><span>购买企业期权，到期获得高回报收益</span></view>
+				<view style="font-size: 8px"><span>{{$t('prohall.buycon')}}</span></view>
 				
 				<view style="margin-top:30px;text-align: right;">
 					
-				<span>	<el-button type="primary">去购买</el-button></span></view>
+				<span>	<el-button type="primary">{{$t('prohall.buysend')}}</el-button></span></view>
 			</el-col>
 		</el-row> 
       </el-card>
