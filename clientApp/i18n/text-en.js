@@ -27,6 +27,9 @@ export default {
     credit: {
         title: '信用代还专区'
     },
+    credit: {
+        title: '信用代还专区'
+    },
     public: {
         register: "Create an account",
         login: "Sign In",
@@ -47,6 +50,7 @@ export default {
 		buytitle:'SME Loans',
 		buycon:'Purchase enterprise options and obtain high return upon expiration',
 		buysend:'buy'
+<<<<<<< HEAD
     },
 	indexpages:{
 		order:'Order',
@@ -56,4 +60,7 @@ export default {
 		Moneybag:"Home",
 		My:"hall"
 	}
+=======
+    }
+>>>>>>> 2faa765306015e3378055bdfaff7b1ab0850c336
 }
