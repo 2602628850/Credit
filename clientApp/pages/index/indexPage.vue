@@ -28,7 +28,7 @@
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
-				<view class="demo-uni-col dark">
+				<view class="demo-uni-col dark" v-on:click="SharedTo()">
 					<span>
 						<image style="width: 5em;height: 5em;" src="../../static/image/index/share.png"></image>
 					</span>
@@ -205,6 +205,13 @@
 
 <script>
 	export default {
+		methods:{
+			SharedTo(){
+				uni.navigateTo({
+					url:"/pages/share/index"
+				})
+			}
+		},
 		data() {
 			return {
 				rotation: [{

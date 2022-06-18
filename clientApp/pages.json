@@ -65,7 +65,13 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+			"path": "pages/share/index",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		}
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",
