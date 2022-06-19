@@ -77,9 +77,9 @@ namespace Credit.Api.Controllers
             await _walletService.MoneyApplyCreate(new MoneyApplyInput
             {
                 Amount = input.Amount,
-                WalletSource = WalletSourceEnums.RechargeApply,
+                SourceType = WalletSourceEnums.RechargeApply,
                 Type = input.Type,
-                PayeeCardId = input.PayeeCardId,
+                PayeeBankCardId = input.PayeeBankCardId,
                 PaymentInfoId = input.PaymentInfoId,
                 Remark = input.Remark
             },CurrentUser.UserId);
@@ -95,8 +95,8 @@ namespace Credit.Api.Controllers
             await _walletService.MoneyApplyCreate(new MoneyApplyInput
             {
                 Amount = input.Amount,
-                WalletSource = WalletSourceEnums.WithdrawalApply,
-                PayeeCardId = input.PayeeCardId,
+                SourceType = WalletSourceEnums.WithdrawalApply,
+                PayeeBankCardId = input.PayeeBankCardId,
                 PaymentInfoId = input.PaymentInfoId,
                 Remark = input.Remark
             },CurrentUser.UserId);

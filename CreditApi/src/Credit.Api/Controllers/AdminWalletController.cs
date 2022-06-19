@@ -29,7 +29,7 @@ public class AdminWalletController : BaseAdminController
     [HttpGet]
     public async Task<PagedOutput<MoneyApplyDto>> GetRechargeApplyPagedList(MoneyApplyPagedInput input)
     {
-        input.Source = WalletSourceEnums.Recharge;
+        input.Source = WalletSourceEnums.RechargeApply;
         return await _userWalletService.GetMoneyApplyPagedList(input);
     }
     

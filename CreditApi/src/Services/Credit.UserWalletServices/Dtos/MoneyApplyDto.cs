@@ -10,7 +10,7 @@ public class MoneyApplyInput : UserMoneyApplyInput
     /// <summary>
     ///  收支来源  0 充值  10 提款
     /// </summary>
-    public WalletSourceEnums WalletSource { get; set; }
+    public WalletSourceEnums SourceType { get; set; }
 }
 
 /// <summary>
@@ -41,7 +41,7 @@ public class UserMoneyApplyInput
     /// <summary>
     ///  收款卡号Id
     /// </summary>
-    public long PayeeCardId { get; set; }
+    public long PayeeBankCardId { get; set; }
 }
 
 public class MoneyApplyAuditInput

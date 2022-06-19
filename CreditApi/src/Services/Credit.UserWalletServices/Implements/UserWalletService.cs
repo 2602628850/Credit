@@ -62,28 +62,29 @@ public class UserWalletService : IUserWalletService
         var userMoneyApply = await _freeSql.Select<UserMoneyApply>().AsTable((type, table) => $"{table}_{year}")
             .Where(s => s.UserId == userId && s.IsDeleted == 0)
             .Where(s => s.AuditStatus == AuditStatusEnums.Default || s.AuditStatus == AuditStatusEnums.Ing)
-            .Where(s => s.SourceType == input.WalletSource)
+            .Where(s => s.SourceType == input.SourceType)
             .ToListAsync();
         if (userMoneyApply.Count > 0)
             throw new MyException("There are still unfulfilled orders");
         //充值
-        if (input.WalletSource == WalletSourceEnums.RechargeApply)
+        if (input.SourceType == WalletSourceEnums.RechargeApply)
         {
             //线下支付
             if (input.Type?.ToLower() == PayTypeConsts.BankCard)
             {
-                if (input.PayeeCardId == 0)
+                if (input.PayeeBankCardId == 0)
                     throw new MyException("Please contact customer service");
                 //查找对应收款卡
-                var bankCard = await _payeeBankCardService.GetAvailablePayeeBankCards(bankCardId:input.PayeeCardId);
+                var bankCard = await _payeeBankCardService.GetAvailablePayeeBankCards(bankCardId:input.PayeeBankCardId);
                 if (bankCard == null)
                     throw new MyException("Please contact customer service");
-                var payText = $"卡号：{bankCard.CardNo} 收到充值款{input.Amount}.";
+                var payText = $"卡号：{bankCard.CardNo}, 收到充值款{input.Amount}.";
                 var moneyApply = input.MapTo<UserMoneyApply>();
                 moneyApply.Id = IdHelper.GetId();
                 moneyApply.PayText = payText;
                 moneyApply.AuditStatus = AuditStatusEnums.Default;
                 moneyApply.ChangeType = WalletChangeEnums.In;
+                moneyApply.UserId = userId;
                 await _freeSql.Insert(moneyApply).InsertTableTime(TableTimeFormat.Year).ExecuteAffrowsAsync();
             }
             //线上支付
@@ -97,14 +98,14 @@ public class UserWalletService : IUserWalletService
             }
         }
         //提款
-        else if (input.WalletSource == WalletSourceEnums.WithdrawalApply)
+        else if (input.SourceType == WalletSourceEnums.WithdrawalApply)
         {
             //提款金额
             if (input.Amount > user.Balance)
                 throw new MyException("Insufficient balance");
             
             //查找用户银行卡
-            var userBankCard = await _userBankCardService.GetUserBankCardList(userId, input.PayeeCardId);
+            var userBankCard = await _userBankCardService.GetUserBankCardList(userId, input.PayeeBankCardId);
             if (userBankCard.Count == 0)
                 throw new MyException("Please select the receiving bank card");
             //添加提款申请
@@ -112,7 +113,8 @@ public class UserWalletService : IUserWalletService
             moneyApply.Id = IdHelper.GetId();
             moneyApply.AuditStatus = AuditStatusEnums.Default;
             moneyApply.ChangeType = WalletChangeEnums.Out;
-            moneyApply.PayText = $"提款：{input.Amount} 提款卡号：{userBankCard.First().CardNo}";
+            moneyApply.PayText = $"提款：{input.Amount}, 提款卡号：{userBankCard.First().CardNo}.";
+            moneyApply.UserId = userId;
             _freeSql.Transaction(() =>
             {
                 //添加申请
@@ -168,7 +170,7 @@ public class UserWalletService : IUserWalletService
                 WalletSource = s.SourceType,
                 AuditAt = s.AuditAt,
                 AuditText = s.AuditText,
-                PayeeCardId = s.PayeeBankCardId,
+                PayeeBankCardId = s.PayeeBankCardId,
                 PaymentInfoId = s.PaymentInfoId,
                 PayText = s.PayText,
                 Remark = s.Remark,
@@ -275,9 +277,13 @@ public class UserWalletService : IUserWalletService
        _freeSql.Transaction(() =>
        {
            //修改用户余额信息
-           _freeSql.Update<Users>(user).ExecuteAffrows();
-           //添加资金变动记录
-           _freeSql.Insert(newRecord).InsertTableTime(TableTimeFormat.Month).ExecuteAffrows();
+           _freeSql.Update<Users>(user.Id)
+               .SetDto(new {FreezeFunds = user.FreezeFunds,Balance = user.Balance}).ExecuteAffrows();
+           if (input.SourceType != WalletSourceEnums.Withdrawal)
+           {
+               //添加资金变动记录
+               _freeSql.Insert(newRecord).InsertTableTime(TableTimeFormat.Month).ExecuteAffrows();
+           }
        });
    }
 
@@ -318,11 +324,15 @@ public class UserWalletService : IUserWalletService
        //数据分表年份
        var tableYear = DateTimeOffset.FromUnixTimeMilliseconds(moneyApply.CreateAt).Year;
        //更新数据
-       moneyApply.AuditAt = utcNow;
-       moneyApply.AuditUserId = auditUserId;
-       moneyApply.AuditText = auditText;
-       moneyApply.AuditStatus = AuditStatusEnums.Ing;
-       await _freeSql.Update<UserMoneyApply>(moneyApply).AsTable(table => $"{table}_{tableYear}").ExecuteAffrowsAsync();
+       await _freeSql.Update<UserMoneyApply>(moneyApply).UpdateTableTime(TableTimeFormat.Year,moneyApply.CreateAt)
+           .SetDto(new
+           {
+               AuditAt = utcNow,
+               AuditStatus = AuditStatusEnums.Ing,
+               AuditText = auditText,
+               AuditUserId = auditUserId,
+               UpdateAt = utcNow
+           }).ExecuteAffrowsAsync();
    }
 
    /// <summary>
@@ -347,14 +357,19 @@ public class UserWalletService : IUserWalletService
            .Where(s => s.IsDeleted == 0)
            .ToOneAsync();
        //修改申请数据
-       moneyApply.AuditAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-       moneyApply.AuditText = auditText;
-       moneyApply.AuditUserId = auditUserId;
-       moneyApply.AuditStatus = AuditStatusEnums.Fail;
+       var utcNow = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
        _freeSql.Transaction(() =>
        {
            //更新修改申请信息
-           _freeSql.Update<UserMoneyApply>(moneyApply).UpdateTableTime(TableTimeFormat.Year,moneyApply.CreateAt)
+           _freeSql.Update<UserMoneyApply>(moneyApply.Id).UpdateTableTime(TableTimeFormat.Year,moneyApply.CreateAt)
+               .SetDto(new
+                   {
+                       AuditAt = utcNow,
+                       AuditStatus = AuditStatusEnums.Fail,
+                       AuditText = auditText,
+                       AuditUserId = auditUserId,
+                       UpdateAt = utcNow
+                   })
                .ExecuteAffrows();
            //添加用户资金记录
            if (moneyApply.SourceType == WalletSourceEnums.WithdrawalApply)
@@ -390,14 +405,19 @@ public class UserWalletService : IUserWalletService
        var user = await _freeSql.Select<Users>()
            .Where(s => s.Id == moneyApply.UserId && s.IsDeleted == 0)
            .ToOneAsync();
-       moneyApply.AuditAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-       moneyApply.AuditStatus = AuditStatusEnums.Success;
-       moneyApply.AuditText = auditText;
-       moneyApply.AuditUserId = auditUserId;
+       var utcNow = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
        _freeSql.Transaction(() =>
        {
            //修改资金申请信息
-           _freeSql.Update<UserMoneyApply>(moneyApply).ExecuteAffrows();
+           _freeSql.Update<UserMoneyApply>(moneyApply.Id).UpdateTableTime(TableTimeFormat.Year,moneyApply.CreateAt)
+               .SetDto(new
+               {
+                   AuditAt = utcNow,
+                   AuditStatus = AuditStatusEnums.Success,
+                   AuditText = auditText,
+                   AuditUserId = auditUserId,
+                   UpdateAt = utcNow
+               }).ExecuteAffrows();
            //添加用户充值流水
            if (moneyApply.SourceType == WalletSourceEnums.RechargeApply)
            {
@@ -405,6 +425,17 @@ public class UserWalletService : IUserWalletService
                {
                    Amount = moneyApply.Amount,
                    SourceType = WalletSourceEnums.Recharge,
+                   OperateUserId = auditUserId,
+                   UserId = moneyApply.UserId
+               });
+           }
+
+           if (moneyApply.SourceType == WalletSourceEnums.WithdrawalApply)
+           {
+               WalletRecordCreate(new UserWalletRecordInput
+               {
+                   Amount = moneyApply.Amount,
+                   SourceType = WalletSourceEnums.Withdrawal,
                    OperateUserId = auditUserId,
                    UserId = moneyApply.UserId
                });

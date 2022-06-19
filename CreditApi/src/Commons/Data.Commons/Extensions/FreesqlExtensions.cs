@@ -56,7 +56,7 @@ public static class FreesqlExtensions
         {
             for (var i = 0; i < 3; i++)
             {
-                var datetimeStartStr = datetimeStart.AddMonths(i).Date.ToString("yyyy");
+                var datetimeStartStr = datetimeStart.AddYears(i).Date.ToString("yyyy");
                 var datetimeEndStr = datetimeEnd.Date.ToString("yyyy");
     
                 query = query.AsTable((type, table) => $"{table}_{datetimeStartStr}");

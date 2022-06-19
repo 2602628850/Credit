@@ -177,23 +177,16 @@ public class PayeeBankCardService : IPayeeBankCardService
     {
         var now = DateTime.UtcNow;
         var nowSpan = new TimeSpan(now.Hour,now.Minute,now.Second);
-        var sql = _freeSql.Select<PayeeBankCard>()
-            .WhereIf(amount > 0, s => s.MinPayeeAmount <= amount && s.MaxPayeeAmount >= amount)
-            .WhereIf(bankCardId.HasValue, s => s.Id == bankCardId)
-            .Where(s => nowSpan >= s.StartTime && nowSpan <= s.EndTime)
-            .Where(s => s.IsEnable == 1)
-            .Where(s => s.IsDeleted == 0)
-            .OrderByRandom()
-            .ToSql();
         var bankCard = await _freeSql.Select<PayeeBankCard>()
             .WhereIf(amount > 0,s => s.MinPayeeAmount <= amount && s.MaxPayeeAmount >= amount)
             .WhereIf(bankCardId.HasValue, s => s.Id == bankCardId)
-            .Where(s => nowSpan >= s.StartTime && nowSpan <= s.EndTime)
+            //.Where(s => nowSpan.Ticks >= s.StartTime.Ticks && nowSpan.Ticks <= s.EndTime.Ticks)
             .Where(s => s.IsEnable == 1)
             .Where(s => s.IsDeleted == 0)
             .OrderByRandom()
             .ToOneAsync();
-
+        if (bankCard == null || nowSpan < bankCard.StartTime || nowSpan > bankCard.EndTime)
+            return null;
         return bankCard.MapTo<PayeeBankCardSelectDto>();
     }
 

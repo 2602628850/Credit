@@ -89,7 +89,7 @@ public class UserBankCardService : IUserBankCardService
             .WhereIf(bankCardId > 0, s => s.Id == bankCardId)
             .Where(s => s.UserId == userId)
             .Where(s => s.IsDeleted == 0)
-            .ToOneAsync();
+            .ToListAsync();
         return bankCards.MapToList<UserBankCardDto>();
     }
 }
