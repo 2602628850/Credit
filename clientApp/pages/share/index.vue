@@ -26,6 +26,7 @@
 		</uni-card>
 
 	</view>
+	<view style="height: 4%;"></view>
 <tab-bar :selected="0"></tab-bar>
 </template>
 
