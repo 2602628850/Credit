@@ -13,6 +13,7 @@
       <ProjectReference Include="..\..\Models\Credit.UserModels\Credit.UserModels.csproj" />
       <ProjectReference Include="..\..\Models\Credit.UserWalletModels\Credit.UserWalletModels.csproj" />
       <ProjectReference Include="..\Credit.PayeeBankCardServices\Credit.PayeeBankCardServices.csproj" />
+      <ProjectReference Include="..\Credit.UserBankCardServices\Credit.UserBankCardServices.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.UserWalletModels", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.UserWalletServices", "Services\Credit.UserWalletServices\Credit.UserWalletServices.csproj", "{B2B2FADF-4BC5-4961-A3B2-EDF274BEC3FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.UserBankCardModels", "Models\Credit.UserBankCardModels\Credit.UserBankCardModels.csproj", "{668C9CAC-240C-4BB6-9CB3-B6C5C6B3CDF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.UserBankCardServices", "Services\Credit.UserBankCardServices\Credit.UserBankCardServices.csproj", "{873B1AE9-FB4E-4432-A82C-E207609610E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +103,14 @@ Global
 		{B2B2FADF-4BC5-4961-A3B2-EDF274BEC3FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2B2FADF-4BC5-4961-A3B2-EDF274BEC3FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2B2FADF-4BC5-4961-A3B2-EDF274BEC3FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{668C9CAC-240C-4BB6-9CB3-B6C5C6B3CDF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{668C9CAC-240C-4BB6-9CB3-B6C5C6B3CDF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{668C9CAC-240C-4BB6-9CB3-B6C5C6B3CDF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{668C9CAC-240C-4BB6-9CB3-B6C5C6B3CDF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{873B1AE9-FB4E-4432-A82C-E207609610E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{873B1AE9-FB4E-4432-A82C-E207609610E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{873B1AE9-FB4E-4432-A82C-E207609610E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{873B1AE9-FB4E-4432-A82C-E207609610E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,6 +129,8 @@ Global
 		{C3A036D8-AA27-4E79-98D5-9A75AE1AE1D7} = {AD38372F-7AFB-4F7A-BC6E-042A321B8EA8}
 		{2D19F5F7-2562-4DD1-9AAF-D4CBFA66C9D8} = {CE159541-6753-4927-8909-6161E8E9F7C5}
 		{B2B2FADF-4BC5-4961-A3B2-EDF274BEC3FE} = {AD38372F-7AFB-4F7A-BC6E-042A321B8EA8}
+		{668C9CAC-240C-4BB6-9CB3-B6C5C6B3CDF9} = {CE159541-6753-4927-8909-6161E8E9F7C5}
+		{873B1AE9-FB4E-4432-A82C-E207609610E9} = {AD38372F-7AFB-4F7A-BC6E-042A321B8EA8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C3532953-9A99-4976-8D3B-355D741B2207}

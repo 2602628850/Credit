@@ -1,4 +1,6 @@
-﻿using Credit.UserServices.Dtos;
+﻿using Credit.UserBankCardServices;
+using Credit.UserBankCardServices.Dtos;
+using Credit.UserServices.Dtos;
 using Credit.UserServices;
 using Credit.UserWalletServices;
 using Credit.UserWalletServices.Dtos;
@@ -17,6 +19,7 @@ namespace Credit.Api.Controllers
     {
         private readonly IUserService _userService;
         private readonly IUserWalletService _walletService;
+        private readonly IUserBankCardService _userBankCardService;
 
         /// <summary>
         /// 
@@ -24,10 +27,12 @@ namespace Credit.Api.Controllers
         public UserController(
             ITokenManager tokenManager
             ,IUserService userService
-            ,IUserWalletService walletService) : base(tokenManager)
+            ,IUserWalletService walletService
+            ,IUserBankCardService userBankCardService) : base(tokenManager)
         {
             _userService = userService;
             _walletService = walletService;
+            _userBankCardService = userBankCardService;
         }
 
         /// <summary>
@@ -72,7 +77,7 @@ namespace Credit.Api.Controllers
             await _walletService.MoneyApplyCreate(new MoneyApplyInput
             {
                 Amount = input.Amount,
-                WalletSource = WalletSourceEnums.Recharge,
+                WalletSource = WalletSourceEnums.RechargeApply,
                 Type = input.Type,
                 PayeeCardId = input.PayeeCardId,
                 PaymentInfoId = input.PaymentInfoId,
@@ -95,6 +100,36 @@ namespace Credit.Api.Controllers
                 PaymentInfoId = input.PaymentInfoId,
                 Remark = input.Remark
             },CurrentUser.UserId);
+        }
+
+        /// <summary>
+        ///  绑定银行卡
+        /// </summary>
+        /// <param name="input"></param>
+        [HttpPost]
+        public async Task BindBankCard([FromBody]BindBankCardInput input)
+        {
+            await _userBankCardService.UserBankCardCreate(input, CurrentUser.UserId);
+        }
+
+        /// <summary>
+        ///  银行卡删除
+        /// </summary>
+        /// <param name="input"></param>
+        [HttpPost]
+        public async Task DeleteBankCard([FromBody]IdInput input)
+        {
+            await _userBankCardService.UserBankCardDelete(input.Id, CurrentUser.UserId);
+        }
+
+        /// <summary>
+        ///   获取用户绑定银行卡
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<List<UserBankCardDto>> GetUserBindCardList()
+        {
+            return await _userBankCardService.GetUserBankCardList(CurrentUser.UserId);
         }
     }
 }

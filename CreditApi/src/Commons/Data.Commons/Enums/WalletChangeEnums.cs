@@ -16,6 +16,12 @@ public enum WalletSourceEnums
     Recharge = 0,
     
     /// <summary>
+    ///  充值申请
+    /// </summary>
+    [Description("充值申请")]
+    RechargeApply = 10,
+    
+    /// <summary>
     ///  提款
     /// </summary>
     [Description("提款")]

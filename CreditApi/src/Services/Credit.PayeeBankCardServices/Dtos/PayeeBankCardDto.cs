@@ -60,12 +60,12 @@ public class PayeeBankCardInput
     /// <summary>
     ///   开启时间
     /// </summary>
-    public TimeSpan StartTime { get; set; }
+    public TimeSpan StartTime { get; set; } = new TimeSpan(00, 00, 00);
 
     /// <summary>
     ///   关闭时间
     /// </summary>
-    public TimeSpan EndTime { get; set; }
+    public TimeSpan EndTime { get; set; } = new TimeSpan(23,59,59);
 
     /// <summary>
     ///  是否启动

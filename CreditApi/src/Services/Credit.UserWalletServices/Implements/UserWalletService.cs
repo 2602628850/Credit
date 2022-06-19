@@ -1,6 +1,8 @@
 using Credit.PamentInfoModels;
 using Credit.PayeeBankCardServices;
 using Credit.PayeeInfoModels;
+using Credit.UserBankCardModels;
+using Credit.UserBankCardServices;
 using Credit.UserModels;
 using Credit.UserWalletModels;
 using Credit.UserWalletServices.Dtos;
@@ -21,17 +23,21 @@ public class UserWalletService : IUserWalletService
     private readonly IFreeSql _freeSql;
 
     private readonly IPayeeBankCardService _payeeBankCardService;
+    private readonly IUserBankCardService _userBankCardService;
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="freeSql"></param>
     /// <param name="payeeBankCardService"></param>
+    /// <param name="userBankCardService"></param>
     public UserWalletService(IFreeSql freeSql,
-        IPayeeBankCardService payeeBankCardService)
+        IPayeeBankCardService payeeBankCardService,
+        IUserBankCardService userBankCardService)
     {
         _freeSql = freeSql;
         _payeeBankCardService = payeeBankCardService;
+        _userBankCardService = userBankCardService;
     }
 
    /// <summary>
@@ -61,7 +67,7 @@ public class UserWalletService : IUserWalletService
         if (userMoneyApply.Count > 0)
             throw new MyException("There are still unfulfilled orders");
         //充值
-        if (input.WalletSource == WalletSourceEnums.Recharge)
+        if (input.WalletSource == WalletSourceEnums.RechargeApply)
         {
             //线下支付
             if (input.Type?.ToLower() == PayTypeConsts.BankCard)
@@ -72,11 +78,7 @@ public class UserWalletService : IUserWalletService
                 var bankCard = await _payeeBankCardService.GetAvailablePayeeBankCards(bankCardId:input.PayeeCardId);
                 if (bankCard == null)
                     throw new MyException("Please contact customer service");
-                var payText = string.Empty;
-                if (input.WalletSource == WalletSourceEnums.Recharge)
-                    payText = $"卡号：{bankCard.CardNo} 收到充值款{input.Amount}.";
-                if (input.WalletSource == WalletSourceEnums.Withdrawal)
-                    payText = $"用户申请提款{input.Amount}.";
+                var payText = $"卡号：{bankCard.CardNo} 收到充值款{input.Amount}.";
                 var moneyApply = input.MapTo<UserMoneyApply>();
                 moneyApply.Id = IdHelper.GetId();
                 moneyApply.PayText = payText;
@@ -102,13 +104,15 @@ public class UserWalletService : IUserWalletService
                 throw new MyException("Insufficient balance");
             
             //查找用户银行卡
-            
-            
+            var userBankCard = await _userBankCardService.GetUserBankCardList(userId, input.PayeeCardId);
+            if (userBankCard.Count == 0)
+                throw new MyException("Please select the receiving bank card");
             //添加提款申请
             var moneyApply = input.MapTo<UserMoneyApply>();
             moneyApply.Id = IdHelper.GetId();
             moneyApply.AuditStatus = AuditStatusEnums.Default;
             moneyApply.ChangeType = WalletChangeEnums.Out;
+            moneyApply.PayText = $"提款：{input.Amount} 提款卡号：{userBankCard.First().CardNo}";
             _freeSql.Transaction(() =>
             {
                 //添加申请
@@ -395,7 +399,7 @@ public class UserWalletService : IUserWalletService
            //修改资金申请信息
            _freeSql.Update<UserMoneyApply>(moneyApply).ExecuteAffrows();
            //添加用户充值流水
-           if (moneyApply.SourceType == WalletSourceEnums.Recharge)
+           if (moneyApply.SourceType == WalletSourceEnums.RechargeApply)
            {
                WalletRecordCreate(new UserWalletRecordInput
                {

@@ -152,12 +152,37 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:Credit.Api.Controllers.AdminWalletController">
+            <summary>
+             钱包资金管理
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminWalletController.GetRechargeApplyPagedList(Credit.UserWalletServices.Dtos.MoneyApplyPagedInput)">
+            <summary>
+             获取充值申请列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminWalletController.GetWithdrawalApplyPagedList(Credit.UserWalletServices.Dtos.MoneyApplyPagedInput)">
+            <summary>
+             获取提款列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminWalletController.MoneyApplyAudit(Credit.UserWalletServices.Dtos.MoneyApplyAuditInput)">
+            <summary>
+             申请审核
+            </summary>
+            <param name="input"></param>
+        </member>
         <member name="T:Credit.Api.Controllers.UserController">
             <summary>
              用户接口管理
             </summary>
         </member>
-        <member name="M:Credit.Api.Controllers.UserController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.UserServices.IUserService,Credit.UserWalletServices.IUserWalletService)">
+        <member name="M:Credit.Api.Controllers.UserController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.UserServices.IUserService,Credit.UserWalletServices.IUserWalletService,Credit.UserBankCardServices.IUserBankCardService)">
             <summary>
             
             </summary>
@@ -192,6 +217,24 @@
              用户提款
             </summary>
             <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.BindBankCard(Credit.UserBankCardServices.Dtos.BindBankCardInput)">
+            <summary>
+             绑定银行卡
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.DeleteBankCard(Data.Commons.Dtos.IdInput)">
+            <summary>
+             银行卡删除
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.GetUserBindCardList">
+            <summary>
+              获取用户绑定银行卡
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Credit.Api.ServicesTransient">
             <summary>
