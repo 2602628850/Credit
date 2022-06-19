@@ -15,25 +15,24 @@
 					</swiper-item>
 				</swiper>
 				<!-- 首页轮播图 -->
-		<uni-row class="demo-uni-row"  style="margin-left: 6%;">
+		<uni-row class="demo-uni-row"  style="margin-left: 7%;margin-top: 5%;">
 			<uni-col :xs="8" :sm="6" :md="5" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/order.png"></image>
-					</span>
-					<br />
-					<span style="margin-left: 10px;">
+					<text style="display: flex;">
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/order.png"></image>
+					</text>
+					<text style="font-size: 14px;margin-left: 6%;">
 						{{$t('indexpages.order')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark" v-on:click="SharedTo()">
 					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/share.png"></image>
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/share.png"></image>
 					</span>
 					<br />
-					<span style="margin-left: 17px;">
+					<span style="font-size: 14px;margin-left: 5%;">
 						{{$t('indexpages.shar')}}
 					</span>
 				</view>
@@ -41,10 +40,10 @@
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
 					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/integral.png"></image>
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/integral.png"></image>
 					</span>
 					<br />
-					<span >
+					<span style="font-size: 14px;">
 						{{$t('indexpages.integral')}}
 					</span>
 				</view>
@@ -52,10 +51,10 @@
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
 					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-charts.png"></image>
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-charts.png"></image>
 					</span>
 					<br />
-					<span style="margin-left: 10px;">
+					<span style="margin-left: 10px;font-size: 14px;">
 						{{$t('indexpages.analysis')}}
 					</span>
 				</view>
@@ -63,10 +62,10 @@
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
 					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-charts.png"></image>
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-charts.png"></image>
 					</span>
 					<br />
-					<span style="margin-left: 20px;" >
+					<span style="font-size: 14px;margin-left: 10%;" >
 						{{$t('indexpages.recharge')}}
 					</span>
 				</view>
@@ -74,11 +73,11 @@
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
 					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-withdraw.png">
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-withdraw.png">
 						</image>
 					</span>
 					<br />
-					<span style="margin-left: 20px;" >
+					<span style="font-size: 14px;margin-left: 10%;" >
 						{{$t('indexpages.withdraw')}}
 					</span>
 				</view>
@@ -86,10 +85,10 @@
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
 					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-level.png"></image>
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-level.png"></image>
 					</span>
 					<br />
-					<span style="margin-left: 10px;">
+					<span style="font-size: 14px;">
 						{{$t('indexpages.creditlevel')}}
 					</span>
 				</view>
@@ -97,11 +96,10 @@
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
 					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-service.png"></image>
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-service.png"></image>
 					</span>
 					<br />
-					<span >
-						<!-- style="margin-left: 7px;" -->
+					<span style="font-size: 14px;">
 						{{$t('indexpages.onlineservice')}}
 					</span>
 				</view>
@@ -112,23 +110,23 @@
 		</view>
 
 		<uni-row class="demo-uni-row radios product" style="margin-left: 1.5%;">
-			<view style="padding: 20px 5px;">
+			<view style="padding: 10px 5px;">
 				<uni-col :span="3" :offset="1" style="margin-top: 1px;">
 					<view class="demo-uni-col-anniu dark">
-						<text style="color: green;">$10000</text><br />
-						<text style="margin-left: 10%;">{{$t('indexpages.balance')}}</text>
+						<text style="color: green;display: flex;">$10000</text>
+						<text style="margin-left: 10%;font-size: 13px;">{{$t('indexpages.balance')}}</text>
 					</view>
 				</uni-col>
-				<uni-col :span="9" :offset="3">
+				<uni-col :span="10" :offset="3">
 					<view class="demo-uni-col-anniu light">
-						<text style="margin-left: 40%;color: green;">3</text><br />
-						<text>{{$t('indexpages.todayremain')}}</text>
+						<text style="margin-left: 30%;color: green;display: flex;">3</text>
+						<text style="font-size: 13px;">{{$t('indexpages.todayremain')}}</text>
 					</view>
 				</uni-col>
-				<uni-col :span="5" :offset="2">
+				<uni-col :span="7" >
 					<view class="demo-uni-col-anniu light">
-						<text style="margin-left: 10%;color: green;">+$0</text><br />
-						<text>{{$t('indexpages.todayincome')}}</text>
+						<text style="margin-left: 10%;color: green;display: flex;">+$0</text>
+						<text style="font-size: 13px;">{{$t('indexpages.todayincome')}}</text>
 					</view>
 				</uni-col>
 			</view>

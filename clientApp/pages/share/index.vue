@@ -73,7 +73,7 @@
 	.imgbody {
 		border-radius: 3%;
 		width: 90%;
-		height: 7%;
+		height: 9%;
 		margin: 0 6% auto;
 		font-size: 6px;
 		font-weight: 800;
@@ -84,7 +84,7 @@
 	.inputtext {
 		float: left;
 		margin-top: 2%;
-		width: 72%;
+		width: 60%;
 	}
 
 	.bottonbody {
@@ -97,7 +97,7 @@
 		border: 1px solid darkgray;
 	}
 	.bottoncl{
-		margin-left: 6%;margin-top: 1%;
+		margin-left: 6%;margin-top: 3%;
 	}
 	.bottomimg{
 		width: 40px;height: 40px;

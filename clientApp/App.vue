@@ -20,6 +20,7 @@
 	@import "/common/css/flex.css";
 	@import "/common/css/public.css";
 	@import "/static/font/iconfont.css";
+	@import "/common/uni.css";
 
 	//uni-app {
 	//	box-shadow: 0 -15px 10px rgba(0,0,0, 0.5);
