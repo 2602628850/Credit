@@ -28,80 +28,77 @@
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark" v-on:click="SharedTo()">
-					<span>
+					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/share.png"></image>
-					</span>
-					<br />
-					<span style="font-size: 14px;margin-left: 5%;">
+					</text>  
+					<text style="font-size: 14px;margin-left: 5%;">
 						{{$t('indexpages.shar')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
+					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/integral.png"></image>
-					</span>
-					<br />
-					<span style="font-size: 14px;">
+					</text>
+					
+					<text style="font-size: 14px;">
 						{{$t('indexpages.integral')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
+					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-charts.png"></image>
-					</span>
-					<br />
-					<span style="margin-left: 10px;font-size: 14px;">
+					</text>
+					<text style="margin-left: 10px;font-size: 14px;">
 						{{$t('indexpages.analysis')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
+					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-charts.png"></image>
-					</span>
-					<br />
-					<span style="font-size: 14px;margin-left: 10%;" >
+					</text>
+					<text style="font-size: 14px;margin-left: 10%;" >
 						{{$t('indexpages.recharge')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
+				<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-withdraw.png">
 						</image>
-					</span>
-					<br />
-					<span style="font-size: 14px;margin-left: 10%;" >
+					</text>
+					
+					<text style="font-size: 12.5px;margin-left: 10%;" >
 						{{$t('indexpages.withdraw')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
+					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-level.png"></image>
-					</span>
-					<br />
-					<span style="font-size: 14px;">
+					</text>
+				
+					<text style="font-size: 14px;">
 						{{$t('indexpages.creditlevel')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
+					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-service.png"></image>
-					</span>
-					<br />
-					<span style="font-size: 14px;">
+					</text>
+				
+					<text style="font-size: 14px;">
 						{{$t('indexpages.onlineservice')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 		</uni-row>
@@ -299,7 +296,6 @@
 
 	.radios {
 		border-radius: 9px;
-		;
 	}
 
 	.dark_deep {
