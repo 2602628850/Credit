@@ -5,16 +5,16 @@
 	     <view style="margin-top: 20px;">
 					<el-card class="box-card" >
 					<el-row :gutter="20">
-						<el-col :span="6"> 
+						<el-col :span="7"> 
 						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
 							当前积分：
 						</div>
 						</el-col>
-						<el-col :span="18">
+						<el-col :span="17">
 							<div style="font-size: 16px; opacity: 1;font-weight: bold;text-align: left;">
 								0
 							</div>
-							<view style="margin-top:10px;text-align: right;">
+							<view style="margin-top:0;text-align: right;">
 								
 							<text class="g-icons"></text></view>
 						</el-col>
@@ -24,7 +24,7 @@
 			
 			
 			<view style="margin-top: 20px;">
-					<el-card class="box-card" >
+					<el-card class="box-card" style="padding: 0;">
 					<el-row :gutter="20">
 						<el-col :span="3"> 
 						<image src="/static/image/iteral/integral-mall.png" style="width: 30px;height: 30px;"></image>
@@ -38,10 +38,6 @@
 							<text class="g-icons"></text></view>
 						</el-col>
 					</el-row> 
-			      </el-card>
-				</view>
-			<view style="margin-top: 0px;">
-					<el-card class="box-card" >
 					<el-row :gutter="20">
 						<el-col :span="3"> 
 						<image src="/static/image/iteral/integral-order.png" style="width: 30px;height: 30px;"></image>
@@ -78,10 +74,7 @@
 				<span> <el-button type="primary">去完成</el-button> </span></view>
 			</el-col>
 		</el-row> 
-      </el-card>
-	</view>
-<view style="margin-top: 0px;">
-		<el-card class="box-card" >
+    
 		<el-row :gutter="20">
 			<el-col :span="3"> 
 				<image src="/static/image/iteral/integral-repayment.png"
@@ -98,10 +91,6 @@
 				<span> <el-button type="primary">去完成</el-button> </span></view>
 			</el-col>
 		</el-row> 
-      </el-card>
-	</view>
-	<view style="margin-top: 0px;">
-			<el-card class="box-card" >
 			<el-row :gutter="20">
 				<el-col :span="3"> 
 				<image src="/static/image/iteral/integral-share.png"
@@ -140,7 +129,7 @@
 		text-decoration: none;
 		text-align: center
 	}
-
+	
 </style>
 <style>
 .el-row {
