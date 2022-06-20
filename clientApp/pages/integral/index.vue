@@ -1,16 +1,16 @@
 <template>
 	<view class="pagebackground">
-		<navigation-bar title="积分中心"></navigation-bar>
+		<navigation-bar :title="intereal"></navigation-bar>
 		<view class="uni-padding-wrap uni-common-mt">
 	     <view style="margin-top: 20px;">
 					<el-card class="box-card" >
 					<el-row :gutter="20">
-						<el-col :span="7"> 
+						<el-col :span="11"> 
 						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-							当前积分：
+							{{$t('interal.currentinte')}}
 						</div>
 						</el-col>
-						<el-col :span="17">
+						<el-col :span="13">
 							<div style="font-size: 16px; opacity: 1;font-weight: bold;text-align: left;">
 								0
 							</div>
@@ -31,7 +31,7 @@
 						</el-col>
 						<el-col :span="21">
 							<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-								积分商城
+								{{$t('interal.inteshop')}}
 							</div>
 							<view style="margin-top:10px;text-align: right;">
 								
@@ -44,7 +44,7 @@
 						</el-col>
 						<el-col :span="21">
 							<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-								积分订单
+								{{$t('interal.inteorder')}}
 							</div>
 							<view style="margin-top:10px;text-align: right;">
 								
@@ -55,7 +55,7 @@
 				</view>
 			
 			
-<view style="margin-top: 20px;">积分任务</view>	
+<view style="margin-top: 20px;">{{$t('interal.interenwu')}}</view>	
 <view style="margin-top: 9px;">
 		<el-card class="box-card" >
 		<el-row :gutter="20">
@@ -65,13 +65,13 @@
 			</el-col>
 			<el-col :span="21">
 				<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-					完成查卡
+					{{$t('interal.finishchaka')}}
 				</div>
-				<view style="font-size: 8px"><span>完成一次查卡自动获得1积分</span></view>
+				<view style="font-size: 8px"><span>{{$t('interal.chakareason')}}</span></view>
 				
 				<view style="margin-top:10px;text-align: right;">
 					
-				<span> <el-button type="primary">去完成</el-button> </span></view>
+				<span> <el-button type="primary">{{$t('interal.tofinish')}}</el-button> </span></view>
 			</el-col>
 		</el-row> 
     
@@ -82,13 +82,13 @@
 			</el-col>
 			<el-col :span="21">
 				<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-					完成代还
+					{{$t('interal.finishdaikuan')}}
 				</div>
-				<view style="font-size: 8px"><span>完成一次代还贷款自动获得20积分</span></view>
+				<view style="font-size: 8px"><span>	{{$t('interal.finishdaikuanreason')}}</span></view>
 				
 				<view style="margin-top:10px;text-align: right;">
 					
-				<span> <el-button type="primary">去完成</el-button> </span></view>
+				<span> <el-button type="primary">{{$t('interal.tofinish')}}</el-button> </span></view>
 			</el-col>
 		</el-row> 
 			<el-row :gutter="20">
@@ -98,13 +98,13 @@
 				</el-col>
 				<el-col :span="21">
 					<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-						邀请好友
+						{{$t('interal.sharfrend')}}
 					</div>
-					<view style="font-size: 8px"><span>成功邀请一名好友成为平台正式会员自动获得100积分</span></view>
+					<view style="font-size: 8px"><span>{{$t('interal.sharreason')}}</span></view>
 					
 					<view style="margin-top:10px;text-align: right;">
 						
-					<span> <el-button type="primary">去完成</el-button> </span></view>
+					<span> <el-button type="primary">{{$t('interal.tofinish')}}</el-button> </span></view>
 				</el-col>
 			</el-row> 
 	      </el-card>
@@ -116,6 +116,16 @@
 
 </template>
 <script>
+	export default {
+			data() {
+				return {
+	              intereal:this.$t('interal.intereal')
+				}
+			},
+			methods: {
+				
+			}
+		}
 </script>
 
 <style>
