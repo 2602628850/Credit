@@ -1,5 +1,5 @@
 <template>
-	<view class="topview">
+<view style="width: 96%;margin-left: 2%;">
 		<view class="created">
 			<text>Third Credit</text>
 		</view>
@@ -128,76 +128,81 @@
 				</uni-col>
 			</view>
 		</uni-row>
-
+    
+	<!-- </view> -->
 		<view class="titlecom">
 			<text>Product feature</text>
 		</view>
-		<uni-row class="demo-uni-row radios product" style="margin-left: 1.5%;">
-			<uni-col :span="18" :offset="1">
-				<view class="demo-uni-col-anniu1 dark">
-					<text class="productval">1</text>
-					<view class="productcont">
-						<text class="producttile">{{$t('indexpages.producejs')}}</text><br />
-						<text class="marginleft10">{{$t('indexpages.producejscontent')}}</text>
-					</view>
-
-				</view>
-			</uni-col>
-
-			<uni-col :span="5" style="margin-top: 10%;">
-				<text>
-					<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
-				</text>
-			</uni-col>
-		</uni-row>
-
-
-
-		<uni-row class="demo-uni-row radios product" style="margin-left: 1.5%;">
-			<uni-col :span="18" :offset="1">
-				<view class="demo-uni-col-anniu1 dark">
-					<text class="productval">2</text>
-					<view class="productcont">
-						<text class="producttile">{{$t('indexpages.creditleavel')}}</text><br />
-						<text class="marginleft10">{{$t('indexpages.creditcontent')}}</text>
-					</view>
-
-				</view>
-			</uni-col>
-
-			<uni-col :span="5" style="margin-top: 10%;">
-				<text>
-					<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
-				</text>
-			</uni-col>
-		</uni-row>
-
-
-		<uni-row class="demo-uni-row radios product" style="margin-left: 1.5%;">
-			<uni-col :span="18" :offset="1">
-				<view class="demo-uni-col-anniu1 dark">
-					<text class="productval">3</text>
-					<view class="productcont">
-						<text class="producttile">{{$t('indexpages.whitepeaper')}}</text><br />
-						<text class="marginleft10">{{$t('indexpages.whitepeapercontent')}}</text>
-					</view>
-
-				</view>
-			</uni-col>
-
-			<uni-col :span="5" style="margin-top: 10%;">
-				<text>
-					<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
-				</text>
-			</uni-col>
-		</uni-row>
-
+		<view style="margin-top: 5px;">
+				<el-card class="box-card" >
+				<el-row :gutter="20">
+					<el-col :span="2"> 
+						<text class="productval">1</text>
+					</el-col>
+					<el-col :span="22">
+						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+							{{$t('indexpages.producejs')}}
+						</div>
+						<view style="font-size: 8px"><span>{{$t('indexpages.producejscontent')}}</span></view>
+						
+						<view style="margin-top:5px;text-align: right;">
+							<text>
+								<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
+							</text>
+						</view>
+					</el-col>
+				</el-row> 
+		      </el-card>
+			</view>
+		<view style="margin-top: 5px;">
+				<el-card class="box-card" >
+				<el-row :gutter="20">
+					<el-col :span="2"> 
+						<text class="productval">2</text>
+					</el-col>
+					<el-col :span="22">
+						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+							{{$t('indexpages.creditleavel')}}
+						</div>
+						<view style="font-size: 8px"><span>{{$t('indexpages.creditcontent')}}</span></view>
+						
+						<view style="margin-top:5px;text-align: right;">
+							<text>
+								<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
+							</text>
+						</view>
+					</el-col>
+				</el-row> 
+		      </el-card>
+			</view>
+			
+			
 		
-        <tab-bar :selected="0"></tab-bar>
-	</view>
-</template>
-
-
+		<view style="margin-top: 5px;">
+				<el-card class="box-card" >
+				<el-row :gutter="20">
+					<el-col :span="2"> 
+						<text class="productval">3</text>
+					</el-col>
+					<el-col :span="22">
+						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+							{{$t('indexpages.whitepeaper')}}
+						</div>
+						<view style="font-size: 8px"><span>{{$t('indexpages.whitepeapercontent')}}</span></view>
+						
+						<view style="margin-top:5px;text-align: right;">
+							<text>
+								<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
+							</text>
+						</view>
+					</el-col>
+				</el-row> 
+		      </el-card>
+			</view>
+	    <tab-bar :selected="0"></tab-bar>
+		</view>
+		</template>
+		
 <script>
 	export default {
 		methods:{
@@ -324,11 +329,7 @@
 		color: #fff;
 	}
 
-	.topview {
-		user-select: none;
-		width: 100%;
-		height: 100%;
-	}
+	
 
 	.created {
 		padding-top: 2%;
