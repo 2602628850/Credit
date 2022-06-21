@@ -93,7 +93,10 @@ export default {
 		finishdaikuanreason:"完成一次代还贷款自动获得20积分",
 		sharfrend:"邀请好友",
 		sharreason:"成功邀请一名好友成为平台正式会员自动获得100积分",
-	    tofinish:"去完成"
+	    tofinish:"去完成",
+		jifendh:'积分兑换',
+		shengyu:'剩余',
+		interal:'积分'
 		
 	}
 	

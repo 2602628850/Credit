@@ -27,7 +27,7 @@
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
-				<view class="demo-uni-col dark" v-on:click="SharedTo()">
+				<view class="demo-uni-col dark" v-on:click="SharedTo('/pages/share/index')">
 					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/share.png"></image>
 					</text>  
@@ -37,7 +37,7 @@
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
-				<view class="demo-uni-col dark">
+				<view class="demo-uni-col dark" v-on:click="SharedTo('/pages/integral/index')">
 					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/integral.png"></image>
 					</text>
@@ -129,12 +129,11 @@
 			</view>
 		</uni-row>
     
-	<!-- </view> -->
 		<view class="titlecom">
 			<text>Product feature</text>
 		</view>
 		<view style="margin-top: 5px;">
-				<el-card class="box-card" >
+				<el-card class="box-card" style="background-color: rgb(244, 245, 247);">
 				<el-row :gutter="20">
 					<el-col :span="2"> 
 						<text class="productval">1</text>
@@ -155,7 +154,7 @@
 		      </el-card>
 			</view>
 		<view style="margin-top: 5px;">
-				<el-card class="box-card" >
+				<el-card class="box-card" style="background-color: rgb(244, 245, 247);" >
 				<el-row :gutter="20">
 					<el-col :span="2"> 
 						<text class="productval">2</text>
@@ -179,7 +178,7 @@
 			
 		
 		<view style="margin-top: 5px;">
-				<el-card class="box-card" >
+				<el-card class="box-card" style="background-color: rgb(244, 245, 247);">
 				<el-row :gutter="20">
 					<el-col :span="2"> 
 						<text class="productval">3</text>
@@ -206,9 +205,9 @@
 <script>
 	export default {
 		methods:{
-			SharedTo(){
+			SharedTo(uri){
 				uni.navigateTo({
-					url:"/pages/share/index"
+					url:uri
 				})
 			}
 		},
@@ -256,7 +255,7 @@
 
 <style lang="scss" scoped>
 	image {
-		margin-left: 3.3%;
+		margin-left:0.5%;
 		margin-top: 3%;
 		width: 700rpx;
 		height: 85%;
@@ -292,21 +291,9 @@
 		height: 70px;
 
 	}
-
-	.demo-uni-col-anniu1 {
-		margin-top: 15px;
-		height: 120px;
-
-	}
-
 	.radios {
 		border-radius: 9px;
 	}
-
-	.dark_deep {
-		background-color: #FFFFFF;
-	}
-
 	.dark {
 		background-color: #FFFFFF;
 	}
@@ -314,23 +301,6 @@
 	.light {
 		background-color: #FFFFFF;
 	}
-
-	.how-num {
-		width: 20px;
-		height: 20px;
-		border-radius: 100px;
-		text-align: center;
-		line-height: 20px;
-		font-size: 13px;
-	}
-
-	.bg-primary {
-		background-color: #00875a;
-		color: #fff;
-	}
-
-	
-
 	.created {
 		padding-top: 2%;
 		padding-left: 2%;
@@ -362,17 +332,7 @@
 		color: wheat;
 	}
 
-	.productcont {
-		argin-left: 10px;
-		margin-top: 10%;
-	}
+	
 
-	.producttile {
-		font-size: 20px;
-		margin-left: 10px;
-	}
-
-	.marginleft10 {
-		margin-left: 10px;
-	}
+	
 </style>
