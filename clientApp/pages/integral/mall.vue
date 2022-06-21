@@ -4,7 +4,7 @@
 		<view style="margin-left: 2%;width: 96%;">
 			<uni-row v-for="(item,index) in rotation" :key="item" :gutter="20">
 				<view v-if="index%2==0">
-					<uni-col :span="12" class="unicol">
+					<uni-col :span="12" class="unicol" v-on:click="ToDetail()">
 						<view style="background-color: white;">
 							<text style="display: flex;">
 								<image :src="item.url" class="imagewh"></image>
@@ -23,7 +23,7 @@
 
 					</uni-col>
 
-					<uni-col :span="12" class="unicol" v-if='index+1<rotation.length'>
+					<uni-col :span="12" class="unicol" v-if='index+1<rotation.length' v-on:click="ToDetail()">
 						<view style="background-color: white;">
 							<text style="display: flex;">
 								<image :src="rotation[index+1].url" class="imagewh"></image>
@@ -52,7 +52,13 @@
 
 <script>
 	export default {
-		methods: {},
+		methods: {
+			ToDetail(){
+				uni.navigateTo({
+					url:"/pages/integral/productDetail"
+				})
+			}
+		},
 		data() {
 			return {
 				intereal:this.$t('interal.jifendh'),

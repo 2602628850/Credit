@@ -101,7 +101,8 @@ export default {
 	    tofinish:"To finish",
 		jifendh:'Integral exchange',
 		shengyu:'Remaining',
-		interal:'Integral'
+		interal:'Integral',
+		lijiduihuan:'Exchange now'
 		
 	}
     

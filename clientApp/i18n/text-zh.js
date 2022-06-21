@@ -96,7 +96,8 @@ export default {
 	    tofinish:"去完成",
 		jifendh:'积分兑换',
 		shengyu:'剩余',
-		interal:'积分'
+		interal:'积分',
+		lijiduihuan:'立即兑换'
 		
 	}
 	

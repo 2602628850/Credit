@@ -83,6 +83,12 @@
 			"style": {
 				"navigationBarTitleText": ""
 			}
+		},
+		{
+			"path": "pages/integral/productDetail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
 		}
     ],
 	"globalStyle": {
