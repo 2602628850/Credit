@@ -24,7 +24,7 @@
 			
 			
 			<view style="margin-top: 20px;">
-					<el-card class="box-card" style="padding: 0;">
+					<el-card class="box-card" style="padding: 0;" v-on:click="ToShop()">
 					<el-row :gutter="20">
 						<el-col :span="3"> 
 						<image src="/static/image/iteral/integral-mall.png" style="width: 30px;height: 30px;"></image>
@@ -117,14 +117,19 @@
 </template>
 <script>
 	export default {
+		
 			data() {
 				return {
 	              intereal:this.$t('interal.intereal')
 				}
 			},
-			methods: {
-				
-			}
+			methods:{
+				ToShop(){
+					uni.navigateTo({
+						url:"/pages/integral/mall"
+					})
+				}
+			},
 		}
 </script>
 

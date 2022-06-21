@@ -113,7 +113,10 @@ export default {
 		finishdaikuanreason:"Complete one-time loan repayment will automatically get 20 points",
 		sharfrend:"Invite friends",
 		sharreason:"Successfully invite a friend to become a full member of the platform and automatically get 100 points",
-	    tofinish:"To finish"
+	    tofinish:"To finish",
+		jifendh:'Integral exchange',
+		shengyu:'Remaining',
+		interal:'Integral'
 		
 	}
     

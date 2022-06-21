@@ -77,6 +77,12 @@
 			"style": {
 				"navigationBarTitleText": ""
 			}
+		},
+		{
+			"path": "pages/integral/mall",
+			"style": {
+				"navigationBarTitleText": ""
+			}
 		}
         ,{
             "path" : "pages/prohall/Chaka",
