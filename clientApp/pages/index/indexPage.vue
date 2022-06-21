@@ -1,5 +1,5 @@
 <template>
-	<view class="topview">
+<view style="width: 96%;margin-left: 2%;">
 		<view class="created">
 			<text>Third Credit</text>
 		</view>
@@ -15,95 +15,90 @@
 					</swiper-item>
 				</swiper>
 				<!-- 首页轮播图 -->
-		<uni-row class="demo-uni-row"  style="margin-left: 6%;">
+		<uni-row class="demo-uni-row"  style="margin-left: 7%;margin-top: 5%;">
 			<uni-col :xs="8" :sm="6" :md="5" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/order.png"></image>
-					</span>
-					<br />
-					<span style="margin-left: 10px;">
+					<text style="display: flex;">
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/order.png"></image>
+					</text>
+					<text style="font-size: 14px;margin-left: 6%;">
 						{{$t('indexpages.order')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark" v-on:click="SharedTo()">
-					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/share.png"></image>
-					</span>
-					<br />
-					<span style="margin-left: 17px;">
+					<text style="display: flex;">
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/share.png"></image>
+					</text>  
+					<text style="font-size: 14px;margin-left: 5%;">
 						{{$t('indexpages.shar')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/integral.png"></image>
-					</span>
-					<br />
-					<span >
+					<text style="display: flex;">
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/integral.png"></image>
+					</text>
+					
+					<text style="font-size: 14px;">
 						{{$t('indexpages.integral')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-charts.png"></image>
-					</span>
-					<br />
-					<span style="margin-left: 10px;">
+					<text style="display: flex;">
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-charts.png"></image>
+					</text>
+					<text style="margin-left: 10px;font-size: 14px;">
 						{{$t('indexpages.analysis')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-charts.png"></image>
-					</span>
-					<br />
-					<span style="margin-left: 20px;" >
+					<text style="display: flex;">
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-charts.png"></image>
+					</text>
+					<text style="font-size: 14px;margin-left: 10%;" >
 						{{$t('indexpages.recharge')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-withdraw.png">
+				<text style="display: flex;">
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-withdraw.png">
 						</image>
-					</span>
-					<br />
-					<span style="margin-left: 20px;" >
+					</text>
+					
+					<text style="font-size: 12.5px;margin-left: 10%;" >
 						{{$t('indexpages.withdraw')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-level.png"></image>
-					</span>
-					<br />
-					<span style="margin-left: 10px;">
+					<text style="display: flex;">
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-level.png"></image>
+					</text>
+				
+					<text style="font-size: 14px;">
 						{{$t('indexpages.creditlevel')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-					<span>
-						<image style="width: 5em;height: 5em;" src="../../static/image/index/index-service.png"></image>
-					</span>
-					<br />
-					<span >
-						<!-- style="margin-left: 7px;" -->
+					<text style="display: flex;">
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-service.png"></image>
+					</text>
+				
+					<text style="font-size: 14px;">
 						{{$t('indexpages.onlineservice')}}
-					</span>
+					</text>
 				</view>
 			</uni-col>
 		</uni-row>
@@ -112,97 +107,102 @@
 		</view>
 
 		<uni-row class="demo-uni-row radios product" style="margin-left: 1.5%;">
-			<view style="padding: 20px 5px;">
+			<view style="padding: 10px 5px;">
 				<uni-col :span="3" :offset="1" style="margin-top: 1px;">
 					<view class="demo-uni-col-anniu dark">
-						<text style="color: green;">$10000</text><br />
-						<text style="margin-left: 10%;">{{$t('indexpages.balance')}}</text>
+						<text style="color: green;display: flex;">$10000</text>
+						<text style="margin-left: 10%;font-size: 13px;">{{$t('indexpages.balance')}}</text>
 					</view>
 				</uni-col>
-				<uni-col :span="9" :offset="3">
+				<uni-col :span="10" :offset="3">
 					<view class="demo-uni-col-anniu light">
-						<text style="margin-left: 40%;color: green;">3</text><br />
-						<text>{{$t('indexpages.todayremain')}}</text>
+						<text style="margin-left: 30%;color: green;display: flex;">3</text>
+						<text style="font-size: 13px;">{{$t('indexpages.todayremain')}}</text>
 					</view>
 				</uni-col>
-				<uni-col :span="5" :offset="2">
+				<uni-col :span="7" >
 					<view class="demo-uni-col-anniu light">
-						<text style="margin-left: 10%;color: green;">+$0</text><br />
-						<text>{{$t('indexpages.todayincome')}}</text>
+						<text style="margin-left: 10%;color: green;display: flex;">+$0</text>
+						<text style="font-size: 13px;">{{$t('indexpages.todayincome')}}</text>
 					</view>
 				</uni-col>
 			</view>
 		</uni-row>
-
+    
+	<!-- </view> -->
 		<view class="titlecom">
 			<text>Product feature</text>
 		</view>
-		<uni-row class="demo-uni-row radios product" style="margin-left: 1.5%;">
-			<uni-col :span="18" :offset="1">
-				<view class="demo-uni-col-anniu1 dark">
-					<text class="productval">1</text>
-					<view class="productcont">
-						<text class="producttile">{{$t('indexpages.producejs')}}</text><br />
-						<text class="marginleft10">{{$t('indexpages.producejscontent')}}</text>
-					</view>
-
-				</view>
-			</uni-col>
-
-			<uni-col :span="5" style="margin-top: 10%;">
-				<text>
-					<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
-				</text>
-			</uni-col>
-		</uni-row>
-
-
-
-		<uni-row class="demo-uni-row radios product" style="margin-left: 1.5%;">
-			<uni-col :span="18" :offset="1">
-				<view class="demo-uni-col-anniu1 dark">
-					<text class="productval">2</text>
-					<view class="productcont">
-						<text class="producttile">{{$t('indexpages.creditleavel')}}</text><br />
-						<text class="marginleft10">{{$t('indexpages.creditcontent')}}</text>
-					</view>
-
-				</view>
-			</uni-col>
-
-			<uni-col :span="5" style="margin-top: 10%;">
-				<text>
-					<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
-				</text>
-			</uni-col>
-		</uni-row>
-
-
-		<uni-row class="demo-uni-row radios product" style="margin-left: 1.5%;">
-			<uni-col :span="18" :offset="1">
-				<view class="demo-uni-col-anniu1 dark">
-					<text class="productval">3</text>
-					<view class="productcont">
-						<text class="producttile">{{$t('indexpages.whitepeaper')}}</text><br />
-						<text class="marginleft10">{{$t('indexpages.whitepeapercontent')}}</text>
-					</view>
-
-				</view>
-			</uni-col>
-
-			<uni-col :span="5" style="margin-top: 10%;">
-				<text>
-					<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
-				</text>
-			</uni-col>
-		</uni-row>
-
+		<view style="margin-top: 5px;">
+				<el-card class="box-card" >
+				<el-row :gutter="20">
+					<el-col :span="2"> 
+						<text class="productval">1</text>
+					</el-col>
+					<el-col :span="22">
+						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+							{{$t('indexpages.producejs')}}
+						</div>
+						<view style="font-size: 8px"><span>{{$t('indexpages.producejscontent')}}</span></view>
+						
+						<view style="margin-top:5px;text-align: right;">
+							<text>
+								<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
+							</text>
+						</view>
+					</el-col>
+				</el-row> 
+		      </el-card>
+			</view>
+		<view style="margin-top: 5px;">
+				<el-card class="box-card" >
+				<el-row :gutter="20">
+					<el-col :span="2"> 
+						<text class="productval">2</text>
+					</el-col>
+					<el-col :span="22">
+						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+							{{$t('indexpages.creditleavel')}}
+						</div>
+						<view style="font-size: 8px"><span>{{$t('indexpages.creditcontent')}}</span></view>
+						
+						<view style="margin-top:5px;text-align: right;">
+							<text>
+								<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
+							</text>
+						</view>
+					</el-col>
+				</el-row> 
+		      </el-card>
+			</view>
+			
+			
 		
-        <tab-bar :selected="0"></tab-bar>
-	</view>
-</template>
-
-
+		<view style="margin-top: 5px;">
+				<el-card class="box-card" >
+				<el-row :gutter="20">
+					<el-col :span="2"> 
+						<text class="productval">3</text>
+					</el-col>
+					<el-col :span="22">
+						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+							{{$t('indexpages.whitepeaper')}}
+						</div>
+						<view style="font-size: 8px"><span>{{$t('indexpages.whitepeapercontent')}}</span></view>
+						
+						<view style="margin-top:5px;text-align: right;">
+							<text>
+								<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
+							</text>
+						</view>
+					</el-col>
+				</el-row> 
+		      </el-card>
+			</view>
+	    <tab-bar :selected="0"></tab-bar>
+		</view>
+		</template>
+		
 <script>
 	export default {
 		methods:{
@@ -301,7 +301,6 @@
 
 	.radios {
 		border-radius: 9px;
-		;
 	}
 
 	.dark_deep {
@@ -330,11 +329,7 @@
 		color: #fff;
 	}
 
-	.topview {
-		user-select: none;
-		width: 100%;
-		height: 100%;
-	}
+	
 
 	.created {
 		padding-top: 2%;

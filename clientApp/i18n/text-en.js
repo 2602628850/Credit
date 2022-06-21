@@ -85,6 +85,21 @@ export default {
 		bottonc:"Copy",
 		bottomcontent:"Every time you successfully invite a friend to become an official member of the platform, you can get 100 points. ",
 		copyresult:"Copy Success!"
+	},
+	interal:{
+		intereal:"Integral",
+		currentinte:"Current point：",
+		inteshop:"Point shop",
+		inteorder:"Points order",
+		interenwu:"Integral task",
+		finishchaka:"Complete Chaka",
+		chakareason:"Complete one check card and automatically get 1 point",
+		finishdaikuan:"Complete payment",
+		finishdaikuanreason:"Complete one-time loan repayment will automatically get 20 points",
+		sharfrend:"Invite friends",
+		sharreason:"Successfully invite a friend to become a full member of the platform and automatically get 100 points",
+	    tofinish:"To finish"
+		
 	}
     
 }

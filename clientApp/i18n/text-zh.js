@@ -80,6 +80,21 @@ export default {
 		bottonc:"复制",
 		bottomcontent:"每成功邀请一名好友成为平台正式会员，即可获得100积分。",
 		copyresult:"复制成功!"
+	},
+	interal:{
+		intereal:"积分中心",
+		currentinte:"当前积分：",
+		inteshop:"积分商城",
+		inteorder:"积分订单",
+		interenwu:"积分任务",
+		finishchaka:"完成查卡",
+		chakareason:"完成一次查卡自动获得1积分",
+		finishdaikuan:"完成代还",
+		finishdaikuanreason:"完成一次代还贷款自动获得20积分",
+		sharfrend:"邀请好友",
+		sharreason:"成功邀请一名好友成为平台正式会员自动获得100积分",
+	    tofinish:"去完成"
+		
 	}
 	
 }

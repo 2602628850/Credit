@@ -71,6 +71,12 @@
 			"style": {
 				"navigationBarTitleText": ""
 			}
+		},
+		{
+			"path": "pages/integral/index",
+			"style": {
+				"navigationBarTitleText": ""
+			}
 		}
     ],
 	"globalStyle": {
