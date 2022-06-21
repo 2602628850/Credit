@@ -25,10 +25,25 @@ export default {
         title: 'User agreement'
     },
     credit: {
-        title: '信用代还专区'
+        title: ' Credit Zone',
+		profit:'Profit',
+		unbalance:'Unlock balance',
+		repayment:'Repayment',		
+		button:'Enter'		
     },
-    credit: {
-        title: '信用代还专区'
+    chaka: {
+        title: 'Check card',		
+		bankname:'Bank Name',	
+		repayment:'Repayment',
+		todayCheckNum:'Today remaining check time',
+		checkButton:'Check card',
+		selectrepayment:'Select repayment',
+		behalfButton:'Repayment on behalf',
+		todayCheck:'Today check card',
+		Tocheck:'Checked times',
+		Tocheckprofit:'Checked profit',
+		Procontent:'Product introduction'
+		
     },
     public: {
         register: "Create an account",
