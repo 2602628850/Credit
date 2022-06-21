@@ -1,6 +1,6 @@
 <template>
 	<navigation-bar :title="$t('credit.title')"></navigation-bar>
-	<view style="margin-top:30px;">
+	<view style="margin-top:30px;" @click="tocreditDetail">
 		<el-card class="box-card">
 			<view class="card-content product-item margin-bottom-lg">
 				<view class="product-header">
@@ -20,7 +20,7 @@
 							</view>
 							<view class="align-center flex-1">
 								<text class="text-secondary text-center text-xxs margin-top-xs">
-									<span>利润</span></text>
+									<span>{{$t('credit.profit')}}</span></text>
 							</view>
 						</el-col>
 						<el-col :span="12">
@@ -29,7 +29,7 @@
 							</view>
 							<view class="align-center flex-1">
 								<text class="text-secondary text-center text-xxs margin-top-xs">
-									<span>解锁余额</span></text>
+									<span>{{$t('credit.unbalance')}}</span></text>
 							</view>
 						</el-col>
 					</el-row>
@@ -39,14 +39,14 @@
 
 						<el-col :span="16">
 							<view class="flex-1">
-								<text class="text-xs"><span>还款金额:<text class="text-bold margin-left-xs"><span>$5 -
+								<text class="text-xs"><span>{{$t('credit.repayment')}}:<text class="text-bold margin-left-xs"><span>$5 -
 												$20</span></text></span></text>
 							</view>
 						</el-col>
 						<el-col :span="4">
 							<button class="btn-task">
 								<!---->
-								<text class="text-small text-white"><span>进入</span></text>
+								<text class="text-small text-white"><span>{{$t('credit.button')}}</span></text>
 							</button>
 						</el-col>
 					</el-row>
@@ -54,33 +54,33 @@
 			</view>
 		</el-card>
 	</view>
-	<view style="margin-top:30px;">
+	<view style="margin-top:30px;" @click="tocreditDetail">
 		<el-card class="box-card">
 			<view class="card-content product-item margin-bottom-lg">
 				<view class="product-header">
-					<image class="product-logo" src="/static/image/hall/credit1.png"> 
+					<image class="product-logo" src="/static/image/hall/credit2.png"> 
 					</image>
 					<!---->
-					<text class="product-title line-1"><span>Bad debt handling area</span></text>
+					<text class="product-title line-1"><span>Small amount payment area</span></text>
 				</view>
 				<view class="product-body flex-row solid-bottom" style=" text-align: center;">
 					<el-row :gutter="20">
 						<el-col :span="12">
 							<view class="align-center flex-1">
-								<text class="text-bold text-primary text-lg"><span>0.30%</span></text>
+								<text class="text-bold text-primary text-lg"><span>0.22%</span></text>
 							</view>
 							<view class="align-center flex-1">
 								<text class="text-secondary text-center text-xxs margin-top-xs">
-									<span>利润</span></text>
+									<span>{{$t('credit.profit')}}</span></text>
 							</view>
 						</el-col>
 						<el-col :span="12">
 							<view class="align-center flex-1">
-								<text class="text-bold text-primary text-lg"><span>$5</span></text>
+								<text class="text-bold text-primary text-lg"><span>$35</span></text>
 							</view>
 							<view class="align-center flex-1">
 								<text class="text-secondary text-center text-xxs margin-top-xs">
-									<span>解锁余额</span></text>
+									<span>{{$t('credit.unbalance')}}</span></text>
 							</view>
 						</el-col>
 					</el-row>
@@ -90,14 +90,14 @@
 
 						<el-col :span="16">
 							<view class="flex-1">
-								<text class="text-xs"><span>还款金额:<text class="text-bold margin-left-xs"><span>$5 -
-												$20</span></text></span></text>
+								<text class="text-xs"><span>{{$t('credit.repayment')}}:<text class="text-bold margin-left-xs"><span>$35 -
+												$100</span></text></span></text>
 							</view>
 						</el-col>
 						<el-col :span="4">
 							<button class="btn-task">
 								<!---->
-								<text class="text-small text-white"><span>进入</span></text>
+								<text class="text-small text-white"><span>{{$t('credit.button')}}</span></text>
 							</button>
 						</el-col>
 					</el-row>
@@ -105,33 +105,33 @@
 			</view>
 		</el-card>
 	</view>
-	<view style="margin-top:30px;">
+	<view style="margin-top:30px;" @click="tocreditDetail">
 		<el-card class="box-card">
 			<view class="card-content product-item margin-bottom-lg">
 				<view class="product-header">
-					<image class="product-logo" src="/static/image/hall/credit1.png"> 
+					<image class="product-logo" src="/static/image/hall/credit3.png"> 
 					</image>
 					<!---->
-					<text class="product-title line-1"><span>Bad debt handling area</span></text>
+					<text class="product-title line-1"><span>Ordinary repayment area</span></text>
 				</view>
 				<view class="product-body flex-row solid-bottom" style=" text-align: center;">
 					<el-row :gutter="20">
 						<el-col :span="12">
 							<view class="align-center flex-1">
-								<text class="text-bold text-primary text-lg"><span>0.30%</span></text>
+								<text class="text-bold text-primary text-lg"><span>0.24%</span></text>
 							</view>
 							<view class="align-center flex-1">
 								<text class="text-secondary text-center text-xxs margin-top-xs">
-									<span>利润</span></text>
+									<span>{{$t('credit.profit')}}</span></text>
 							</view>
 						</el-col>
 						<el-col :span="12">
 							<view class="align-center flex-1">
-								<text class="text-bold text-primary text-lg"><span>$5</span></text>
+								<text class="text-bold text-primary text-lg"><span>$100</span></text>
 							</view>
 							<view class="align-center flex-1">
 								<text class="text-secondary text-center text-xxs margin-top-xs">
-									<span>解锁余额</span></text>
+									<span>{{$t('credit.unbalance')}}</span></text>
 							</view>
 						</el-col>
 					</el-row>
@@ -141,14 +141,14 @@
 
 						<el-col :span="16">
 							<view class="flex-1">
-								<text class="text-xs"><span>还款金额:<text class="text-bold margin-left-xs"><span>$5 -
-												$20</span></text></span></text>
+								<text class="text-xs"><span>{{$t('credit.repayment')}}:<text class="text-bold margin-left-xs"><span>$100 -
+												$500</span></text></span></text>
 							</view>
 						</el-col>
 						<el-col :span="4">
 							<button class="btn-task">
 								<!---->
-								<text class="text-small text-white"><span>进入</span></text>
+								<text class="text-small text-white"><span>{{$t('credit.button')}}</span></text>
 							</button>
 						</el-col>
 					</el-row>
@@ -156,33 +156,33 @@
 			</view>
 		</el-card>
 	</view>
-	<view style="margin-top:30px;">
+	<view style="margin-top:30px;" @click="tocreditDetail">
 		<el-card class="box-card">
 			<view class="card-content product-item margin-bottom-lg">
 				<view class="product-header">
-					<image class="product-logo" src="/static/image/hall/credit1.png"> 
+					<image class="product-logo" src="/static/image/hall/credit4.png"> 
 					</image>
 					<!---->
-					<text class="product-title line-1"><span>Bad debt handling area</span></text>
+					<text class="product-title line-1"><span>High-value repayment area</span></text>
 				</view>
 				<view class="product-body flex-row solid-bottom" style=" text-align: center;">
 					<el-row :gutter="20">
 						<el-col :span="12">
 							<view class="align-center flex-1">
-								<text class="text-bold text-primary text-lg"><span>0.30%</span></text>
+								<text class="text-bold text-primary text-lg"><span>0.28%</span></text>
 							</view>
 							<view class="align-center flex-1">
 								<text class="text-secondary text-center text-xxs margin-top-xs">
-									<span>利润</span></text>
+									<span>{{$t('credit.profit')}}</span></text>
 							</view>
 						</el-col>
 						<el-col :span="12">
 							<view class="align-center flex-1">
-								<text class="text-bold text-primary text-lg"><span>$5</span></text>
+								<text class="text-bold text-primary text-lg"><span>$500</span></text>
 							</view>
 							<view class="align-center flex-1">
 								<text class="text-secondary text-center text-xxs margin-top-xs">
-									<span>解锁余额</span></text>
+									<span>{{$t('credit.unbalance')}}</span></text>
 							</view>
 						</el-col>
 					</el-row>
@@ -192,14 +192,14 @@
 
 						<el-col :span="16">
 							<view class="flex-1">
-								<text class="text-xs"><span>还款金额:<text class="text-bold margin-left-xs"><span>$5 -
-												$20</span></text></span></text>
+								<text class="text-xs"><span>{{$t('credit.repayment')}}:<text class="text-bold margin-left-xs"><span>$500 -
+												$2000</span></text></span></text>
 							</view>
 						</el-col>
 						<el-col :span="4">
 							<button class="btn-task">
 								<!---->
-								<text class="text-small text-white"><span>进入</span></text>
+								<text class="text-small text-white"><span>{{$t('credit.button')}}</span></text>
 							</button>
 						</el-col>
 					</el-row>
@@ -210,19 +210,19 @@
 </template>
 
 <script>
-	import NavigationBar from "../../components/navigation-bar";
 	export default {
-		name: "agreement",
-		components: {
-			NavigationBar
-		},
 		data() {
 			return {
 
 			}
 		},
 		methods: {
-
+			tocreditDetail() {
+				// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
+				uni.reLaunch({
+					url: '/pages/prohall/Chaka'
+				})
+			}
 		}
 	}
 </script>

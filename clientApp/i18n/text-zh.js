@@ -81,6 +81,27 @@ export default {
 		bottomcontent:"每成功邀请一名好友成为平台正式会员，即可获得100积分。",
 		copyresult:"复制成功!"
 	},
+    credit: {
+        title: '信用代还专区',		
+		profit:'利润',		
+		unbalance:'解锁余额',
+		repayment:'还款金额',
+		button:'进入'	
+    },
+    chaka: {
+        title: '查卡',		
+		bankname:'银行',	
+		repayment:'还款金额',
+		todayCheckNum:'今日查卡次数',
+		checkButton:'查卡',
+		selectrepayment:'选择还款',
+		behalfButton:'代还款',
+		todayCheck:'今日查卡',
+		Tocheck:'已查卡次数',
+		Tocheckprofit:'已查卡利润',
+		Procontent:'产品简介'
+		
+    },
 	interal:{
 		intereal:"积分中心",
 		currentinte:"当前积分：",
