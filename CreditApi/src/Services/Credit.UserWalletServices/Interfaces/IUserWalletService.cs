@@ -39,4 +39,12 @@ public interface IUserWalletService
     /// <returns></returns>
     void WalletRecordCreate(UserWalletRecordInput input);
 
+
+    /// <summary>
+    ///  获取资金变动列表
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<PagedOutput<UserWalletRecordDto>> GetUserWalletRecordPagedList(WalletRecordPagedInput input);
+
 }

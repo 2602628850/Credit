@@ -131,5 +131,44 @@ namespace Credit.Api.Controllers
         {
             return await _userBankCardService.GetUserBankCardList(CurrentUser.UserId);
         }
+
+
+        /// <summary>
+        ///  获取用户充值记录
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<PagedOutput<UserWalletRecordDto>> GetUserRechargePagedList(WalletRecordPagedInput input)
+        {
+            input.UserId = CurrentUser.UserId;
+            input.WalletSource = WalletSourceEnums.Recharge;
+            return await _walletService.GetUserWalletRecordPagedList(input);
+        }
+        
+        /// <summary>
+        ///  获取用户提款记录
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<PagedOutput<UserWalletRecordDto>> GetUserWithdrawalPagedList(WalletRecordPagedInput input)
+        {
+            input.UserId = CurrentUser.UserId;
+            input.WalletSource = WalletSourceEnums.Withdrawal;
+            return await _walletService.GetUserWalletRecordPagedList(input);
+        }
+        
+        /// <summary>
+        ///  获取用户资金明细列表
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<PagedOutput<UserWalletRecordDto>> GetUserWalletRecordPagedList(WalletRecordPagedInput input)
+        {
+            input.UserId = CurrentUser.UserId;
+            return await _walletService.GetUserWalletRecordPagedList(input);
+        }
     }
 }

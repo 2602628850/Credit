@@ -238,32 +238,45 @@ public class UserWalletService : IUserWalletService
            .ToOne();
        if (user == null)
            throw new MyException("Data error");
-       var changeType = WalletChangeEnums.In;
+       WalletChangeEnums changeType = WalletChangeEnums.In;
+
+       #region 余额变动
+
        if (input.SourceType == WalletSourceEnums.Recharge
-           || input.SourceType == WalletSourceEnums.WithdrawalReturn)
+           || input.SourceType == WalletSourceEnums.WithdrawalReturn
+           || input.SourceType == WalletSourceEnums.WithdrawalUnFreeze)
        {
            user.Balance += input.Amount;
-           if (input.SourceType == WalletSourceEnums.WithdrawalReturn)
-               user.FreezeFunds -= input.Amount;
        }
-       else if (input.SourceType == WalletSourceEnums.WithdrawalApply)
+       else if (input.SourceType == WalletSourceEnums.WithdrawalApply
+                || input.SourceType == WalletSourceEnums.Withdrawal)
        {
            if (input.Amount >= user.Balance)
                throw new MyException("Insufficient balance");
            user.Balance -= input.Amount;
-           user.FreezeFunds += input.Amount;
-           changeType = WalletChangeEnums.Out;
-       }
-       else if (input.SourceType == WalletSourceEnums.Withdrawal)
-       {
-           user.FreezeFunds -= input.Amount;
            changeType = WalletChangeEnums.Out;
        }
        else
        {
-           
+           throw new MyException("Wallet source error");
        }
 
+       #endregion
+
+       #region 冻结资金变动
+
+       if (input.SourceType == WalletSourceEnums.WithdrawalApply)
+       {
+           user.FreezeFunds += input.Amount;
+       }
+
+       if (input.SourceType == WalletSourceEnums.WithdrawalUnFreeze)
+       {
+           user.FreezeFunds -= input.Amount;
+       }
+
+       #endregion
+   
        var newRecord = new UserWalletRecord
        {
            Id = IdHelper.GetId(),
@@ -271,7 +284,7 @@ public class UserWalletService : IUserWalletService
            UserId = input.UserId,
            Amount = input.Amount,
            ChangeType = changeType,
-           operationType = input.OperateType,
+           OperationType = input.OperateType,
            OperateUserId = input.OperateUserId
        };
        _freeSql.Transaction(() =>
@@ -279,12 +292,54 @@ public class UserWalletService : IUserWalletService
            //修改用户余额信息
            _freeSql.Update<Users>(user.Id)
                .SetDto(new {FreezeFunds = user.FreezeFunds,Balance = user.Balance}).ExecuteAffrows();
-           if (input.SourceType != WalletSourceEnums.Withdrawal)
-           {
-               //添加资金变动记录
-               _freeSql.Insert(newRecord).InsertTableTime(TableTimeFormat.Month).ExecuteAffrows();
-           }
+           //添加资金变动记录
+           _freeSql.Insert(newRecord).InsertTableTime(TableTimeFormat.Month).ExecuteAffrows();
        });
+   }
+
+   /// <summary>
+   ///  获取资金变动明细列表
+   /// </summary>
+   /// <param name="input"></param>
+   /// <returns></returns>
+   /// <exception cref="NotImplementedException"></exception>
+   public async Task<PagedOutput<UserWalletRecordDto>> GetUserWalletRecordPagedList(WalletRecordPagedInput input)
+   {
+       if (input.StartTime == 0)
+           input.StartTime = DateTimeHelper.DayStart();
+       if (input.EndTime == 0)
+           input.StartTime = DateTimeHelper.UtcNow();
+       var list = await _freeSql.Select<UserWalletRecord>()
+           .WhereTableTime(TableTimeFormat.Month, input.StartTime, input.EndTime)
+           .WhereIf(input.UserId.HasValue, s => s.UserId == input.UserId)
+           .WhereIf(input.WalletSource.HasValue, s => s.SourceType == input.WalletSource)
+           .Where(s => s.CreateAt >= input.StartTime && s.CreateAt <= input.EndTime)
+           .Where(s => s.IsDeleted == 0)
+           .Count(out long totalCount)
+           .Page(input.PageIndex,input.PageSize)
+           .ToListAsync();
+       var items = list.MapToList<UserWalletRecordDto>();
+       var userIds = list.Select(s => s.UserId).Union(list.Select(s => s.OperateUserId));
+       var users = await _freeSql.Select<Users>()
+           .Where(s => userIds.Contains(s.Id))
+           .ToListAsync();
+       
+       items.ForEach(item =>
+       {
+           item.Username = users.FirstOrDefault(s => s.Id == item.UserId)?.Username ?? string.Empty;
+           item.Nickname = users.FirstOrDefault(s => s.Id == item.UserId)?.Nickname ?? string.Empty;
+           item.OperateNickname = users.FirstOrDefault(s => s.Id == item.OperateUserId)?.Nickname ?? string.Empty;
+           item.OperateUsername = users.FirstOrDefault(s => s.Id == item.OperateUserId)?.Username ?? string.Empty;
+           item.OperateTypeText = EnumHelper.GetDescription(item.OperateType);
+           item.SourceTypeText = EnumHelper.GetDescription(item.SourceType);
+       });
+       
+       var output = new PagedOutput<UserWalletRecordDto>
+       {
+           TotalCount = totalCount,
+           Items = items
+       };
+       return output;
    }
 
    /// <summary>
@@ -377,7 +432,7 @@ public class UserWalletService : IUserWalletService
                WalletRecordCreate(new UserWalletRecordInput
                {
                     UserId = moneyApply.UserId,
-                    SourceType = WalletSourceEnums.Withdrawal,
+                    SourceType = WalletSourceEnums.WithdrawalReturn,
                     OperateUserId = auditUserId,
                     Amount = moneyApply.Amount,
                     OperateType = WalletOperateEnums.Admin
@@ -432,6 +487,15 @@ public class UserWalletService : IUserWalletService
 
            if (moneyApply.SourceType == WalletSourceEnums.WithdrawalApply)
            {
+               //解冻资金
+               WalletRecordCreate(new UserWalletRecordInput
+               {
+                   Amount = moneyApply.Amount,
+                   SourceType = WalletSourceEnums.WithdrawalUnFreeze,
+                   OperateUserId = auditUserId,
+                   UserId = moneyApply.UserId
+               });
+               //提款
                WalletRecordCreate(new UserWalletRecordInput
                {
                    Amount = moneyApply.Amount,

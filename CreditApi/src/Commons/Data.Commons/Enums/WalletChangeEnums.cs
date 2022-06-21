@@ -37,6 +37,12 @@ public enum WalletSourceEnums
     /// </summary>
     [Description("提款申请")]
     WithdrawalApply = 120,
+    
+    /// <summary>
+    ///  提款解冻
+    /// </summary>
+    [Description("提款解冻")]
+    WithdrawalUnFreeze = 130,
 }
 
 /// <summary>

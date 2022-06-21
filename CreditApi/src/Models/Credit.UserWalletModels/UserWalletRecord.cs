@@ -21,7 +21,7 @@ public class UserWalletRecord : BaseModel
     /// <summary>
     ///  操作类型  0 系统  10 管理员  20 用户
     /// </summary>
-    public WalletOperateEnums operationType { get; set; }
+    public WalletOperateEnums OperationType { get; set; }
     
     /// <summary>
     ///  改变类型  0 入账  10 出账
@@ -37,4 +37,9 @@ public class UserWalletRecord : BaseModel
     ///  操作人UserId
     /// </summary>
     public long OperateUserId { get; set; }
+
+    /// <summary>
+    ///  变动后余额
+    /// </summary>
+    public decimal Balance { get; set; }
 }
