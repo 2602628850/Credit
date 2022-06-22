@@ -74,9 +74,9 @@ export default {
 		mine:"我的"
 	},
 	share:{
-		title:"推广",
+		title:"推广给您的朋友",
 		titlenexe:"推广给您的朋友",
-		copylink:"点击下方按钮复制您的推广链接",
+		copylink:"点击下面的链接内容复制您的推广链接",
 		bottonc:"复制",
 		bottomcontent:"每成功邀请一名好友成为平台正式会员，即可获得100积分。",
 		copyresult:"复制成功!"

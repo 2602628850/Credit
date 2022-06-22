@@ -16,6 +16,7 @@ import zh from '/i18n/text-zh'
 import en from '/i18n/text-en'
 import tabBar from '@/components/bottomhand.vue'
 import NavigationBar from "@/components/navigation-bar.vue";
+import AppContentView from "@/components/app-content-view.vue";
 const i18n = createI18n({
     globalInjection: true,
     locale: langUtil.getLang() || "en",
@@ -73,6 +74,7 @@ export function createApp() {
 	app.component('tabBar', tabBar)
 	//将顶部导航栏注册到main里面，就不用在每个页面在单独去注册引用了,页面就可以直接调用了
 	app.component('NavigationBar', NavigationBar)
+	app.component('AppContentView', AppContentView)
 
     return {
         app

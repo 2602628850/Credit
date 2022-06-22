@@ -1,6 +1,7 @@
 <template>
 	<view class="pagebackground">
 		<navigation-bar :title="intereal"></navigation-bar>
+		<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
 		<view style="margin-left: 2%;width: 96%;">
 			<uni-row v-for="(item,index) in rotation" :key="item" :gutter="20">
 				<view v-if="index%2==0">
@@ -45,7 +46,7 @@
 			</uni-row>
 		</view>
 
-
+		</app-content-view>
 	</view>
 
 </template>

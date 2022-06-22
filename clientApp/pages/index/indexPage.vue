@@ -140,72 +140,72 @@
 			<text>Product feature</text>
 		</view>
 		<view style="margin-top: 5px;">
-			<el-card class="box-card" style="background-color: rgb(244, 245, 247);">
-				<el-row :gutter="20">
-					<el-col :span="2">
+			<uni-card style="background-color: rgb(244, 245, 247);">
+				<uni-row :gutter="20">
+					<uni-col :span="2">
 						<text class="productval">1</text>
-					</el-col>
-					<el-col :span="22">
-						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+					</uni-col>
+					<uni-col :span="22">
+						<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 							{{ $t('indexpages.producejs') }}
-						</div>
+						</view>
 						<view style="font-size: 8px"><span>{{ $t('indexpages.producejscontent') }}</span></view>
 
-						<view style="margin-top:5px;text-align: right;">
+						<view style="text-align: right;">
 							<text>
 								<image src="/static/image/index/index-product.png"
 								       style="width: 50px;height: 50px;"></image>
 							</text>
 						</view>
-					</el-col>
-				</el-row>
-			</el-card>
+					</uni-col>
+				</uni-row>
+			</uni-card>
 		</view>
 		<view style="margin-top: 5px;">
-			<el-card class="box-card" style="background-color: rgb(244, 245, 247);">
-				<el-row :gutter="20">
-					<el-col :span="2">
+			<uni-card style="background-color: rgb(244, 245, 247);">
+				<uni-row :gutter="20">
+					<uni-col :span="2">
 						<text class="productval">2</text>
-					</el-col>
-					<el-col :span="22">
-						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+					</uni-col>
+					<uni-col :span="22">
+						<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 							{{ $t('indexpages.creditleavel') }}
-						</div>
+						</view>
 						<view style="font-size: 8px"><span>{{ $t('indexpages.creditcontent') }}</span></view>
 
-						<view style="margin-top:5px;text-align: right;">
+						<view style="text-align: right;">
 							<text>
 								<image src="/static/image/index/index-product.png"
 								       style="width: 50px;height: 50px;"></image>
 							</text>
 						</view>
-					</el-col>
-				</el-row>
-			</el-card>
+					</uni-col>
+				</uni-row>
+			</uni-card>
 		</view>
 
 
 		<view style="margin-top: 5px;">
-			<el-card class="box-card" style="background-color: rgb(244, 245, 247);">
-				<el-row :gutter="20">
-					<el-col :span="2">
+			<uni-card style="background-color: rgb(244, 245, 247);">
+				<uni-row :gutter="20">
+					<uni-col :span="2">
 						<text class="productval">3</text>
-					</el-col>
-					<el-col :span="22">
-						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+					</uni-col>
+					<uni-col :span="22">
+						<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 							{{ $t('indexpages.whitepeaper') }}
-						</div>
+						</view>
 						<view style="font-size: 8px"><span>{{ $t('indexpages.whitepeapercontent') }}</span></view>
 
-						<view style="margin-top:5px;text-align: right;">
+						<view style="text-align: right;">
 							<text>
 								<image src="/static/image/index/index-product.png"
 								       style="width: 50px;height: 50px;"></image>
 							</text>
 						</view>
-					</el-col>
-				</el-row>
-			</el-card>
+					</uni-col>
+				</uni-row>
+			</uni-card>
 		</view>
 	</app-content-view>
 	<tab-bar :selected="0"></tab-bar>

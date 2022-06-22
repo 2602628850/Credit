@@ -94,9 +94,9 @@ export default {
 		mine:"Mine"
 	},
 	share:{
-		title:"Promote",
+		title:"Promote to your friends",
 		titlenexe:"Promote to your friends",
-		copylink:"Click the button below to copy promotion link",
+		copylink:"Click The following links copy promotion link",
 		bottonc:"Copy",
 		bottomcontent:"Every time you successfully invite a friend to become an official member of the platform, you can get 100 points. ",
 		copyresult:"Copy Success!"

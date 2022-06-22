@@ -1,6 +1,7 @@
 <template>
 	<view class="pagebackground">
 		<navigation-bar :title="rotation.productName"></navigation-bar>
+		<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
 		<view style="margin-left: 1%;width: 98%;background-color: white;">
 			<text>
 				<image :src="rotation.url" style="width: 96%;height: 200px;margin-left: 2%;margin-top: 5%;"></image>
@@ -18,6 +19,7 @@
 		 <button type="primary" style="background-color: #00875a;margin-top: 3%;">{{$t('interal.lijiduihuan')}}</button>
 		 <view>&nbsp;</view>
 		</view>
+		</app-content-view>
 	</view>
 </template>
 
