@@ -1,6 +1,6 @@
 <template>
-	<navigation-bar></navigation-bar>
-	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="true">
+<!--	<navigation-bar></navigation-bar>-->
+	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="false">
 		<view class="created">
 			<text>Third Credit</text>
 		</view>

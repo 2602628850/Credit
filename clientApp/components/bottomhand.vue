@@ -48,7 +48,7 @@
 		},
 		methods: {
 		toAgree(path,index) {
-			uni.navigateTo({
+			uni.redirectTo({
 				url:path
 			})
 		},

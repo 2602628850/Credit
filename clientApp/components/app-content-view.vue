@@ -2,7 +2,9 @@
 <!--内容显示视图-->
 <!--	规定tabbar高度 49  naviBar 高度 49-->
 	<scroll-view scroll-y="true" :style="loadContentHeight()">
+		<view v-if="!showNavigationBar" :style="{height:$safeTop+'px'}"></view>
 		<slot></slot>
+		<view v-if="!showTabBar" :style="{height: $safeBottom+'px'}"></view>
 	</scroll-view>
 </template>
 
@@ -40,11 +42,14 @@
 					let height = 0;
 					if (this.showTabBar) {
 						height += 49;
+					} else {
+						height += this.$safeTop;
 					}
 					if (this.showNavigationBar) {
 						height += 49;
+					} else {
+						height += this.$safeBottom;
 					}
-					height += (this.$safeTop + this.$safeBottom);
 
 					height += 'px';
 					return {
