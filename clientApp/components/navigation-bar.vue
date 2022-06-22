@@ -43,7 +43,7 @@
 			}
 		},
 		created() {
-			this.statusBarHeight = this.$statusBarHeight - 49;
+			this.statusBarHeight = this.$safeTop;
 			if (this.statusBarHeight <= 0) {
 				this.statusBarHeight = 0;
 			}

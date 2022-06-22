@@ -1,28 +1,31 @@
 <template>
-<view style="width: 96%;margin-left: 2%;">
+	<navigation-bar></navigation-bar>
+	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="true">
 		<view class="created">
 			<text>Third Credit</text>
 		</view>
 		<!-- 首页轮播图 indexpages.swipers控制显示中文还是英文图标-->
-				<swiper v-if="$t('indexpages.swipers')=='0'" style="text-align: center;" indicator-dots indicator-active-color="#FFFFFF" circular autoplay>
-					<swiper-item v-for="item in rotation" :key="item.id">
-						<image :src="item.url"></image>
-					</swiper-item>
-				</swiper>
-				<swiper v-if="$t('indexpages.swipers')=='1'" style="text-align: center;" indicator-dots indicator-active-color="#FFFFFF" circular autoplay>
-					<swiper-item v-for="item in enrotation" :key="item.id">
-						<image :src="item.url"></image>
-					</swiper-item>
-				</swiper>
-				<!-- 首页轮播图 -->
-		<uni-row class="demo-uni-row"  style="margin-left: 7%;margin-top: 5%;">
+		<swiper v-if="$t('indexpages.swipers')=='0'" style="text-align: center;" indicator-dots
+		        indicator-active-color="#FFFFFF" circular autoplay>
+			<swiper-item v-for="item in rotation" :key="item.id">
+				<image :src="item.url"></image>
+			</swiper-item>
+		</swiper>
+		<swiper v-if="$t('indexpages.swipers')=='1'" style="text-align: center;" indicator-dots
+		        indicator-active-color="#FFFFFF" circular autoplay>
+			<swiper-item v-for="item in enrotation" :key="item.id">
+				<image :src="item.url"></image>
+			</swiper-item>
+		</swiper>
+		<!-- 首页轮播图 -->
+		<uni-row class="demo-uni-row" style="margin-left: 7%;margin-top: 5%;">
 			<uni-col :xs="8" :sm="6" :md="5" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
 					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/order.png"></image>
 					</text>
 					<text style="font-size: 14px;margin-left: 6%;">
-						{{$t('indexpages.order')}}
+						{{ $t('indexpages.order') }}
 					</text>
 				</view>
 			</uni-col>
@@ -30,9 +33,9 @@
 				<view class="demo-uni-col dark" v-on:click="SharedTo('/pages/share/index')">
 					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/share.png"></image>
-					</text>  
+					</text>
 					<text style="font-size: 14px;margin-left: 5%;">
-						{{$t('indexpages.shar')}}
+						{{ $t('indexpages.shar') }}
 					</text>
 				</view>
 			</uni-col>
@@ -41,63 +44,67 @@
 					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/integral.png"></image>
 					</text>
-					
+
 					<text style="font-size: 14px;">
-						{{$t('indexpages.integral')}}
+						{{ $t('indexpages.integral') }}
 					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
 					<text style="display: flex;">
-						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-charts.png"></image>
+						<image style="width: 3.5em;height: 3.5em;"
+						       src="../../static/image/index/index-charts.png"></image>
 					</text>
 					<text style="margin-left: 10px;font-size: 14px;">
-						{{$t('indexpages.analysis')}}
+						{{ $t('indexpages.analysis') }}
 					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
 					<text style="display: flex;">
-						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-charts.png"></image>
+						<image style="width: 3.5em;height: 3.5em;"
+						       src="../../static/image/index/index-charts.png"></image>
 					</text>
-					<text style="font-size: 14px;margin-left: 10%;" >
-						{{$t('indexpages.recharge')}}
+					<text style="font-size: 14px;margin-left: 10%;">
+						{{ $t('indexpages.recharge') }}
 					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
-				<text style="display: flex;">
+					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-withdraw.png">
 						</image>
 					</text>
-					
-					<text style="font-size: 12.5px;margin-left: 10%;" >
-						{{$t('indexpages.withdraw')}}
+
+					<text style="font-size: 12.5px;margin-left: 10%;">
+						{{ $t('indexpages.withdraw') }}
 					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
 					<text style="display: flex;">
-						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-level.png"></image>
+						<image style="width: 3.5em;height: 3.5em;"
+						       src="../../static/image/index/index-level.png"></image>
 					</text>
-				
+
 					<text style="font-size: 14px;">
-						{{$t('indexpages.creditlevel')}}
+						{{ $t('indexpages.creditlevel') }}
 					</text>
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
 					<text style="display: flex;">
-						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-service.png"></image>
+						<image style="width: 3.5em;height: 3.5em;"
+						       src="../../static/image/index/index-service.png"></image>
 					</text>
-				
+
 					<text style="font-size: 14px;">
-						{{$t('indexpages.onlineservice')}}
+						{{ $t('indexpages.onlineservice') }}
 					</text>
 				</view>
 			</uni-col>
@@ -111,112 +118,119 @@
 				<uni-col :span="3" :offset="1" style="margin-top: 1px;">
 					<view class="demo-uni-col-anniu dark">
 						<text style="color: green;display: flex;">$10000</text>
-						<text style="margin-left: 10%;font-size: 13px;">{{$t('indexpages.balance')}}</text>
+						<text style="margin-left: 10%;font-size: 13px;">{{ $t('indexpages.balance') }}</text>
 					</view>
 				</uni-col>
 				<uni-col :span="10" :offset="3">
 					<view class="demo-uni-col-anniu light">
 						<text style="margin-left: 30%;color: green;display: flex;">3</text>
-						<text style="font-size: 13px;">{{$t('indexpages.todayremain')}}</text>
+						<text style="font-size: 13px;">{{ $t('indexpages.todayremain') }}</text>
 					</view>
 				</uni-col>
-				<uni-col :span="7" >
+				<uni-col :span="7">
 					<view class="demo-uni-col-anniu light">
 						<text style="margin-left: 10%;color: green;display: flex;">+$0</text>
-						<text style="font-size: 13px;">{{$t('indexpages.todayincome')}}</text>
+						<text style="font-size: 13px;">{{ $t('indexpages.todayincome') }}</text>
 					</view>
 				</uni-col>
 			</view>
 		</uni-row>
-    
+
 		<view class="titlecom">
 			<text>Product feature</text>
 		</view>
 		<view style="margin-top: 5px;">
-				<el-card class="box-card" style="background-color: rgb(244, 245, 247);">
+			<el-card class="box-card" style="background-color: rgb(244, 245, 247);">
 				<el-row :gutter="20">
-					<el-col :span="2"> 
+					<el-col :span="2">
 						<text class="productval">1</text>
 					</el-col>
 					<el-col :span="22">
 						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-							{{$t('indexpages.producejs')}}
+							{{ $t('indexpages.producejs') }}
 						</div>
-						<view style="font-size: 8px"><span>{{$t('indexpages.producejscontent')}}</span></view>
-						
+						<view style="font-size: 8px"><span>{{ $t('indexpages.producejscontent') }}</span></view>
+
 						<view style="margin-top:5px;text-align: right;">
 							<text>
-								<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
+								<image src="/static/image/index/index-product.png"
+								       style="width: 50px;height: 50px;"></image>
 							</text>
 						</view>
 					</el-col>
-				</el-row> 
-		      </el-card>
-			</view>
+				</el-row>
+			</el-card>
+		</view>
 		<view style="margin-top: 5px;">
-				<el-card class="box-card" style="background-color: rgb(244, 245, 247);" >
+			<el-card class="box-card" style="background-color: rgb(244, 245, 247);">
 				<el-row :gutter="20">
-					<el-col :span="2"> 
+					<el-col :span="2">
 						<text class="productval">2</text>
 					</el-col>
 					<el-col :span="22">
 						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-							{{$t('indexpages.creditleavel')}}
+							{{ $t('indexpages.creditleavel') }}
 						</div>
-						<view style="font-size: 8px"><span>{{$t('indexpages.creditcontent')}}</span></view>
-						
+						<view style="font-size: 8px"><span>{{ $t('indexpages.creditcontent') }}</span></view>
+
 						<view style="margin-top:5px;text-align: right;">
 							<text>
-								<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
+								<image src="/static/image/index/index-product.png"
+								       style="width: 50px;height: 50px;"></image>
 							</text>
 						</view>
 					</el-col>
-				</el-row> 
-		      </el-card>
-			</view>
-			
-			
-		
+				</el-row>
+			</el-card>
+		</view>
+
+
 		<view style="margin-top: 5px;">
-				<el-card class="box-card" style="background-color: rgb(244, 245, 247);">
+			<el-card class="box-card" style="background-color: rgb(244, 245, 247);">
 				<el-row :gutter="20">
-					<el-col :span="2"> 
+					<el-col :span="2">
 						<text class="productval">3</text>
 					</el-col>
 					<el-col :span="22">
 						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-							{{$t('indexpages.whitepeaper')}}
+							{{ $t('indexpages.whitepeaper') }}
 						</div>
-						<view style="font-size: 8px"><span>{{$t('indexpages.whitepeapercontent')}}</span></view>
-						
+						<view style="font-size: 8px"><span>{{ $t('indexpages.whitepeapercontent') }}</span></view>
+
 						<view style="margin-top:5px;text-align: right;">
 							<text>
-								<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;"></image>
+								<image src="/static/image/index/index-product.png"
+								       style="width: 50px;height: 50px;"></image>
 							</text>
 						</view>
 					</el-col>
-				</el-row> 
-		      </el-card>
-			</view>
-	    <tab-bar :selected="0"></tab-bar>
+				</el-row>
+			</el-card>
 		</view>
-		</template>
-		
+	</app-content-view>
+	<tab-bar :selected="0"></tab-bar>
+</template>
+
 <script>
+	import AppContentView from "../../components/app-content-view";
+	import NavigationBar from "../../components/navigation-bar";
 	export default {
-		methods:{
-			SharedTo(uri){
+		components: {NavigationBar, AppContentView},
+		methods: {
+			SharedTo(uri) {
 				uni.navigateTo({
-					url:uri
+					url: uri
 				})
 			}
+		},
+		onShow() {
 		},
 		data() {
 			return {
 				rotation: [{
-						id: 1,
-						url: '/static/image/lb1.jpg'
-					},
+					id: 1,
+					url: '/static/image/lb1.jpg'
+				},
 					{
 						id: 2,
 						url: '/static/image/lb2.jpg'
@@ -231,9 +245,9 @@
 					}
 				],
 				enrotation: [{
-						id: 1,
-						url: '/static/image/lben/lb1.png'
-					},
+					id: 1,
+					url: '/static/image/lben/lb1.png'
+				},
 					{
 						id: 2,
 						url: '/static/image/lben/lb2.png'
@@ -255,9 +269,9 @@
 
 <style lang="scss" scoped>
 	image {
-		margin-left:0.5%;
+		margin-left: 0.5%;
 		margin-top: 3%;
-		width: 700rpx;
+		width: 700 rpx;
 		height: 85%;
 	}
 
@@ -291,9 +305,11 @@
 		height: 70px;
 
 	}
+
 	.radios {
 		border-radius: 9px;
 	}
+
 	.dark {
 		background-color: #FFFFFF;
 	}
@@ -301,6 +317,7 @@
 	.light {
 		background-color: #FFFFFF;
 	}
+
 	.created {
 		padding-top: 2%;
 		padding-left: 2%;
@@ -332,7 +349,5 @@
 		color: wheat;
 	}
 
-	
 
-	
 </style>

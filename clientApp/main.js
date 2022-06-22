@@ -56,6 +56,8 @@ export function createApp() {
     app.config.globalProperties.$screenHeight = uni.getSystemInfoSync().screenHeight;
     app.config.globalProperties.$screenWidth = uni.getSystemInfoSync().screenWidth > 960 ? 500 : uni.getSystemInfoSync().screenWidth;
     app.config.globalProperties.$statusBarHeight = uni.getSystemInfoSync().statusBarHeight;
+    app.config.globalProperties.$safeTop = uni.getSystemInfoSync().safeAreaInsets.top;
+    app.config.globalProperties.$safeBottom = uni.getSystemInfoSync().safeAreaInsets.bottom;
     app.config.globalProperties.$pixelRatio = uni.getSystemInfoSync().windowWidth / 750;
     // 多语言
     app.config.globalProperties.$i18n = i18n;

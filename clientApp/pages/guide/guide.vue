@@ -58,12 +58,11 @@
 		onLoad() {
 			this.swiperHeight = this.$screenWidth - 40 + 'px';
 
-
 			// 跳转处理
 			if (!this.$StoreUtil.get('token')) {
 				// 已登录 跳转到首页
 				uni.navigateTo({
-					url: '/pages/index/index',
+					url: '/pages/index/indexPage',
 					success: ()=> {
 						// #ifdef APP-PLUS
 						plus?.navigator.closeSplashscreen();
@@ -80,6 +79,8 @@
 </script>
 
 <style scoped>
+	@import "/common/css/public.css";
+
 	.button-login {
 		font-size: 16px;
 		border-radius: 44px;

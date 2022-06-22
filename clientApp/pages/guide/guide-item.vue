@@ -1,14 +1,14 @@
 <template>
 <!--引导组件-->
 	<view class="h100 w100 flex-column-center">
-		<el-image :src="src" fit="fill" class="guide-img"></el-image>
+		<image :src="src" fit="fill" class="guide-img"></image>
 		<view class="flex-row-start w100 mgt">
 			<view class="flex-column-start" style="height: 100%">
-				<el-image class="guide-tip-img" style="" fit="fill" src="/static/Icons/guide/top-left.png"></el-image>
+				<image class="guide-tip-img" style="" fit="fill" src="/static/Icons/guide/top-left.png"></image>
 			</view>
 			<view class="flex-row-center guide-title text-primary">{{title}}</view>
 			<view class="flex-column-end" style="height: 100%">
-				<el-image class="guide-tip-img" style="" fit="fill" src="/static/Icons/guide/bottom-right.png"></el-image>
+				<image class="guide-tip-img" style="" fit="fill" src="/static/Icons/guide/bottom-right.png"></image>
 			</view>
 		</view>
 		<view class="flex-row-end mgt w100">

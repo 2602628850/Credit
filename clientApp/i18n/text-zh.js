@@ -120,6 +120,10 @@ export default {
 		interal:'积分',
 		lijiduihuan:'立即兑换'
 		
+	},
+	mine: {
+		title: "我的",
+
 	}
 	
 }
