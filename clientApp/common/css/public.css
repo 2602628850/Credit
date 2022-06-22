@@ -1,8 +1,11 @@
 .w100 {
     width: 100%;
 }
-.h100 {
+.h100vh {
     height: 100vh;
+}
+.h100 {
+    height: 100%;
 }
 .w-auto {
     width: auto;

@@ -1,6 +1,6 @@
 <template>
 <!--引导-->
-	<view class=" h100 flex-column-between padding-left-right-20">
+	<view class="h100vh flex-column-between padding-left-right-20">
 		<view class="w100 flex-row-center" style="flex: 1">
 			<swiper class="w100" :style="{height: swiperHeight}" :indicator-dots="true">
 				<swiper-item v-for="item in items" >
