@@ -62,10 +62,10 @@
 	.tab-bar {
 		height: 49px;
 		width: 100%;
-		padding-bottom: env(safe-area-inset-bottom);
 		border-top-width: 1px;
 		border-top-style: solid;
 		border-top-color: #f1f1f1;
+		box-sizing: border-box;
 	}
 
 	.tab-bar-item {
