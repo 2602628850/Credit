@@ -1,173 +1,176 @@
 <template>
 	<navigation-bar :title="$t('credit.title')"></navigation-bar>
-	<view class="page" style="bankg">
-		<scroll-view class="scroll-x flex-row seg-list">
-			<div class="scroll-view">
-				<div class="scroll-view" style="overflow: auto hidden;">
-					<div class="scroll-view-content">
-						<!---->
-						<view id="tab0">
-							<view class="seg-item flex-row align-center">
-								<image class="margin-right-xs" style="width: 21px; height: 21px;"
-									src="/static/image/hall/tab-asia.png">
+	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
+		<view class="page" style="bankg">
+			<scroll-view class="scroll-x flex-row seg-list">
+				<div class="scroll-view">
+					<div class="scroll-view" style="overflow: auto hidden;">
+						<div class="scroll-view-content">
+							<!---->
+							<view id="tab0">
+								<view class="seg-item flex-row align-center">
+									<image class="margin-right-xs" style="width: 21px; height: 21px;"
+										src="/static/image/hall/tab-asia.png">
 
-								</image>
-								<text><span>亚洲专区</span></text>
+									</image>
+									<text><span>亚洲专区</span></text>
+								</view>
 							</view>
-						</view>
-						<view id="tab1">
-							<view class="seg-item flex-row align-center seg-item-active">
-								<image class="margin-right-xs" src="/static/image/hall/tab-usa.png"
-									style="width: 21px; height: 21px;">
+							<view id="tab1">
+								<view class="seg-item flex-row align-center seg-item-active">
+									<image class="margin-right-xs" src="/static/image/hall/tab-usa.png"
+										style="width: 21px; height: 21px;">
 
-								</image>
-								<text><span>欧美专区</span></text>
+									</image>
+									<text><span>欧美专区</span></text>
+								</view>
 							</view>
-						</view>
+						</div>
 					</div>
 				</div>
-			</div>
-		</scroll-view>
-		<view class="card-page margin-top page-fixed">
-			<view class="card-content product-item margin-bottom-lg">
-				<view class="product-header">
-					<!---->
-					<image class="product-logo" src="/static/image/hall/ptp1.png">
-					</image>
-					<text class="product-title line-1"><span>Europe and the United States -
-							Small</span></text>
-					<view></view>
-				</view>
-				<view class="product-body flex-row solid-bottom">
-					<view class="align-center flex-1">
-						<text class="text-bold text-primary text-lg"><span>0.80%</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>利润</span></text>
-					</view>
-					<view class="product-border"></view>
-					<view class="align-center flex-1">
-						<text class="text-bold text-danger text-lg"><span>+5%</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>7天</span></text>
-					</view>
-					<view class="product-border"></view>
-					<view class="align-center flex-1">
-						<text class="text-bold text-primary text-lg"><span>$500</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>解锁余额</span></text>
-					</view>
-				</view>
-				<view class="product-footer flex-row align-center justify-between">
-					<view class="flex-1">
-						<text class="text-xs"><span>还款金额:<text class="text-bold margin-left-xs"><span>$500 -
-										$2000</span></text></span>
-						</text>
-					</view>
-					<button class="btn-task">
+			</scroll-view>
+			<view class="card-page margin-top page-fixed">
+				<view class="card-content product-item margin-bottom-lg">
+					<view class="product-header">
 						<!---->
-						<text class="text-small text-white"><span>进入</span></text>
-					</button>
+						<image class="product-logo" src="/static/image/hall/ptp1.png">
+						</image>
+						<text class="product-title line-1"><span>Europe and the United States -
+								Small</span></text>
+						<view></view>
+					</view>
+					<view class="product-body flex-row solid-bottom">
+						<view class="align-center flex-1">
+							<text class="text-bold text-primary text-lg"><span>0.80%</span>
+							</text>
+							<text class="text-secondary text-center text-xxs margin-top-xs">
+								<span>利润</span></text>
+						</view>
+						<view class="product-border"></view>
+						<view class="align-center flex-1">
+							<text class="text-bold text-danger text-lg"><span>+5%</span>
+							</text>
+							<text class="text-secondary text-center text-xxs margin-top-xs">
+								<span>7天</span></text>
+						</view>
+						<view class="product-border"></view>
+						<view class="align-center flex-1">
+							<text class="text-bold text-primary text-lg"><span>$500</span>
+							</text>
+							<text class="text-secondary text-center text-xxs margin-top-xs">
+								<span>解锁余额</span></text>
+						</view>
+					</view>
+					<view class="product-footer flex-row align-center justify-between">
+						<view class="flex-1">
+							<text class="text-xs"><span>还款金额:<text class="text-bold margin-left-xs"><span>$500 -
+											$2000</span></text></span>
+							</text>
+						</view>
+						<button class="btn-task">
+							<!---->
+							<text class="text-small text-white"><span>进入</span></text>
+						</button>
+					</view>
 				</view>
-			</view>
-			<view class="card-content product-item margin-bottom-lg">
-				<view class="product-header">
-					<!---->
-					<image class="product-logo" src="/static/image/hall/ptp3.png">
+				<view class="card-content product-item margin-bottom-lg">
+					<view class="product-header">
+						<!---->
+						<image class="product-logo" src="/static/image/hall/ptp3.png">
 
-					</image>
-					<text class="product-title line-1"><span>Europe and the United States -
-							General</span></text>
-					<view>
-						<text class="disabled-tag"><span>待解锁</span></text>
+						</image>
+						<text class="product-title line-1"><span>Europe and the United States -
+								General</span></text>
+						<view>
+							<text class="disabled-tag"><span>待解锁</span></text>
+						</view>
+					</view>
+					<view class="product-body flex-row solid-bottom">
+						<view class="align-center flex-1">
+							<text class="text-bold text-primary text-lg"><span>0.90%</span>
+							</text>
+							<text class="text-secondary text-center text-xxs margin-top-xs">
+								<span>利润</span></text>
+						</view>
+						<view class="product-border"></view>
+						<view class="align-center flex-1">
+							<text class="text-bold text-danger text-lg"><span>+5%</span>
+							</text>
+							<text class="text-secondary text-center text-xxs margin-top-xs">
+								<span>7天</span></text>
+						</view>
+						<view class="product-border"></view>
+						<view class="align-center flex-1">
+							<text class="text-bold text-primary text-lg"><span>$2000</span>
+							</text>
+							<text class="text-secondary text-center text-xxs margin-top-xs">
+								<span>解锁余额</span></text>
+						</view>
+					</view>
+					<view class="product-footer flex-row align-center justify-between">
+						<view class="flex-1">
+							<text class="text-xs"><span>还款金额:<text class="text-bold margin-left-xs"><span>$2000 -
+											$10000</span></text></span>
+							</text>
+						</view>
+						<button class="btn-task">
+							<!---->
+							<text class="text-small text-white"><span>进入</span></text>
+						</button>
 					</view>
 				</view>
-				<view class="product-body flex-row solid-bottom">
-					<view class="align-center flex-1">
-						<text class="text-bold text-primary text-lg"><span>0.90%</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>利润</span></text>
-					</view>
-					<view class="product-border"></view>
-					<view class="align-center flex-1">
-						<text class="text-bold text-danger text-lg"><span>+5%</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>7天</span></text>
-					</view>
-					<view class="product-border"></view>
-					<view class="align-center flex-1">
-						<text class="text-bold text-primary text-lg"><span>$2000</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>解锁余额</span></text>
-					</view>
-				</view>
-				<view class="product-footer flex-row align-center justify-between">
-					<view class="flex-1">
-						<text class="text-xs"><span>还款金额:<text class="text-bold margin-left-xs"><span>$2000 -
-										$10000</span></text></span>
-						</text>
-					</view>
-					<button class="btn-task">
+				<view class="card-content product-item margin-bottom-lg">
+					<view class="product-header">
 						<!---->
-						<text class="text-small text-white"><span>进入</span></text>
-					</button>
+						<image class="product-logo" src="/static/image/hall/ptp3.png">
+						</image>
+						<text class="product-title line-1"><span>Europe and the United States -
+								High</span></text>
+						<view>
+							<text class="disabled-tag"><span>待解锁</span></text>
+						</view>
+					</view>
+					<view class="product-body flex-row solid-bottom">
+						<view class="align-center flex-1">
+							<text class="text-bold text-primary text-lg"><span>1.00%</span>
+							</text>
+							<text class="text-secondary text-center text-xxs margin-top-xs">
+								<span>利润</span></text>
+						</view>
+						<view class="product-border"></view>
+						<view class="align-center flex-1">
+							<text class="text-bold text-danger text-lg"><span>+5%</span>
+							</text>
+							<text class="text-secondary text-center text-xxs margin-top-xs">
+								<span>7天</span></text>
+						</view>
+						<view class="product-border"></view>
+						<view class="align-center flex-1">
+							<text class="text-bold text-primary text-lg"><span>$10000</span>
+							</text>
+							<text class="text-secondary text-center text-xxs margin-top-xs">
+								<span>解锁余额</span></text>
+						</view>
+					</view>
+					<view class="product-footer flex-row align-center justify-between">
+						<view class="flex-1">
+							<text class="text-xs"><span>还款金额:<text class="text-bold margin-left-xs"><span>$10000 -
+											$50000</span></text></span>
+							</text>
+						</view>
+						<button class="btn-task">
+							<!---->
+							<text class="text-small text-white"><span>进入</span></text>
+						</button>
+					</view>
 				</view>
 			</view>
-			<view class="card-content product-item margin-bottom-lg">
-				<view class="product-header">
-					<!---->
-					<image class="product-logo" src="/static/image/hall/ptp3.png">
-					</image>
-					<text class="product-title line-1"><span>Europe and the United States -
-							High</span></text>
-					<view>
-						<text class="disabled-tag"><span>待解锁</span></text>
-					</view>
-				</view>
-				<view class="product-body flex-row solid-bottom">
-					<view class="align-center flex-1">
-						<text class="text-bold text-primary text-lg"><span>1.00%</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>利润</span></text>
-					</view>
-					<view class="product-border"></view>
-					<view class="align-center flex-1">
-						<text class="text-bold text-danger text-lg"><span>+5%</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>7天</span></text>
-					</view>
-					<view class="product-border"></view>
-					<view class="align-center flex-1">
-						<text class="text-bold text-primary text-lg"><span>$10000</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>解锁余额</span></text>
-					</view>
-				</view>
-				<view class="product-footer flex-row align-center justify-between">
-					<view class="flex-1">
-						<text class="text-xs"><span>还款金额:<text class="text-bold margin-left-xs"><span>$10000 -
-										$50000</span></text></span>
-						</text>
-					</view>
-					<button class="btn-task">
-						<!---->
-						<text class="text-small text-white"><span>进入</span></text>
-					</button>
-				</view>
-			</view>
+			<!---->
 		</view>
-		<!---->
-	</view>
+
+	</app-content-view>
 </template>
-<script> 
+<script>
 	export default {
 		data() {
 			return {

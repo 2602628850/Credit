@@ -1,144 +1,147 @@
 <template>
 	<navigation-bar :title="$t('chaka.title')"></navigation-bar>
-	<view>
-		<view class="page">
-			<view class="card-page-place"></view>
-			<view class="page-card">
-				<view class="card-page margin-top">
-					<view class="credit-card position-relative">
-						<image class="card-bg position-absolute" src="/static/image/hall/product-info-credit.png">
-						</image>
-						<view class="credit-info position-relative flex-1 justify-between">
-							<view class="flex-row justify-between">
-								<view>
-									<text class="text-white text-lg text-bold">
-										<span>CREDIT</span></text>
+	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
+		<view>
+			<view class="page">
+				<view class="card-page-place"></view>
+				<view class="page-card">
+					<view class="card-page margin-top">
+						<view class="credit-card position-relative">
+							<image class="card-bg position-absolute" src="/static/image/hall/product-info-credit.png">
+							</image>
+							<view class="credit-info position-relative flex-1 justify-between">
+								<view class="flex-row justify-between">
+									<view>
+										<text class="text-white text-lg text-bold">
+											<span>CREDIT</span></text>
+									</view>
+									<view class="level-icon">
+										<text class="font-italic text-bold text-white">
+											<span>V0</span></text>
+									</view>
 								</view>
-								<view class="level-icon">
-									<text class="font-italic text-bold text-white">
-										<span>V0</span></text>
+								<view>
+									<text class="card-num"><span>**** **** ****
+											****</span></text>
+								</view>
+								<view class="flex-row justify-between">
+									<view>
+										<text class="text-white text-xs"><span>{{$t('chaka.bankname')}}</span>
+										</text>
+										<text class="text-white text-small text-bold">
+											<span>****</span></text>
+									</view>
+									<view class="align-flex-end">
+										<text class="text-white text-xs"><span>{{$t('chaka.repayment')}}</span></text>
+										<text class="credit-amount text-small text-bold">
+											<span>$17.60</span></text>
+									</view>
+									<!---->
 								</view>
 							</view>
+						</view>
+						<view class="margin-top-lg">
 							<view>
-								<text class="card-num"><span>**** **** ****
-										****</span></text>
-							</view>
-							<view class="flex-row justify-between">
-								<view>
-									<text class="text-white text-xs"><span>{{$t('chaka.bankname')}}</span>
+								<view class="flex-row align-center flex-1">
+									<text class="text-small"><span>{{$t('chaka.todayCheckNum')}}:</span>
 									</text>
-									<text class="text-white text-small text-bold">
-										<span>****</span></text>
+									<text class="text-small text-bold text-primary margin-left-xs"><span>3</span>
+									</text>
 								</view>
-								<view  class="align-flex-end">
-									<text  class="text-white text-xs"><span>{{$t('chaka.repayment')}}</span></text>
-									<text  class="credit-amount text-small text-bold">
-										<span>$17.60</span></text>
+								<view class="margin-top">
+									<text class="btn-search"><span>{{$t('chaka.checkButton')}}</span></text>
 								</view>
+							</view>
+						</view>
+						<!---->
+						<view id="cardList" class="margin-top-lg card-content-secondary">
+							<view>
+								<text class="text-bold text-lg"><span>{{$t('chaka.selectrepayment')}}</span></text>
+							</view>
+							<view class="card-content-sm flex-row align-center margin-top card-select">
+								<view class="flex-1">
+									<text class="text-sm"><span>洪仁峰</span></text>
+									<text class="text-xs text-secondary">
+										<span>****62930515****</span></text>
+								</view>
+								<text class="text-lg"><span>$17.40</span></text>
+							</view>
+							<view class="card-content-sm flex-row align-center margin-top">
+								<view class="flex-1">
+									<text class="text-sm"><span>袁怡芳</span></text>
+									<text class="text-xs text-secondary">
+										<span>****01785323****</span></text>
+								</view>
+								<text class="text-lg"><span>$16.20</span></text>
+							</view>
+							<view class="card-content-sm flex-row align-center margin-top">
+								<view class="flex-1">
+									<text class="text-sm"><span>Huang Yude</span></text>
+									<text class="text-xs text-secondary">
+										<span>****09798794****</span></text>
+								</view>
+								<text class="text-lg"><span>$17.60</span></text>
+							</view>
+						</view>
+						<!---->
+						<view class="margin-top-lg card-content-secondary">
+							<view>
+								<text class="text-bold text-lg"><span>{{$t('chaka.repayment')}}</span></text>
+							</view>
+							<view class="align-center margin-top-sm">
+								<text class="text-21"><span>$17.60</span></text>
+								<text class="text-xxs margin-top-xs"><span>≈ 621.17THB</span>
+								</text>
+							</view>
+							<view class="flex-row margin-top">
+								<button class="flex-1 btn-primary">{{$t('chaka.behalfButton')}}</button>
+							</view>
+						</view>
+						<view class="margin-top-xl card-content-secondary">
+							<view>
+								<text class="text-bold text-lg"><span>{{$t('chaka.todayCheck')}}</span>
+								</text>
 								<!---->
 							</view>
-						</view>
-					</view>
-					<view class="margin-top-lg">
-						<view>
-							<view class="flex-row align-center flex-1">
-								<text class="text-small"><span>{{$t('chaka.todayCheckNum')}}:</span>
-								</text>
-								<text class="text-small text-bold text-primary margin-left-xs"><span>3</span>
-								</text>
+							<view class="flex-row margin-top">
+								<view class="flex-1">
+									<text class="text-bold text-primary text-21">
+										<span>0</span></text>
+									<text class="text-xs text-secondary margin-top-xs">
+										<span>{{$t('chaka.Tocheck')}}</span></text>
+								</view>
+								<view class="flex-1">
+									<text class="text-bold text-primary text-21">
+										<span>$0</span></text>
+									<text class="text-xs text-secondary margin-top-xs">
+										<span>{{$t('chaka.Tocheckprofit')}}</span></text>
+								</view>
 							</view>
-							<view class="margin-top">
-								<text class="btn-search"><span>{{$t('chaka.checkButton')}}</span></text>
-							</view>
 						</view>
-					</view>
-					<!---->
-					<view id="cardList" class="margin-top-lg card-content-secondary">
-						<view>
-							<text class="text-bold text-lg"><span>{{$t('chaka.selectrepayment')}}</span></text>
-						</view>
-						<view class="card-content-sm flex-row align-center margin-top card-select">
-							<view class="flex-1">
-								<text class="text-sm"><span>洪仁峰</span></text>
-								<text class="text-xs text-secondary">
-									<span>****62930515****</span></text>
-							</view>
-							<text class="text-lg"><span>$17.40</span></text>
-						</view>
-						<view class="card-content-sm flex-row align-center margin-top">
-							<view class="flex-1">
-								<text class="text-sm"><span>袁怡芳</span></text>
-								<text class="text-xs text-secondary">
-									<span>****01785323****</span></text>
-							</view>
-							<text class="text-lg"><span>$16.20</span></text>
-						</view>
-						<view class="card-content-sm flex-row align-center margin-top">
-							<view class="flex-1">
-								<text class="text-sm"><span>Huang Yude</span></text>
-								<text class="text-xs text-secondary">
-									<span>****09798794****</span></text>
-							</view>
-							<text class="text-lg"><span>$17.60</span></text>
-						</view>
-					</view>
-					<!---->
-					<view class="margin-top-lg card-content-secondary">
-						<view>
-							<text class="text-bold text-lg"><span>{{$t('chaka.repayment')}}</span></text>
-						</view>
-						<view class="align-center margin-top-sm">
-							<text class="text-21"><span>$17.60</span></text>
-							<text class="text-xxs margin-top-xs"><span>≈ 621.17THB</span>
+						<view class="margin-top-xl card-content-secondary">
+							<text class="text-bold text-lg"><span>{{$t('chaka.Procontent')}}</span></text>
+							<text class=" margin-top text-sm line-height-16">
+								<span>"Personal credit card repayment" products are divided into special areas
+									for bad debt processing, small-amount repayment area, general repayment
+									area, high-amount repayment area and large-amount repayment area. Users can
+									enter to check the card and make repayment, and the area that has not
+									reached the amount is grayed out and cannot be entered. The amount of the
+									repayment products that do not use the special area is different, and the
+									commission rate paid by the platform is also different. All users in the bad
+									debt processing area can enter and check the card, but the platform account
+									wallet has no balance and cannot continue the repayment task.</span>
 							</text>
 						</view>
-						<view class="flex-row margin-top">
-							<button class="flex-1 btn-primary">{{$t('chaka.behalfButton')}}</button>
-						</view>
 					</view>
-					<view class="margin-top-xl card-content-secondary">
-						<view>
-							<text class="text-bold text-lg"><span>{{$t('chaka.todayCheck')}}</span>
-							</text>
-							<!---->
-						</view>
-						<view class="flex-row margin-top">
-							<view class="flex-1">
-								<text class="text-bold text-primary text-21">
-									<span>0</span></text>
-								<text class="text-xs text-secondary margin-top-xs">
-									<span>{{$t('chaka.Tocheck')}}</span></text>
-							</view>
-							<view class="flex-1">
-								<text class="text-bold text-primary text-21">
-									<span>$0</span></text>
-								<text class="text-xs text-secondary margin-top-xs">
-									<span>{{$t('chaka.Tocheckprofit')}}</span></text>
-							</view>
-						</view>
-					</view>
-					<view class="margin-top-xl card-content-secondary">
-						<text class="text-bold text-lg"><span>{{$t('chaka.Procontent')}}</span></text>
-						<text class=" margin-top text-sm line-height-16">
-							<span>"Personal credit card repayment" products are divided into special areas
-								for bad debt processing, small-amount repayment area, general repayment
-								area, high-amount repayment area and large-amount repayment area. Users can
-								enter to check the card and make repayment, and the area that has not
-								reached the amount is grayed out and cannot be entered. The amount of the
-								repayment products that do not use the special area is different, and the
-								commission rate paid by the platform is also different. All users in the bad
-								debt processing area can enter and check the card, but the platform account
-								wallet has no balance and cannot continue the repayment task.</span>
-						</text>
-					</view>
+					<view class="margin"></view>
 				</view>
-				<view class="margin"></view>
-			</view>
-			<view>
-				<!---->
+				<view>
+					<!---->
+				</view>
 			</view>
 		</view>
-	</view>
+
+	</app-content-view>
 </template>
 
 <script>
@@ -509,7 +512,8 @@
 		overflow: hidden;
 		cursor: pointer;
 	}
+
 	.credit-amount {
-    color: #fdd741;
-}
+		color: #fdd741;
+	}
 </style>

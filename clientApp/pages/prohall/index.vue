@@ -1,92 +1,97 @@
 <template>
-	<uni-page-head uni-page-head-type="default">
-		<div class="uni-page-head" style="background-color: rgb(244, 245, 247); color: rgb(0, 0, 0);">
-			<div class="uni-page-head-hd">
-				<div class="uni-page-head-btn" style="display: none;"><i class="uni-btn-icon"
-						style="color: rgb(0, 0, 0); font-size: 27px;"></i></div>
+	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
+		<uni-page-head uni-page-head-type="default">
+			<div class="uni-page-head" style="background-color: rgb(244, 245, 247); color: rgb(0, 0, 0);">
+				<div class="uni-page-head-hd">
+					<div class="uni-page-head-btn" style="display: none;"><i class="uni-btn-icon"
+							style="color: rgb(0, 0, 0); font-size: 27px;"></i></div>
+					<div class="uni-page-head-ft"></div>
+				</div>
+				<div class="uni-page-head-bd">
+					<div class="uni-page-head__title" style="font-size: 16px; opacity: 1;">
+						{{$t('prohall.title')}}
+					</div>
+				</div>
+				<!---->
 				<div class="uni-page-head-ft"></div>
 			</div>
-			<div class="uni-page-head-bd">
-				<div class="uni-page-head__title" style="font-size: 16px; opacity: 1;">
-					{{$t('prohall.title')}}
-				</div>
-			</div>
-			<!---->
-			<div class="uni-page-head-ft"></div>
-		</div>
-		<div class="uni-placeholder"></div>
-	</uni-page-head>
-	<view style="margin-top:20px;" @click="tocredit">
-		<el-card class="box-card">
-			<el-row :gutter="20">
-				<el-col :span="6">
-					<image class="logo" src="/static/icons/task-credit.png"></image>
-				</el-col>
-				<el-col :span="6">
-				</el-col>
-				<el-col :span="10">
-					<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-						{{$t('prohall.repayment')}}
-					</div>
-					<view style="font-size: 8px"><span>{{$t('prohall.repaycon')}}</span></view>
+			<div class="uni-placeholder"></div>
+		</uni-page-head>
+		<view style="margin-top:20px;" @click="tocredit">
+			<uni-card class="box-card">
+				<uni-row :gutter="20">
+					<uni-col :span="6">
+						<image class="logo" src="/static/icons/task-credit.png"></image>
+					</uni-col>
+					<uni-col :span="8">
+						&nbsp;
+					</uni-col>
+					<uni-col :span="10">
+						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+							{{$t('prohall.repayment')}}
+						</div>
+						<view style="font-size: 8px"><span>{{$t('prohall.repaycon')}}</span></view>
 
-					<view style="margin-top:30px;text-align: right;">
+						<view style="margin-top:30px;text-align: right;">
 
-						<span>
-							<el-button type="primary">{{$t('prohall.repaysend')}}</el-button>
-						</span>
-					</view>
-				</el-col>
-			</el-row>
-		</el-card>
-	</view>
-	<view style="margin-top:20px;" @click="toP2P">
-		<el-card class="box-card">
-			<el-row :gutter="20">
-				<el-col :span="6">
-					<image class="logo" src="/static/icons/task-repayment.png"></image>
-				</el-col>
-				<el-col :span="16">
-					<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-						{{$t('prohall.loantitle')}}
-					</div>
-					<view style="font-size: 8px"><span>{{$t('prohall.loancon')}}</span></view>
+							<span>
+								<button type="primary" class="text-center btn-task">{{$t('prohall.repaysend')}}</button>
+							</span>
+						</view>
+					</uni-col>
+				</uni-row>
+			</uni-card>
+		</view>
+		<view style="margin-top:20px;" @click="toP2P">
+			<uni-card class="box-card">
+				<uni-row :gutter="20">
+					<uni-col :span="6">
+						<image class="logo" src="/static/icons/task-repayment.png"></image>
+					</uni-col>
+					<uni-col :span="6">
+						&nbsp;
+					</uni-col>
+					<uni-col :span="12">
+						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+							{{$t('prohall.loantitle')}}
+						</div>
+						<view style="font-size: 8px"><span>{{$t('prohall.loancon')}}</span></view>
 
-					<view style="margin-top:30px;text-align: right;">
+						<view style="margin-top:30px;text-align: right;">
+							<text class="btn-task"><span>
+									<button type="primary" class=" btn-task">{{$t('prohall.loansend')}}</button>
+								</span></text>
 
-						<span>
-							<el-button type="primary">{{$t('prohall.loansend')}}</el-button>
-						</span>
-					</view>
-				</el-col>
-			</el-row>
-		</el-card>
-	</view>
-	<view style="margin-top:20px;">
-		<el-card class="box-card">
-			<el-row :gutter="20">
-				<el-col :span="6">
-					<image class="logo" src="/static/icons/task-smeloan.png"></image>
-				</el-col>
-				<el-col :span="4">
-				</el-col>
-				<el-col :span="12">
-					<div style="font-size: 16px; opacity: 1;font-weight: bold;">
-						{{$t('prohall.buytitle')}}
-					</div>
-					<view style="font-size: 8px"><span>{{$t('prohall.buycon')}}</span></view>
+						</view>
+					</uni-col>
+				</uni-row>
+			</uni-card>
+		</view>
+		<view style="margin-top:20px;">
+			<uni-card class="box-card">
+				<uni-row :gutter="20">
+					<uni-col :span="6">
+						<image class="logo" src="/static/icons/task-smeloan.png"></image>
+					</uni-col>
+					<uni-col :span="6">
+						&nbsp;
+					</uni-col>
+					<uni-col :span="12">
+						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+							{{$t('prohall.buytitle')}}
+						</div>
+						<view style="font-size: 8px"><span>{{$t('prohall.buycon')}}</span></view>
 
-					<view style="margin-top:30px;text-align: right;">
-
-						<span>
-							<el-button type="primary">{{$t('prohall.buysend')}}</el-button>
-						</span>
-					</view>
-				</el-col>
-			</el-row>
-		</el-card>
-	</view>
-	<tab-bar :selected="1"></tab-bar>
+						<view style="margin-top:30px;margin-right: 10px;;">
+							<text> <button type="primary"
+									class="text-center btn-task">{{$t('prohall.buysend')}}</button> </text>
+						</view>
+					</uni-col>
+				</uni-row>
+			</uni-card>
+		</view>
+	</app-content-view>
+	<tab-bar :selected="0"></tab-bar>
 </template>
 
 <script>
@@ -114,15 +119,27 @@
 </script>
 
 <style>
-	.el-row {
+	.btn-task {
+		height: 36px;
+		line-height: 36px;
+		text-align: center;
+		border-radius: 12px;
+		width: 120px;
+		color: #fff;
+		font-size: 15px;
+		margin-right: 50px;
+		background-image: linear-gradient(270deg, #108d62, #54b78d);
+	}
+
+	.uni-row {
 		margin-bottom: 20px;
 	}
 
-	.el-row:last-child {
+	.uni-row:last-child {
 		margin-bottom: 0;
 	}
 
-	.el-col {
+	.uni-col {
 		border-radius: 4px;
 	}
 
@@ -134,5 +151,29 @@
 	.grid-content {
 		border-radius: 4px;
 		min-height: 36px;
+	}
+
+	.titlecom {
+		padding-top: 2%;
+		padding-left: 2%;
+		font-weight: 600;
+		font-size: 17px;
+		padding-bottom: 2%;
+	}
+
+	.product {
+		border: 1px solid darkgray;
+		width: 97%;
+	}
+
+	.productval {
+		float: left;
+		margin-top: 8%;
+		background-color: #00875a;
+		border-radius: 50%;
+		width: 20px;
+		font-size: 20px;
+		text-align: center;
+		color: wheat;
 	}
 </style>
