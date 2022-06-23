@@ -32,6 +32,8 @@ export default {
         pwdTip: '请输入密码',
         mail: '邮箱',
         mailTip: '请输入邮箱',
+		recharge: "充值",
+		withdraw: '提现',
     },
     prohall: {
         title: "大厅",
@@ -123,7 +125,12 @@ export default {
 	},
 	mine: {
 		title: "我的",
-
+		balance: "账户余额",
+		purse: '我的钱包',
+		financial: '财务报表',
+		setUp: '设置',
+		paper: '官方白皮书',
+		service: '联系客服'
 	}
 	
 }

@@ -11,6 +11,30 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-right:before {
+  content: "\e6a3";
+}
+
+.icon-shezhi:before {
+  content: "\e600";
+}
+
+.icon-bangzhuzhongxin:before {
+  content: "\e78f";
+}
+
+.icon-qianbao:before {
+  content: "\e613";
+}
+
+.icon-lianxi:before {
+  content: "\e66f";
+}
+
+.icon-caiwubaobiao:before {
+  content: "\e602";
+}
+
 .icon-back:before {
   content: "\e679";
 }
@@ -42,4 +66,6 @@
 .icon-diqiu:before {
   content: "\e642";
 }
+
+
 

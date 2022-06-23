@@ -53,6 +53,8 @@ export default {
         pwdTip: 'Enter your Password',
         mail: 'Email',
         mailTip: 'Enter your email',
+		recharge: "recharge",
+		withdraw: 'withdraw funds',
     },
     prohall: {
         title: "hall",
@@ -119,6 +121,15 @@ export default {
 		interal:'Integral',
 		lijiduihuan:'Exchange now'
 		
+	},
+	mine: {
+		title: "Mine",
+		balance: "Account Balance",
+		purse: "My purse",
+		financial: 'Financial Statements',
+		setUp: 'set up',
+		paper: 'Official White Paper',
+		service: 'Contact Customer Service',
 	}
     
 }
