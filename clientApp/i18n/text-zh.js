@@ -34,6 +34,8 @@ export default {
         mailTip: '请输入邮箱',
 		recharge: "充值",
 		withdraw: '提现',
+		nickname: "昵称",
+		submit: '提交',
     },
     prohall: {
         title: "大厅",
@@ -131,6 +133,8 @@ export default {
 		setUp: '设置',
 		paper: '官方白皮书',
 		service: '联系客服'
+	},
+	mineInfo: {
+		title: '个人资料'
 	}
-	
 }

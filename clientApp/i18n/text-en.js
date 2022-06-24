@@ -55,6 +55,8 @@ export default {
         mailTip: 'Enter your email',
 		recharge: "recharge",
 		withdraw: 'withdraw funds',
+		nickname: "Nickname",
+		submit: 'Submit',
     },
     prohall: {
         title: "hall",
@@ -130,6 +132,9 @@ export default {
 		setUp: 'set up',
 		paper: 'Official White Paper',
 		service: 'Contact Customer Service',
+	},
+	mineInfo: {
+		title: 'personal information'
 	}
     
 }

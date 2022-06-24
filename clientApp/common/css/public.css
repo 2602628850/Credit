@@ -62,6 +62,14 @@
     color: #00875a;
 }
 
+.bg-primary {
+    background-color: #00875a;
+}
+
+.text-white {
+    color: white;
+}
+
 .text-second {
     color: #000;
 }
