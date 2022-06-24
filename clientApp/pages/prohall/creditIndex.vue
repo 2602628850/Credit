@@ -226,8 +226,11 @@
 		methods: {
 			tocreditDetail() {
 				// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
-				uni.reLaunch({
-					url: '/pages/prohall/Chaka'
+				// uni.reLaunch({
+				// 	url: '/pages/prohall/Chaka'
+				// })
+				uni.navigateTo({
+						url: '/pages/prohall/Chaka'
 				})
 			}
 		}

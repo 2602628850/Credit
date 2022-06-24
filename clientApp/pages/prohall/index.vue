@@ -91,7 +91,7 @@
 			</uni-card>
 		</view>
 	</app-content-view>
-	<tab-bar :selected="0"></tab-bar>
+	<tab-bar :selected="1"></tab-bar>
 </template>
 
 <script>
@@ -104,13 +104,20 @@
 		methods: {
 			tocredit() {
 				// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
-				uni.reLaunch({
+				// uni.reLaunch({
+				// 	url: '/pages/prohall/creditIndex'
+				// })
+				
+				uni.navigateTo({
 					url: '/pages/prohall/creditIndex'
 				})
 			},
 			toP2P() {
 				// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
-				uni.reLaunch({
+				// uni.reLaunch({
+				// 	url: '/pages/prohall/P2PZone'
+				// })
+				uni.navigateTo({
 					url: '/pages/prohall/P2PZone'
 				})
 			}
