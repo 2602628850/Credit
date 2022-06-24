@@ -16,8 +16,7 @@
 							<view style="font-size: 16px; opacity: 1;font-weight: bold;text-align: left;">
 								0
 							</view>
-							<view style="margin-top:0;text-align: right;">
-								
+							<view style="text-align: right;">
 							<text class="g-icons"></text></view>
 						</uni-col>
 					</uni-row> 
@@ -26,8 +25,8 @@
 			
 			
 			<view style="margin-top: 20px;">
-					<uni-card class="box-card" style="padding: 0;" v-on:click="ToShop()">
-					<uni-row :gutter="20">
+					<uni-card class="box-card" style="padding: 0;">
+					<uni-row :gutter="20" v-on:click="ToShop()">
 						<uni-col :span="3"> 
 						<image src="/static/image/iteral/integral-mall.png" style="width: 30px;height: 30px;"></image>
 						</uni-col>
