@@ -1,130 +1,135 @@
 <template>
 	<view class="pagebackground">
 		<navigation-bar :title="intereal"></navigation-bar>
+		<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
+		
 		<view class="uni-padding-wrap uni-common-mt">
 	     <view style="margin-top: 20px;">
-					<el-card class="box-card" >
-					<el-row :gutter="20">
-						<el-col :span="11"> 
-						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+					<uni-card class="box-card" >
+					<uni-row :gutter="20" style="height: 50px;">
+						<uni-col :span="11"> 
+						<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 							{{$t('interal.currentinte')}}
-						</div>
-						</el-col>
-						<el-col :span="13">
-							<div style="font-size: 16px; opacity: 1;font-weight: bold;text-align: left;">
+						</view>
+						</uni-col>
+						<uni-col :span="13">
+							<view style="font-size: 16px; opacity: 1;font-weight: bold;text-align: left;">
 								0
-							</div>
-							<view style="margin-top:0;text-align: right;">
-								
+							</view>
+							<view style="text-align: right;margin-top: -10%;">
 							<text class="g-icons"></text></view>
-						</el-col>
-					</el-row> 
-			      </el-card>
+						</uni-col>
+					</uni-row> 
+			      </uni-card>
 				</view>
 			
 			
 			<view style="margin-top: 20px;">
-					<el-card class="box-card" style="padding: 0;">
-					<el-row :gutter="20">
-						<el-col :span="3"> 
+					<uni-card class="box-card" style="padding: 0;">
+					<uni-row :gutter="20" v-on:click="ToShop()" style="height: 60px;">
+						<uni-col :span="3"> 
 						<image src="/static/image/iteral/integral-mall.png" style="width: 30px;height: 30px;"></image>
-						</el-col>
-						<el-col :span="21">
-							<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+						</uni-col>
+						<uni-col :span="21">
+							<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 								{{$t('interal.inteshop')}}
-							</div>
-							<view style="margin-top:10px;text-align: right;">
+							</view>
+							<view style="margin-top:10px;text-align: right;margin-top: -5%;">
 								
 							<text class="g-icons"></text></view>
-						</el-col>
-					</el-row> 
-					<el-row :gutter="20">
-						<el-col :span="3"> 
+						</uni-col>
+					</uni-row> 
+					<uni-row :gutter="20" style="height: 50px;">
+						<uni-col :span="3"> 
 						<image src="/static/image/iteral/integral-order.png" style="width: 30px;height: 30px;"></image>
-						</el-col>
-						<el-col :span="21">
-							<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+						</uni-col>
+						<uni-col :span="21">
+							<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 								{{$t('interal.inteorder')}}
-							</div>
-							<view style="margin-top:10px;text-align: right;">
+							</view>
+							<view style="margin-top:10px;text-align: right;margin-top: -5%;">
 								
 							<text class="g-icons"></text></view>
-						</el-col>
-					</el-row> 
-			      </el-card>
+						</uni-col>
+					</uni-row> 
+			      </uni-card>
 				</view>
 			
 			
 <view style="margin-top: 20px;">{{$t('interal.interenwu')}}</view>	
 <view style="margin-top: 9px;">
-		<el-card class="box-card" >
-		<el-row :gutter="20">
-			<el-col :span="3"> 
+		<uni-card class="box-card" >
+		<uni-row :gutter="20">
+			<uni-col :span="3"> 
 				<image src="/static/image/iteral/integral-credit.png"
 					style="width: 30px;height: 30px;"></image>
-			</el-col>
-			<el-col :span="21">
-				<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+			</uni-col>
+			<uni-col :span="21">
+				<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 					{{$t('interal.finishchaka')}}
-				</div>
-				<view style="font-size: 8px"><span>{{$t('interal.chakareason')}}</span></view>
+				</view>
+				<view style="font-size: 8px"><text>{{$t('interal.chakareason')}}</text></view>
 				
 				<view style="margin-top:10px;text-align: right;">
 					
-				<span> <el-button type="primary">{{$t('interal.tofinish')}}</el-button> </span></view>
-			</el-col>
-		</el-row> 
+				<text> <el-button type="primary">{{$t('interal.tofinish')}}</el-button> </text></view>
+			</uni-col>
+		</uni-row> 
     
-		<el-row :gutter="20">
-			<el-col :span="3"> 
+		<uni-row :gutter="20">
+			<uni-col :span="3"> 
 				<image src="/static/image/iteral/integral-repayment.png"
 					style="width: 30px;height: 30px;"></image>
-			</el-col>
-			<el-col :span="21">
-				<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+			</uni-col>
+			<uni-col :span="21">
+				<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 					{{$t('interal.finishdaikuan')}}
-				</div>
+				</view>
 				<view style="font-size: 8px"><span>	{{$t('interal.finishdaikuanreason')}}</span></view>
 				
 				<view style="margin-top:10px;text-align: right;">
 					
 				<span> <el-button type="primary">{{$t('interal.tofinish')}}</el-button> </span></view>
-			</el-col>
-		</el-row> 
-			<el-row :gutter="20">
-				<el-col :span="3"> 
+			</uni-col>
+		</uni-row> 
+			<uni-row :gutter="20">
+				<uni-col :span="3"> 
 				<image src="/static/image/iteral/integral-share.png"
 					style="width: 30px;height: 30px;"></image>
-				</el-col>
-				<el-col :span="21">
-					<div style="font-size: 16px; opacity: 1;font-weight: bold;">
+				</uni-col>
+				<uni-col :span="21">
+					<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 						{{$t('interal.sharfrend')}}
-					</div>
+					</view>
 					<view style="font-size: 8px"><span>{{$t('interal.sharreason')}}</span></view>
 					
 					<view style="margin-top:10px;text-align: right;">
 						
 					<span> <el-button type="primary">{{$t('interal.tofinish')}}</el-button> </span></view>
-				</el-col>
-			</el-row> 
-	      </el-card>
+				</uni-col>
+			</uni-row> 
+	      </uni-card>
 		</view>
-
-
 		</view>
+		</app-content-view>
 	</view>
 
 </template>
 <script>
 	export default {
+		
 			data() {
 				return {
 	              intereal:this.$t('interal.intereal')
 				}
 			},
-			methods: {
-				
-			}
+			methods:{
+				ToShop(){
+					uni.navigateTo({
+						url:"/pages/integral/mall"
+					})
+				}
+			},
 		}
 </script>
 

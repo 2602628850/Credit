@@ -57,7 +57,7 @@
 		methods: {
 			doLogin() {
 				// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
-				uni.switchTab({
+				uni.navigateTo({
 					url: '/pages/index/indexPage'
 				})
 			},
@@ -80,7 +80,7 @@
 					this.$StoreUtil.set('lang', 'en');
 				}
 			}
-		}
+		},
 	}
 </script>
 

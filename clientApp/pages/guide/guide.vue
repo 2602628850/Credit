@@ -1,6 +1,6 @@
 <template>
 <!--引导-->
-	<view class=" h100 flex-column-between padding-left-right-20">
+	<view class="h100vh flex-column-between padding-left-right-20">
 		<view class="w100 flex-row-center" style="flex: 1">
 			<swiper class="w100" :style="{height: swiperHeight}" :indicator-dots="true">
 				<swiper-item v-for="item in items" >
@@ -58,12 +58,11 @@
 		onLoad() {
 			this.swiperHeight = this.$screenWidth - 40 + 'px';
 
-
 			// 跳转处理
 			if (!this.$StoreUtil.get('token')) {
 				// 已登录 跳转到首页
 				uni.navigateTo({
-					url: '/pages/index/index',
+					url: '/pages/index/indexPage',
 					success: ()=> {
 						// #ifdef APP-PLUS
 						plus?.navigator.closeSplashscreen();
@@ -80,6 +79,8 @@
 </script>
 
 <style scoped>
+	@import "/common/css/public.css";
+
 	.button-login {
 		font-size: 16px;
 		border-radius: 44px;

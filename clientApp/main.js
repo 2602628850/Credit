@@ -16,6 +16,7 @@ import zh from '/i18n/text-zh'
 import en from '/i18n/text-en'
 import tabBar from '@/components/bottomhand.vue'
 import NavigationBar from "@/components/navigation-bar.vue";
+import AppContentView from "@/components/app-content-view.vue";
 const i18n = createI18n({
     globalInjection: true,
     locale: langUtil.getLang() || "en",
@@ -56,6 +57,8 @@ export function createApp() {
     app.config.globalProperties.$screenHeight = uni.getSystemInfoSync().screenHeight;
     app.config.globalProperties.$screenWidth = uni.getSystemInfoSync().screenWidth > 960 ? 500 : uni.getSystemInfoSync().screenWidth;
     app.config.globalProperties.$statusBarHeight = uni.getSystemInfoSync().statusBarHeight;
+    app.config.globalProperties.$safeTop = uni.getSystemInfoSync().safeAreaInsets.top;
+    app.config.globalProperties.$safeBottom = uni.getSystemInfoSync().safeAreaInsets.bottom;
     app.config.globalProperties.$pixelRatio = uni.getSystemInfoSync().windowWidth / 750;
     // 多语言
     app.config.globalProperties.$i18n = i18n;
@@ -71,6 +74,7 @@ export function createApp() {
 	app.component('tabBar', tabBar)
 	//将顶部导航栏注册到main里面，就不用在每个页面在单独去注册引用了,页面就可以直接调用了
 	app.component('NavigationBar', NavigationBar)
+	app.component('AppContentView', AppContentView)
 
     return {
         app

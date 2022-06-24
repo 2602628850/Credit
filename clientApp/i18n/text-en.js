@@ -25,10 +25,25 @@ export default {
         title: 'User agreement'
     },
     credit: {
-        title: '信用代还专区'
+        title: ' Credit Zone',
+		profit:'Profit',
+		unbalance:'Unlock balance',
+		repayment:'Repayment',		
+		button:'Enter'		
     },
-    credit: {
-        title: '信用代还专区'
+    chaka: {
+        title: 'Check card',		
+		bankname:'Bank Name',	
+		repayment:'Repayment',
+		todayCheckNum:'Today remaining check time',
+		checkButton:'Check card',
+		selectrepayment:'Select repayment',
+		behalfButton:'Repayment on behalf',
+		todayCheck:'Today check card',
+		Tocheck:'Checked times',
+		Tocheckprofit:'Checked profit',
+		Procontent:'Product introduction'
+		
     },
     public: {
         register: "Create an account",
@@ -38,6 +53,10 @@ export default {
         pwdTip: 'Enter your Password',
         mail: 'Email',
         mailTip: 'Enter your email',
+		recharge: "recharge",
+		withdraw: 'withdraw funds',
+		nickname: "Nickname",
+		submit: 'Submit',
     },
     prohall: {
         title: "hall",
@@ -79,9 +98,9 @@ export default {
 		mine:"Mine"
 	},
 	share:{
-		title:"Promote",
+		title:"Promote to your friends",
 		titlenexe:"Promote to your friends",
-		copylink:"Click the button below to copy promotion link",
+		copylink:"Click The following links copy promotion link",
 		bottonc:"Copy",
 		bottomcontent:"Every time you successfully invite a friend to become an official member of the platform, you can get 100 points. ",
 		copyresult:"Copy Success!"
@@ -98,8 +117,29 @@ export default {
 		finishdaikuanreason:"Complete one-time loan repayment will automatically get 20 points",
 		sharfrend:"Invite friends",
 		sharreason:"Successfully invite a friend to become a full member of the platform and automatically get 100 points",
-	    tofinish:"To finish"
+	    tofinish:"To finish",
+		jifendh:'Integral exchange',
+		shengyu:'Remaining',
+		interal:'Integral',
+		lijiduihuan:'Exchange now'
 		
+	},
+	mine: {
+		title: "Mine",
+		balance: "Account Balance",
+		purse: "My purse",
+		financial: 'Financial Statements',
+		setUp: 'set up',
+		paper: 'Official White Paper',
+		service: 'Contact Customer Service',
+	},
+	mineInfo: {
+		title: 'personal information'
+	},
+	level: {
+		title: 'credit rating',
+		currentCreditValue: 'current credit value',
+		nextLevel: '[number] credits required to reach [lv]'
 	}
     
 }

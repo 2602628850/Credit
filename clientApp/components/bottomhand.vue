@@ -1,12 +1,10 @@
 <template>
-	<view style="padding: 5%;"></view>
-	<view class="tab-bar">
-		<view v-for="(item,index) in list" :key="index" class="tab-bar-item" >
+	<view class="tab-bar flex-row-between">
+		<view v-for="(item,index) in list" :key="index" class="tab-bar-item flex-column-center" >
 			<span v-on:click="toAgree(item.pagePath,index)"><image class="tab_img" :src="selected === index ? item.selectedIconPath : item.iconPath"></image></span>
-			<view class="tab_text" :style="{color: selected === index ? selectedColor : color}" style="font-size: 17px;margin-bottom: 15px;;" v-on:click="toAgree(item.pagePath,index)">{{item.text}}</view>
+			<view class="tab_text" :style="{color: selected === index ? selectedColor : color}" v-on:click="toAgree(item.pagePath,index)">{{item.text}}</view>
 		</view>
 	</view>
- 
 </template>
 <script>
 	export default {
@@ -39,7 +37,7 @@
 					text: this.$t('Tabbar.team')
 				}, 
 				{
-					pagePath: "/pages/index/tes",
+					pagePath: "/pages/mine/mine",
 					iconPath: "/static/image/tarbar/mine.png",
 					selectedIconPath: "/static/image/tarbar/choose/mine.png",
 					text: this.$t('Tabbar.mine')
@@ -50,7 +48,7 @@
 		},
 		methods: {
 		toAgree(path,index) {
-			uni.navigateTo({
+			uni.redirectTo({
 				url:path
 			})
 		},
@@ -58,35 +56,61 @@
 	}
 </script>
  
-<style lang="scss">
+<style lang="scss" scoped>
+	@import "/common/css/flex.css";
+
 	.tab-bar {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 100rpx;
-		background: white;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding-bottom: env(safe-area-inset-bottom); // 适配iphoneX的底部
-		.tab-bar-item {
-			flex: 1;
-			text-align: center;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			flex-direction: column;
- 
-			.tab_img {
-				width: 37rpx;
-				height: 41rpx;
-			}
- 
-			.tab_text {
-				font-size: 20rpx;
-				margin-top: 9rpx;
-			}
-		}
+		height: 49px;
+		width: 100%;
+		border-top-width: 1px;
+		border-top-style: solid;
+		border-top-color: #f1f1f1;
+		box-sizing: border-box;
 	}
+
+	.tab-bar-item {
+		width: 24%;
+	}
+
+	.tab_img {
+		width: 20px;
+		height: 20px;
+	}
+
+	.tab_text {
+		font-size: 14px;
+	}
+
+
+
+	//.tab-bar {
+	//	//position: fixed;
+	//	bottom: 0;
+	//	left: 0;
+	//	right: 0;
+	//	height: 49px;
+	//	background: white;
+	//	display: flex;
+	//	justify-content: center;
+	//	align-items: center;
+	//	padding-bottom: env(safe-area-inset-bottom); // 适配iphoneX的底部
+	//	.tab-bar-item {
+	//		flex: 1;
+	//		text-align: center;
+	//		display: flex;
+	//		justify-content: center;
+	//		align-items: center;
+	//		flex-direction: column;
+	//
+	//		.tab_img {
+	//			width: 20px;
+	//			height: 20px;
+	//		}
+	//
+	//		.tab_text {
+	//			font-size: 20px;
+	//			margin-top: 9px;
+	//		}
+	//	}
+	//}
 </style>

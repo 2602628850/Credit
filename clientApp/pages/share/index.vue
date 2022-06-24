@@ -1,44 +1,36 @@
 <template>
 	<navigation-bar :title="$t('share.title')"></navigation-bar>
-	<view>
-		<text class="title">{{$t('share.titlenexe')}}</text>
-	</view>
-
+	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
 	<view class="imgvew">
 		<image src="../../static/image/share/share.png" style="width: 150px; height: 150px;" draggable="true"></image>
 	</view>
-	<view style="width: 100%;color: green;font-size: 13px;text-align: center;">
+	<view style="width: 100%;color: green;font-size: 13px;text-align: center;"  v-on:click="copyUrl()" >
 		<text>
 			{{$t('share.copylink')}}
 		</text>
 	</view>
-	<view class="mt-4" style="width: 90%;margin-left: 5%;margin-top: 10%;">
-	    <el-input v-model="copyurl">
-	      <template #append>
-			 <button type="primary" size="mini"
-			 	@click="copyUrl()">{{$t('share.bottonc')}}</button>
-			  </template>
-	    </el-input>
+	<view style="text-align: center;" v-on:click="copyUrl()" >
+		<input class="uni-input" v-model="copyurl" style="border: 1px solid darkgray;width: 60%;margin-left: 15%;margin-top: 10px;"/>
 	
-	  </view>
+	</view>
 
 	<view class="bottonbody">
 		<uni-card :is-shadow="false" is-full>
 			<image src="../../static/image/share/icon-gift.png" class="bottomimg"></image>
-			<text class="uni-h6"
-				style="margin-left: 5px;">{{$t('share.bottomcontent')}}</text>
+			<text class="uni-h6" style="margin-left: 5px;">{{$t('share.bottomcontent')}}</text>
 		</uni-card>
 
 	</view>
 	<view style="height: 4%;"></view>
-<tab-bar :selected="0"></tab-bar>
+	</app-content-view>
+	<!-- <tab-bar :selected="0"></tab-bar> -->
 </template>
 
 <script>
 	export default {
 		data() {
 			return {
-				copyurl:"https://www.thirdcredit.net?t=25202"
+				copyurl: "https://www.thirdcredit.net?t=25202"
 			}
 		},
 		methods: {
@@ -77,8 +69,8 @@
 		margin: 20% auto;
 	}
 
-	
-	
+
+
 
 	.bottonbody {
 		border-radius: 3%;
@@ -90,7 +82,8 @@
 		border: 1px solid darkgray;
 	}
 
-	.bottomimg{
-		width: 40px;height: 40px;
+	.bottomimg {
+		width: 40px;
+		height: 40px;
 	}
 </style>

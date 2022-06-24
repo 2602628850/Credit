@@ -5,6 +5,9 @@
 		onLaunch: function() {
 			interceptor()
 			console.log('App Launch')
+
+
+
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -20,7 +23,7 @@
 	@import "/common/css/flex.css";
 	@import "/common/css/public.css";
 	@import "/static/font/iconfont.css";
-	@import "/common/uni.css";
+	@import "@/common/uni.css";
 
 	//uni-app {
 	//	box-shadow: 0 -15px 10px rgba(0,0,0, 0.5);
@@ -30,6 +33,11 @@
 		width: 100%;
 		height: 100%;
 	}
+	page {
+		width: 100%;
+		height: 100%;
+	}
+
 
 
 	@media screen and (min-width: 960px) {
@@ -45,6 +53,5 @@
 		background-color: rgb(244, 245, 247);
 		position: absolute;
 		width: 100%;
-		height: 100%;
 	}
 </style>

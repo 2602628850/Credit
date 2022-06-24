@@ -2,7 +2,7 @@
 	<view :style="{height: statusBarHeight}"></view>
 	<view class="flex-row-between navi" :style="{color: titleColor}">
 		<view class="h100 flex-row-start">
-			<el-image class="navi-logo mgl" fit="fill" :src="'/static/logo.png'"></el-image>
+			<image class="navi-logo mgl" fit="fill" :src="'/static/logo.png'"></image>
 			<view class="mgl">{{ $Const.APP_NAME }}</view>
 		</view>
 		<view class="h100 flex-row-end mgr">
@@ -60,8 +60,7 @@
 					break;
 				}
 			}
-
-			this.statusBarHeight = this.$statusBarHeight - 49;
+			this.statusBarHeight = this.$safeTop;
 			if (this.statusBarHeight <= 0) {
 				this.statusBarHeight = 0;
 			}

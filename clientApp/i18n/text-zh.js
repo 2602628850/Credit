@@ -32,6 +32,10 @@ export default {
         pwdTip: '请输入密码',
         mail: '邮箱',
         mailTip: '请输入邮箱',
+		recharge: "充值",
+		withdraw: '提现',
+		nickname: "昵称",
+		submit: '提交',
     },
     prohall: {
         title: "大厅",
@@ -74,13 +78,34 @@ export default {
 		mine:"我的"
 	},
 	share:{
-		title:"推广",
+		title:"推广给您的朋友",
 		titlenexe:"推广给您的朋友",
-		copylink:"点击下方按钮复制您的推广链接",
+		copylink:"点击下面的链接内容复制您的推广链接",
 		bottonc:"复制",
 		bottomcontent:"每成功邀请一名好友成为平台正式会员，即可获得100积分。",
 		copyresult:"复制成功!"
 	},
+    credit: {
+        title: '信用代还专区',		
+		profit:'利润',		
+		unbalance:'解锁余额',
+		repayment:'还款金额',
+		button:'进入'	
+    },
+    chaka: {
+        title: '查卡',		
+		bankname:'银行',	
+		repayment:'还款金额',
+		todayCheckNum:'今日查卡次数',
+		checkButton:'查卡',
+		selectrepayment:'选择还款',
+		behalfButton:'代还款',
+		todayCheck:'今日查卡',
+		Tocheck:'已查卡次数',
+		Tocheckprofit:'已查卡利润',
+		Procontent:'产品简介'
+		
+    },
 	interal:{
 		intereal:"积分中心",
 		currentinte:"当前积分：",
@@ -93,8 +118,28 @@ export default {
 		finishdaikuanreason:"完成一次代还贷款自动获得20积分",
 		sharfrend:"邀请好友",
 		sharreason:"成功邀请一名好友成为平台正式会员自动获得100积分",
-	    tofinish:"去完成"
+	    tofinish:"去完成",
+		jifendh:'积分兑换',
+		shengyu:'剩余',
+		interal:'积分',
+		lijiduihuan:'立即兑换'
 		
+	},
+	mine: {
+		title: "我的",
+		balance: "账户余额",
+		purse: '我的钱包',
+		financial: '财务报表',
+		setUp: '设置',
+		paper: '官方白皮书',
+		service: '联系客服'
+	},
+	mineInfo: {
+		title: '个人资料'
+	},
+	level: {
+		title: '信用等级',
+		currentCreditValue: '当前信用值',
+		nextLevel: "距[lv]还需[number]信用值",
 	}
-	
 }
