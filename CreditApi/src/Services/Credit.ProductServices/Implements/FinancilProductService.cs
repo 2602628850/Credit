@@ -10,11 +10,11 @@ namespace Credit.ProductServices;
 /// <summary>
 ///  理财产品方法实现
 /// </summary>
-public class FinancialProductService : IFinancialProductService
+public class FinancilProductService : IFinancilProductService
 {
     private readonly IFreeSql _freeSql;
 
-    public FinancialProductService(IFreeSql freeSql)
+    public FinancilProductService(IFreeSql freeSql)
     {
         _freeSql = freeSql;
     }

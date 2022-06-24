@@ -9,7 +9,7 @@ namespace Credit.Api.Controllers;
 
 public class ProductController : BaseUserController
 {
-    private readonly IFinancialProductService _financialProductService;
+    private readonly IFinancilProductService _financialProductService;
 
     /// <summary>
     /// 
@@ -17,7 +17,7 @@ public class ProductController : BaseUserController
     /// <param name="tokenManager"></param>
     /// <param name="financialProductService"></param>
     public ProductController(ITokenManager tokenManager
-        ,IFinancialProductService financialProductService) : base(tokenManager)
+        ,IFinancilProductService financialProductService) : base(tokenManager)
     {
         _financialProductService = financialProductService;
     }

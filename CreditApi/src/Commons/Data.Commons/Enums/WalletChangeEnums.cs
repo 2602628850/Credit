@@ -6,6 +6,7 @@ namespace Data.Commons.Enums;
 ///  资金钱包变动枚举
 ///  0 充值
 ///  100 提款
+///  200 购买理财产品
 /// </summary>
 public enum WalletSourceEnums
 {
@@ -43,6 +44,12 @@ public enum WalletSourceEnums
     /// </summary>
     [Description("提款解冻")]
     WithdrawalUnFreeze = 130,
+    
+    /// <summary>
+    ///  购买理财产品
+    /// </summary>
+    [Description("购买理财产品")]
+    BuyFinancil = 200,
 }
 
 /// <summary>

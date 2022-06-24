@@ -13,6 +13,7 @@
     <ProjectReference Include="..\Commons\Data.FreeSql\FreeSql.Core.csproj" />
     <ProjectReference Include="..\Commons\Swagger.UI\Swagger.UI.csproj" />
     <ProjectReference Include="..\Services\Credit.BankServices\Credit.BankServices.csproj" />
+    <ProjectReference Include="..\Services\Credit.OrderServices\Credit.OrderServices.csproj" />
     <ProjectReference Include="..\Services\Credit.PayeeBankCardServices\Credit.PayeeBankCardServices.csproj" />
     <ProjectReference Include="..\Services\Credit.ProductServices\Credit.ProductServices.csproj" />
     <ProjectReference Include="..\Services\Credit.UserBankCardServices\Credit.UserBankCardServices.csproj" />

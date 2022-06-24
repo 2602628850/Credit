@@ -12,13 +12,13 @@ namespace Credit.Api.Controllers;
 /// </summary>
 public class AdminProductController : BaseAdminController
 {
-    private readonly IFinancialProductService _financialProductService;
+    private readonly IFinancilProductService _financialProductService;
 
     /// <summary>
     /// 
     /// </summary>
     public AdminProductController(ITokenManager tokenManager
-            ,IFinancialProductService financialProductService) : base(tokenManager)
+            ,IFinancilProductService financialProductService) : base(tokenManager)
     {
         _financialProductService = financialProductService;
     }

@@ -6,7 +6,7 @@ namespace Credit.ProductServices;
 /// <summary>
 ///  理财产品方法定义
 /// </summary>
-public interface IFinancialProductService
+public interface IFinancilProductService
 {
     /// <summary>
     ///  理财产品添加

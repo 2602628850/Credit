@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FreeSql" Version="3.2.661" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Commons\Data.Commons\Data.Commons.csproj" />
+      <ProjectReference Include="..\..\Models\Credit.OrderModels\Credit.OrderModels.csproj" />
+      <ProjectReference Include="..\..\Models\Credit.ProductModels\Credit.ProductModels.csproj" />
+      <ProjectReference Include="..\..\Models\Credit.UserModels\Credit.UserModels.csproj" />
+      <ProjectReference Include="..\Credit.UserWalletServices\Credit.UserWalletServices.csproj" />
+    </ItemGroup>
+
+</Project>
