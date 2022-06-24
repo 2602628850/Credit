@@ -192,7 +192,7 @@
 	}
 
 	.seg-list {
-		width: 497px;
+		/*width: 497px;*/
 		height: 48px;
 		background-color: #fff;
 		border-top: 1px solid #f5f5f5;
