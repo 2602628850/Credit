@@ -58,8 +58,24 @@
     line-height: 44px;
 }
 
+.box-shadow {
+    box-shadow: 0 0 15px rgba(0,0,0, 0.2);
+}
+
+.box-margin {
+    margin: 20px;
+}
+
 .text-primary {
     color: #00875a;
+}
+
+.bg-primary {
+    background-color: #00875a;
+}
+
+.text-white {
+    color: white;
 }
 
 .text-second {

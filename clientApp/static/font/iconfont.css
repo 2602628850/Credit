@@ -11,6 +11,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-geren:before {
+  content: "\e61c";
+}
+
+.icon-xiangce:before {
+  content: "\e6e2";
+}
+
 .icon-right:before {
   content: "\e6a3";
 }
@@ -66,6 +74,4 @@
 .icon-diqiu:before {
   content: "\e642";
 }
-
-
 
