@@ -6,7 +6,7 @@
 		<view class="uni-padding-wrap uni-common-mt">
 	     <view style="margin-top: 20px;">
 					<uni-card class="box-card" >
-					<uni-row :gutter="20">
+					<uni-row :gutter="20" style="height: 50px;">
 						<uni-col :span="11"> 
 						<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 							{{$t('interal.currentinte')}}
@@ -16,7 +16,7 @@
 							<view style="font-size: 16px; opacity: 1;font-weight: bold;text-align: left;">
 								0
 							</view>
-							<view style="text-align: right;">
+							<view style="text-align: right;margin-top: -10%;">
 							<text class="g-icons"></text></view>
 						</uni-col>
 					</uni-row> 
@@ -26,7 +26,7 @@
 			
 			<view style="margin-top: 20px;">
 					<uni-card class="box-card" style="padding: 0;">
-					<uni-row :gutter="20" v-on:click="ToShop()">
+					<uni-row :gutter="20" v-on:click="ToShop()" style="height: 60px;">
 						<uni-col :span="3"> 
 						<image src="/static/image/iteral/integral-mall.png" style="width: 30px;height: 30px;"></image>
 						</uni-col>
@@ -34,12 +34,12 @@
 							<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 								{{$t('interal.inteshop')}}
 							</view>
-							<view style="margin-top:10px;text-align: right;">
+							<view style="margin-top:10px;text-align: right;margin-top: -5%;">
 								
 							<text class="g-icons"></text></view>
 						</uni-col>
 					</uni-row> 
-					<uni-row :gutter="20">
+					<uni-row :gutter="20" style="height: 50px;">
 						<uni-col :span="3"> 
 						<image src="/static/image/iteral/integral-order.png" style="width: 30px;height: 30px;"></image>
 						</uni-col>
@@ -47,7 +47,7 @@
 							<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 								{{$t('interal.inteorder')}}
 							</view>
-							<view style="margin-top:10px;text-align: right;">
+							<view style="margin-top:10px;text-align: right;margin-top: -5%;">
 								
 							<text class="g-icons"></text></view>
 						</uni-col>

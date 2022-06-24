@@ -1,15 +1,16 @@
 <template>
 	<navigation-bar :title="intereal"></navigation-bar>
 	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
-
 		<view>
 			<uni-page data-page="pages/level/level">
 				<view class="page">
-					<swiper class="vip-swiper margin-top">
-						<view class="swiper-wrapper">
+					
+					
+					<swiper class="vip-swiper margin-top" style="width: 94%;margin-left: 3%;" >
+						<!-- <view class="swiper-wrapper">
 							<view class="swiper-slides" style="inset: 0px 19px;">
 								<view class="swiper-slide-frame"
-									style="width: 100%; height: 100%; transform: translate(0%, 0px) translateZ(0px);">
+									style="width: 100%; height: 100%; transform: translate(0%, 0px) translateZ(0px);"> -->
 									<swiper-item
 										style="position: absolute; width: 100%; height: 100%; transform: translate(0%, 0px) translateZ(0px);">
 										<view class="vip-banner align-center">
@@ -147,10 +148,13 @@
 											</view>
 										</view>
 									</swiper-item>
-								</view>
+								<!-- </view>
 							</view>
-						</view>
+						</view> -->
 					</swiper>
+					
+					
+					
 					<view class="card-page-lg margin-top-lg">
 						<text class="text-lg text-bold margin-bottom"><span>获取信用值</span>
 						</text>
