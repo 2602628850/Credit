@@ -136,5 +136,10 @@ export default {
 	},
 	mineInfo: {
 		title: '个人资料'
+	},
+	level: {
+		title: '信用等级',
+		currentCreditValue: '当前信用值',
+		nextLevel: "距[lv]还需[number]信用值",
 	}
 }

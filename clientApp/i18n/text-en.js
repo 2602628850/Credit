@@ -135,6 +135,11 @@ export default {
 	},
 	mineInfo: {
 		title: 'personal information'
+	},
+	level: {
+		title: 'credit rating',
+		currentCreditValue: 'current credit value',
+		nextLevel: '[number] credits required to reach [lv]'
 	}
     
 }

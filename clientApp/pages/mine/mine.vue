@@ -11,7 +11,7 @@
 					<image class="mine-inv-img mgl" :src="'/static/Icons/mine/v1.png'"></image>
 				</view>
 			</view>
-			<image class="mine-level-img" :src="'/static/Icons/mine/v1.png'"></image>
+			<image class="mine-level-img" :src="'/static/Icons/mine/v1.png'" @click="goLevel"></image>
 		</view>
 
 
@@ -100,6 +100,11 @@
 			goInfo() {
 				uni.navigateTo({
 					url: '/pages/mine/change-info'
+				})
+			},
+			goLevel() {
+				uni.navigateTo({
+					url: '/pages/mine/level'
 				})
 			},
 			getLineStyle(item,index) {
