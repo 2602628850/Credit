@@ -4,10 +4,10 @@
 		<view class="created">
 			<text>Third Credit</text>
 		</view>
-		<!-- 首页轮播图 indexpages.swipers控制显示中文还是英文图标-->
+		<!-- 首页轮播图 indexpages.swipers控制显示中文还是英文图标 catchtouchmove="stopChange"-->
 		<swiper v-if="$t('indexpages.swipers')=='0'" style="text-align: center;" indicator-dots
 		        indicator-active-color="#FFFFFF" circular autoplay>
-			<swiper-item catchtouchmove="stopChange" v-for="item in rotation" :key="item.id">
+			<swiper-item  v-for="item in rotation" :key="item.id">
 				<image :src="item.url"></image>
 			</swiper-item>
 		</swiper>
@@ -221,10 +221,11 @@
 				uni.navigateTo({
 					url: uri
 				})
-			},
-			stopChange(res){
-				return false;
 			}
+			//,
+			// stopChange(res){
+			// 	return false;
+			// }
 		},
 		onShow() {
 		},
