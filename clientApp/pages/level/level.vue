@@ -161,8 +161,10 @@
 						<view class="card-content card-cell-list margin-bottom">
 							<view class="cell-list-item margin-bottom">
 								<view class="score-icon score-icon-1">
-									<text data-v-31e2aa49="" class="g-icons"
-										style="color: rgb(0, 158, 115); font-size: 24px;"><span></span></text>
+									<text  class="g-icons"
+										style="color: rgb(0, 158, 115); font-size: 24px;">
+										<image src="/static/Icons/l1.png"
+											style="width: 40px; height: 40px;"></image></text>
 								</view>
 								<view class="flex-1">
 									<text class="text-lg text-bold margin-bottom-xs">
@@ -178,9 +180,11 @@
 								</view>
 							</view>
 							<view class="cell-list-item cell-list-item--last">
-								<view class="score-icon score-icon-3">
-									<text data-v-31e2aa49="" class="g-icons"
-										style="color: rgb(88, 72, 174); font-size: 24px;"><span></span></text>
+								<view class="score-icon score-icon-3" style="background-color: #c0b6f2">
+									<text  class="g-icons" style="color: rgb(88, 72, 174); font-size: 24px;">
+										<span>
+											<image src="/static/Icons/l2.png"
+												style="width: 40px;height: 40px;"></image></span></text>
 								</view>
 								<view class="flex-1">
 									<text class="text-lg text-bold margin-bottom-xs">

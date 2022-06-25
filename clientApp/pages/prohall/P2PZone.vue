@@ -7,9 +7,9 @@
 <!--		</view>-->
 
 		<scroll-view class="scroll-x flex-row seg-list">
-			<div class="scroll-view">
-				<div class="scroll-view" style="overflow: auto hidden;">
-					<div class="scroll-view-content">
+			<view class="scroll-view">
+				<view class="scroll-view" style="overflow: auto hidden;">
+					<view class="scroll-view-content">
 						<!---->
 						<view class="seg-item flex-row align-center" v-for="(item,index) in topItems" :class="checkIndex == index ? ['seg-item-active'] : []" @click="changCheckIndex(index)">
 							<image class="margin-right-xs" :src="item.url"
@@ -18,9 +18,9 @@
 							</image>
 							<text><span>{{item.title}}</span></text>
 						</view>
-					</div>
-				</div>
-			</div>
+					</view>
+				</view>
+			</view>
 		</scroll-view>
 		<view class="card-page margin-top page-fixed">
 			<view class="card-content product-item margin-bottom-lg">
