@@ -160,7 +160,15 @@ export default {
 		tdsy:'Total team revenue',
 		tdtj:'Team statistics',
 		tdzcyh:'Team users',
-		zsrs:'Direct users'
+		zsrs:'Direct users',
+		zjbdjl:'Fund change records',
+		gd:"More"
+	},
+	monchange:{
+		jebd:'Fund change records',
+		cz:'Recharge',
+		banlance:'Current balance:',
+		sj:'1'
 	}
     
 }

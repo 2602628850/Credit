@@ -13,14 +13,14 @@ public interface IFinancilProductService
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task ProductCreate(FinancialProductInput input);
+    Task ProductCreate(FinancilProductInput input);
 
     /// <summary>
     ///  理财产品更新
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task ProductUpdate(FinancialProductInput input);
+    Task ProductUpdate(FinancilProductInput input);
 
     /// <summary>
     ///  理财产品批量删除
@@ -49,12 +49,12 @@ public interface IFinancilProductService
     /// </summary>
     /// <param name="productId"></param>
     /// <returns></returns>
-    Task<FinancialProductDto> GetFinancialProduct(long productId);
+    Task<FinancilProductDto> GetFinancialProduct(long productId);
 
     /// <summary>
     ///   获取理财产品分页列表
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<PagedOutput<FinancialProductDto>> GetProductPagedList(FinancialProductPagedInput input);
+    Task<PagedOutput<FinancilProductDto>> GetProductPagedList(FinancilProductPagedInput input);
 }

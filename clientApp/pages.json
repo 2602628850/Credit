@@ -169,7 +169,15 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },{
+		    "path" : "pages/statistic/moneychangerecord",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",

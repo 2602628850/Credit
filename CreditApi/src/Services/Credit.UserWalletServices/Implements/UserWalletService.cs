@@ -244,7 +244,9 @@ public class UserWalletService : IUserWalletService
 
        if (input.SourceType == WalletSourceEnums.Recharge
            || input.SourceType == WalletSourceEnums.WithdrawalReturn
-           || input.SourceType == WalletSourceEnums.WithdrawalUnFreeze)
+           || input.SourceType == WalletSourceEnums.WithdrawalUnFreeze
+           || input.SourceType == WalletSourceEnums.BuyFinancilReturn
+           || input.SourceType == WalletSourceEnums.SoldFinancil)
        {
            user.Balance += input.Amount;
        }

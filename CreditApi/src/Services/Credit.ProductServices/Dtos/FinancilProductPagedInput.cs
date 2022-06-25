@@ -5,7 +5,7 @@ namespace Credit.ProductServices.Dtos;
 /// <summary>
 ///  理财产品分页输入
 /// </summary>
-public class FinancialProductPagedInput : PagedInput
+public class FinancilProductPagedInput : PagedInput
 {
     /// <summary>
     ///  产品名称

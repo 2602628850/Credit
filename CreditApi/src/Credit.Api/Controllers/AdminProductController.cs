@@ -28,7 +28,7 @@ public class AdminProductController : BaseAdminController
     /// </summary>
     /// <param name="input"></param>
     [HttpPost]
-    public async Task FinanacialProductCreate([FromBody]FinancialProductInput input)
+    public async Task FinanacialProductCreate([FromBody]FinancilProductInput input)
     {
         await _financialProductService.ProductCreate(input);
     }
@@ -38,7 +38,7 @@ public class AdminProductController : BaseAdminController
     /// </summary>
     /// <param name="input"></param>
     [HttpPost]
-    public async Task FinanacialProductUpdate([FromBody]FinancialProductInput input)
+    public async Task FinanacialProductUpdate([FromBody]FinancilProductInput input)
     {
         await _financialProductService.ProductUpdate(input);
     }
@@ -79,7 +79,7 @@ public class AdminProductController : BaseAdminController
     /// <param name="productId"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<FinancialProductDto> GetFinancialProduct([FromQuery]long productId)
+    public async Task<FinancilProductDto> GetFinancialProduct([FromQuery]long productId)
     {
         return await _financialProductService.GetFinancialProduct(productId);
     }
@@ -90,7 +90,7 @@ public class AdminProductController : BaseAdminController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<PagedOutput<FinancialProductDto>> GetProductPagedList([FromQuery]FinancialProductPagedInput input)
+    public async Task<PagedOutput<FinancilProductDto>> GetProductPagedList([FromQuery]FinancilProductPagedInput input)
     {
         return await _financialProductService.GetProductPagedList(input);
     }

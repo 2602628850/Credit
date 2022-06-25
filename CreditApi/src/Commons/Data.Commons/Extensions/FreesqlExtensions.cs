@@ -32,11 +32,14 @@ public static class FreesqlExtensions
     /// <param name="timeStart">开始时间</param>
     /// <param name="timeEnd">结束时间</param>
     /// <returns></returns>
-    public static ISelect<T> WhereTableTime<T>(this ISelect<T> query,TableTimeFormat format,long timeStart,long timeEnd)
+    public static ISelect<T> WhereTableTime<T>(this ISelect<T> query,TableTimeFormat format,long timeStart = 0,long timeEnd = 0)
     {
         if (timeStart > timeEnd)
             throw new MyException("开始时间不能大于结束时间");
-    
+        if (timeStart == 0)
+            timeStart = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        if (timeEnd == 0)
+            timeEnd = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         var datetimeStart = DateTimeOffset.FromUnixTimeMilliseconds(timeStart);
         var datetimeEnd = DateTimeOffset.FromUnixTimeMilliseconds(timeEnd);
     

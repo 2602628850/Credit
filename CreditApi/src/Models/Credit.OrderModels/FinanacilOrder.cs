@@ -64,7 +64,32 @@ public class FinancilOrder : BaseModel
     public AuditStatusEnums Status { get; set; }
 
     /// <summary>
+    ///  审核人
+    /// </summary>
+    public long AuditUserId { get; set; }
+
+    /// <summary>
+    ///  审核时间
+    /// </summary>
+    public long AuditAt { get; set; }
+
+    /// <summary>
+    ///  审核意见
+    /// </summary>
+    public string AuditText { get; set; } = string.Empty;
+
+    /// <summary>
     ///  是否结束
     /// </summary>
-    public int IsFinished { get; set; }
+    public int IsSold { get; set; }
+
+    /// <summary>
+    ///  售出审核状态
+    /// </summary>
+    public AuditStatusEnums? SoldStatus { get; set; }
+
+    /// <summary>
+    ///  售出审核文字
+    /// </summary>
+    public string SoldAuditText { get; set; } = string.Empty;
 }

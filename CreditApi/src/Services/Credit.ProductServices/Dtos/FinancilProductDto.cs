@@ -3,7 +3,7 @@ namespace Credit.ProductServices.Dtos;
 /// <summary>
 ///  理财产品输出DTO
 /// </summary>
-public class FinancialProductDto : FinancialProductInput
+public class FinancilProductDto : FinancilProductInput
 {
     /// <summary>
     ///  添加时间
@@ -19,7 +19,7 @@ public class FinancialProductDto : FinancialProductInput
 /// <summary>
 ///  理财产品输入
 /// </summary>
-public class FinancialProductInput
+public class FinancilProductInput
 {
     /// <summary>
     ///  产品Id
