@@ -23,7 +23,7 @@ public class FinancilProductService : IFinancilProductService
     ///  理财产品基础信息验证
     /// </summary>
     /// <param name="input"></param>
-    private void ProductVerify(FinancialProductInput input)
+    private void ProductVerify(FinancilProductInput input)
     {
         if (string.IsNullOrEmpty(input.ProductName))
             throw new MyException("Please input the product name");
@@ -45,7 +45,7 @@ public class FinancilProductService : IFinancilProductService
     ///  理财产品添加
     /// </summary>
     /// <param name="input"></param>
-    public async Task ProductCreate(FinancialProductInput input)
+    public async Task ProductCreate(FinancilProductInput input)
     {
         //产品信息验证
         ProductVerify(input);
@@ -58,7 +58,7 @@ public class FinancilProductService : IFinancilProductService
     ///  理财产品编辑
     /// </summary>
     /// <param name="input"></param>
-    public async Task ProductUpdate(FinancialProductInput input)
+    public async Task ProductUpdate(FinancilProductInput input)
     {
         //产品信息验证
         ProductVerify(input);
@@ -152,14 +152,14 @@ public class FinancilProductService : IFinancilProductService
     /// </summary>
     /// <param name="productId"></param>
     /// <returns></returns>
-    public async Task<FinancialProductDto> GetFinancialProduct(long productId)
+    public async Task<FinancilProductDto> GetFinancialProduct(long productId)
     {
         var product = await _freeSql.Select<FinancialProduct>()
             .Where(s => s.Id == productId)
             .Where(s => s.IsDeleted == 0)
             .ToOneAsync();
 
-        return product.MapTo<FinancialProductDto>();
+        return product.MapTo<FinancilProductDto>();
     }
 
     /// <summary>
@@ -167,7 +167,7 @@ public class FinancilProductService : IFinancilProductService
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public async Task<PagedOutput<FinancialProductDto>> GetProductPagedList(FinancialProductPagedInput input)
+    public async Task<PagedOutput<FinancilProductDto>> GetProductPagedList(FinancilProductPagedInput input)
     {
         var list = await _freeSql.Select<FinancialProduct>()
             .WhereIf(input.IsEnable.HasValue, s => s.IsEnable == input.IsEnable)
@@ -178,10 +178,10 @@ public class FinancilProductService : IFinancilProductService
             .OrderByDescending(s => s.UpdateAt)
             .Page(input.PageSize, input.PageIndex)
             .ToListAsync();
-        var output = new PagedOutput<FinancialProductDto>()
+        var output = new PagedOutput<FinancilProductDto>()
         {
             TotalCount = totalCount,
-            Items = list.MapToList<FinancialProductDto>()
+            Items = list.MapToList<FinancilProductDto>()
         };
         return output;
     }

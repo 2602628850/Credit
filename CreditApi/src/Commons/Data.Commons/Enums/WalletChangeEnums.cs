@@ -46,10 +46,22 @@ public enum WalletSourceEnums
     WithdrawalUnFreeze = 130,
     
     /// <summary>
-    ///  购买理财产品
+    ///  购买理财
     /// </summary>
-    [Description("购买理财产品")]
+    [Description("购买理财")]
     BuyFinancil = 200,
+    
+    /// <summary>
+    ///  购买理财退回
+    /// </summary>
+    [Description("购买理财退回")]
+    BuyFinancilReturn = 210,
+    
+    /// <summary>
+    ///  出售理财
+    /// </summary>
+    [Description("出售理财")]
+    SoldFinancil = 220,
 }
 
 /// <summary>
