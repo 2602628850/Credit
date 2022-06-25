@@ -141,5 +141,15 @@ export default {
 		title: '信用等级',
 		currentCreditValue: '当前信用值',
 		nextLevel: "距[lv]还需[number]信用值",
+	},
+	tongji:{
+		title:'统计报表',
+		sytj:'收益统计',
+		cksy:'插卡收益',
+		sme:'SME收益',
+		tdsy:'团队总收益',
+		tdtj:'团队统计',
+		tdzcyh:'团队注册用户',
+		zsrs:'直属人数'
 	}
 }

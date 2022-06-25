@@ -1,0 +1,30 @@
+{
+	"PieA": {
+		"series": [{
+			"data": [{
+				"name": "查卡收益",
+				"value": 50
+			}, {
+				"name": "SME收益",
+				"value": 30
+			}, {
+				"name": "团队总收益",
+				"value": 20
+			}]
+		}]
+		
+	},
+	"PieTd": {
+		"series": [{
+			"data": [{
+				"name": "团队注册用户",
+				"value": 50
+			}, {
+				"name": "直属人数",
+				"value": 30
+			}]
+		}]
+	}
+
+
+}

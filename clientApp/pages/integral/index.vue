@@ -59,7 +59,7 @@
 <view style="margin-top: 20px;">{{$t('interal.interenwu')}}</view>	
 <view style="margin-top: 9px;">
 		<uni-card class="box-card" >
-		<uni-row :gutter="20">
+		<uni-row :gutter="20" @click="CompleteQCard()" >
 			<uni-col :span="3"> 
 				<image src="/static/image/iteral/integral-credit.png"
 					style="width: 30px;height: 30px;"></image>
@@ -76,7 +76,7 @@
 			</uni-col>
 		</uni-row> 
     
-		<uni-row :gutter="20">
+		<uni-row :gutter="20" @click="CompleteDaikuan()" >
 			<uni-col :span="3"> 
 				<image src="/static/image/iteral/integral-repayment.png"
 					style="width: 30px;height: 30px;"></image>
@@ -92,7 +92,7 @@
 				<span> <el-button type="primary">{{$t('interal.tofinish')}}</el-button> </span></view>
 			</uni-col>
 		</uni-row> 
-			<uni-row :gutter="20">
+			<uni-row :gutter="20" @click="ToInvite()" >
 				<uni-col :span="3"> 
 				<image src="/static/image/iteral/integral-share.png"
 					style="width: 30px;height: 30px;"></image>
@@ -124,9 +124,28 @@
 				}
 			},
 			methods:{
+				//积分商城
 				ToShop(){
 					uni.navigateTo({
 						url:"/pages/integral/mall"
+					})
+				},
+				//完成查卡
+				CompleteQCard(){
+					uni.navigateTo({
+						url:"/pages/prohall/creditIndex"
+					})
+				},
+				//完成代还
+				CompleteDaikuan(){
+					uni.navigateTo({
+						url:"/pages/prohall/P2PZone"
+					})
+				},
+				//邀请好友
+				ToInvite(){
+					uni.navigateTo({
+						url:"/pages/share/index"
 					})
 				}
 			},
