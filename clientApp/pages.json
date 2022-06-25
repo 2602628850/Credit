@@ -170,6 +170,14 @@
                 "enablePullDownRefresh": false
             }
             
+        } ,{
+            "path" : "pages/statistic/reportstatistics",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
     ],
 	"globalStyle": {

@@ -152,6 +152,60 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:Credit.Api.Controllers.AdminProductController">
+            <summary>
+             管理员产品管理
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminProductController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.ProductServices.IFinancialProductService)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminProductController.FinanacialProductCreate(Credit.ProductServices.Dtos.FinancialProductInput)">
+            <summary>
+             理财产品添加
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminProductController.FinanacialProductUpdate(Credit.ProductServices.Dtos.FinancialProductInput)">
+            <summary>
+             理财产品编辑
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminProductController.FinancialProductDelete(Data.Commons.Dtos.ListIdInput)">
+            <summary>
+             理财产品删除
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminProductController.FinancialProductTakeOn(Data.Commons.Dtos.ListIdInput)">
+            <summary>
+             理财产品上架
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminProductController.FinancialProductTakeDown(Data.Commons.Dtos.ListIdInput)">
+            <summary>
+             理财产品下架
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminProductController.GetFinancialProduct(System.Int64)">
+            <summary>
+             获取理财产品
+            </summary>
+            <param name="productId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminProductController.GetProductPagedList(Credit.ProductServices.Dtos.FinancialProductPagedInput)">
+            <summary>
+             获取理财产品列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:Credit.Api.Controllers.AdminWalletController">
             <summary>
              钱包资金管理
@@ -176,6 +230,45 @@
              申请审核
             </summary>
             <param name="input"></param>
+        </member>
+        <member name="T:Credit.Api.Controllers.BankController">
+            <summary>
+             银行接口管理
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.BankController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.BankServices.IBankService)">
+            <summary>
+            
+            </summary>
+            <param name="tokenManager"></param>
+            <param name="bankService"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.BankController.GetBankList">
+            <summary>
+             获取银行
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.ProductController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.ProductServices.IFinancialProductService)">
+            <summary>
+            
+            </summary>
+            <param name="tokenManager"></param>
+            <param name="financialProductService"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.ProductController.GetFinancialProduct(System.Int64)">
+            <summary>
+             获取理财产品
+            </summary>
+            <param name="productId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.ProductController.GetProductPagedList(Credit.ProductServices.Dtos.FinancialProductPagedInput)">
+            <summary>
+             获取理财产品列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="T:Credit.Api.Controllers.UserController">
             <summary>
@@ -234,6 +327,27 @@
             <summary>
               获取用户绑定银行卡
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.GetUserRechargePagedList(Credit.UserWalletServices.Dtos.WalletRecordPagedInput)">
+            <summary>
+             获取用户充值记录
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.GetUserWithdrawalPagedList(Credit.UserWalletServices.Dtos.WalletRecordPagedInput)">
+            <summary>
+             获取用户提款记录
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.GetUserWalletRecordPagedList(Credit.UserWalletServices.Dtos.WalletRecordPagedInput)">
+            <summary>
+             获取用户资金明细列表
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:Credit.Api.ServicesTransient">

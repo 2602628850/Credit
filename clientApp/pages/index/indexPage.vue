@@ -7,7 +7,7 @@
 		<!-- 首页轮播图 indexpages.swipers控制显示中文还是英文图标-->
 		<swiper v-if="$t('indexpages.swipers')=='0'" style="text-align: center;" indicator-dots
 		        indicator-active-color="#FFFFFF" circular autoplay>
-			<swiper-item catchtouchmove="stopChange" v-for="item in rotation" :key="item.id">
+			<swiper-item  v-for="item in rotation" :key="item.id">
 				<image :src="item.url"></image>
 			</swiper-item>
 		</swiper>
@@ -51,7 +51,7 @@
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
-				<view class="demo-uni-col dark">
+				<view class="demo-uni-col dark"  v-on:click="SharedTo('/pages/statistic/reportstatistics')">
 					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;"
 						       src="../../static/image/index/index-charts.png"></image>
@@ -221,10 +221,8 @@
 				uni.navigateTo({
 					url: uri
 				})
-			},
-			stopChange(res){
-				return false;
 			}
+			
 		},
 		onShow() {
 		},

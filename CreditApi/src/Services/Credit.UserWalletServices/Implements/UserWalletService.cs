@@ -249,7 +249,8 @@ public class UserWalletService : IUserWalletService
            user.Balance += input.Amount;
        }
        else if (input.SourceType == WalletSourceEnums.WithdrawalApply
-                || input.SourceType == WalletSourceEnums.Withdrawal)
+                || input.SourceType == WalletSourceEnums.Withdrawal
+                || input.SourceType == WalletSourceEnums.BuyFinancil)
        {
            if (input.Amount >= user.Balance)
                throw new MyException("Insufficient balance");

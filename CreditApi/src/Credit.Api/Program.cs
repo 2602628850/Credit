@@ -65,6 +65,5 @@ app.UseAllRoadApiExceptionHandler();
 
 app.MapControllers();
 
-app.UseAllRoadApiExceptionHandler();
 
 app.Run();

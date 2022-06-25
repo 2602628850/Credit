@@ -1,5 +1,8 @@
 ﻿using Credit.BankServices;
+using Credit.OrderServices;
+using Credit.OrderServices.Implements;
 using Credit.PayeeBankCardServices;
+using Credit.ProductServices;
 using Credit.UserBankCardServices;
 using Credit.UserServices;
 using Credit.UserWalletServices;
@@ -24,6 +27,8 @@ namespace Credit.Api
                 .AddTransient<IPayeeBankCardService,PayeeBankCardService>()
                 .AddTransient<IUserWalletService,UserWalletService>()
                 .AddTransient<IUserBankCardService,UserBankCardService>()
+                .AddTransient<IFinancilOrderService,FinancilOrderService>()
+                .AddTransient<IFinancilProductService,FinancilProductService>()
                 .AddTransient<ICacheManager,CacheManager>()
                 .AddTransient<ITokenManager,TokenManager>();
         }

@@ -140,6 +140,16 @@ export default {
 		title: 'credit rating',
 		currentCreditValue: 'current credit value',
 		nextLevel: '[number] credits required to reach [lv]'
+	},
+	tongji:{
+		title:'Rport statistics',
+		sytj:'Income statistics',
+		cksy:'Check card earning',
+		sme:'SME income',
+		tdsy:'Total team revenue',
+		tdtj:'Team statistics',
+		tdzcyh:'Team users',
+		zsrs:'Direct users'
 	}
     
 }
