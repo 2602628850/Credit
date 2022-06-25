@@ -150,6 +150,14 @@ export default {
 		tdsy:'团队总收益',
 		tdtj:'团队统计',
 		tdzcyh:'团队注册用户',
-		zsrs:'直属人数'
+		zsrs:'直属人数',
+		zjbdjl:'资金变动记录',
+		gd:"更多"
+	},
+	monchange:{
+		jebd:'金额变动记录',
+		cz:'充值',
+		banlance:'当前余额:',
+		sj:'0'
 	}
 }
