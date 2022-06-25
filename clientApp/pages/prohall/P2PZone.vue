@@ -1,19 +1,19 @@
 <template>
-	<navigation-bar :title="$t('credit.title')"></navigation-bar>
+	<navigation-bar :title="$t('P2P.title')"></navigation-bar>
 	<app-content-view :show-tab-bar="false" :show-navigation-bar="true">
-<!--		<view class="page" style="bankg">-->
-<!--		-->
-<!--			&lt;!&ndash;&ndash;&gt;-->
-<!--		</view>-->
+		<!--		<view class="page" style="bankg">-->
+		<!--		-->
+		<!--			&lt;!&ndash;&ndash;&gt;-->
+		<!--		</view>-->
 
 		<scroll-view class="scroll-x flex-row seg-list">
 			<view class="scroll-view">
 				<view class="scroll-view" style="overflow: auto hidden;">
 					<view class="scroll-view-content">
 						<!---->
-						<view class="seg-item flex-row align-center" v-for="(item,index) in topItems" :class="checkIndex == index ? ['seg-item-active'] : []" @click="changCheckIndex(index)">
-							<image class="margin-right-xs" :src="item.url"
-							       style="width: 21px; height: 21px;">
+						<view class="seg-item flex-row align-center" v-for="(item,index) in topItems"
+							:class="checkIndex == index ? ['seg-item-active'] : []" @click="changCheckIndex(index)">
+							<image class="margin-right-xs" :src="item.url" style="width: 21px; height: 21px;">
 
 							</image>
 							<text><span>{{item.title}}</span></text>
@@ -23,137 +23,45 @@
 			</view>
 		</scroll-view>
 		<view class="card-page margin-top page-fixed">
-			<view class="card-content product-item margin-bottom-lg">
+			<view class="card-content product-item margin-bottom-lg" v-for=" item in P2Pdata" >
 				<view class="product-header">
 					<!---->
-					<image class="product-logo" src="/static/image/hall/ptp1.png">
+					<image class="product-logo" :src="item.url">
 					</image>
-					<text class="product-title line-1"><span>Europe and the United States -
-								Small</span></text>
+					<text class="product-title line-1"><span>{{item.title}}</span></text>
 					<view></view>
 				</view>
 				<view class="product-body flex-row solid-bottom">
 					<view class="align-center flex-1">
-						<text class="text-bold text-primary text-lg"><span>0.80%</span>
+						<text class="text-bold text-primary text-lg"><span>{{item.profit}}</span>
 						</text>
 						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>利润</span></text>
+							<span>{{$t('P2P.profit')}}</span></text>
 					</view>
 					<view class="product-border"></view>
 					<view class="align-center flex-1">
-						<text class="text-bold text-danger text-lg"><span>+5%</span>
+						<text class="text-bold text-danger text-lg"><span>{{item.cyclesf}}</span>
 						</text>
 						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>7天</span></text>
+							<span>{{item.cycle}}</span></text>
 					</view>
 					<view class="product-border"></view>
 					<view class="align-center flex-1">
-						<text class="text-bold text-primary text-lg"><span>$500</span>
+						<text class="text-bold text-primary text-lg"><span>{{item.unbalance}}</span>
 						</text>
 						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>解锁余额</span></text>
+							<span>{{$t('P2P.unbalance')}}</span></text>
 					</view>
 				</view>
 				<view class="product-footer flex-row align-center justify-between">
 					<view class="flex-1">
-						<text class="text-xs"><span>还款金额:<text class="text-bold margin-left-xs"><span>$500 -
-											$2000</span></text></span>
+						<text class="text-xs"><span>{{$t('P2P.repayment')}}:
+						<text class="text-bold margin-left-xs"><span>{{item.repayment}}</span></text></span>
 						</text>
 					</view>
 					<button class="btn-task">
 						<!---->
-						<text class="text-small text-white"><span>进入</span></text>
-					</button>
-				</view>
-			</view>
-			<view class="card-content product-item margin-bottom-lg">
-				<view class="product-header">
-					<!---->
-					<image class="product-logo" src="/static/image/hall/ptp3.png">
-
-					</image>
-					<text class="product-title line-1"><span>Europe and the United States -
-								General</span></text>
-					<view>
-						<text class="disabled-tag"><span>待解锁</span></text>
-					</view>
-				</view>
-				<view class="product-body flex-row solid-bottom">
-					<view class="align-center flex-1">
-						<text class="text-bold text-primary text-lg"><span>0.90%</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>利润</span></text>
-					</view>
-					<view class="product-border"></view>
-					<view class="align-center flex-1">
-						<text class="text-bold text-danger text-lg"><span>+5%</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>7天</span></text>
-					</view>
-					<view class="product-border"></view>
-					<view class="align-center flex-1">
-						<text class="text-bold text-primary text-lg"><span>$2000</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>解锁余额</span></text>
-					</view>
-				</view>
-				<view class="product-footer flex-row align-center justify-between">
-					<view class="flex-1">
-						<text class="text-xs"><span>还款金额:<text class="text-bold margin-left-xs"><span>$2000 -
-											$10000</span></text></span>
-						</text>
-					</view>
-					<button class="btn-task">
-						<!---->
-						<text class="text-small text-white"><span>进入</span></text>
-					</button>
-				</view>
-			</view>
-			<view class="card-content product-item margin-bottom-lg">
-				<view class="product-header">
-					<!---->
-					<image class="product-logo" src="/static/image/hall/ptp3.png">
-					</image>
-					<text class="product-title line-1"><span>Europe and the United States -
-								High</span></text>
-					<view>
-						<text class="disabled-tag"><span>待解锁</span></text>
-					</view>
-				</view>
-				<view class="product-body flex-row solid-bottom">
-					<view class="align-center flex-1">
-						<text class="text-bold text-primary text-lg"><span>1.00%</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>利润</span></text>
-					</view>
-					<view class="product-border"></view>
-					<view class="align-center flex-1">
-						<text class="text-bold text-danger text-lg"><span>+5%</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>7天</span></text>
-					</view>
-					<view class="product-border"></view>
-					<view class="align-center flex-1">
-						<text class="text-bold text-primary text-lg"><span>$10000</span>
-						</text>
-						<text class="text-secondary text-center text-xxs margin-top-xs">
-							<span>解锁余额</span></text>
-					</view>
-				</view>
-				<view class="product-footer flex-row align-center justify-between">
-					<view class="flex-1">
-						<text class="text-xs"><span>还款金额:<text class="text-bold margin-left-xs"><span>$10000 -
-											$50000</span></text></span>
-						</text>
-					</view>
-					<button class="btn-task">
-						<!---->
-						<text class="text-small text-white"><span>进入</span></text>
+						<text class="text-small text-white"><span>{{$t('P2P.button')}}</span></text>
 					</button>
 				</view>
 			</view>
@@ -165,8 +73,39 @@
 	export default {
 		data() {
 			return {
-				topItems: [
+				P2Pdata: [{
+						id: 1,
+						title: "Asia - Small",
+						profit: "0.80%",
+						unbalance: "$500",
+						repayment: "$500 - $2000",
+						cyclesf:"+5%",
+						
+						cycle:"5天",
+						url: '/static/image/hall/ptp1.png'
+					},
 					{
+						id: 2,
+						title: "Asia - General",
+						profit: "0.90%",
+						unbalance: "$2000",
+						repayment: "$2000 - $10000",
+						cyclesf:"+5%",
+						cycle:"5天",
+						url: '/static/image/hall/ptp2.png'
+					},
+					{
+						id: 3,
+						title: "Asia - High",
+						profit: "1.00%",
+						unbalance: "$10000",
+						repayment: "$10000 - $50000",
+						cyclesf:"+5%",
+						cycle:"5天",
+						url: '/static/image/hall/ptp3.png'
+					}
+				],				
+				topItems: [{
 						url: '/static/image/hall/tab-asia.png',
 						title: '亚洲专区'
 					},

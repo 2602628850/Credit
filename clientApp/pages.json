@@ -126,15 +126,6 @@
 				"navigationBarTitleText": ""
 			}
 		}
-	    ,{
-            "path" : "pages/statistic/statistic",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
         ,{
             "path" : "pages/wallet/record",
             "style" :                                                                                    

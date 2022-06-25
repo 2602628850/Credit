@@ -1,15 +1,15 @@
 <template>
 	<navigation-bar :title="$t('credit.title')"></navigation-bar>
 	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="false">
-		<view style="margin-top:30px;" @click="tocreditDetail">
+		<view style="margin-top:30px;" @click="tocreditDetail"  v-for="item in creditdata">
 			<uni-card class="box-card">
 				<view class="card-content product-item margin-bottom-lg">
 					<view class="product-header">
 						<image class="product-logo" src="/static/image/hall/credit1.png">
 						</image>
 						<!---->
-						<text class="product-title line-1"><span>Bad debt handling area</span></text>
-						<view>
+						<text class="product-title line-1"><span>{{item.title}}</span></text>
+						<view v-if="item.id==1">
 							<text class="limit-tag"><span>Limit 10</span></text>
 						</view>
 					</view>
@@ -17,7 +17,7 @@
 						<uni-row :gutter="20">
 							<uni-col :span="12">
 								<view class="align-center flex-1">
-									<text class="text-bold text-primary text-lg"><span>0.30%</span></text>
+									<text class="text-bold text-primary text-lg"><span>{{item.profit}}</span></text>
 								</view>
 								<view class="align-center flex-1">
 									<text class="text-secondary text-center text-xxs margin-top-xs">
@@ -26,7 +26,7 @@
 							</uni-col>
 							<uni-col :span="12">
 								<view class="align-center flex-1">
-									<text class="text-bold text-primary text-lg"><span>$5</span></text>
+									<text class="text-bold text-primary text-lg"><span>{{item.unbalance}}</span></text>
 								</view>
 								<view class="align-center flex-1">
 									<text class="text-secondary text-center text-xxs margin-top-xs">
@@ -41,8 +41,7 @@
 							<uni-col :span="16">
 								<view class="flex-1">
 									<text class="text-xs"><span>{{$t('credit.repayment')}}:<text
-												class="text-bold margin-left-xs"><span>$5 -
-													$20</span></text></span></text>
+												class="text-bold margin-left-xs"><span>{{item.repayment}}</span></text></span></text>
 								</view>
 							</uni-col>
 							<uni-col :span="4">
@@ -56,163 +55,7 @@
 				</view>
 			</uni-card>
 		</view>
-		<view style="margin-top:30px;" @click="tocreditDetail">
-			<uni-card class="box-card">
-				<view class="card-content product-item margin-bottom-lg">
-					<view class="product-header">
-						<image class="product-logo" src="/static/image/hall/credit2.png">
-						</image>
-						<!---->
-						<text class="product-title line-1"><span>Small amount payment area</span></text>
-					</view>
-					<view class="product-body flex-row solid-bottom" style=" text-align: center;">
-						<uni-row :gutter="20">
-							<uni-col :span="12">
-								<view class="align-center flex-1">
-									<text class="text-bold text-primary text-lg"><span>0.22%</span></text>
-								</view>
-								<view class="align-center flex-1">
-									<text class="text-secondary text-center text-xxs margin-top-xs">
-										<span>{{$t('credit.profit')}}</span></text>
-								</view>
-							</uni-col>
-							<uni-col :span="12">
-								<view class="align-center flex-1">
-									<text class="text-bold text-primary text-lg"><span>$35</span></text>
-								</view>
-								<view class="align-center flex-1">
-									<text class="text-secondary text-center text-xxs margin-top-xs">
-										<span>{{$t('credit.unbalance')}}</span></text>
-								</view>
-							</uni-col>
-						</uni-row>
-					</view>
-					<view class="product-footer flex-row align-center justify-between">
-						<uni-row :gutter="20">
-
-							<uni-col :span="16">
-								<view class="flex-1">
-									<text class="text-xs"><span>{{$t('credit.repayment')}}:<text
-												class="text-bold margin-left-xs"><span>$35 -
-													$100</span></text></span></text>
-								</view>
-							</uni-col>
-							<uni-col :span="4">
-								<button class="btn-task">
-									<!---->
-									<text class="text-small text-white"><span>{{$t('credit.button')}}</span></text>
-								</button>
-							</uni-col>
-						</uni-row>
-					</view>
-				</view>
-			</uni-card>
-		</view>
-		<view style="margin-top:30px;" @click="tocreditDetail">
-			<uni-card class="box-card">
-				<view class="card-content product-item margin-bottom-lg">
-					<view class="product-header">
-						<image class="product-logo" src="/static/image/hall/credit3.png">
-						</image>
-						<!---->
-						<text class="product-title line-1"><span>Ordinary repayment area</span></text>
-					</view>
-					<view class="product-body flex-row solid-bottom" style=" text-align: center;">
-						<uni-row :gutter="20">
-							<uni-col :span="12">
-								<view class="align-center flex-1">
-									<text class="text-bold text-primary text-lg"><span>0.24%</span></text>
-								</view>
-								<view class="align-center flex-1">
-									<text class="text-secondary text-center text-xxs margin-top-xs">
-										<span>{{$t('credit.profit')}}</span></text>
-								</view>
-							</uni-col>
-							<uni-col :span="12">
-								<view class="align-center flex-1">
-									<text class="text-bold text-primary text-lg"><span>$100</span></text>
-								</view>
-								<view class="align-center flex-1">
-									<text class="text-secondary text-center text-xxs margin-top-xs">
-										<span>{{$t('credit.unbalance')}}</span></text>
-								</view>
-							</uni-col>
-						</uni-row>
-					</view>
-					<view class="product-footer flex-row align-center justify-between">
-						<uni-row :gutter="20">
-
-							<uni-col :span="16">
-								<view class="flex-1">
-									<text class="text-xs"><span>{{$t('credit.repayment')}}:<text
-												class="text-bold margin-left-xs"><span>$100 -
-													$500</span></text></span></text>
-								</view>
-							</uni-col>
-							<uni-col :span="4">
-								<button class="btn-task">
-									<!---->
-									<text class="text-small text-white"><span>{{$t('credit.button')}}</span></text>
-								</button>
-							</uni-col>
-						</uni-row>
-					</view>
-				</view>
-			</uni-card>
-		</view>
-		<view style="margin-top:30px;" @click="tocreditDetail">
-			<uni-card class="box-card">
-				<view class="card-content product-item margin-bottom-lg">
-					<view class="product-header">
-						<image class="product-logo" src="/static/image/hall/credit4.png">
-						</image>
-						<!---->
-						<text class="product-title line-1"><span>High-value repayment area</span></text>
-					</view>
-					<view class="product-body flex-row solid-bottom" style=" text-align: center;">
-						<uni-row :gutter="20">
-							<uni-col :span="12">
-								<view class="align-center flex-1">
-									<text class="text-bold text-primary text-lg"><span>0.28%</span></text>
-								</view>
-								<view class="align-center flex-1">
-									<text class="text-secondary text-center text-xxs margin-top-xs">
-										<span>{{$t('credit.profit')}}</span></text>
-								</view>
-							</uni-col>
-							<uni-col :span="12">
-								<view class="align-center flex-1">
-									<text class="text-bold text-primary text-lg"><span>$500</span></text>
-								</view>
-								<view class="align-center flex-1">
-									<text class="text-secondary text-center text-xxs margin-top-xs">
-										<span>{{$t('credit.unbalance')}}</span></text>
-								</view>
-							</uni-col>
-						</uni-row>
-					</view>
-					<view class="product-footer flex-row align-center justify-between">
-						<uni-row :gutter="20">
-
-							<uni-col :span="16">
-								<view class="flex-1">
-									<text class="text-xs"><span>{{$t('credit.repayment')}}:<text
-												class="text-bold margin-left-xs"><span>$500 -
-													$2000</span></text></span></text>
-								</view>
-							</uni-col>
-							<uni-col :span="4">
-								<button class="btn-task">
-									<!---->
-									<text class="text-small text-white"><span>{{$t('credit.button')}}</span></text>
-								</button>
-							</uni-col>
-						</uni-row>
-					</view>
-				</view>
-			</uni-card>
-		</view>
-	</app-content-view>
+		</app-content-view>
 	<tab-bar :selected="0"></tab-bar>
 </template>
 
@@ -220,17 +63,46 @@
 	export default {
 		data() {
 			return {
+				creditdata: [{
+						id: 1,
+						title: "Bad debt handling area",
+						profit: "0.30%",
+						unbalance: "$5",
+						repayment: "$5 - $20",
+						url: '/static/image/hall/credit1.png'
+					},
+					{
+						id: 2,
+						title: "Small amount payment area",
+						profit: "0.22%",
+						unbalance: "$35",
+						repayment: "$35 - $100",
+						url: '/static/image/hall/credit2.png'
+					},
+					{
+						id: 3,
+						title: "Ordinary repayment area",
+						profit: "0.24%",
+						unbalance: "$100",
+						repayment: "$100 - $500",
+						url: '/static/image/hall/credit3.png'
+					},
+					{
+						id: 4,
+						title: "High-value repayment area",
+						profit: "0.28%",
+						unbalance: "$500",
+						repayment: "$500 - $2000",
+						url: '/static/image/hall/credit4.png'
+					}
+				]
 
 			}
 		},
 		methods: {
 			tocreditDetail() {
-				// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
-				// uni.reLaunch({
-				// 	url: '/pages/prohall/Chaka'
-				// })
 				uni.navigateTo({
-						url: '/pages/prohall/Chaka'
+					url: '/pages/prohall/Chaka'
 				})
 			}
 		}

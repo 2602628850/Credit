@@ -141,6 +141,17 @@ export default {
 		title: '信用等级',
 		currentCreditValue: '当前信用值',
 		nextLevel: "距[lv]还需[number]信用值",
+		obtain:"获取信用值",
+		Dailytask:'每日任务',
+		daytask:"完今日完成信用卡代还任务",
+		Eweektask:"每周任务",
+		weektask:'本周完成贷款代还任务',
+		togo:"去完成",
+		Equity:"会员权益",
+		table1:"等级",
+		table2:"升级需要信用值",
+		table3:"该等级特权",
+		Creditvalue:"信用值"
 	},
 	tongji:{
 		title:'统计报表',
@@ -151,5 +162,12 @@ export default {
 		tdtj:'团队统计',
 		tdzcyh:'团队注册用户',
 		zsrs:'直属人数'
-	}
+	},
+	P2P: {
+	    title: ' 贷款代还专区 ',		
+		profit:'利润',		
+		unbalance:'解锁余额',
+		repayment:'还款金额',
+		button:'进入'	
+	},
 }

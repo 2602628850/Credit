@@ -139,7 +139,18 @@ export default {
 	level: {
 		title: 'credit rating',
 		currentCreditValue: 'current credit value',
-		nextLevel: '[number] credits required to reach [lv]'
+		nextLevel: '[number] credits required to reach [lv]',
+		obtain:"Get credit value",
+		Dailytask:'Daily task ',
+		daytask:"Complete the credit card repayment task today ",
+		Eweektask:"Weekly task ",
+		weektask:'Complete the loan repayment task this week ',
+		togo:"To finish",
+		Equity:"Membership benefits",
+		table1:"level",
+		table2:"Upgrade requires credit",
+		table3:"This level of privilege",
+		Creditvalue:"credit value"
 	},
 	tongji:{
 		title:'Rport statistics',
