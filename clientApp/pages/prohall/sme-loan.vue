@@ -49,6 +49,16 @@
 					</uni-col>
 					<uni-col :span="6">
 
+
+						<view class="numberBtn">
+							<view @click="reduce" class="countBtn reduceBtn"> － </view>
+							<view>
+								<input type="number" v-model="numberinput" class="sumTotal" />
+							</view>
+							<view @click="add" class="countBtn addBtn"> + </view>
+						</view>
+
+
 					</uni-col>
 				</uni-row>
 
@@ -98,11 +108,18 @@
 	export default {
 		data() {
 			return {
-
+				numberinput: 0
 			}
 		},
 		methods: {
-
+			reduce() {
+				if(this.numberinput-1>=0){
+				this.numberinput--
+				}
+			},
+			add() {
+				this.numberinput++
+			}
 		}
 	}
 </script>
@@ -145,5 +162,47 @@
 
 	.text-small {
 		font-size: 14px;
+	}
+
+
+
+	.countBtn {
+		color: #10AEFF;
+	}
+
+	.reduceBtn {
+		border-radius: 10rpx 0rpx 0rpx 10rpx;
+		width: 60rpx;
+		border: 1rpx solid #ddd;
+		border-right: none;
+		text-align: center;
+	}
+
+	.addBtn {
+		border-radius: 0rpx 10rpx 10rpx 0rpx;
+		width: 60rpx;
+		border: 1rpx solid #ddd;
+		border-left: none;
+		text-align: center;
+	}
+
+	.sumTotal {
+		border: 1rpx solid #ddd;
+		width: 100rpx;
+		text-align: center;
+	}
+
+	.numberBtn {
+		position: absolute;
+		right: 0%;
+		width: auto;
+	}
+
+
+
+	.numberBtn view {
+		/* border: 1rpx solid #ddd; */
+		float: left;
+		/* width: 80rpx; */
 	}
 </style>
