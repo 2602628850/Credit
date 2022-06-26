@@ -1,6 +1,7 @@
 <template>
-	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
-		<uni-page-head uni-page-head-type="default">
+	<navigation-bar :title="protitle" :show-back="false"></navigation-bar>
+	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="true">
+		<!-- <uni-page-head uni-page-head-type="default">
 			<div class="uni-page-head" style="background-color: rgb(244, 245, 247); color: rgb(0, 0, 0);">
 				<div class="uni-page-head-hd">
 					<div class="uni-page-head-btn" style="display: none;"><i class="uni-btn-icon"
@@ -12,11 +13,10 @@
 						{{$t('prohall.title')}}
 					</div>
 				</div>
-				<!---->
 				<div class="uni-page-head-ft"></div>
 			</div>
 			<div class="uni-placeholder"></div>
-		</uni-page-head>
+		</uni-page-head> -->
 		<view style="margin-top:20px;" @click="tocredit">
 			<uni-card class="box-card">
 				<uni-row :gutter="20">
@@ -98,7 +98,7 @@
 	export default {
 		data() {
 			return {
-
+              protitle: this.$t('prohall.title')
 			}
 		},
 		methods: {

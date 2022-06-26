@@ -1,6 +1,6 @@
 <template>
-	<navigation-bar :title="$t('team.title')"></navigation-bar>
-	<app-content-view :show-tab-bar="false" :show-navigation-bar="true">
+	<navigation-bar :title="$t('team.title')" :show-back="false"></navigation-bar>
+	<app-content-view :show-tab-bar="true" :show-navigation-bar="true">
 		<view>
 			<view class="page">
 				<view class="card-page margin-top">
@@ -93,6 +93,7 @@
 			</view>
 		</view>
 	</app-content-view>
+	<tab-bar :selected="2"></tab-bar>
 </template>
 
 <script>

@@ -31,7 +31,7 @@
 					text: this.$t('Tabbar.hall')
 				},
 				 {
-					pagePath: "/pages/index/index",
+					pagePath: "/pages/statistic/referral-bonus",
 					iconPath: "/static/image/tarbar/team.png",
 					selectedIconPath: "/static/image/tarbar/choose/team.png",
 					text: this.$t('Tabbar.team')

@@ -1,9 +1,9 @@
 <template>
-<!--	<navigation-bar></navigation-bar>-->
-	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="false">
-		<view class="created">
+<navigation-bar title="Third Credit" :show-back="false"></navigation-bar>
+	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="true">
+		<!-- <view class="created">
 			<text>Third Credit</text>
-		</view>
+		</view> -->
 		<!-- 首页轮播图 indexpages.swipers控制显示中文还是英文图标-->
 		<swiper v-if="$t('indexpages.swipers')=='0'" style="text-align: center;" indicator-dots
 		        indicator-active-color="#FFFFFF" circular autoplay>
