@@ -159,5 +159,18 @@ export default {
 		cz:'充值',
 		banlance:'当前余额:',
 		sj:'0'
+	},
+	kefu:{
+		title:'客服',
+		kefutitle:'诚心诚意 为您服务',
+		online:'在线客服',
+		vipline:'VIP在线客服',
+		phoneline:'投诉电话',
+		lineservice:'在线客服',
+		kefutm:'客服工作时间',
+		ketime:'周一至周日早上8:00~晚上22:00',
+		vipservice:'vip客服',
+		vipkefutm:'客服工作时间',
+		vipketime:'周一至周日早上8:00~晚上22:00',
 	}
 }

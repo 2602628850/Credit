@@ -158,6 +158,19 @@ export default {
 		cz:'Recharge',
 		banlance:'Current balance:',
 		sj:'1'
+	},
+	kefu:{
+		title:'Customer Service',
+		kefutitle:'Serve you sincerely',
+		online:'Online Customer Service',
+		vipline:'VIP customer service',
+		phoneline:'complaint phone',
+		lineservice:'Online Customer Service',
+		kefutm:'Customer service working time',
+		ketime:'Monday to Sunday 8:00 am to 22:00 pm',
+		vipservice:'VIP customer service',
+		vipkefutm:'Customer service working time',
+		vipketime:'Monday to Sunday 8:00 am to 22:00 pm',
 	}
     
 }

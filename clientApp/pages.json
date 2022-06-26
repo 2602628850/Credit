@@ -186,6 +186,30 @@
 		        "enablePullDownRefresh": false
 		    }
 		    
+		},{
+		    "path" : "pages/onlinecustomers/index",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},{
+		    "path" : "pages/onlinecustomers/online",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},{
+		    "path" : "pages/onlinecustomers/vipline",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
 		}
     ],
 	"globalStyle": {
