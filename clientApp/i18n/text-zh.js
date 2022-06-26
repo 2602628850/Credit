@@ -141,6 +141,17 @@ export default {
 		title: '信用等级',
 		currentCreditValue: '当前信用值',
 		nextLevel: "距[lv]还需[number]信用值",
+		obtain:"获取信用值",
+		Dailytask:'每日任务',
+		daytask:"完今日完成信用卡代还任务",
+		Eweektask:"每周任务",
+		weektask:'本周完成贷款代还任务',
+		togo:"去完成",
+		Equity:"会员权益",
+		table1:"等级",
+		table2:"升级需要信用值",
+		table3:"该等级特权",
+		Creditvalue:"信用值"
 	},
 	tongji:{
 		title:'统计报表',
@@ -150,9 +161,7 @@ export default {
 		tdsy:'团队总收益',
 		tdtj:'团队统计',
 		tdzcyh:'团队注册用户',
-		zsrs:'直属人数',
-		zjbdjl:'资金变动记录',
-		gd:"更多"
+		zsrs:'直属人数'
 	},
 	monchange:{
 		jebd:'金额变动记录',
@@ -172,5 +181,59 @@ export default {
 		vipservice:'vip客服',
 		vipkefutm:'客服工作时间',
 		vipketime:'周一至周日早上8:00~晚上22:00',
-	}
+	},
+	P2P: {
+	    title: ' 贷款代还专区 ',		
+		profit:'利润',		
+		unbalance:'解锁余额',
+		repayment:'还款金额',
+		button:'进入'	
+	},
+	Temrule: {
+	    title: '团队规则'	
+	},
+	team: {
+	    title: '团队',
+		Totaldata:"总数据",
+		Tuser:"团队注册用户",
+		TformalUser:"团队正式会员用户",
+		Totalteamrepayment:"团队总还款",
+		Expectedteamrepaymentincome:"预计团队还款收益",
+		ExpectedteamSMEprofit:"预计团队还款收益",
+		Expectedtotalprofit:"预计总收益",
+		Rulesdescription:"团队规则",
+		Subordinateddata:"下级报表"
+		
+	},
+    loan: {
+        title: ' 贷款代还专区 ',		
+		bankname:'银行',		
+		number:'贷款合同编号',	
+		repayment:'借款金额',
+		checkButton:'查找待还贷款信息',
+		selectrepayment:'选择借款',
+		behalfButton:'确认',
+		Prorevenue:'产品收益',
+		dayrevenue:'日收益',
+		cycle:'周期',
+		expirerevenue:'到期收益',
+		Procontent:'产品简介'
+		
+    },
+    sem: {
+        title: ' SME Loans ',		
+		Dailyincome:'日收益',		
+		cycle:'周期',
+		button:'购买'	
+    },
+    semloan: {
+        title: ' SME Loans ',		
+		UnitPrice:'每份单价',		
+		cycle:'回款周期',
+		Minimum:"最低购买",
+		returnrate:"回报率",
+		buymum:"购买数量",
+		buyprice:"购买金额",
+		button:'购买'	
+    },
 }

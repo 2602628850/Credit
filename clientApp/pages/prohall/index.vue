@@ -67,7 +67,7 @@
 				</uni-row>
 			</uni-card>
 		</view>
-		<view style="margin-top:20px;">
+		<view style="margin-top:20px;" @click="toSme">
 			<uni-card class="box-card">
 				<uni-row :gutter="20">
 					<uni-col :span="6">
@@ -103,22 +103,18 @@
 		},
 		methods: {
 			tocredit() {
-				// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
-				// uni.reLaunch({
-				// 	url: '/pages/prohall/creditIndex'
-				// })
-				
 				uni.navigateTo({
 					url: '/pages/prohall/creditIndex'
 				})
 			},
 			toP2P() {
-				// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
-				// uni.reLaunch({
-				// 	url: '/pages/prohall/P2PZone'
-				// })
 				uni.navigateTo({
 					url: '/pages/prohall/P2PZone'
+				})
+			},
+			toSme() {
+				uni.navigateTo({
+					url: '/pages/prohall/sme'
 				})
 			}
 		}

@@ -57,6 +57,7 @@
 			
 			
 <view style="margin-top: 20px;">{{$t('interal.interenwu')}}</view>	
+
 <view style="margin-top: 9px;">
 		<uni-card class="box-card" >
 		<uni-row :gutter="20" @click="CompleteQCard()" >
@@ -64,48 +65,56 @@
 				<image src="/static/image/iteral/integral-credit.png"
 					style="width: 30px;height: 30px;"></image>
 			</uni-col>
-			<uni-col :span="21">
+			<uni-col :span="15">
 				<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 					{{$t('interal.finishchaka')}}
 				</view>
 				<view style="font-size: 8px"><text>{{$t('interal.chakareason')}}</text></view>
-				
-				<view style="margin-top:10px;text-align: right;">
-					
-				<text> <el-button type="primary">{{$t('interal.tofinish')}}</el-button> </text></view>
+
+			</uni-col>
+			<uni-col :span="6">
+				<view>
+				<text style="text-align: right;"> <button class="btn-task" type="primary">{{$t('interal.tofinish')}}</button> </text>
+				</view>
 			</uni-col>
 		</uni-row> 
     
-		<uni-row :gutter="20" @click="CompleteDaikuan()" >
+		<uni-row :gutter="20" @click="CompleteDaikuan()" style="margin-top:10%;">
 			<uni-col :span="3"> 
 				<image src="/static/image/iteral/integral-repayment.png"
 					style="width: 30px;height: 30px;"></image>
 			</uni-col>
-			<uni-col :span="21">
+			<uni-col :span="15">
 				<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 					{{$t('interal.finishdaikuan')}}
 				</view>
 				<view style="font-size: 8px"><span>	{{$t('interal.finishdaikuanreason')}}</span></view>
 				
-				<view style="margin-top:10px;text-align: right;">
-					
-				<span> <el-button type="primary">{{$t('interal.tofinish')}}</el-button> </span></view>
+				
 			</uni-col>
-		</uni-row> 
-			<uni-row :gutter="20" @click="ToInvite()" >
+			<uni-col :span="6">
+				<view>
+				<text style="text-align: right;"> <button class="btn-task" type="primary">{{$t('interal.tofinish')}}</button> </text>
+				</view>
+			</uni-col>
+	
+		</uni-row > 
+			<uni-row :gutter="20" @click="ToInvite()" style="margin-top:10%;">
 				<uni-col :span="3"> 
 				<image src="/static/image/iteral/integral-share.png"
 					style="width: 30px;height: 30px;"></image>
 				</uni-col>
-				<uni-col :span="21">
+				<uni-col :span="15">
 					<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 						{{$t('interal.sharfrend')}}
 					</view>
 					<view style="font-size: 8px"><span>{{$t('interal.sharreason')}}</span></view>
 					
-					<view style="margin-top:10px;text-align: right;">
-						
-					<span> <el-button type="primary">{{$t('interal.tofinish')}}</el-button> </span></view>
+				</uni-col>
+				<uni-col :span="6">
+					<view>
+					<text style="text-align: right;"> <button class="btn-task" type="primary">{{$t('interal.tofinish')}}</button> </text>
+					</view>
 				</uni-col>
 			</uni-row> 
 	      </uni-card>
@@ -183,4 +192,15 @@
   border-radius: 4px;
   min-height: 36px;
 }
+.btn-task {
+		height: 33px;
+		width: 70px;
+		line-height: 33px;
+		text-align: center;
+		border-radius: 10px;
+		min-width: 100px;
+		color: #fff;
+		font-size: 14px;
+		background: linear-gradient(270deg, #108d62, #54b78d);
+	}
 </style>
