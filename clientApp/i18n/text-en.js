@@ -169,6 +169,60 @@ export default {
 		cz:'Recharge',
 		banlance:'Current balance:',
 		sj:'1'
-	}
+	},	
+	P2P: {
+	    title: '  P2P zone  ',		
+		profit:'Profit',		
+		unbalance:'Unlock balance',
+		repayment:'Repayment:',
+		button:'Enter'	
+	},
+	Temrule: {
+	    title: ' team rules '	
+	},
+	team: {
+	    title: ' Team ',
+		Totaldata:"Total data",
+		Tuser:"Team users",
+		TformalUser:"Team official member user",
+		Totalteamrepayment:"Total team repayment",
+		Expectedteamrepaymentincome:"Expected team repayment income",
+		ExpectedteamSMEprofit:"Expected team SME profit",
+		Expectedtotalprofit:"Expected total profit",
+		Rulesdescription:"Rules description",
+		Subordinateddata:"Subordinated data"
+		
+	},
+    loan: {
+        title: '  P2P zone  ',		
+		bankname:'Bank Name',		
+		number:'Loan contract number',	
+		repayment:'Loan amount',
+		checkButton:'Find pending loan information',
+		selectrepayment:'Select Loan',
+		behalfButton:'Confirm',
+		Prorevenue:'Product Profit',
+		dayrevenue:'Daily income',
+		cycle:'Cycle',
+		expirerevenue:'Expire income',
+		Procontent:'Product introduction'
+		
+    },
+    sem: {
+        title: ' SME Loans ',		
+		Dailyincome:'Daily income',		
+		cycle:'Cycle',
+		button:'Enter'	
+    },
+    semloan: {
+        title: ' SME Loans ',		
+		UnitPrice:'Price per unit',		
+		cycle:'Period of payment',
+		Minimum:"Min purchase",
+		returnrate:"Daily rate of return",
+		buymum:"Purchase share",
+		buyprice:"Purchase price",
+		button:'Buy'	
+    },
     
 }

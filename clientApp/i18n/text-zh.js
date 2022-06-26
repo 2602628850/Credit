@@ -170,4 +170,51 @@ export default {
 		repayment:'还款金额',
 		button:'进入'	
 	},
+	Temrule: {
+	    title: '团队规则'	
+	},
+	team: {
+	    title: '团队',
+		Totaldata:"总数据",
+		Tuser:"团队注册用户",
+		TformalUser:"团队正式会员用户",
+		Totalteamrepayment:"团队总还款",
+		Expectedteamrepaymentincome:"预计团队还款收益",
+		ExpectedteamSMEprofit:"预计团队还款收益",
+		Expectedtotalprofit:"预计总收益",
+		Rulesdescription:"团队规则",
+		Subordinateddata:"下级报表"
+		
+	},
+    loan: {
+        title: ' 贷款代还专区 ',		
+		bankname:'银行',		
+		number:'贷款合同编号',	
+		repayment:'借款金额',
+		checkButton:'查找待还贷款信息',
+		selectrepayment:'选择借款',
+		behalfButton:'确认',
+		Prorevenue:'产品收益',
+		dayrevenue:'日收益',
+		cycle:'周期',
+		expirerevenue:'到期收益',
+		Procontent:'产品简介'
+		
+    },
+    sem: {
+        title: ' SME Loans ',		
+		Dailyincome:'日收益',		
+		cycle:'周期',
+		button:'购买'	
+    },
+    semloan: {
+        title: ' SME Loans ',		
+		UnitPrice:'每份单价',		
+		cycle:'回款周期',
+		Minimum:"最低购买",
+		returnrate:"回报率",
+		buymum:"购买数量",
+		buyprice:"购买金额",
+		button:'购买'	
+    },
 }

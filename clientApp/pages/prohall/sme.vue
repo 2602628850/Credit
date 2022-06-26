@@ -1,17 +1,14 @@
 <template>
-	<navigation-bar :title="$t('credit.title')"></navigation-bar>
+	<navigation-bar :title="$t('sem.title')"></navigation-bar>
 	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="false">
-		<view style="margin-top:30px;" @click="tocreditDetail"  v-for="item in creditdata">
+		<view style="margin-top:30px;" @click="tocreditDetail" v-for="item in creditdata">
 			<uni-card class="box-card">
 				<view class="card-content product-item margin-bottom-lg">
 					<view class="product-header">
-						<image class="product-logo" src="/static/image/hall/credit1.png">
+						<image class="product-logo" src="/static/image/hall/sem1.png">
 						</image>
 						<!---->
-						<text class="product-title line-1"><span>{{item.title}}</span></text>
-						<view v-if="item.id==1">
-							<text class="limit-tag"><span>Limit 10</span></text>
-						</view>
+						<text class="product-title line-1"><span>{{item.title}}</span></text> 
 					</view>
 					<view class="product-body flex-row solid-bottom" style=" text-align: center;">
 						<uni-row :gutter="20">
@@ -21,41 +18,32 @@
 								</view>
 								<view class="align-center flex-1">
 									<text class="text-secondary text-center text-xxs margin-top-xs">
-										<span>{{$t('credit.profit')}}</span></text>
+										<span>{{$t('sem.Dailyincome')}}</span></text>
 								</view>
 							</uni-col>
 							<uni-col :span="12">
 								<view class="align-center flex-1">
-									<text class="text-bold text-primary text-lg"><span>{{item.unbalance}}</span></text>
+									<text class="text-bold text-primary text-lg"><span>{{item.cycle}}</span></text>
 								</view>
 								<view class="align-center flex-1">
 									<text class="text-secondary text-center text-xxs margin-top-xs">
-										<span>{{$t('credit.unbalance')}}</span></text>
+										<span>{{$t('sem.cycle')}}</span></text>
 								</view>
 							</uni-col>
 						</uni-row>
 					</view>
 					<view class="product-footer flex-row align-center justify-between">
-						<uni-row :gutter="20">
 
-							<uni-col :span="16">
-								<view class="flex-1">
-									<text class="text-xs"><span>{{$t('credit.repayment')}}:<text
-												class="text-bold margin-left-xs"><span>{{item.repayment}}</span></text></span></text>
-								</view>
-							</uni-col>
-							<uni-col :span="4">
-								<button class="btn-task">
-									<!---->
-									<text class="text-small text-white"><span>{{$t('credit.button')}}</span></text>
-								</button>
-							</uni-col>
-						</uni-row>
+						<button class="btn-task">
+							<!---->
+							<text class="text-small text-white"><span>{{$t('sem.button')}}</span></text>
+						</button>
+
 					</view>
 				</view>
 			</uni-card>
 		</view>
-		</app-content-view>
+	</app-content-view>
 </template>
 
 <script>
@@ -66,33 +54,36 @@
 						id: 1,
 						title: "Bad debt handling area",
 						profit: "0.30%",
-						unbalance: "$5",
-						repayment: "$5 - $20",
-						url: '/static/image/hall/credit1.png'
+						cycle: "7天",
+						url: '/static/image/hall/sem1.png'
 					},
 					{
 						id: 2,
 						title: "Small amount payment area",
 						profit: "0.22%",
-						unbalance: "$35",
-						repayment: "$35 - $100",
-						url: '/static/image/hall/credit2.png'
+						cycle: "15天",
+						url: '/static/image/hall/sem2.png'
 					},
 					{
 						id: 3,
 						title: "Ordinary repayment area",
 						profit: "0.24%",
-						unbalance: "$100",
-						repayment: "$100 - $500",
-						url: '/static/image/hall/credit3.png'
+						cycle: "30天",
+						url: '/static/image/hall/sem3.png'
 					},
 					{
 						id: 4,
 						title: "High-value repayment area",
 						profit: "0.28%",
-						unbalance: "$500",
-						repayment: "$500 - $2000",
-						url: '/static/image/hall/credit4.png'
+						cycle: "90天",
+						url: '/static/image/hall/sem4.png'
+					},
+					{
+						id: 4,
+						title: "High-value repayment area",
+						profit: "0.28%",
+						cycle: "180天",
+						url: '/static/image/hall/sem5.png'
 					}
 				]
 
@@ -101,7 +92,7 @@
 		methods: {
 			tocreditDetail() {
 				uni.navigateTo({
-					url: '/pages/prohall/Chaka'
+					url: '/pages/prohall/sme-loan'
 				})
 			}
 		}
@@ -159,9 +150,6 @@
 		background-color: #f8f8f8;
 		cursor: pointer;
 	}
-
-	.text-white,
-	.line-white,
 	.lines-white {
 		color: #fff;
 	}

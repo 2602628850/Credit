@@ -23,7 +23,7 @@
 			</view>
 		</scroll-view>
 		<view class="card-page margin-top page-fixed">
-			<view class="card-content product-item margin-bottom-lg" v-for=" item in P2Pdata" >
+			<view class="card-content product-item margin-bottom-lg" @click="toloan" v-for=" item in P2Pdata">
 				<view class="product-header">
 					<!---->
 					<image class="product-logo" :src="item.url">
@@ -56,7 +56,7 @@
 				<view class="product-footer flex-row align-center justify-between">
 					<view class="flex-1">
 						<text class="text-xs"><span>{{$t('P2P.repayment')}}:
-						<text class="text-bold margin-left-xs"><span>{{item.repayment}}</span></text></span>
+								<text class="text-bold margin-left-xs"><span>{{item.repayment}}</span></text></span>
 						</text>
 					</view>
 					<button class="btn-task">
@@ -79,9 +79,9 @@
 						profit: "0.80%",
 						unbalance: "$500",
 						repayment: "$500 - $2000",
-						cyclesf:"+5%",
-						
-						cycle:"5天",
+						cyclesf: "+5%",
+
+						cycle: "5天",
 						url: '/static/image/hall/ptp1.png'
 					},
 					{
@@ -90,8 +90,8 @@
 						profit: "0.90%",
 						unbalance: "$2000",
 						repayment: "$2000 - $10000",
-						cyclesf:"+5%",
-						cycle:"5天",
+						cyclesf: "+5%",
+						cycle: "5天",
 						url: '/static/image/hall/ptp2.png'
 					},
 					{
@@ -100,11 +100,11 @@
 						profit: "1.00%",
 						unbalance: "$10000",
 						repayment: "$10000 - $50000",
-						cyclesf:"+5%",
-						cycle:"5天",
+						cyclesf: "+5%",
+						cycle: "5天",
 						url: '/static/image/hall/ptp3.png'
 					}
-				],				
+				],
 				topItems: [{
 						url: '/static/image/hall/tab-asia.png',
 						title: '亚洲专区'
@@ -120,6 +120,11 @@
 		methods: {
 			changCheckIndex(index) {
 				this.checkIndex = index;
+			},
+			toloan() {
+				uni.navigateTo({
+					url: '/pages/prohall/loan'
+				})
 			}
 		}
 	}
