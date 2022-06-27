@@ -5,6 +5,7 @@
 		<view v-if="!showNavigationBar" :style="{height:$safeTop+'px'}"></view>
 		<view style="height: 1px"></view>
 		<slot></slot>
+		<view style="height: 1px"></view>
 		<view v-if="!showTabBar" :style="{height: $safeBottom+'px'}"></view>
 	</scroll-view>
 </template>
