@@ -14,6 +14,7 @@ const httpQuest = (method, url, param) => {
                     'X-Requested-With': 'XMLHttpRequest',
                     'Content-Type': 'application/json; charset=UTF-8',
                     'tid': 20000,
+					'Token':uni.getStorageSync('token'),
                 }
             } else {
                 header = {
@@ -21,6 +22,7 @@ const httpQuest = (method, url, param) => {
                     "Accept": "application/json",
                     "Content-Type": "application/json; charset=UTF-8",
                     'tid': 20000,
+					'Token':uni.getStorageSync('token'),
                 }
             }
 

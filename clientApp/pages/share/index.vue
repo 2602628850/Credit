@@ -33,6 +33,13 @@
 				copyurl: "https://www.thirdcredit.net?t=25202"
 			}
 		},
+		mounted() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			}
+		},
 		methods: {
 			copyUrl() {
 				uni.setClipboardData({

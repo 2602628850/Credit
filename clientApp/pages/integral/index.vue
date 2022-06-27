@@ -132,6 +132,13 @@
 	              intereal:this.$t('interal.intereal')
 				}
 			},
+			mounted() {
+				if (!uni.getStorageSync('token')) {
+				uni.reLaunch({
+					url:'/pages/login/login'
+				})
+				}
+			},
 			methods:{
 				//积分商城
 				ToShop(){

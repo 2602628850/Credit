@@ -50,7 +50,11 @@ namespace Credit.UserServices
                 Id = IdHelper.GetId(),
                 Username = input.Username.ToLower(),
                 Password = input.Password,
-                Nickname = input.Username,
+                Nickname = input.Nickname,
+                CountryName=input.CountryName,
+                Code=input.Code,
+                InvCode=input.InvCode,
+
             };
             await _freeSql.Insert(user).ExecuteAffrowsAsync();
         }

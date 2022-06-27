@@ -54,7 +54,14 @@
 				  totime:''
 				}
 			},
+			
 			mounted(){
+				if (!uni.getStorageSync('token')) {
+				uni.reLaunch({
+					url:'/pages/login/login'
+				})
+				}
+				
 				if(this.$t('monchange.sj')=="0"){
 					this.totime=this.formatDateCh(1527488790000)//中文时间
 					

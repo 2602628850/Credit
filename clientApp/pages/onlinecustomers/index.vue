@@ -83,6 +83,13 @@
 				kefutitle:this.$t('kefu.title')
 			}
 		},
+		mounted() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			}
+		},
 		methods: {
 			ToOnline() {
 				uni.navigateTo({

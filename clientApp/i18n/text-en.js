@@ -51,8 +51,10 @@ export default {
         send: 'Send',
         pwd: 'Password',
         pwdTip: 'Enter your Password',
-        mail: 'Email',
-        mailTip: 'Enter your email',
+        mail: 'Username',
+        mailTip: 'Enter your Username',
+		nikename:'True name',
+		nikenameTip:'Enter your true name',
 		recharge: "recharge",
 		withdraw: 'withdraw funds',
 		nickname: "Nickname",
@@ -240,5 +242,11 @@ export default {
 		buyprice:"Purchase price",
 		button:'Buy'	
     },
-    
+    registerandlog:{
+    	gxxy:'Please agree to check the agreement!',
+    	srmm:'Please fill in the password and confirm the password!',
+    	surepass:'The two passwords are inconsistent!',
+    	registersuc:'Registration succeeded, please login!',
+    	loginresult:'Wrong user name or password!'
+    }
 }

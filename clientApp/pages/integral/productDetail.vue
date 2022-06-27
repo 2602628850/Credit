@@ -26,6 +26,13 @@
 <script>
 	export default {
 		methods: {},
+		mounted() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			}
+		},
 		data() {
 			return {
 				rotation: {

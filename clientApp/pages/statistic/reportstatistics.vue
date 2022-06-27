@@ -37,6 +37,7 @@
 				default: 0
 			}
 		},
+		
 		data() {
 			return {
 				intereal: this.$t('tongji.title'),
@@ -80,6 +81,11 @@
 			};
 		},
 		mounted() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			}
 			this.getServerData()
 		},
 		methods: {

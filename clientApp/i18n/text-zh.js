@@ -30,8 +30,10 @@ export default {
         send: '发 送',
         pwd: '密码',
         pwdTip: '请输入密码',
-        mail: '邮箱',
-        mailTip: '请输入邮箱',
+        mail: '用户名',
+        mailTip: '请输入用户名',
+		nikename:'真实名称',
+	    nikenameTip:'请输入真实名称',
 		recharge: "充值",
 		withdraw: '提现',
 		nickname: "昵称",
@@ -238,4 +240,11 @@ export default {
 		buyprice:"购买金额",
 		button:'购买'	
     },
+	registerandlog:{
+		gxxy:'请同意勾选协议!',
+		srmm:'请填写密码和确认密码!',
+		surepass:'两次密码不一致!',
+		registersuc:'注册成功,请登录!',
+		loginresult:'用户名或密码错误!'
+	}
 }

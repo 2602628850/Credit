@@ -31,6 +31,13 @@
 				ontitle:this.$t('kefu.lineservice')
 			}
 		},
+		mounted() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			}
+		},
 		methods: {
 			copyUrl() {
 				uni.setClipboardData({

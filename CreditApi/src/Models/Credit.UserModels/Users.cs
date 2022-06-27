@@ -8,6 +8,10 @@ namespace Credit.UserModels
     public class Users : BaseModel
     {
         /// <summary>
+        /// 国家
+        /// </summary>
+        public string CountryName { get; set; } = string.Empty;
+        /// <summary>
         ///  账号
         /// </summary>
         public string Username { get; set; } = string.Empty;
@@ -21,6 +25,14 @@ namespace Credit.UserModels
         ///  昵称
         /// </summary>
         public string Nickname { get; set; } = string.Empty;
+        /// <summary>
+        /// 验证码
+        /// </summary>
+        public string Code { get; set; } = string.Empty;
+        /// <summary>
+        /// 邀请码
+        /// </summary>
+        public string InvCode { get; set; } = string.Empty;
 
         /// <summary>
         ///  头像

@@ -31,6 +31,13 @@
 				viptitle:this.$t('kefu.vipservice')
 			}
 		},
+		mounted() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			}
+		},
 		methods: {
 			
 
