@@ -150,7 +150,10 @@ export default {
 		table1:"level",
 		table2:"Upgrade requires credit",
 		table3:"This level of privilege",
-		Creditvalue:"credit value"
+		Creditvalue:"credit value",
+		toFinish: 'to finish',
+		memberBenefits: 'member benefits',
+
 	},
 	tongji:{
 		title:'Rport statistics',

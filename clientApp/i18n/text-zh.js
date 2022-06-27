@@ -151,7 +151,9 @@ export default {
 		table1:"等级",
 		table2:"升级需要信用值",
 		table3:"该等级特权",
-		Creditvalue:"信用值"
+		Creditvalue:"信用值",
+		toFinish: '去完成',
+		memberBenefits: '会员权益',
 	},
 	tongji:{
 		title:'统计报表',
