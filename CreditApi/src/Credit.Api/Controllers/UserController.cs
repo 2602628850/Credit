@@ -174,8 +174,8 @@ namespace Credit.Api.Controllers
         ///  用户积分转余额
         /// </summary>[FromBody]RegisterUserInput input
         /// <returns></returns>
-        [HttpGet]
-        public async Task<string> ExchangeIntegral(UserDto input )
+        [HttpPost]
+        public async Task<string> ExchangeIntegral([FromBody]UserDto input )
         {
 
             //转换率,呢个以后在后台设置,现在写死

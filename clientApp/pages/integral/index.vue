@@ -183,7 +183,7 @@
 			},
 			ExchangeIn() {
 				var url = "/User/ExchangeIntegral";
-				this.ApiGet(url,this.showItem).then(res => {
+				this.ApiPost(url,this.showItem).then(res => {
 					if (res.data == "1") {
 						uni.showToast({
 							title:this.$t('interal.zfail'),
