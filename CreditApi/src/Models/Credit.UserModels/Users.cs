@@ -48,7 +48,10 @@ namespace Credit.UserModels
         ///  冻结资金
         /// </summary>
         public decimal FreezeFunds { get; set; }
-        
+        /// <summary>
+        ///  积分
+        /// </summary>
+        public decimal Integral { get; set; }
         /// <summary>
         ///  是否管理员
         /// </summary>

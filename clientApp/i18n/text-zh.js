@@ -124,7 +124,9 @@ export default {
 		jifendh:'积分兑换',
 		shengyu:'剩余',
 		interal:'积分',
-		lijiduihuan:'立即兑换'
+		lijiduihuan:'立即兑换',
+		zsuccess:'已成功转到您的余额.',
+		zfail:'您输入的积分不能大于你的个人积分!'
 		
 	},
 	mine: {

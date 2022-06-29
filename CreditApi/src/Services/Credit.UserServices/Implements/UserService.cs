@@ -186,5 +186,15 @@ namespace Credit.UserServices
 
             return output;
         }
+        /// <summary>
+        ///  用户积分转余额
+        /// </summary>
+        /// <param name="input"></param>
+        public void ExchangeIntegral(UserDto input)
+        {
+            //修改用户余额信息
+            _freeSql.Update<Users>(input.Id)
+                .SetDto(new { Balance = input.Balance, Integral = input.Integral }).ExecuteAffrows();
+        }
     }
 }

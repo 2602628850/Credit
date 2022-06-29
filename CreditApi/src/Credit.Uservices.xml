@@ -114,6 +114,16 @@
              用户信息
             </summary>
         </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.Integral">
+            <summary>
+             积分
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.Balance">
+            <summary>
+             余额
+            </summary>
+        </member>
         <member name="T:Credit.UserServices.UserService">
             <summary>
              用户管理接口方法实现
@@ -167,6 +177,12 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
+        <member name="M:Credit.UserServices.UserService.ExchangeIntegral(Credit.UserServices.Dtos.UserDto)">
+            <summary>
+             用户积分转余额
+            </summary>
+            <param name="input"></param>
+        </member>
         <member name="T:Credit.UserServices.IUserService">
             <summary>
              用户管理接口定义
@@ -213,6 +229,12 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.ExchangeIntegral(Credit.UserServices.Dtos.UserDto)">
+            <summary>
+             用户积分转余额
+            </summary>
+            <param name="input"></param>
         </member>
     </members>
 </doc>

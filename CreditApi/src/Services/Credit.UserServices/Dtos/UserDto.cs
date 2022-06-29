@@ -126,6 +126,13 @@ namespace Credit.UserServices.Dtos
     /// </summary>
     public class UserDto : UserInput
     {
-
+        /// <summary>
+        ///  积分
+        /// </summary>
+        public decimal Integral { get; set; }
+        /// <summary>
+        ///  余额
+        /// </summary>
+        public decimal Balance { get; set; }
     }
 }

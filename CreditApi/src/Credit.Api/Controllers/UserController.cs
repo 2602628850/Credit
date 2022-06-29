@@ -41,7 +41,7 @@ namespace Credit.Api.Controllers
         /// <param name="input"></param>
         [HttpPost]
         public async Task CreateUser([FromBody] UserInput input)
-        { 
+        {
             await _userService.CreateUser(input);
         }
 
@@ -169,6 +169,27 @@ namespace Credit.Api.Controllers
         {
             input.UserId = CurrentUser.UserId;
             return await _walletService.GetUserWalletRecordPagedList(input);
+        }
+        /// <summary>
+        ///  用户积分转余额
+        /// </summary>[FromBody]RegisterUserInput input
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<string> ExchangeIntegral(UserDto input )
+        {
+
+            //转换率,呢个以后在后台设置,现在写死
+            decimal exchangeRate = 0.1M;
+            UserDto user = await _userService.GetUserById(CurrentUser.UserId);
+            if (input.Integral > user.Integral)
+            {
+                return "1";
+            }
+            user.Balance = user.Balance + (input.Integral * exchangeRate);
+            user.Integral = user.Integral - input.Integral;
+            _userService.ExchangeIntegral(user);
+            return "0";
+
         }
     }
 }

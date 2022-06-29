@@ -123,7 +123,9 @@ export default {
 		jifendh:'Integral exchange',
 		shengyu:'Remaining',
 		interal:'Integral',
-		lijiduihuan:'Exchange now'
+		lijiduihuan:'Exchange now',
+		zsuccess:'Your balance has been successfully transferred',
+		zfail:'The points you entered cannot be greater than your personal points!'
 		
 	},
 	mine: {
