@@ -1,4 +1,5 @@
 ﻿using Data.Commons.Models;
+using FreeSql.DataAnnotations;
 
 namespace Credit.ProductModels;
 
@@ -45,7 +46,8 @@ public class FinancialProduct : BaseModel
     /// <summary>
     ///  产品介绍
     /// </summary>
-    public string ProductIntroduction { get; set; } = string.Empty;
+    [Column(StringLength = 1024)]
+    public string Introduction { get; set; } = string.Empty;
 
     /// <summary>
     ///  启用  0 未启用  1 启用

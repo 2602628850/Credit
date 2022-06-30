@@ -13,6 +13,11 @@ public class BankInfo : BaseModel
     public string BankName { get; set; } = string.Empty;
 
     /// <summary>
+    ///  银行logo
+    /// </summary>
+    public string Logo { get; set; } = string.Empty;
+
+    /// <summary>
     ///  银行编码
     /// </summary>
     public string BankCode { get; set; } = string.Empty;

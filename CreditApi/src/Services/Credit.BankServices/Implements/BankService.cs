@@ -71,8 +71,9 @@ public class BankService : IBankService
         bank.BankCode = input.BankCode;
         bank.BankName = input.BankName;
         bank.IsEnable = input.IsEnable;
+        bank.Logo = input.Logo;
         bank.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        await _freeSql.Update<BankInfo>(bank).ExecuteAffrowsAsync();
+        await _freeSql.Update<BankInfo>().SetSource(bank).ExecuteAffrowsAsync();
     }
 
     /// <summary>
@@ -111,6 +112,7 @@ public class BankService : IBankService
                 BankName = s.BankName,
                 BankCode = s.BankCode,
                 IsEnable = s.IsEnable,
+                Logo = s.Logo,
                 UpdateAt = s.UpdateAt
             });
         return bank;

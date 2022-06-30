@@ -70,7 +70,7 @@ public class FinancilProductService : IFinancilProductService
             throw new MyException("Edit information does not exist");
         product.ProductName = input.ProductName;
         product.CoverImage = input.CoverImage;
-        product.ProductIntroduction = input.ProductIntroduction;
+        product.Introduction = input.ProductIntroduction;
         product.DailyRate = input.DailyRate;
         product.Cycle = input.Cycle;
         product.BuyMinUnit = input.BuyMinUnit;

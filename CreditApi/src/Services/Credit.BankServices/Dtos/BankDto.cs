@@ -32,6 +32,11 @@ public class BankInput
     public string BankCode { get; set; } = string.Empty;
 
     /// <summary>
+    ///  银行Logo
+    /// </summary>
+    public string Logo { get; set; } = string.Empty;
+
+    /// <summary>
     ///  是否启用 0 启用  1禁用
     /// </summary>
     public int IsEnable { get; set; }
