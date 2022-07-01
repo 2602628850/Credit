@@ -8,7 +8,7 @@
 			<view class="input-icon iconfont icon-youxiang"></view>
 		</template>
 		<template v-slot:default>
-			<input :placeholder="$t('public.mailTip')" class="input" v-model="editItem.mail"/>
+			<input :placeholder="$t('public.mailTip')" class="input" v-model="editItem.Username" />
 		</template>
 	</register-input-item>
 
@@ -18,16 +18,12 @@
 			<view class="input-icon iconfont icon-mima"></view>
 		</template>
 		<template v-slot:default>
-			<input :placeholder="$t('public.pwdTip')" class="input" v-model="editItem.pwd"/>
+			<input :placeholder="$t('public.pwdTip')" class="input" v-model="editItem.Password" />
 		</template>
 	</register-input-item>
 
 	<view class="flex-row-start margin-left-right-20 mgt mgb text-small">
-		<el-switch
-			v-model="rememberAccount"
-			class="ml-2"
-			style="--el-switch-on-color: #00875a;"
-		/>
+		<el-switch v-model="rememberAccount" class="ml-2" style="--el-switch-on-color: #00875a;" />
 		<view class="mgl text-grey">{{$t('login.remember')}}</view>
 	</view>
 
@@ -45,9 +41,16 @@
 <script>
 	import RegisterTopItem from "../register/register-top-item";
 	import RegisterInputItem from "../register/register-input-item";
+	// import {
+	// 	get,
+	// 	post
+	// } from '@/common/js/API/Query.js'
 	export default {
 		name: "login",
-		components: {RegisterInputItem, RegisterTopItem},
+		components: {
+			RegisterInputItem,
+			RegisterTopItem
+		},
 		data() {
 			return {
 				editItem: {},
@@ -55,11 +58,27 @@
 			}
 		},
 		methods: {
+			// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
 			doLogin() {
-				// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
-				uni.navigateTo({
-					url: '/pages/index/indexPage'
+				var url = "/Account/UserLogin";
+				this.ApiPost(url, this.editItem).then(res => {
+					if(res.data==null){
+						uni.showToast({
+							title:this.$t('registerandlog.loginresult'),
+							duration:2000,
+						})
+						
+					}else{
+						//登录成功,缓存token
+						this.$StoreUtil.set('token',res.data.token);
+						//跳首页
+						uni.navigateTo({
+						url: '/pages/index/indexPage'
+						})
+					}
 				})
+				
+				
 			},
 			toRegister() {
 				uni.reLaunch({
@@ -88,6 +107,7 @@
 	.input-placeholder {
 		font-size: 12px;
 	}
+
 	.uni-input-input {
 		font-size: 12px;
 	}

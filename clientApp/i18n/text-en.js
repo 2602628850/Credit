@@ -51,8 +51,10 @@ export default {
         send: 'Send',
         pwd: 'Password',
         pwdTip: 'Enter your Password',
-        mail: 'Email',
-        mailTip: 'Enter your email',
+        mail: 'Username',
+        mailTip: 'Enter your Username',
+		nikename:'True name',
+		nikenameTip:'Enter your true name',
 		recharge: "recharge",
 		withdraw: 'withdraw funds',
 		nickname: "Nickname",
@@ -121,7 +123,9 @@ export default {
 		jifendh:'Integral exchange',
 		shengyu:'Remaining',
 		interal:'Integral',
-		lijiduihuan:'Exchange now'
+		lijiduihuan:'Exchange now',
+		zsuccess:'Your balance has been successfully transferred',
+		zfail:'The points you entered cannot be greater than your personal points!'
 		
 	},
 	mine: {
@@ -139,7 +143,21 @@ export default {
 	level: {
 		title: 'credit rating',
 		currentCreditValue: 'current credit value',
-		nextLevel: '[number] credits required to reach [lv]'
+		nextLevel: '[number] credits required to reach [lv]',
+		obtain:"Get credit value",
+		Dailytask:'Daily task ',
+		daytask:"Complete the credit card repayment task today ",
+		Eweektask:"Weekly task ",
+		weektask:'Complete the loan repayment task this week ',
+		togo:"To finish",
+		Equity:"Membership benefits",
+		table1:"level",
+		table2:"Upgrade requires credit",
+		table3:"This level of privilege",
+		Creditvalue:"credit value",
+		toFinish: 'to finish',
+		memberBenefits: 'member benefits',
+
 	},
 	tongji:{
 		title:'Rport statistics',
@@ -149,7 +167,88 @@ export default {
 		tdsy:'Total team revenue',
 		tdtj:'Team statistics',
 		tdzcyh:'Team users',
-		zsrs:'Direct users'
-	}
-    
+		zsrs:'Direct users',
+		zjbdjl:'Fund change records',
+		gd:"More"
+	},
+	monchange:{
+		jebd:'Fund change records',
+		cz:'Recharge',
+		banlance:'Current balance:',
+		sj:'1'
+	},
+	kefu:{
+		title:'Customer Service',
+		kefutitle:'Serve you sincerely',
+		online:'Online Customer Service',
+		vipline:'VIP customer service',
+		phoneline:'complaint phone',
+		lineservice:'Online Customer Service',
+		kefutm:'Customer service working time',
+		ketime:'Monday to Sunday 8:00 am to 22:00 pm',
+		vipservice:'VIP customer service',
+		vipkefutm:'Customer service working time',
+		vipketime:'Monday to Sunday 8:00 am to 22:00 pm'
+	},	
+	P2P: {
+	    title: '  P2P zone  ',		
+		profit:'Profit',		
+		unbalance:'Unlock balance',
+		repayment:'Repayment:',
+		button:'Enter'	
+	},
+	Temrule: {
+	    title: ' team rules '	
+	},
+	team: {
+	    title: ' Team ',
+		Totaldata:"Total data",
+		Tuser:"Team users",
+		TformalUser:"Team official member user",
+		Totalteamrepayment:"Total team repayment",
+		Expectedteamrepaymentincome:"Expected team repayment income",
+		ExpectedteamSMEprofit:"Expected team SME profit",
+		Expectedtotalprofit:"Expected total profit",
+		Rulesdescription:"Rules description",
+		Subordinateddata:"Subordinated data"
+		
+	},
+    loan: {
+        title: '  P2P zone  ',		
+		bankname:'Bank Name',		
+		number:'Loan contract number',	
+		repayment:'Loan amount',
+		checkButton:'Find pending loan information',
+		selectrepayment:'Select Loan',
+		behalfButton:'Confirm',
+		Prorevenue:'Product Profit',
+		dayrevenue:'Daily income',
+		cycle:'Cycle',
+		expirerevenue:'Expire income',
+		Procontent:'Product introduction'
+		
+    },
+    sem: {
+        title: ' SME Loans ',		
+		Dailyincome:'Daily income',		
+		cycle:'Cycle',
+		button:'Enter'	
+    },
+    semloan: {
+        title: ' SME Loans ',		
+		UnitPrice:'Price per unit',		
+		cycle:'Period of payment',
+		Minimum:"Min purchase",
+		returnrate:"Daily rate of return",
+		buymum:"Purchase share",
+		buyprice:"Purchase price",
+		button:'Buy'	
+    },
+    registerandlog:{
+    	gxxy:'Please agree to check the agreement!',
+    	srmm:'Please fill in the password and confirm the password!',
+    	surepass:'The two passwords are inconsistent!',
+    	registersuc:'Registration succeeded, please login!',
+    	loginresult:'Wrong user name or password!'
+    }
 }

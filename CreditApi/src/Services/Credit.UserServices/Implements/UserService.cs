@@ -50,7 +50,11 @@ namespace Credit.UserServices
                 Id = IdHelper.GetId(),
                 Username = input.Username.ToLower(),
                 Password = input.Password,
-                Nickname = input.Username,
+                Nickname = input.Nickname,
+                CountryName=input.CountryName,
+                Code=input.Code,
+                InvCode=input.InvCode,
+
             };
             await _freeSql.Insert(user).ExecuteAffrowsAsync();
         }
@@ -181,6 +185,16 @@ namespace Credit.UserServices
             };
 
             return output;
+        }
+        /// <summary>
+        ///  用户积分转余额
+        /// </summary>
+        /// <param name="input"></param>
+        public void ExchangeIntegral(UserDto input)
+        {
+            //修改用户余额信息
+            _freeSql.Update<Users>(input.Id)
+                .SetDto(new { Balance = input.Balance, Integral = input.Integral }).ExecuteAffrows();
         }
     }
 }

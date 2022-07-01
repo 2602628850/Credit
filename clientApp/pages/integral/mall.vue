@@ -60,6 +60,13 @@
 				})
 			}
 		},
+		mounted() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			}
+		},
 		data() {
 			return {
 				intereal:this.$t('interal.jifendh'),

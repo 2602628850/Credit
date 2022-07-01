@@ -79,6 +79,26 @@
              确认密码
             </summary>
         </member>
+        <member name="P:Credit.UserServices.Dtos.RegisterUserInput.Nickname">
+            <summary>
+             昵称
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.RegisterUserInput.CountryName">
+            <summary>
+            国家
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.RegisterUserInput.Code">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.RegisterUserInput.InvCode">
+            <summary>
+            邀请码
+            </summary>
+        </member>
         <member name="P:Credit.UserServices.Dtos.UserInput.Id">
             <summary>
             
@@ -92,6 +112,16 @@
         <member name="T:Credit.UserServices.Dtos.UserDto">
             <summary>
              用户信息
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.Integral">
+            <summary>
+             积分
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.Balance">
+            <summary>
+             余额
             </summary>
         </member>
         <member name="T:Credit.UserServices.UserService">
@@ -147,6 +177,12 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
+        <member name="M:Credit.UserServices.UserService.ExchangeIntegral(Credit.UserServices.Dtos.UserDto)">
+            <summary>
+             用户积分转余额
+            </summary>
+            <param name="input"></param>
+        </member>
         <member name="T:Credit.UserServices.IUserService">
             <summary>
              用户管理接口定义
@@ -193,6 +229,12 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.ExchangeIntegral(Credit.UserServices.Dtos.UserDto)">
+            <summary>
+             用户积分转余额
+            </summary>
+            <param name="input"></param>
         </member>
     </members>
 </doc>

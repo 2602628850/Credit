@@ -48,7 +48,10 @@ app.$mount(); //为了兼容小程序及app端必须这样写才有效果
 
 
 import {createSSRApp} from 'vue'
-
+import {
+		get,
+		post
+	} from '@/common/js/API/Query.js'
 export function createApp() {
     const app = createSSRApp(App)
 
@@ -75,7 +78,8 @@ export function createApp() {
 	//将顶部导航栏注册到main里面，就不用在每个页面在单独去注册引用了,页面就可以直接调用了
 	app.component('NavigationBar', NavigationBar)
 	app.component('AppContentView', AppContentView)
-
+    app.config.globalProperties.ApiPost = post;
+    app.config.globalProperties.ApiGet = get;
     return {
         app
     }

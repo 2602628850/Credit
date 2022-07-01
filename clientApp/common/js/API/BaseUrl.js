@@ -1,7 +1,8 @@
 // #ifdef H5
 console.log('h5')
-// 请求域名
-let host = 'http://api.ceshi-api.com/v1.0';
+// 请求域名http://localhost:8003/v1
+// let host = 'http://api.ceshi-api.com/v1.0';
+let host = 'http://localhost:8003/v1';
 // #endif
 // #ifdef APP-PLUS
 console.log('app')

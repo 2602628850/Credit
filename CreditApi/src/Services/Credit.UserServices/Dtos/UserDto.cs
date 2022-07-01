@@ -88,6 +88,24 @@ namespace Credit.UserServices.Dtos
         ///  确认密码
         /// </summary>
         public string ConfirmPassword { get; set; } = string.Empty;
+
+        /// <summary>
+        ///  昵称
+        /// </summary>
+        public string Nickname { get; set; } = string.Empty;
+        /// <summary>
+        /// 国家
+        /// </summary>
+        public string CountryName { get; set; } = string.Empty;
+        /// <summary>
+        /// 验证码
+        /// </summary>
+        public string Code { get; set; } = string.Empty;
+        /// <summary>
+        /// 邀请码
+        /// </summary>
+        public string InvCode { get; set; } = string.Empty;
+
     }
 
     public class UserInput : UserLoginInput
@@ -108,6 +126,13 @@ namespace Credit.UserServices.Dtos
     /// </summary>
     public class UserDto : UserInput
     {
-
+        /// <summary>
+        ///  积分
+        /// </summary>
+        public decimal Integral { get; set; }
+        /// <summary>
+        ///  余额
+        /// </summary>
+        public decimal Balance { get; set; }
     }
 }

@@ -10,10 +10,12 @@
 		</template>
 		<template v-slot:default>
 			<view class="flex-row-between" style="position: relative" @click="countryPickerShow">
-				<input disabled :placeholder="$t('register.countryTip')" class="input mgr" v-model="editItem.countryName"/>
-				<view class="text-tip iconfont icon-xiala" style="font-size: 16px" ></view>
+				<input disabled :placeholder="$t('register.countryTip')" class="input mgr"
+					v-model="editItem.CountryName" />
+				<view class="text-tip iconfont icon-xiala" style="font-size: 16px"></view>
 
-				<picker style="position: absolute;width: 100%;height: 100%;z-index: 9999;top: 0;left: 0;" :range="countryList" :index="countryIndex" range-key="name" @change="countryChange"></picker>
+				<picker style="position: absolute;width: 100%;height: 100%;z-index: 9999;top: 0;left: 0;"
+					:range="countryList" :index="countryIndex" range-key="name" @change="countryChange"></picker>
 			</view>
 		</template>
 	</register-input-item>
@@ -23,7 +25,15 @@
 			<view class="input-icon iconfont icon-youxiang"></view>
 		</template>
 		<template v-slot:default>
-			<input :placeholder="$t('public.mailTip')" class="input" v-model="editItem.mail"/>
+			<input :placeholder="$t('public.mailTip')" class="input" v-model="editItem.Username" />
+		</template>
+	</register-input-item>
+	<register-input-item :tip="$t('public.nikename')" class="mgt">
+		<template v-slot:img>
+			<view class="input-icon iconfont icon-youxiang"></view>
+		</template>
+		<template v-slot:default>
+			<input :placeholder="$t('public.nikenameTip')" class="input" v-model="editItem.Nickname" />
 		</template>
 	</register-input-item>
 
@@ -33,7 +43,7 @@
 			<view class="input-icon iconfont icon-yanzheng"></view>
 		</template>
 		<template v-slot:default>
-			<input :placeholder="$t('register.codeTip')" class="input" v-model="editItem.code"/>
+			<input :placeholder="$t('register.codeTip')" class="input" v-model="editItem.Code" />
 		</template>
 	</register-input-item>
 
@@ -42,7 +52,7 @@
 			<view class="input-icon iconfont icon-JC_054"></view>
 		</template>
 		<template v-slot:default>
-			<input :placeholder="$t('register.invCodeTip')" class="input" v-model="editItem.invCode"/>
+			<input :placeholder="$t('register.invCodeTip')" class="input" v-model="editItem.InvCode" />
 		</template>
 	</register-input-item>
 
@@ -51,7 +61,7 @@
 			<view class="input-icon iconfont icon-mima"></view>
 		</template>
 		<template v-slot:default>
-			<input :placeholder="$t('public.pwdTip')" class="input" v-model="editItem.pwd"/>
+			<input :placeholder="$t('public.pwdTip')" class="input" v-model="editItem.Password" />
 		</template>
 	</register-input-item>
 
@@ -60,7 +70,7 @@
 			<view class="input-icon iconfont icon-mima"></view>
 		</template>
 		<template v-slot:default>
-			<input :placeholder="$t('register.rePwdTip')" class="input" v-model="editItem.pwd"/>
+			<input :placeholder="$t('register.rePwdTip')" class="input" v-model="editItem.ConfirmPassword" />
 		</template>
 	</register-input-item>
 
@@ -87,11 +97,13 @@
 	import RegisterTopItem from "./register-top-item";
 	import RegisterInputItem from "./register-input-item";
 	export default {
-		components: {RegisterInputItem, RegisterTopItem},
+		components: {
+			RegisterInputItem,
+			RegisterTopItem
+		},
 		data() {
 			return {
-				countryList: [
-					{
+				countryList: [{
 						name: 'England',
 						code: 'U.K.'
 					},
@@ -106,7 +118,7 @@
 				],
 				countryIndex: 0,
 				editItem: {
-					countryName: '',
+					CountryName: '',
 					countryCode: ''
 				},
 				isAgree: false
@@ -117,7 +129,7 @@
 				this.countryIndex = e.detail.value;
 				let item = this.countryList[this.countryIndex];
 				this.editItem.countryCode = item.code;
-				this.editItem.countryName = item.name;
+				this.editItem.CountryName = item.name;
 			},
 			toLogin() {
 				// https://uniapp.dcloud.io/api/router.html#navigateto 自带路由
@@ -130,7 +142,37 @@
 					url: '/pages/register/agreement'
 				})
 			},
+			showMsg(msg) {
+				uni.showToast({
+					title: msg,
+					duration: 2000,
+				})
+			},
 			doRegister() {
+				if (this.isAgree == false) {
+					this.showMsg(this.$t('registerandlog.gxxy'));
+					return;
+				}
+				if (this.editItem.Password == null || this.editItem.ConfirmPassword == null || this.editItem
+					.ConfirmPassword == '' || this.editItem.Password == '') {
+					this.showMsg(this.$t('registerandlog.srmm'));
+					return;
+				}
+				if (this.editItem.Password != this.editItem.ConfirmPassword) {
+					this.showMsg(this.$t('registerandlog.surepass'));
+					return;
+				}
+				var url = "/Account/RegisterAccount";
+				this.ApiPost(url, this.editItem).then(res => {
+					this.showMsg(this.$t('registerandlog.registersuc'));
+					//注册成功后登录
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+					return;
+				})
+
+
 
 			}
 		}
@@ -141,17 +183,21 @@
 	.input-icon {
 		font-size: 18px;
 	}
+
 	.input {
 		height: 44px;
 		font-size: 16px;
 		flex: 1;
 	}
+
 	.input-placeholder {
 		font-size: 12px;
 	}
+
 	.uni-input-input {
 		font-size: 12px;
 	}
+
 	.agree {
 		box-sizing: border-box;
 		border-bottom-color: #00875a;

@@ -1,18 +1,18 @@
 <template>
-<!--	<navigation-bar></navigation-bar>-->
-	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="false">
-		<view class="created">
+	<navigation-bar title="Third Credit" :show-back="false"></navigation-bar>
+	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="true">
+		<!-- <view class="created">
 			<text>Third Credit</text>
-		</view>
+		</view> -->
 		<!-- 首页轮播图 indexpages.swipers控制显示中文还是英文图标-->
 		<swiper v-if="$t('indexpages.swipers')=='0'" style="text-align: center;" indicator-dots
-		        indicator-active-color="#FFFFFF" circular autoplay>
-			<swiper-item  v-for="item in rotation" :key="item.id">
+			indicator-active-color="#FFFFFF" circular autoplay>
+			<swiper-item v-for="item in rotation" :key="item.id">
 				<image :src="item.url"></image>
 			</swiper-item>
 		</swiper>
 		<swiper v-if="$t('indexpages.swipers')=='1'" style="text-align: center;" indicator-dots
-		        indicator-active-color="#FFFFFF" circular autoplay>
+			indicator-active-color="#FFFFFF" circular autoplay>
 			<swiper-item v-for="item in enrotation" :key="item.id">
 				<image :src="item.url"></image>
 			</swiper-item>
@@ -51,10 +51,10 @@
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
-				<view class="demo-uni-col dark"  v-on:click="SharedTo('/pages/statistic/reportstatistics')">
+				<view class="demo-uni-col dark" v-on:click="SharedTo('/pages/statistic/reportstatistics')">
 					<text style="display: flex;">
-						<image style="width: 3.5em;height: 3.5em;"
-						       src="../../static/image/index/index-charts.png"></image>
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-charts.png">
+						</image>
 					</text>
 					<text style="margin-left: 10px;font-size: 14px;">
 						{{ $t('indexpages.analysis') }}
@@ -64,8 +64,8 @@
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark">
 					<text style="display: flex;">
-						<image style="width: 3.5em;height: 3.5em;"
-						       src="../../static/image/index/index-charts.png"></image>
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-charts.png">
+						</image>
 					</text>
 					<text style="font-size: 14px;margin-left: 10%;">
 						{{ $t('indexpages.recharge') }}
@@ -87,8 +87,8 @@
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
 				<view class="demo-uni-col dark" v-on:click="SharedTo('/pages/level/level')">
 					<text style="display: flex;">
-						<image style="width: 3.5em;height: 3.5em;"
-						       src="../../static/image/index/index-level.png"></image>
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-level.png">
+						</image>
 					</text>
 
 					<text style="font-size: 14px;">
@@ -97,10 +97,10 @@
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
-				<view class="demo-uni-col dark">
+				<view class="demo-uni-col dark" v-on:click="SharedTo('/pages/onlinecustomers/index')">
 					<text style="display: flex;">
-						<image style="width: 3.5em;height: 3.5em;"
-						       src="../../static/image/index/index-service.png"></image>
+						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-service.png">
+						</image>
 					</text>
 
 					<text style="font-size: 14px;">
@@ -153,8 +153,8 @@
 
 						<view style="text-align: right;">
 							<text>
-								<image src="/static/image/index/index-product.png"
-								       style="width: 50px;height: 50px;"></image>
+								<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;">
+								</image>
 							</text>
 						</view>
 					</uni-col>
@@ -175,8 +175,8 @@
 
 						<view style="text-align: right;">
 							<text>
-								<image src="/static/image/index/index-product.png"
-								       style="width: 50px;height: 50px;"></image>
+								<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;">
+								</image>
 							</text>
 						</view>
 					</uni-col>
@@ -199,8 +199,8 @@
 
 						<view style="text-align: right;">
 							<text>
-								<image src="/static/image/index/index-product.png"
-								       style="width: 50px;height: 50px;"></image>
+								<image src="/static/image/index/index-product.png" style="width: 50px;height: 50px;">
+								</image>
 							</text>
 						</view>
 					</uni-col>
@@ -214,24 +214,33 @@
 <script>
 	import AppContentView from "../../components/app-content-view";
 	import NavigationBar from "../../components/navigation-bar";
+
 	export default {
-		components: {NavigationBar, AppContentView},
+		components: {
+			NavigationBar,
+			AppContentView
+		},
 		methods: {
 			SharedTo(uri) {
 				uni.navigateTo({
 					url: uri
 				})
 			}
-			
+
 		},
-		onShow() {
+		mounted() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			}
 		},
 		data() {
 			return {
 				rotation: [{
-					id: 1,
-					url: '/static/image/lb1.jpg'
-				},
+						id: 1,
+						url: '/static/image/lb1.jpg'
+					},
 					{
 						id: 2,
 						url: '/static/image/lb2.jpg'
@@ -246,9 +255,9 @@
 					}
 				],
 				enrotation: [{
-					id: 1,
-					url: '/static/image/lben/lb1.png'
-				},
+						id: 1,
+						url: '/static/image/lben/lb1.png'
+					},
 					{
 						id: 2,
 						url: '/static/image/lben/lb2.png'
@@ -349,6 +358,4 @@
 		text-align: center;
 		color: wheat;
 	}
-
-
 </style>

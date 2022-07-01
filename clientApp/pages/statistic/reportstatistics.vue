@@ -4,14 +4,16 @@
 		<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
 
 
-			<view style="padding: 4%;">{{$t('tongji.sytj')}}</view>
+			<view style="padding: 4%;float: left;">{{$t('tongji.sytj')}}</view>
+			<view style="padding: 4%;text-align: right;font-size: 14px;color: green;" @click="ToChange()">{{$t('tongji.zjbdjl')}}</view>
 			<view class="charts-box" style="background-color: white;width:92%;margin-left: 4%;">
 				<qiun-data-charts type="ring" 
 					:opts="{legend:{position: 'bottom'},extra:{ring:{ringWidth: 60,linearType:'custom',centerColor:'white'}}}"
 					:chartData="chartsDataRing1" />
 			</view>
 
-			<view style="padding: 4%;">{{$t('tongji.tdtj')}}</view>
+			<view style="padding: 4%;float: left;">{{$t('tongji.tdtj')}}</view>
+			<view style="padding: 4%;text-align: right;font-size: 14px;color:green;"  @click="ToMore()">{{$t('tongji.gd')}}</view>
 			<view class="charts-box" style="background-color: white;width:92%;margin-left: 4%;">
 				<qiun-data-charts type="ring"
 					:opts="{legend:{position: 'bottom'},extra:{ring:{ringWidth: 60,linearType:'custom',centerColor:'white'}}}"
@@ -35,6 +37,7 @@
 				default: 0
 			}
 		},
+		
 		data() {
 			return {
 				intereal: this.$t('tongji.title'),
@@ -78,9 +81,24 @@
 			};
 		},
 		mounted() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			}
 			this.getServerData()
 		},
 		methods: {
+			ToChange() {
+				uni.navigateTo({
+					url: '/pages/statistic/moneychangerecord'
+				})
+			},
+			ToMore() {
+				uni.navigateTo({
+					url: '/pages/statistic/referral-bonus'
+				})
+			},
 			getServerData() {
 				var obj = this.demodataarray.PieA.series[0].data;
 				obj[0].name = this.$t('tongji.cksy')

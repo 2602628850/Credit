@@ -49,5 +49,10 @@ namespace Credit.UserServices
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedOutput<UserDto>> GetUserPagedList(PagedInput input);
+        /// <summary>
+        ///  用户积分转余额
+        /// </summary>
+        /// <param name="input"></param>
+        void ExchangeIntegral(UserDto input);
     }
 }

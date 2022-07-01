@@ -5,9 +5,6 @@
 		onLaunch: function() {
 			interceptor()
 			console.log('App Launch')
-
-
-
 		},
 		onShow: function() {
 			console.log('App Show')
