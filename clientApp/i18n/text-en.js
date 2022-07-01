@@ -125,7 +125,8 @@ export default {
 		interal:'Integral',
 		lijiduihuan:'Exchange now',
 		zsuccess:'Your balance has been successfully transferred',
-		zfail:'The points you entered cannot be greater than your personal points!'
+		zfail:'The points you entered cannot be greater than your personal points!',
+		tobalance:'Change into balance:'
 		
 	},
 	mine: {
@@ -250,5 +251,22 @@ export default {
     	surepass:'The two passwords are inconsistent!',
     	registersuc:'Registration succeeded, please login!',
     	loginresult:'Wrong user name or password!'
-    }
+    },
+	inteorder:{
+		intetitle:'Point order',
+		tointeral:'Redeem points：',
+		duihl:'rate of exchange：',
+		duicye:'Converted balance：',
+		duizye:'Total balance：'
+	},
+	inteexchange:{
+		title:'Integral record',
+		intetype:'Integral type：',
+		querycomplete:'Check card completed',
+		wancdh:'Complete replacement return',
+		yqhy:'Invite friends',
+		hqjfs:'Get product score：',
+		hqsj:'Get time：'
+		
+	}
 }

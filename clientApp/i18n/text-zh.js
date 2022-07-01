@@ -126,7 +126,8 @@ export default {
 		interal:'积分',
 		lijiduihuan:'立即兑换',
 		zsuccess:'已成功转到您的余额.',
-		zfail:'您输入的积分不能大于你的个人积分!'
+		zfail:'您输入的积分不能大于你的个人积分!',
+		tobalance:'换成余额:'
 		
 	},
 	mine: {
@@ -248,5 +249,22 @@ export default {
 		surepass:'两次密码不一致!',
 		registersuc:'注册成功,请登录!',
 		loginresult:'用户名或密码错误!'
+	},
+	inteorder:{
+		intetitle:'积分订单',
+		tointeral:'兑换积分：',
+		duihl:'兑换率：',
+		duicye:'兑换成的余额：',
+		duizye:'兑换后总余额：'
+	},
+	inteexchange:{
+		title:'积分记录',
+		intetype:'积分类型：',
+		querycomplete:'查卡完成',
+		wancdh:'完成代还',
+		yqhy:'邀请好友',
+		hqjfs:'获取积分数：',
+		hqsj:'获取时间：'
+		
 	}
 }

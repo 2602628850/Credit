@@ -351,7 +351,7 @@
              用户接口管理
             </summary>
         </member>
-        <member name="M:Credit.Api.Controllers.UserController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.UserServices.IUserService,Credit.UserWalletServices.IUserWalletService,Credit.UserBankCardServices.IUserBankCardService)">
+        <member name="M:Credit.Api.Controllers.UserController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.UserServices.IUserService,Credit.UserWalletServices.IUserWalletService,Credit.UserBankCardServices.IUserBankCardService,Credit.IntegralServices.IIntegralOrderService,Credit.IntegralServices.IIntegralRecodeService)">
             <summary>
             
             </summary>
@@ -430,6 +430,24 @@
             <summary>
              用户积分转余额
             </summary>[FromBody]RegisterUserInput input
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.GetCountIntegral">
+            <summary>
+            获取用户的当前积分
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.GetIntegralRecode">
+            <summary>
+            获取用户的积分记录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.GetIntegralOrder">
+            <summary>
+            获取用户的积分订单
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Credit.Api.ServicesTransient">

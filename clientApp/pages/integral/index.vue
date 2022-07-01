@@ -5,7 +5,7 @@
 
 			<view class="uni-padding-wrap uni-common-mt">
 				<view style="margin-top: 20px;">
-					<uni-card class="box-card">
+					<uni-card class="box-card" @click="ToRecode()">
 						<uni-row :gutter="20" style="height: 50px;">
 							<uni-col :span="11">
 								<view style="font-size: 16px; opacity: 1;font-weight: bold;">
@@ -14,7 +14,7 @@
 							</uni-col>
 							<uni-col :span="13">
 								<view style="font-size: 16px; opacity: 1;font-weight: bold;text-align: left;">
-									0
+									{{interealCount}}
 								</view>
 								<view style="text-align: right;margin-top: -10%;">
 									<text class="g-icons"></text>
@@ -34,7 +34,7 @@
 							</uni-col>
 							<uni-col :span="6">
 								<view style="font-size: 16px; opacity: 1;font-weight: bold;float: left;">
-									换成余额:
+									{{$t('interal.tobalance')}}
 								</view>
 							</uni-col>
 							<uni-col :span="9">
@@ -45,12 +45,13 @@
 							</uni-col>
 							<uni-col :span="6">
 								<view>
-									<text> <button class="btn-task1" @click="ExchangeIn()" type="primary">兑换</button> </text>
+									<text> <button class="btn-task1" @click="ExchangeIn()" type="primary">兑换</button>
+									</text>
 								</view>
 							</uni-col>
 
 						</uni-row>
-						<uni-row :gutter="20" style="height: 50px;">
+						<uni-row :gutter="20" style="height: 50px;" @click=ToOrder()>
 							<uni-col :span="3">
 								<image src="/static/image/iteral/integral-order.png" style="width: 30px;height: 30px;">
 								</image>
@@ -146,7 +147,8 @@
 		data() {
 			return {
 				intereal: this.$t('interal.intereal'),
-				showItem:{}
+				showItem: {},
+				interealCount: '',
 			}
 		},
 		mounted() {
@@ -155,6 +157,7 @@
 					url: '/pages/login/login'
 				})
 			}
+			this.GetInterealCount();
 		},
 		methods: {
 			//积分商城
@@ -183,21 +186,39 @@
 			},
 			ExchangeIn() {
 				var url = "/User/ExchangeIntegral";
-				this.ApiPost(url,this.showItem).then(res => {
+				this.ApiPost(url, this.showItem).then(res => {
 					if (res.data == "1") {
 						uni.showToast({
-							title:this.$t('interal.zfail'),
+							title: this.$t('interal.zfail'),
 							duration: 2000,
 						})
-					}else{
+					} else {
 						uni.showToast({
-							title:this.$t('interal.zsuccess'),
+							title: this.$t('interal.zsuccess'),
 							duration: 2000,
 						})
 					}
-					
+
 				})
-			}
+			},
+			GetInterealCount() {
+				var url = "/User/GetCountIntegral";
+				this.ApiGet(url).then(res => {
+					this.interealCount=res.data
+				})
+			},
+			//积分记录
+			ToRecode() {
+				uni.navigateTo({
+					url: "/pages/integral/currentintegral"
+				})
+			},
+			//积分订单
+			ToOrder() {
+				uni.navigateTo({
+					url: "/pages/integral/inteorder"
+				})
+			},
 
 
 
