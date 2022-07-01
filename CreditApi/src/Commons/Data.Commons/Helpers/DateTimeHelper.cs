@@ -12,4 +12,15 @@ public static class DateTimeHelper
     {
         return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
     }
+    /// <summary>
+    ///  UtcÊ±¼ä´Á×ªDateTime
+    /// </summary>
+    /// <param name="unixTime"></param>
+    /// <returns></returns>
+    public static DateTime UnixTimeToDateTime(long unixTime)
+    {
+        var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        dateTime = dateTime.AddMilliseconds(unixTime).ToLocalTime();
+        return dateTime;
+    }
 }

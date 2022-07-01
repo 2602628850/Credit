@@ -9,6 +9,9 @@ using Data.Commons.Enums;
 using Data.Commons.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Data.Core.Controllers;
+using Credit.IntegralServices;
+using Credit.IntegralServices.Dtos;
+using Credit.IntegralServices.Implements;
 
 namespace Credit.Api.Controllers
 {
@@ -20,6 +23,8 @@ namespace Credit.Api.Controllers
         private readonly IUserService _userService;
         private readonly IUserWalletService _walletService;
         private readonly IUserBankCardService _userBankCardService;
+        private readonly IIntegralOrderService _integralOrderService;
+        private readonly IIntegralRecodeService _integralRecodeService;
 
         /// <summary>
         /// 
@@ -28,11 +33,15 @@ namespace Credit.Api.Controllers
             ITokenManager tokenManager
             ,IUserService userService
             ,IUserWalletService walletService
-            ,IUserBankCardService userBankCardService) : base(tokenManager)
+            ,IUserBankCardService userBankCardService,
+            IIntegralOrderService integralOrderService,
+            IIntegralRecodeService integralRecodeService) : base(tokenManager)
         {
             _userService = userService;
             _walletService = walletService;
             _userBankCardService = userBankCardService;
+            _integralOrderService = integralOrderService;
+            _integralRecodeService = integralRecodeService;
         }
 
         /// <summary>
@@ -190,6 +199,36 @@ namespace Credit.Api.Controllers
             _userService.ExchangeIntegral(user);
             return "0";
 
+        }
+        /// <summary>
+        /// 获取用户的当前积分
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<decimal> GetCountIntegral()
+        {
+            UserDto user = await _userService.GetUserById(CurrentUser.UserId);
+            return user.Integral;
+        }
+        /// <summary>
+        /// 获取用户的积分记录
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<List<IntegralRecodeDto>> GetIntegralRecode()
+        {
+           List<IntegralRecodeDto> integralRecodeList =await _integralRecodeService.GentntegralRecodeList(CurrentUser.UserId);
+            return integralRecodeList;
+        }
+        /// <summary>
+        /// 获取用户的积分订单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<List<IntegralOrderDto>> GetIntegralOrder()
+        {
+            List<IntegralOrderDto> integralOrderList = await _integralOrderService.GentIntegralOrderList(CurrentUser.UserId);
+            return integralOrderList;
         }
     }
 }
