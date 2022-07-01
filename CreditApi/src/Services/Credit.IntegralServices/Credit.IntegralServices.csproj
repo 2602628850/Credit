@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Models\Credit.Integral\Credit.IntegralModels.csproj" />
     <ProjectReference Include="..\Commons\Data.Commons\Data.Commons.csproj" />
+    <ProjectReference Include="..\Credit.Integral\Credit.IntegralModels.csproj" />
   </ItemGroup>
 
 </Project>

@@ -244,6 +244,106 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:Credit.Api.Controllers.AdminRepayController">
+            <summary>
+             管理员代还管理
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.RepayServices.IRepayService)">
+            <summary>
+            
+            </summary>
+            <param name="tokenManager"></param>
+            <param name="repayService"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.RepayLevelCreate(Credit.RepayServices.Dtos.RepayLevelInput)">
+            <summary>
+             还款等级添加
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.RepayLevelUpdate(Credit.RepayServices.Dtos.RepayLevelInput)">
+            <summary>
+             还款等级编辑
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.RepayLevelDelete(Data.Commons.Dtos.ListIdInput)">
+            <summary>
+             还款等级删除
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.RepayLevelEnable(Data.Commons.Dtos.ListIdInput)">
+            <summary>
+             还款等级启用
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.RepayLevelDisable(Data.Commons.Dtos.ListIdInput)">
+            <summary>
+             还款等级停用
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.GetRepayLevel(System.Int64)">
+            <summary>
+             获取还款等级
+            </summary>
+            <param name="repayLevelId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.GetRepayLevelPagedList(Credit.RepayServices.Dtos.RepayLevelPagedInput)">
+            <summary>
+             获取还款等级列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.RepayBankCardCreate(Credit.RepayServices.Dtos.RepayBankCardInput)">
+            <summary>
+             还款银行卡添加
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.RepayBankCardUpdate(Credit.RepayServices.Dtos.RepayBankCardInput)">
+            <summary>
+             还款银行卡编辑
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.RepayBankCardDelete(Data.Commons.Dtos.ListIdInput)">
+            <summary>
+             还款银行卡删除
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.RepayBankCardEnable(Data.Commons.Dtos.ListIdInput)">
+            <summary>
+             还款银行卡启用
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.RepayBankCardDisable(Data.Commons.Dtos.ListIdInput)">
+            <summary>
+             还款银行卡停用
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.GetRepayBankCard(System.Int64)">
+            <summary>
+             获取还款银行卡
+            </summary>
+            <param name="bankCardId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminRepayController.GetRepayBankCardPagedList(Credit.RepayServices.Dtos.RepayBankCardPagedInput)">
+            <summary>
+             获取还款银行卡列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:Credit.Api.Controllers.AdminWalletController">
             <summary>
              钱包资金管理
@@ -344,6 +444,30 @@
              获取理财产品列表
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Credit.Api.Controllers.RepayController">
+            <summary>
+             用户代还管理
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.RepayController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.RepayServices.IRepayService)">
+            <summary>
+            
+            </summary>
+            <param name="tokenManager"></param>
+            <param name="repayService"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.RepayController.GetRepayLevelList">
+            <summary>
+             获取还款等级集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.RepayController.GetRepayBankCardList(System.Int64)">
+            <summary>
+             获取还款卡号
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Credit.Api.Controllers.UserController">

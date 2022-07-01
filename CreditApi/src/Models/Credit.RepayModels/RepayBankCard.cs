@@ -36,4 +36,9 @@ public class RepayBankCard : BaseModel
     ///  还款金额
     /// </summary>
     public decimal Amount { get; set; }
+
+    /// <summary>
+    ///   启用/停用
+    /// </summary>
+    public int IsEnable { get; set; }
 }

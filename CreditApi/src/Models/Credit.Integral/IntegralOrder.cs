@@ -1,5 +1,7 @@
 ﻿using Data.Commons.Models;
+
 namespace Credit.IntegralModels;
+
 public class IntegralOrder:BaseModel
 {
     /// <summary>

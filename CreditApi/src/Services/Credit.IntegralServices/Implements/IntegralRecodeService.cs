@@ -1,11 +1,6 @@
 ﻿using Credit.IntegralModels;
 using Credit.IntegralServices.Dtos;
 using Data.Commons.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Credit.IntegralServices.Implements;
 

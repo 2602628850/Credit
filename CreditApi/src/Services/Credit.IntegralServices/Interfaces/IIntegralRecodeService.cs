@@ -1,5 +1,4 @@
 ﻿using Credit.IntegralServices.Dtos;
-using Data.Commons.Dtos;
 
 namespace Credit.IntegralServices;
 public interface IIntegralRecodeService
