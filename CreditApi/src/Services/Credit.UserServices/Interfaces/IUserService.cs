@@ -54,5 +54,13 @@ namespace Credit.UserServices
         /// </summary>
         /// <param name="input"></param>
         void ExchangeIntegral(UserDto input);
+
+
+        /// <summary>
+        ///  用户团队人数统计
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task<UserTeamDto> GetTeamCountById(long userId);
     }
 }

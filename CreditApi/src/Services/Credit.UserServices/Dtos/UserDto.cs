@@ -135,4 +135,19 @@ namespace Credit.UserServices.Dtos
         /// </summary>
         public decimal Balance { get; set; }
     }
+
+    /// <summary>
+    ///  团队人数统计
+    /// </summary>
+    public class UserTeamDto
+    {
+        /// <summary>
+        ///  直属下级
+        /// </summary>
+        public int Direct { get; set; }
+        /// <summary>
+        ///  团队注册人数
+        /// </summary>
+        public int TeamUser { get; set; }
+    }
 }
