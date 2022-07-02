@@ -12,7 +12,6 @@
     <ProjectReference Include="..\Commons\Data.Core\Data.Core.csproj" />
     <ProjectReference Include="..\Commons\Data.FreeSql\FreeSql.Core.csproj" />
     <ProjectReference Include="..\Commons\Swagger.UI\Swagger.UI.csproj" />
-    <ProjectReference Include="..\Credit.IntegralServices\Credit.IntegralServices.csproj" />
     <ProjectReference Include="..\Services\Credit.BankServices\Credit.BankServices.csproj" />
     <ProjectReference Include="..\Services\Credit.IntegralServices\Credit.IntegralServices.csproj" />
     <ProjectReference Include="..\Services\Credit.OrderServices\Credit.OrderServices.csproj" />
