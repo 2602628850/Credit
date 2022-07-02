@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.SettingModels", "Mod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.SettingServices", "Services\Credit.SettingServices\Credit.SettingServices.csproj", "{E6C62DE5-2B09-404D-A628-69C3020A8AC2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.RepayModels", "Models\Credit.RepayModels\Credit.RepayModels.csproj", "{2731A8CB-EA9F-4399-8F57-7AF406CBCE3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{E6C62DE5-2B09-404D-A628-69C3020A8AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6C62DE5-2B09-404D-A628-69C3020A8AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6C62DE5-2B09-404D-A628-69C3020A8AC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2731A8CB-EA9F-4399-8F57-7AF406CBCE3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2731A8CB-EA9F-4399-8F57-7AF406CBCE3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2731A8CB-EA9F-4399-8F57-7AF406CBCE3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2731A8CB-EA9F-4399-8F57-7AF406CBCE3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -194,6 +200,7 @@ Global
 		{D354084B-535C-4E30-AC05-E393463F7F26} = {AD38372F-7AFB-4F7A-BC6E-042A321B8EA8}
 		{C3C5F1DC-BC57-49C4-AC98-30C2BDE17BEB} = {CE159541-6753-4927-8909-6161E8E9F7C5}
 		{E6C62DE5-2B09-404D-A628-69C3020A8AC2} = {AD38372F-7AFB-4F7A-BC6E-042A321B8EA8}
+		{2731A8CB-EA9F-4399-8F57-7AF406CBCE3B} = {CE159541-6753-4927-8909-6161E8E9F7C5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C3532953-9A99-4976-8D3B-355D741B2207}
