@@ -20,4 +20,10 @@
       <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.6" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="Credit.RepayModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <HintPath>..\..\Models\Credit.RepayModels\bin\Debug\net6.0\Credit.RepayModels.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
 using Credit.PamentInfoModels;
 using Credit.PayeeBankCardServices;
 using Credit.PayeeInfoModels;
+using Credit.RepayModels;
 using Credit.UserBankCardModels;
 using Credit.UserBankCardServices;
 using Credit.UserModels;
@@ -129,9 +130,51 @@ public class UserWalletService : IUserWalletService
                 });
             });
         }
+        //代还
+        else if (input.SourceType == WalletSourceEnums.RepayApply)
+        {
+            //线下支付
+            if (input.Type?.ToLower() == PayTypeConsts.BankCard)
+            {
+                if (input.PayeeBankCardId == 0)
+                    throw new MyException("Please contact customer service");
+                //查找对应收款卡
+                var bankCard = await _freeSql.Select<RepayBankCard>()
+                    .Where(s => s.Id == input.PayeeBankCardId)
+                    .Where(s => s.IsDeleted == 0 && s.IsEnable == 1)
+                    .ToOneAsync();
+                if (bankCard == null)
+                    throw new MyException("Please contact customer service");
+                if (input.Amount != bankCard.Amount)
+                    throw new MyException("Please check the repayment amount");
+                var repayLevel = await _freeSql.Select<RepayLevel>()
+                    .Where(s => s.Id == bankCard.RepayLevelId)
+                    .Where(s => s.IsDeleted == 0 && s.IsEnable == 1)
+                    .ToOneAsync();
+                if (repayLevel == null || repayLevel.UnlockBalance > user.Balance)
+                    throw new MyException("Please contact customer service");
+                var payText = $"卡号：{bankCard.CardNo}, 收到代还金额{input.Amount}.";
+                var moneyApply = input.MapTo<UserMoneyApply>();
+                moneyApply.Id = IdHelper.GetId();
+                moneyApply.PayText = payText;
+                moneyApply.AuditStatus = AuditStatusEnums.Default;
+                moneyApply.ChangeType = WalletChangeEnums.In;
+                moneyApply.UserId = userId;
+                await _freeSql.Insert(moneyApply).InsertTableTime(TableTimeFormat.Year).ExecuteAffrowsAsync();
+            }
+            //线上支付
+            else if (input.Type?.ToLower() == PayTypeConsts.Payment)
+            {
+            
+            }
+            else
+            {
+                throw new MyException("Wrong payment type");
+            }
+        }
         else
         {
-                
+            throw new MyException("Parameter error");
         }
     }
 
@@ -246,7 +289,9 @@ public class UserWalletService : IUserWalletService
            || input.SourceType == WalletSourceEnums.WithdrawalReturn
            || input.SourceType == WalletSourceEnums.WithdrawalUnFreeze
            || input.SourceType == WalletSourceEnums.BuyFinancilReturn
-           || input.SourceType == WalletSourceEnums.SoldFinancil)
+           || input.SourceType == WalletSourceEnums.SoldFinancil
+           || input.SourceType == WalletSourceEnums.Repayment
+           || input.SourceType == WalletSourceEnums.RepayProfit)
        {
            user.Balance += input.Amount;
        }
@@ -463,6 +508,18 @@ public class UserWalletService : IUserWalletService
        var user = await _freeSql.Select<Users>()
            .Where(s => s.Id == moneyApply.UserId && s.IsDeleted == 0)
            .ToOneAsync();
+       var repayProfitAmount = 0m;
+       if (moneyApply.SourceType == WalletSourceEnums.RepayApply)
+       {
+           var repayCard = await _freeSql.Select<RepayBankCard>()
+               .Where(s => s.Id == moneyApply.PayeeBankCardId)
+               .ToOneAsync();
+           var repayLevel = await _freeSql.Select<RepayLevel>()
+               .Where(s => s.Id == repayCard.RepayLevelId)
+               .ToOneAsync();
+           repayProfitAmount = moneyApply.Amount * repayLevel.ProfitRate * 0.01m;
+       }
+
        var utcNow = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
        _freeSql.Transaction(() =>
        {
@@ -503,6 +560,26 @@ public class UserWalletService : IUserWalletService
                {
                    Amount = moneyApply.Amount,
                    SourceType = WalletSourceEnums.Withdrawal,
+                   OperateUserId = auditUserId,
+                   UserId = moneyApply.UserId
+               });
+           }
+
+           if (moneyApply.SourceType == WalletSourceEnums.RepayApply)
+           {
+               //添加代还流水
+               WalletRecordCreate(new UserWalletRecordInput
+               {
+                   Amount = moneyApply.Amount,
+                   SourceType = WalletSourceEnums.Repayment,
+                   OperateUserId = auditUserId,
+                   UserId = moneyApply.UserId
+               });
+               //添加还款收益流水
+               WalletRecordCreate(new UserWalletRecordInput
+               {
+                   Amount = repayProfitAmount,
+                   SourceType = WalletSourceEnums.RepayProfit,
                    OperateUserId = auditUserId,
                    UserId = moneyApply.UserId
                });

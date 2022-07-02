@@ -67,13 +67,19 @@ public enum WalletSourceEnums
     ///  代还申请
     /// </summary>
     [Description("代还申请")]
-    RepayApplication = 300,
+    RepayApply = 300,
     
     /// <summary>
     ///  代还
     /// </summary>
     [Description("代还")]
     Repayment = 310,
+    
+    /// <summary>
+    ///  代还收益
+    /// </summary>
+    [Description("代还收益")]
+    RepayProfit = 320,
 }
 
 /// <summary>
