@@ -6,6 +6,7 @@ using Credit.OrderServices.Implements;
 using Credit.PayeeBankCardServices;
 using Credit.ProductServices;
 using Credit.RepayServices;
+using Credit.SettingServices;
 using Credit.UserBankCardServices;
 using Credit.UserServices;
 using Credit.UserWalletServices;
@@ -36,7 +37,8 @@ namespace Credit.Api
                 .AddTransient<ITokenManager,TokenManager>()
                 .AddTransient<IIntegralOrderService, IntegralOrderService>()
                 .AddTransient<IIntegralRecodeService, IntegralRecodeService>()
-                .AddTransient<IRepayService,RepayService>();
+                .AddTransient<IRepayService,RepayService>()
+                .AddTransient<ISettingService,SettingService>();
         }
     }
 }

@@ -62,6 +62,18 @@ public enum WalletSourceEnums
     /// </summary>
     [Description("出售理财")]
     SoldFinancil = 220,
+    
+    /// <summary>
+    ///  代还申请
+    /// </summary>
+    [Description("代还申请")]
+    RepayApplication = 300,
+    
+    /// <summary>
+    ///  代还
+    /// </summary>
+    [Description("代还")]
+    Repayment = 310,
 }
 
 /// <summary>

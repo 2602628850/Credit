@@ -344,6 +344,30 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:Credit.Api.Controllers.AdminSettingController">
+            <summary>
+             管理员系统配置
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminSettingController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.SettingServices.ISettingService)">
+            <summary>
+            
+            </summary>
+            <param name="tokenManager"></param>
+            <param name="settingService"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminSettingController.GetTaskIntegralSetting">
+            <summary>
+             获取任务积分配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminSettingController.TaskIntegralSetting(Credit.SettingServices.Dtos.TaskIntegralSetting)">
+            <summary>
+             任务积分设置
+            </summary>
+            <param name="taskIntegral"></param>
+        </member>
         <member name="T:Credit.Api.Controllers.AdminWalletController">
             <summary>
              钱包资金管理
@@ -467,6 +491,24 @@
         <member name="M:Credit.Api.Controllers.RepayController.GetRepayBankCardList(System.Int64)">
             <summary>
              获取还款卡号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Credit.Api.Controllers.SettingController">
+            <summary>
+             系统配置
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.SettingController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.SettingServices.ISettingService)">
+            <summary>
+            
+            </summary>
+            <param name="tokenManager"></param>
+            <param name="settingService"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.SettingController.GetTaskIntegralSetting">
+            <summary>
+             获取任务积分配置
             </summary>
             <returns></returns>
         </member>

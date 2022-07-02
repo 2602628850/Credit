@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Commons\Data.Commons\Data.Commons.csproj" />
-    <ProjectReference Include="..\Commons\Data.Commons\Data.Commons.csproj" />
   </ItemGroup>
 
 </Project>
