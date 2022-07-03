@@ -54,4 +54,11 @@ public interface IFinancilOrderService
     /// <param name="input"></param>
     /// <returns></returns>
     Task<PagedOutput<FinancilOrderDto>> GetOrderPagedList(FinancilOrderPagedInput input);
+
+
+    /// <summary>
+    ///  结算订单
+    /// </summary>
+    /// <returns></returns>
+    Task SettleOrders();
 }
