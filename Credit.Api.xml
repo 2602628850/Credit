@@ -489,9 +489,10 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Credit.Api.Controllers.RepayController.GetRepayBankCardList(System.Int64)">
+        <member name="M:Credit.Api.Controllers.RepayController.GetRepayBankCardList(Credit.RepayServices.Dtos.LeavesInput)">
             <summary>
              获取还款卡号
+             uniapp只支持对象传参,不能用long levelId接收参数
             </summary>
             <returns></returns>
         </member>

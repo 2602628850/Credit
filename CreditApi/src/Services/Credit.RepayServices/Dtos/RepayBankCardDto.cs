@@ -20,7 +20,10 @@ public class RepayBankCardDto : RepayBankCardInput
     /// </summary>
     public long CreateAt { get; set; }
 }
-
+public class LeavesInput
+{
+    public long Leaveid { get; set; } = 0;
+}
 /// <summary>
 ///  还款银行卡输入
 /// </summary>
