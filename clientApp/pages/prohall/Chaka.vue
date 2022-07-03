@@ -34,7 +34,9 @@
 									<view class="align-flex-end">
 										<text class="text-white text-xs"><span>{{$t('chaka.repayment')}}</span></text>
 										<text class="credit-amount text-small text-bold">
-											<span>$17.60</span></text>
+											<!-- <span>$17.60</span></text> -->
+											<span>****</span>
+										</text>
 									</view>
 									<!---->
 								</view>
@@ -148,11 +150,25 @@
 	export default {
 		data() {
 			return {
-
+			   
+               lv:{} //等级id
 			}
 		},
+		mounted() {
+			//alert(this.lv.Leaveid)
+			//this.GetChData();
+		},
+		onLoad: function(option) {
+			this.lv.Leaveid=option.id;
+			
+		},
 		methods: {
-
+			GetChData() {
+				var url = "/Repay/GetRepayBankCardList";
+				this.ApiGet(url,this.lv).then(res => {
+					//this.creditdata = res.data
+				})
+			}
 		}
 	}
 </script>

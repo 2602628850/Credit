@@ -39,17 +39,19 @@ public class RepayController : BaseUserController
     [HttpGet]
     public async Task<List<RepayLevelDto>> GetRepayLevelList()
     {
+        List<RepayLevelDto> ss= await _repayService.GetRepayLevelList();
         return await _repayService.GetRepayLevelList();
     }
 
     /// <summary>
     ///  获取还款卡号
+    ///  uniapp只支持对象传参,不能用long levelId接收参数
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public async Task<List<RepayBankCardDto>> GetRepayBankCardList(long levelId)
+    public async Task<List<RepayBankCardDto>> GetRepayBankCardList(LeavesInput input)
     {
-        return await _repayService.GetRepayBankCardList(levelId);
+        return await _repayService.GetRepayBankCardList(input.Leaveid);
     }
 
 
