@@ -624,6 +624,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Credit.Api.Controllers.UserController.GetTeamCountById">
+            <summary>
+             获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Credit.Api.ServicesTransient">
             <summary>
             

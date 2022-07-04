@@ -45,20 +45,33 @@ namespace Credit.UserServices
             var nameExist = await _freeSql.Select<Users>()
                     .Where(s => s.Username == input.Username)
                     .AnyAsync();
+
+            var ParentId = "";
+            var TeamId = "";
+            var Team = await _freeSql.Select<Users>()
+               .Where(s => s.InvCode == input.InvCode)
+               .ToOneAsync();
+            if (Team != null)
+            {
+                ParentId = Team.Id.ToString();
+                TeamId = Team.TeamId;
+            }
             var user = new Users
             {
                 Id = IdHelper.GetId(),
                 Username = input.Username.ToLower(),
                 Password = input.Password,
                 Nickname = input.Nickname,
-                CountryName=input.CountryName,
-                Code=input.Code,
-                InvCode=input.InvCode,
+                CountryName = input.CountryName,
+                Code = input.Code,
+                InvCode = input.InvCode,
+                ParentId= ParentId,
+                TeamId = TeamId,
 
             };
             await _freeSql.Insert(user).ExecuteAffrowsAsync();
         }
-        
+
         /// <summary>
         ///  用户登录
         /// </summary>
@@ -86,7 +99,7 @@ namespace Credit.UserServices
                 Nickname = user.Nickname,
                 HeadImage = user.HeadImage
             };
-            var token = await _tokenManager.GenerateToken(userToken,24*608*60);
+            var token = await _tokenManager.GenerateToken(userToken, 24 * 608 * 60);
             var output = new UserLoginOutput
             {
                 User = userToken,
@@ -124,7 +137,7 @@ namespace Credit.UserServices
                 HeadImage = user.HeadImage,
                 IsAdmin = 1
             };
-            var token = await _tokenManager.GenerateToken(userToken,24*608*60);
+            var token = await _tokenManager.GenerateToken(userToken, 24 * 608 * 60);
             var output = new UserLoginOutput
             {
                 User = userToken,
@@ -162,7 +175,28 @@ namespace Credit.UserServices
                     .ToOneAsync();
             return user.MapTo<UserDto>();
         }
-        
+
+        /// <summary>
+        ///  获取用户团队人数
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<UserTeamDto> GetTeamCountById(long userId)
+        {
+            var DirectCount = await _freeSql.Select<Users>()
+                    .Where(s => s.ParentId == userId.ToString())
+                    .ToListAsync(); 
+            var TeamCount = await _freeSql.Select<Users>()
+                    .Where(s => s.TeamId == userId.ToString())
+                    .ToListAsync(); 
+            var output = new UserTeamDto
+            {
+                Direct = DirectCount.Count,
+                TeamUser = TeamCount.Count
+            }; 
+            return output;
+        }
+
         /// <summary>
         ///   获取用户列表
         /// </summary>
@@ -179,7 +213,7 @@ namespace Credit.UserServices
                 .ToListAsync();
             var output = new PagedOutput<UserDto>
             {
-                
+
                 TotalCount = totalCount,
                 Items = list.MapToList<UserDto>()
             };

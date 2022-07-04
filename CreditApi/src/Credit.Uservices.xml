@@ -124,6 +124,21 @@
              余额
             </summary>
         </member>
+        <member name="T:Credit.UserServices.Dtos.UserTeamDto">
+            <summary>
+             团队人数统计
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserTeamDto.Direct">
+            <summary>
+             直属下级
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserTeamDto.TeamUser">
+            <summary>
+             团队注册人数
+            </summary>
+        </member>
         <member name="T:Credit.UserServices.UserService">
             <summary>
              用户管理接口方法实现
@@ -165,6 +180,13 @@
         <member name="M:Credit.UserServices.UserService.GetUserById(System.Int64)">
             <summary>
              获取用户信息
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.UserService.GetTeamCountById(System.Int64)">
+            <summary>
+             获取用户团队人数
             </summary>
             <param name="userId"></param>
             <returns></returns>
@@ -235,6 +257,13 @@
              用户积分转余额
             </summary>
             <param name="input"></param>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.GetTeamCountById(System.Int64)">
+            <summary>
+             用户团队人数统计
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

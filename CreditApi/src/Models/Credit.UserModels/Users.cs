@@ -56,5 +56,17 @@ namespace Credit.UserModels
         ///  是否管理员
         /// </summary>
         public int IsAdmin { get; set; }
+        /// <summary>
+        /// 邀请人
+        /// </summary>
+
+        public string ParentId { get; set; }
+
+        /// <summary>
+        /// 团队团长Id
+        /// </summary>
+
+        public string TeamId { get; set; }
+        
     }
 }
