@@ -185,7 +185,6 @@ public class FinancilOrderService : IFinancilOrderService
     /// <param name="orderId"></param>
     /// <param name="auditText"></param>
     /// <param name="auditUserId"></param>
-    /// <exception cref="MyException"></exception>
     private async Task BuyAuditSuccess(long orderId,string auditText,long auditUserId)
     {
         var order = await Get(orderId);
@@ -200,6 +199,10 @@ public class FinancilOrderService : IFinancilOrderService
         order.AuditText = auditText;
         order.AuditUserId = auditUserId;
         order.AuditAt = DateTimeHelper.UtcNow();
+        //修改下次结算时间
+        var settleTimeDate = DateTime.UtcNow.AddDays(1).Date.AddDays(order.Cycle).AddDays(-1);
+        var nextSettleDate = settleTimeDate.ToString("yyyyMMdd");
+        order.NextSettledDate = nextSettleDate;
         await _freeSql.Update<FinancilOrder>()
             .UpdateTableTime(TableTimeFormat.Year,order.CreateAt)
             .SetSource(order)
@@ -458,5 +461,49 @@ public class FinancilOrderService : IFinancilOrderService
             Items = items
         };
         return output;
+    }
+
+    /// <summary>
+    ///  结算理财订单
+    /// </summary>
+    public async Task SettleOrders()
+    {
+        var utcNowDate = DateTime.UtcNow.ToString("yyyyMMdd");
+        //获取所有需要结算的订单信息
+        var orders = await _freeSql.Select<FinancilOrder>()
+            .Where(s => s.NextSettledDate == utcNowDate)
+            .Where(s => s.IsDeleted == 0 && s.IsSold == 0)
+            .ToListAsync();
+        foreach (var order in orders)
+        {
+            //计算订单下次结算时间和结算次数
+            var nextSettledDate = DateTime.UtcNow.AddDays(order.Cycle).ToString("yyyyMMdd");
+            var settledCount = order.SettledCount + 1;
+            var amount = order.TotalAmount * order.DailyRate * 0.01m * order.Cycle;
+            try
+            {
+                _freeSql.Transaction(() =>
+                {
+                    //更新订单结算信息
+                    _freeSql.Update<FinancilOrder>(order.Id)
+                        .SetDto(new {NextSettledDate = nextSettledDate, SettledCount = settledCount})
+                        .ExecuteAffrows();
+                    //增加用户理财收益流水
+                    _userWalletService.WalletRecordCreate(new UserWalletRecordInput
+                    {
+                        UserId = order.UserId,
+                        Amount = amount,
+                        SourceType = WalletSourceEnums.FinancilProfit,
+                        OperateType = WalletOperateEnums.Sytem,
+                        OperateUserId = 0
+                    });
+                });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                continue;
+            }
+        }
     }
 }

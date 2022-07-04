@@ -40,7 +40,7 @@
 		
 		data() {
 			return {
-				intereal: this.$t('tongji.title'),
+				intereal: this.$t('tongji.title'),	
 				chartsDataRing1: {},
 				chartsDataTdtj: {},
 				demodataarray: {
@@ -65,7 +65,7 @@
 							"data": [{
 								"name": "团队注册用户",
 								"value": 50
-							}, {
+							},{
 								"name": "直属人数",
 								"value": 30
 							}],
@@ -86,6 +86,7 @@
 				url:'/pages/login/login'
 			})
 			}
+			this.GetTeamCount()
 			this.getServerData()
 		},
 		methods: {
@@ -99,16 +100,23 @@
 					url: '/pages/statistic/referral-bonus'
 				})
 			},
+			GetTeamCount() {
+				var url = "/User/GetTeamCountById";
+				this.ApiGet(url).then(res => {
+					var obj = this.demodataarray.PieTd.series[0].data;
+					obj[0].name = this.$t('tongji.tdzcyh')
+					obj[1].name = this.$t('tongji.zsrs')
+					obj[0].value = res.data.direct
+					obj[1].value = res.data.teamUser
+					this.chartsDataTdtj = JSON.parse(JSON.stringify(this.demodataarray.PieTd))
+				})
+			},
 			getServerData() {
 				var obj = this.demodataarray.PieA.series[0].data;
 				obj[0].name = this.$t('tongji.cksy')
 				obj[1].name = this.$t('tongji.sme')
 				obj[2].name = this.$t('tongji.tdsy')
 				this.chartsDataRing1 = JSON.parse(JSON.stringify(this.demodataarray.PieA))
-				var obj1 = this.demodataarray.PieTd.series[0].data;
-				obj1[0].name = this.$t('tongji.tdzcyh')
-				obj1[1].name = this.$t('tongji.zsrs')
-				this.chartsDataTdtj = JSON.parse(JSON.stringify(this.demodataarray.PieTd))
 			},
 		}
 	};

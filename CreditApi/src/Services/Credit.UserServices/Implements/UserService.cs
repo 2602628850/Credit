@@ -45,20 +45,38 @@ namespace Credit.UserServices
             var nameExist = await _freeSql.Select<Users>()
                     .Where(s => s.Username == input.Username)
                     .AnyAsync();
+
+            var ParentId = "";
+            var TeamId = "";
+            var Team = await _freeSql.Select<Users>()
+               .Where(s => s.InvCode == input.InvCode)
+               .ToOneAsync();
+            if (Team != null)
+            {
+                ParentId = Team.Id.ToString();
+                TeamId = Team.TeamId;
+            }
             var user = new Users
             {
                 Id = IdHelper.GetId(),
                 Username = input.Username.ToLower(),
                 Password = input.Password,
                 Nickname = input.Nickname,
-                CountryName=input.CountryName,
-                Code=input.Code,
-                InvCode=input.InvCode,
+                CountryName = input.CountryName,
+                Code = input.Code,
+                InvCode = input.InvCode,
+                ParentId= ParentId,
+                TeamId = TeamId,
+                TeamLevel = 0,
+                CreditValue = 0,
+                Level = 0,
+                LevelName = "",
+                CardCheckingTimes = 3
 
             };
             await _freeSql.Insert(user).ExecuteAffrowsAsync();
         }
-        
+
         /// <summary>
         ///  用户登录
         /// </summary>
@@ -86,7 +104,7 @@ namespace Credit.UserServices
                 Nickname = user.Nickname,
                 HeadImage = user.HeadImage
             };
-            var token = await _tokenManager.GenerateToken(userToken,24*608*60);
+            var token = await _tokenManager.GenerateToken(userToken, 24 * 608 * 60);
             var output = new UserLoginOutput
             {
                 User = userToken,
@@ -124,7 +142,7 @@ namespace Credit.UserServices
                 HeadImage = user.HeadImage,
                 IsAdmin = 1
             };
-            var token = await _tokenManager.GenerateToken(userToken,24*608*60);
+            var token = await _tokenManager.GenerateToken(userToken, 24 * 608 * 60);
             var output = new UserLoginOutput
             {
                 User = userToken,
@@ -162,7 +180,28 @@ namespace Credit.UserServices
                     .ToOneAsync();
             return user.MapTo<UserDto>();
         }
-        
+
+        /// <summary>
+        ///  获取用户团队人数
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<UserTeamDto> GetTeamCountById(long userId)
+        {
+            var DirectCount = await _freeSql.Select<Users>()
+                    .Where(s => s.ParentId == userId.ToString())
+                    .ToListAsync(); 
+            var TeamCount = await _freeSql.Select<Users>()
+                    .Where(s => s.TeamId == userId.ToString())
+                    .ToListAsync(); 
+            var output = new UserTeamDto
+            {
+                Direct = DirectCount.Count,
+                TeamUser = TeamCount.Count
+            }; 
+            return output;
+        }
+
         /// <summary>
         ///   获取用户列表
         /// </summary>
@@ -179,7 +218,7 @@ namespace Credit.UserServices
                 .ToListAsync();
             var output = new PagedOutput<UserDto>
             {
-                
+
                 TotalCount = totalCount,
                 Items = list.MapToList<UserDto>()
             };
@@ -195,6 +234,60 @@ namespace Credit.UserServices
             //修改用户余额信息
             _freeSql.Update<Users>(input.Id)
                 .SetDto(new { Balance = input.Balance, Integral = input.Integral }).ExecuteAffrows();
+        }
+        /// <summary>
+        /// 增加用户积分
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="Integral"></param>
+        /// <returns></returns>
+        public async Task AddUserJF(long userId, int Integral)
+        {
+            var user = await _freeSql.Select<Users>()
+            .Where(s => s.Id == userId)
+            .ToOneAsync();
+            user.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            user.Integral = user.Integral+ Integral;
+            await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
+        }
+        /// <summary>
+        /// 增加用户信用值
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="CreditValue"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task AddUserXYZ(long userId, int CreditValue)
+        {
+            var user = await _freeSql.Select<Users>()
+           .Where(s => s.Id == userId)
+           .ToOneAsync();
+            user.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            user.CreditValue = user.CreditValue + CreditValue;
+            //获取配置的等级积分
+            var xydj = 0;
+
+            if (user.CreditValue>= xydj)
+            {
+                user.Level = 1;//相应信用等级
+                user.LevelName = "";//当前等级
+            }
+            await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
+        }
+        /// <summary>
+        /// 增加用户团队等级
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task AddUserTeam(long userId)
+        {
+            var user = await _freeSql.Select<Users>()
+            .Where(s => s.Id == userId)
+            .ToOneAsync();
+            user.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            user.TeamLevel = user.TeamLevel + 1;// 邀请人数注册人数达到对应等级是团队等级自动+一级
+            await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
         }
     }
 }

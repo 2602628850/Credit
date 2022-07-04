@@ -64,6 +64,12 @@ public enum WalletSourceEnums
     SoldFinancil = 220,
     
     /// <summary>
+    ///  理财收益
+    /// </summary>
+    [Description("理财收益")]
+    FinancilProfit = 230,
+    
+    /// <summary>
     ///  代还申请
     /// </summary>
     [Description("代还申请")]

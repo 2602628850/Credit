@@ -295,7 +295,8 @@ public class UserWalletService : IUserWalletService
            || input.SourceType == WalletSourceEnums.BuyFinancilReturn
            || input.SourceType == WalletSourceEnums.SoldFinancil
            || input.SourceType == WalletSourceEnums.Repayment
-           || input.SourceType == WalletSourceEnums.RepayProfit)
+           || input.SourceType == WalletSourceEnums.RepayProfit
+           || input.SourceType == WalletSourceEnums.FinancilProfit)
        {
            user.Balance += input.Amount;
        }

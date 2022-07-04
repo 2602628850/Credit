@@ -230,5 +230,14 @@ namespace Credit.Api.Controllers
             List<IntegralOrderDto> integralOrderList = await _integralOrderService.GentIntegralOrderList(CurrentUser.UserId);
             return integralOrderList;
         }
+        /// <summary>
+        ///  获取用户信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<UserTeamDto> GetTeamCountById()
+        {
+            return await _userService.GetTeamCountById(CurrentUser.UserId);
+        }
     }
 }
