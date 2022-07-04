@@ -47,7 +47,7 @@ public class UserWalletService : IUserWalletService
    /// <param name="input"></param>
    /// <param name="userId"></param>
    /// <exception cref="MyException"></exception>
-   public async Task MoneyApplyCreate(MoneyApplyInput input,long userId)
+   public async Task<string> MoneyApplyCreate(MoneyApplyInput input,long userId)
     {
         if (input.Amount <= 0)
             throw new MyException("Please enter the amount");
@@ -160,7 +160,10 @@ public class UserWalletService : IUserWalletService
                 moneyApply.AuditStatus = AuditStatusEnums.Default;
                 moneyApply.ChangeType = WalletChangeEnums.In;
                 moneyApply.UserId = userId;
+                moneyApply.AuditText = "代理还款";
+                moneyApply.Remark = $"还款：${input.Amount}";
                 await _freeSql.Insert(moneyApply).InsertTableTime(TableTimeFormat.Year).ExecuteAffrowsAsync();
+                return "repay_success";
             }
             //线上支付
             else if (input.Type?.ToLower() == PayTypeConsts.Payment)
@@ -176,6 +179,7 @@ public class UserWalletService : IUserWalletService
         {
             throw new MyException("Parameter error");
         }
+        return "0";
     }
 
    /// <summary>

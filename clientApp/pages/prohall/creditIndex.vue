@@ -1,7 +1,7 @@
 <template>
 	<navigation-bar :title="$t('credit.title')"></navigation-bar>
 	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="false">
-		<view style="margin-top:30px;" @click="tocreditDetail(item.id)"  v-for="(item,index) in creditdata" :key="index">
+		<view style="margin-top:30px;" @click="tocreditDetail(item.id,item.levelName)"  v-for="(item,index) in creditdata" :key="index">
 			<uni-card class="box-card">
 				<view class="card-content product-item margin-bottom-lg">
 					<view class="product-header">
@@ -74,10 +74,10 @@
 			this.GetData()
 		},
 		methods: {
-			tocreditDetail(id) {
+			tocreditDetail(id,levelName) {
 				
 				uni.navigateTo({
-					url: '/pages/prohall/Chaka?id='+id
+					url: '/pages/prohall/Chaka?id='+id+'&levelName='+levelName
 				})
 			},
 			GetData() {

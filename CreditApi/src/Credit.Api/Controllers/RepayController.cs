@@ -39,8 +39,16 @@ public class RepayController : BaseUserController
     [HttpGet]
     public async Task<List<RepayLevelDto>> GetRepayLevelList()
     {
-        List<RepayLevelDto> ss= await _repayService.GetRepayLevelList();
         return await _repayService.GetRepayLevelList();
+    }
+    /// <summary>
+    ///  获取还款等级
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public async Task<RepayLevelDto> GetRepayLevel(LeavesInput input)
+    {
+        return await _repayService.GetRepayLevel(input.Leaveid);
     }
 
     /// <summary>
@@ -60,9 +68,9 @@ public class RepayController : BaseUserController
     /// </summary>
     /// <param name="input"></param>
     [HttpPost]
-    public async Task RepayApplication([FromBody]MoneyApplyInput input)
+    public async Task<string> RepayApplication([FromBody]MoneyApplyInput input)
     {
         input.SourceType = WalletSourceEnums.RepayApply;
-        await _userWalletService.MoneyApplyCreate(input,CurrentUser.UserId);
+        return await _userWalletService.MoneyApplyCreate(input,CurrentUser.UserId);
     }
 }

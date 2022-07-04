@@ -15,27 +15,27 @@
 										<text class="text-white text-lg text-bold">
 											<span>CREDIT</span></text>
 									</view>
-									<view class="level-icon">
+									<view >
 										<text class="font-italic text-bold text-white">
-											<span>V0</span></text>
+											{{lv.levelName}}</text>
 									</view>
 								</view>
 								<view>
-									<text class="card-num"><span>**** **** ****
-											****</span></text>
+									<text class="card-num">**** {{this.cardNo}}
+											****</text>
 								</view>
 								<view class="flex-row justify-between">
 									<view>
-										<text class="text-white text-xs"><span>{{$t('chaka.bankname')}}</span>
+										<text class="text-white text-xs">{{$t('chaka.bankname')}}
 										</text>
 										<text class="text-white text-small text-bold">
-											<span>****</span></text>
+											{{this.bankName}}</text>
 									</view>
 									<view class="align-flex-end">
-										<text class="text-white text-xs"><span>{{$t('chaka.repayment')}}</span></text>
+										<text class="text-white text-xs">{{$t('chaka.repayment')}}</text>
 										<text class="credit-amount text-small text-bold">
 											<!-- <span>$17.60</span></text> -->
-											<span>****</span>
+											{{this.amount}}
 										</text>
 									</view>
 									<!---->
@@ -51,39 +51,25 @@
 									</text>
 								</view>
 								<view class="margin-top">
-									<text class="btn-search"><span>{{$t('chaka.checkButton')}}</span></text>
+									<button class="btn-search" style="width: 100%;" @click="GetChData()">{{$t('chaka.checkButton')}}</button>
 								</view>
 							</view>
 						</view>
-						<!---->
+						<!--卡号-->
 						<view id="cardList" class="margin-top-lg card-content-secondary">
 							<view>
 								<text class="text-bold text-lg"><span>{{$t('chaka.selectrepayment')}}</span></text>
 							</view>
-							<view class="card-content-sm flex-row align-center margin-top card-select">
+								<!--循环卡号-->
+							<view class="card-content-sm flex-row align-center margin-top" v-for="(item,index) in cardlist" :key="index"  :class="{'card-select':index==current}" @click="UpdateVal(index,item.cardNo,item.bankName,item.amount)">
 								<view class="flex-1">
-									<text class="text-sm"><span>洪仁峰</span></text>
+									<text class="text-sm"><span>{{item.bindUser}}</span></text>
 									<text class="text-xs text-secondary">
-										<span>****62930515****</span></text>
+										<span>****{{item.cardNo}}****</span></text>
 								</view>
-								<text class="text-lg"><span>$17.40</span></text>
+								<text class="text-lg"><span>${{item.amount}}</span></text>
 							</view>
-							<view class="card-content-sm flex-row align-center margin-top">
-								<view class="flex-1">
-									<text class="text-sm"><span>袁怡芳</span></text>
-									<text class="text-xs text-secondary">
-										<span>****01785323****</span></text>
-								</view>
-								<text class="text-lg"><span>$16.20</span></text>
-							</view>
-							<view class="card-content-sm flex-row align-center margin-top">
-								<view class="flex-1">
-									<text class="text-sm"><span>Huang Yude</span></text>
-									<text class="text-xs text-secondary">
-										<span>****09798794****</span></text>
-								</view>
-								<text class="text-lg"><span>$17.60</span></text>
-							</view>
+						
 						</view>
 						<!---->
 						<view class="margin-top-lg card-content-secondary">
@@ -91,12 +77,10 @@
 								<text class="text-bold text-lg"><span>{{$t('chaka.repayment')}}</span></text>
 							</view>
 							<view class="align-center margin-top-sm">
-								<text class="text-21"><span>$17.60</span></text>
-								<text class="text-xxs margin-top-xs"><span>≈ 621.17THB</span>
-								</text>
+								<text class="text-21"><span>${{this.amount}}</span></text>
 							</view>
 							<view class="flex-row margin-top">
-								<button class="flex-1 btn-primary">{{$t('chaka.behalfButton')}}</button>
+								<button class="flex-1 btn-primary" @click="rePay()">{{$t('chaka.behalfButton')}}</button>
 							</view>
 						</view>
 						<view class="margin-top-xl card-content-secondary">
@@ -123,15 +107,7 @@
 						<view class="margin-top-xl card-content-secondary">
 							<text class="text-bold text-lg"><span>{{$t('chaka.Procontent')}}</span></text>
 							<text class=" margin-top text-sm line-height-16">
-								<span>"Personal credit card repayment" products are divided into special areas
-									for bad debt processing, small-amount repayment area, general repayment
-									area, high-amount repayment area and large-amount repayment area. Users can
-									enter to check the card and make repayment, and the area that has not
-									reached the amount is grayed out and cannot be entered. The amount of the
-									repayment products that do not use the special area is different, and the
-									commission rate paid by the platform is also different. All users in the bad
-									debt processing area can enter and check the card, but the platform account
-									wallet has no balance and cannot continue the repayment task.</span>
+								{{this.leaveobj.introduction}}
 							</text>
 						</view>
 					</view>
@@ -150,23 +126,83 @@
 	export default {
 		data() {
 			return {
-			   
-               lv:{} //等级id
+               lv:{}, //等级id
+			   cardlist:{},//卡号集合
+			   current:0,//当前选中银行卡序号
+			   cardNo:'**** ****',//卡号
+			   bankName:'****',//银行名称
+			   amount:0,//还款金额
+			   leaveobj:{},//还款等级对象
+			   repayObj:{},//还款对象
+			   PayeeBankCardId:0,//银行卡id
 			}
 		},
 		mounted() {
-			//alert(this.lv.Leaveid)
-			//this.GetChData();
+			this.GetRepayLevel();
 		},
 		onLoad: function(option) {
 			this.lv.Leaveid=option.id;
-			
+			this.lv.levelName=option.levelName;
+			this.ApiGet(url,this.lv).then(res => {
+				this.cardlist = res.data
+				
+			})
 		},
 		methods: {
-			GetChData() {
+			//因为等级介绍内容可能很长,所以不建议通过url传过来
+			GetRepayLevel(){
+				var url = "/Repay/GetRepayLevel";
+				this.ApiGet(url,this.lv).then(res => {
+					this.leaveobj = res.data
+					
+				})
+			},
+			GetChData() {//获取页面基础数据
 				var url = "/Repay/GetRepayBankCardList";
 				this.ApiGet(url,this.lv).then(res => {
-					//this.creditdata = res.data
+					this.cardlist = res.data
+					this.cardNo=res.data[0].cardNo;
+					this.bankName=res.data[0].bankName;
+					this.amount=res.data[0].amount;
+					//还款对象
+					this.repayObj.Type="bankcard";//线下还款
+					this.repayObj.PayeeBankCardId=res.data[0].id;//银行卡id
+					this.repayObj.SourceType=300;//代理还款申请
+					this.repayObj.Amount=this.amount;//还款金额
+					
+					
+				})
+			},
+			//点击银行卡的时候页面数据动态变化
+			UpdateVal(index,cardNo,bankName,amount){
+				this.current=index;
+				this.cardNo=cardNo;
+				this.bankName=bankName;
+				this.amount=amount;
+				//还款对象
+				this.repayObj.Type="bankcard";//线下还款
+				this.repayObj.PayeeBankCardId=res.data[0].id;//银行卡id
+				this.repayObj.SourceType=300;//还款申请
+				this.repayObj.Amount=this.amount;//还款金额
+			},
+			//还款
+			rePay(){
+				var url = "/Repay/RepayApplication";
+				this.ApiPost(url,this.repayObj).then(res => {
+					if(res.data=="repay_success"){
+						uni.showToast({
+							title: "还款成功",
+							duration: 3000,
+						})
+						uni.navigateTo({
+							url: '/pages/prohall/creditIndex'
+						})
+					}else{
+						uni.showToast({
+							title: "还款失败!",
+							duration: 3000,
+						})
+					}
 				})
 			}
 		}

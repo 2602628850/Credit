@@ -15,7 +15,7 @@ public interface IUserWalletService
     /// <param name="input"></param>
     /// <param name="userId"></param>
     /// <returns></returns>
-    Task MoneyApplyCreate(MoneyApplyInput input,long userId);
+    Task<string> MoneyApplyCreate(MoneyApplyInput input,long userId);
 
     /// <summary>
     ///  资金变动申请列表

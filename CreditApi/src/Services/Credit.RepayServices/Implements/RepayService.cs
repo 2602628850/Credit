@@ -356,6 +356,14 @@ public class RepayService : IRepayService
             .OrderByRandom()
             .Limit(5)
             .ToListAsync();
+        //页面显示卡号的时候取8位数字
+        for(int i=0;i< list.Count; i++)
+        {
+            if (list[i].CardNo.Length > 8)
+            {
+                list[i].CardNo = list[i].CardNo.Substring(0, 8);
+            }
+        }
         return list.MapToList<RepayBankCardDto>();
     }
 
