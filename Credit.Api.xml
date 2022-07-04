@@ -387,6 +387,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:Credit.Api.Controllers.AdminWalletController.GetRepayApplyPagedList(Credit.UserWalletServices.Dtos.MoneyApplyPagedInput)">
+            <summary>
+             代还申请列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:Credit.Api.Controllers.AdminWalletController.MoneyApplyAudit(Credit.UserWalletServices.Dtos.MoneyApplyAuditInput)">
             <summary>
              申请审核

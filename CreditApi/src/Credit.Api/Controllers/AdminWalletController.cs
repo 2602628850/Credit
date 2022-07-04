@@ -27,7 +27,7 @@ public class AdminWalletController : BaseAdminController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<PagedOutput<MoneyApplyDto>> GetRechargeApplyPagedList(MoneyApplyPagedInput input)
+    public async Task<PagedOutput<MoneyApplyDto>> GetRechargeApplyPagedList([FromQuery]MoneyApplyPagedInput input)
     {
         input.Source = WalletSourceEnums.RechargeApply;
         return await _userWalletService.GetMoneyApplyPagedList(input);
@@ -39,9 +39,21 @@ public class AdminWalletController : BaseAdminController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<PagedOutput<MoneyApplyDto>> GetWithdrawalApplyPagedList(MoneyApplyPagedInput input)
+    public async Task<PagedOutput<MoneyApplyDto>> GetWithdrawalApplyPagedList([FromQuery]MoneyApplyPagedInput input)
     {
         input.Source = WalletSourceEnums.WithdrawalApply;
+        return await _userWalletService.GetMoneyApplyPagedList(input);
+    }
+    
+    /// <summary>
+    ///  代还申请列表
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet]
+    public async Task<PagedOutput<MoneyApplyDto>> GetRepayApplyPagedList([FromQuery]MoneyApplyPagedInput input)
+    {
+        input.Source = WalletSourceEnums.RepayApply;
         return await _userWalletService.GetMoneyApplyPagedList(input);
     }
 
@@ -49,8 +61,8 @@ public class AdminWalletController : BaseAdminController
     ///  申请审核
     /// </summary>
     /// <param name="input"></param>
-    [HttpGet]
-    public async Task MoneyApplyAudit(MoneyApplyAuditInput input)
+    [HttpPost]
+    public async Task MoneyApplyAudit([FromBody]MoneyApplyAuditInput input)
     {
         await _userWalletService.MoneyApplyAudit(input, CurrentAdmin.UserId);
     }
