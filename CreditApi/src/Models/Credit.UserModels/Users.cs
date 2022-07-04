@@ -67,6 +67,31 @@ namespace Credit.UserModels
         /// </summary>
 
         public string TeamId { get; set; }
-        
+
+        /// <summary>
+        /// 个人团队等级
+        /// </summary>
+        public int TeamLevel { get; set; }
+        /// <summary>
+        /// 信用值
+        /// </summary>
+
+        public int CreditValue { get; set; }
+
+        /// <summary>
+        /// 信用等级
+        /// </summary>
+
+        public int Level { get; set; }
+        /// <summary>
+        /// 等级名称
+        /// </summary>
+
+        public string LevelName { get; set; }
+        /// <summary>
+        /// 每日查卡次数
+        /// </summary>
+        public int CardCheckingTimes { get; set; }
+
     }
 }

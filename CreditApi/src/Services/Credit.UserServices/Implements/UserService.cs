@@ -67,6 +67,11 @@ namespace Credit.UserServices
                 InvCode = input.InvCode,
                 ParentId= ParentId,
                 TeamId = TeamId,
+                TeamLevel = 0,
+                CreditValue = 0,
+                Level = 0,
+                LevelName = "",
+                CardCheckingTimes = 3
 
             };
             await _freeSql.Insert(user).ExecuteAffrowsAsync();
@@ -229,6 +234,60 @@ namespace Credit.UserServices
             //修改用户余额信息
             _freeSql.Update<Users>(input.Id)
                 .SetDto(new { Balance = input.Balance, Integral = input.Integral }).ExecuteAffrows();
+        }
+        /// <summary>
+        /// 增加用户积分
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="Integral"></param>
+        /// <returns></returns>
+        public async Task AddUserJF(long userId, int Integral)
+        {
+            var user = await _freeSql.Select<Users>()
+            .Where(s => s.Id == userId)
+            .ToOneAsync();
+            user.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            user.Integral = user.Integral+ Integral;
+            await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
+        }
+        /// <summary>
+        /// 增加用户信用值
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="CreditValue"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task AddUserXYZ(long userId, int CreditValue)
+        {
+            var user = await _freeSql.Select<Users>()
+           .Where(s => s.Id == userId)
+           .ToOneAsync();
+            user.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            user.CreditValue = user.CreditValue + CreditValue;
+            //获取配置的等级积分
+            var xydj = 0;
+
+            if (user.CreditValue>= xydj)
+            {
+                user.Level = 1;//相应信用等级
+                user.LevelName = "";//当前等级
+            }
+            await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
+        }
+        /// <summary>
+        /// 增加用户团队等级
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task AddUserTeam(long userId)
+        {
+            var user = await _freeSql.Select<Users>()
+            .Where(s => s.Id == userId)
+            .ToOneAsync();
+            user.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            user.TeamLevel = user.TeamLevel + 1;// 邀请人数注册人数达到对应等级是团队等级自动+一级
+            await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
         }
     }
 }

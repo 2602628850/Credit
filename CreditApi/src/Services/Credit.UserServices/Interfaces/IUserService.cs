@@ -62,5 +62,25 @@ namespace Credit.UserServices
         /// <param name="userId"></param>
         /// <returns></returns>
         Task<UserTeamDto> GetTeamCountById(long userId);
+        /// <summary>
+        /// 增加用户任务积分
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="Integral"></param>
+        /// <returns></returns>
+        Task AddUserJF(long userId, int Integral);
+        /// <summary>
+        /// 增加用户信用值
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="CreditValue"></param>
+        /// <returns></returns>
+        Task AddUserXYZ(long userId, int CreditValue);
+        /// <summary>
+        /// 增加用用户团队等级
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task AddUserTeam(long userId);
     }
 }
