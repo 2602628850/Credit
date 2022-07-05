@@ -56,6 +56,7 @@ namespace Credit.UserServices
                 ParentId = Team.Id.ToString();
                 TeamId = Team.TeamId;
             }
+
             var user = new Users
             {
                 Id = IdHelper.GetId(),
@@ -65,7 +66,7 @@ namespace Credit.UserServices
                 CountryName = input.CountryName,
                 Code = input.Code,
                 InvCode = input.InvCode,
-                ParentId= ParentId,
+                ParentId = ParentId,
                 TeamId = TeamId,
                 TeamLevel = 0,
                 CreditValue = 0,
@@ -75,6 +76,25 @@ namespace Credit.UserServices
 
             };
             await _freeSql.Insert(user).ExecuteAffrowsAsync();
+            //邀请码注册
+            if (input.InvCode != null)
+            {
+                //邀请码邀请人数
+                var Directnum = 0;
+                //增加邀请人积分
+                await AddUserJF(Team.Id, 100);
+                //查询邀请码邀请人数
+                var teams = await GetTeamCountById(Team.Id);
+                if (teams != null)
+                {
+                    //邀请人数达到一定数量时
+                    if (teams.Direct == Directnum)
+                    {
+                        //增加 邀请人团队等级
+                        await AddUserTeam(Team.Id);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -190,15 +210,15 @@ namespace Credit.UserServices
         {
             var DirectCount = await _freeSql.Select<Users>()
                     .Where(s => s.ParentId == userId.ToString())
-                    .ToListAsync(); 
+                    .ToListAsync();
             var TeamCount = await _freeSql.Select<Users>()
                     .Where(s => s.TeamId == userId.ToString())
-                    .ToListAsync(); 
+                    .ToListAsync();
             var output = new UserTeamDto
             {
                 Direct = DirectCount.Count,
                 TeamUser = TeamCount.Count
-            }; 
+            };
             return output;
         }
 
@@ -247,7 +267,7 @@ namespace Credit.UserServices
             .Where(s => s.Id == userId)
             .ToOneAsync();
             user.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            user.Integral = user.Integral+ Integral;
+            user.Integral = user.Integral + Integral;
             await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
         }
         /// <summary>
@@ -267,7 +287,7 @@ namespace Credit.UserServices
             //获取配置的等级积分
             var xydj = 0;
 
-            if (user.CreditValue>= xydj)
+            if (user.CreditValue >= xydj)
             {
                 user.Level = 1;//相应信用等级
                 user.LevelName = "";//当前等级
