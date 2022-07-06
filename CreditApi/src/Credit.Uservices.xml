@@ -205,6 +205,31 @@
             </summary>
             <param name="input"></param>
         </member>
+        <member name="M:Credit.UserServices.UserService.AddUserJF(System.Int64,System.Int32)">
+            <summary>
+            增加用户积分
+            </summary>
+            <param name="userId"></param>
+            <param name="Integral"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.UserService.AddUserXYZ(System.Int64,System.Int32)">
+            <summary>
+            增加用户信用值
+            </summary>
+            <param name="userId"></param>
+            <param name="CreditValue"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Credit.UserServices.UserService.AddUserTeam(System.Int64)">
+            <summary>
+            增加用户团队等级
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
         <member name="T:Credit.UserServices.IUserService">
             <summary>
              用户管理接口定义
@@ -261,6 +286,29 @@
         <member name="M:Credit.UserServices.IUserService.GetTeamCountById(System.Int64)">
             <summary>
              用户团队人数统计
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.AddUserJF(System.Int64,System.Int32)">
+            <summary>
+            增加用户任务积分
+            </summary>
+            <param name="userId"></param>
+            <param name="Integral"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.AddUserXYZ(System.Int64,System.Int32)">
+            <summary>
+            增加用户信用值
+            </summary>
+            <param name="userId"></param>
+            <param name="CreditValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.AddUserTeam(System.Int64)">
+            <summary>
+            增加用用户团队等级
             </summary>
             <param name="userId"></param>
             <returns></returns>

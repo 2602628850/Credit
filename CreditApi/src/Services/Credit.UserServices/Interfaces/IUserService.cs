@@ -76,13 +76,7 @@ namespace Credit.UserServices
         /// <param name="CreditValue"></param>
         /// <returns></returns>
         Task AddUserXYZ(long userId, int CreditValue);
-
-        /// <summary>
-        /// 增加用用户团队等级
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        int SelectUserTeam(long userId);
+         
         /// <summary>
         /// 增加用用户团队等级
         /// </summary>
