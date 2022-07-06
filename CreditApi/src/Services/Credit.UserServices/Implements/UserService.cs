@@ -45,18 +45,12 @@ namespace Credit.UserServices
             var nameExist = await _freeSql.Select<Users>()
                     .Where(s => s.Username == input.Username)
                     .AnyAsync();
-
-            var ParentId = "";
-            var TeamId = "";
+            //邀请码是否正确
             var Team = await _freeSql.Select<Users>()
                .Where(s => s.InvCode == input.InvCode)
                .ToOneAsync();
-            if (Team != null)
-            {
-                ParentId = Team.Id.ToString();
-                TeamId = Team.TeamId;
-            }
-
+            if (Team == null)
+                throw new MyException("is incorrect");
             var user = new Users
             {
                 Id = IdHelper.GetId(),
@@ -66,13 +60,10 @@ namespace Credit.UserServices
                 CountryName = input.CountryName,
                 Code = input.Code,
                 InvCode = input.InvCode,
-                ParentId = ParentId,
-                TeamId = TeamId,
+                ParentId = Team.Id,
                 TeamLevel = 0,
                 CreditValue = 0,
                 Level = 0,
-                LevelName = "",
-                CardCheckingTimes = 3
 
             };
             await _freeSql.Insert(user).ExecuteAffrowsAsync();
@@ -209,15 +200,12 @@ namespace Credit.UserServices
         public async Task<UserTeamDto> GetTeamCountById(long userId)
         {
             var DirectCount = await _freeSql.Select<Users>()
-                    .Where(s => s.ParentId == userId.ToString())
-                    .ToListAsync();
-            var TeamCount = await _freeSql.Select<Users>()
-                    .Where(s => s.TeamId == userId.ToString())
+                    .Where(s => s.ParentId == userId)
                     .ToListAsync();
             var output = new UserTeamDto
             {
                 Direct = DirectCount.Count,
-                TeamUser = TeamCount.Count
+                TeamUser = DirectCount.Count
             };
             return output;
         }
@@ -289,8 +277,7 @@ namespace Credit.UserServices
 
             if (user.CreditValue >= xydj)
             {
-                user.Level = 1;//相应信用等级
-                user.LevelName = "";//当前等级
+                user.Level = 1;//相应信用等级 
             }
             await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
         }
