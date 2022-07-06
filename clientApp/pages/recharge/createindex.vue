@@ -9,7 +9,7 @@
 
 		<view style="margin-top: 20px;text-align: center;margin-left: 7%;">
 			<view @click="reduce" class="countBtn reduceBtn" style="float: left;"> － </view>
-		    <input type="number" v-model="numberinput" class="sumTotal" style="width: 70%;float: left;" />
+		    <input type="number" v-model="numberinput" @input="getCardId()" class="sumTotal" style="width: 70%;float: left;" />
 			<view @click="add" class="countBtn addBtn"  style="float: left;"> + </view>
 		</view>
 		<view>&nbsp;</view>
@@ -109,20 +109,24 @@
 				})
 			},
 			reduce() {
-				if (this.numberinput - 100 >= 0) {
-					this.numberinput=this.numberinput-100;
+				if (parseFloat(this.numberinput) - 100 >= 0) {
+					this.numberinput=parseFloat(this.numberinput)-100;
+					this.getCardId()
 				}
 			},
 			add() {
-				this.numberinput=this.numberinput+100;
+				this.numberinput=parseFloat(this.numberinput)+100;
+				this.getCardId()
 			},
 			getCardId(){
 				var url = "/PayeeBankCard/GetPayeeBankCard";
+				this.monyobj.Amount=this.numberinput;
 				this.ApiGet(url,this.monyobj).then(res => {
 						this.rechargeObj.PayeeBankCardId=res.data.id;//充值传收款银行卡id
+						
+						
 				})
 			}
-			
 			
 		}
 	}
