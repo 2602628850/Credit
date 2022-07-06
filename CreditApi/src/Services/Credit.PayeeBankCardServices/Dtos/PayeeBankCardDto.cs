@@ -108,3 +108,14 @@ public class PayeeBankCardSelectDto
     /// </summary>
     public string BankName { get; set; } = string.Empty;
 }
+
+/// <summary>
+///  获取银行卡金额输入
+/// </summary>
+public class BankCardAmountInput
+{
+    /// <summary>
+    ///  金额
+    /// </summary>
+    public decimal Amount { get; set; }
+}
