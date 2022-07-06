@@ -14,8 +14,29 @@
 		</view>
 		<view>&nbsp;</view>
 		<view style="margin-top: 20px;">
-			<button style="margin-top: 10%;" class="view-select">{{$t('recharge.suresubmit')}}</button>
+			<button style="margin-top: 10%;" @click="reCharge()" class="view-select">{{$t('recharge.suresubmit')}}</button>
 		</view>
+	</view>
+	<view>
+		<text style="display: flex;font-weight: 800;">{{$t('recharge.remark')}}</text>
+		<text style="display: flex;margin-top: 10px;">
+			{{$t('recharge.remark1')}}
+		</text>
+		<text style="display: flex;">
+			{{$t('recharge.remark2')}}
+		</text>
+		<text style="display: flex;">
+				{{$t('recharge.remark3')}}
+		</text>
+		<text style="display: flex;">
+				{{$t('recharge.remark4')}}
+		</text>
+		<text style="display: flex;">
+				{{$t('recharge.remark5')}}
+		</text>
+		<text>
+				{{$t('recharge.remark6')}}
+		</text>
 	</view>
 	</app-content-view>
 </template>
@@ -27,6 +48,7 @@
 				current: 0,
 				numberinput: 0,
 				rechargeObj:{},//充值对象
+				monyobj:{},//获取收款银行卡id需要传入金额
 				dataitem: [{
 					count: 500
 				}, {
@@ -46,20 +68,33 @@
 			this.numberinput=this.dataitem[0].count;
 			//要提交的数据
 			this.rechargeObj.Amount=this.numberinput;
-			this.repayObj.Type="bankcard";//线下还款
+			this.rechargeObj.Type="bankcard";//线下支付
+			this.rechargeObj.PaymentInfoId=0;//三方支付默认为0
+			
+			this.monyobj.Amount=this.numberinput;//获取收款银行卡id需要传入的金额
+			this.getCardId();//给收款银行卡id赋值
 		},
 		methods: {
 			UpdateView(index,count) {
 				this.current = index;
 				this.numberinput=count;
+				//要提交的数据
+				this.rechargeObj.Amount=this.numberinput;
+				this.rechargeObj.Type="bankcard";//线下支付
+				this.rechargeObj.PaymentInfoId=0;//三方支付默认为0
+				var url = "/PayeeBankCard/GetPayeeBankCard";
+				this.monyobj.Amount=count;////获取收款银行卡id需要传入的金额
+				this.ApiGet(url,this.monyobj).then(res => {
+						this.rechargeObj.PayeeBankCardId=res.data.id;//给收款银行卡id赋值
+				})
 			},
-			//还款
-			rePay(){
+			//充值
+			reCharge(){
 				var url = "/User/UserRecharge";
 				this.ApiPost(url,this.rechargeObj).then(res => {
 					if(res.data=="recharge_success"){
 						uni.showToast({
-							title: "充值成功",
+							title:this.$t('recharge.ressuc'),
 							duration: 3000,
 						})
 						uni.navigateTo({
@@ -67,7 +102,7 @@
 						})
 					}else{
 						uni.showToast({
-							title: "充值失败!",
+							title: this.$t('recharge.resfail'),
 							duration: 3000,
 						})
 					}
@@ -80,7 +115,15 @@
 			},
 			add() {
 				this.numberinput=this.numberinput+100;
+			},
+			getCardId(){
+				var url = "/PayeeBankCard/GetPayeeBankCard";
+				this.ApiGet(url,this.monyobj).then(res => {
+						this.rechargeObj.PayeeBankCardId=res.data.id;//充值传收款银行卡id
+				})
 			}
+			
+			
 		}
 	}
 </script>

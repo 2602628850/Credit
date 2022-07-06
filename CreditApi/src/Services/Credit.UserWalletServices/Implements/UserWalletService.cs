@@ -86,6 +86,8 @@ public class UserWalletService : IUserWalletService
                 moneyApply.AuditStatus = AuditStatusEnums.Default;
                 moneyApply.ChangeType = WalletChangeEnums.In;
                 moneyApply.UserId = userId;
+                moneyApply.AuditText = "用户充值";
+                moneyApply.Remark = $"充值${input.Amount}";
                 await _freeSql.Insert(moneyApply).InsertTableTime(TableTimeFormat.Year).ExecuteAffrowsAsync();
                 return "recharge_success";
             }

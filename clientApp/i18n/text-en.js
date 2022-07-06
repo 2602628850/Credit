@@ -272,5 +272,14 @@ export default {
 	recharge:{
 		title:'bank card recharge',
 		suresubmit:'Confirm submission',
+		ressuc:'submit success!',
+		resfail:'submit fail!',
+		remark:'Recharge instructions',
+		remark1:'1. The minimum recharge amount is $20. Other currency recharge will be converted into USD to the account balance according to the real-time exchange rate',
+		remark2:'2. Please check the bank account information provided by the platform carefully before recharging',
+		remark3:'3. Before confirming the transfer, please confirm that you have filled in the correct bank card information of the payee',
+		remark4:'4. Before submitting the application, please upload the screenshot of your successful transfer. After submitting the application, please wait for the review of the platform5. If your account has not received the recharging amount after the transfer is successful and the platform processes your application, please contact the customer service for details',
+		remark5:'5. If your account has not received the recharging amount after the transfer is successful and the platform processes your application, please contact the customer service for details',
+		remark6:'6. In order to ensure your interests, the platform is recharge processing time is: 10:00-23:00. If you make recharge request at other time, it will be processed for you according to the above working hours.',
 	}
 }
