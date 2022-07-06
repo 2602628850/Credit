@@ -87,6 +87,7 @@ public class UserWalletService : IUserWalletService
                 moneyApply.ChangeType = WalletChangeEnums.In;
                 moneyApply.UserId = userId;
                 await _freeSql.Insert(moneyApply).InsertTableTime(TableTimeFormat.Year).ExecuteAffrowsAsync();
+                return "recharge_success";
             }
             //线上支付
             else if (input.Type?.ToLower() == PayTypeConsts.Payment)

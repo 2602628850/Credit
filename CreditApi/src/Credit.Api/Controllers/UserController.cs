@@ -81,9 +81,9 @@ namespace Credit.Api.Controllers
         /// </summary>
         /// <param name="input"></param>
         [HttpPost]
-        public async Task UserRecharge([FromBody]UserMoneyApplyInput input)
+        public async Task<string> UserRecharge([FromBody]UserMoneyApplyInput input)
         {
-            await _walletService.MoneyApplyCreate(new MoneyApplyInput
+          return  await _walletService.MoneyApplyCreate(new MoneyApplyInput
             {
                 Amount = input.Amount,
                 SourceType = WalletSourceEnums.RechargeApply,

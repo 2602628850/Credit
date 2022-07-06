@@ -268,5 +268,9 @@ export default {
 		hqjfs: '获取积分数：',
 		hqsj: '获取时间：'
 
+	},
+	recharge:{
+		title:'银行卡充值',
+		suresubmit:'确认提交',
 	}
 }

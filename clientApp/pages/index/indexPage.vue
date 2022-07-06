@@ -62,7 +62,7 @@
 				</view>
 			</uni-col>
 			<uni-col :xs="8" :sm="6" :md="4" :lg="6" :xl="1">
-				<view class="demo-uni-col dark">
+				<view class="demo-uni-col dark" v-on:click="SharedTo('/pages/recharge/createindex')">
 					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/index-charts.png">
 						</image>

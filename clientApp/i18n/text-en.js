@@ -268,5 +268,9 @@ export default {
 		hqjfs:'Get product score：',
 		hqsj:'Get time：'
 		
+	},
+	recharge:{
+		title:'bank card recharge',
+		suresubmit:'Confirm submission',
 	}
 }
