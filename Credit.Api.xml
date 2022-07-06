@@ -456,6 +456,25 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:Credit.Api.Controllers.PayeeBankCardController">
+            <summary>
+             收款银行卡
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.PayeeBankCardController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.PayeeBankCardServices.IPayeeBankCardService)">
+            <summary>
+             
+            </summary>
+            <param name="tokenManager"></param>
+            <param name="payeeBankCardService"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.PayeeBankCardController.GetPayeeBankCard(Credit.PayeeBankCardServices.Dtos.BankCardAmountInput)">
+            <summary>
+             获取充值银行卡
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:Credit.Api.Controllers.ProductController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.ProductServices.IFinancilProductService)">
             <summary>
             

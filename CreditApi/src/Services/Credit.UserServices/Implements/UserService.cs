@@ -281,6 +281,12 @@ namespace Credit.UserServices
             }
             await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
         }
+
+        public int SelectUserTeam(long userId)
+        {
+            return 0;
+        }
+
         /// <summary>
         /// 增加用户团队等级
         /// </summary>
