@@ -278,6 +278,12 @@
             <param name="maxSort"></param>
             <returns></returns>
         </member>
+        <member name="M:Credit.UserServices.UserService.UserBecomeTeamUser(System.Int64)">
+            <summary>
+             成为团队人员
+            </summary>
+            <param name="userId"></param>
+        </member>
         <member name="M:Credit.UserServices.UserService.TeamChildMembers(System.Int64,System.Collections.Generic.List{Credit.UserModels.Users},System.Int32,System.Int32)">
             <summary>
             获取子级成员
@@ -385,6 +391,13 @@
             </summary>
             <param name="userId"></param>
             <param name="maxSort"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.UserBecomeTeamUser(System.Int64)">
+            <summary>
+             用户成为团队成员
+            </summary>
+            <param name="userId"></param>
             <returns></returns>
         </member>
     </members>
