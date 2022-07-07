@@ -14,7 +14,7 @@ public class UserBankCardDto : BindBankCardInput
     /// </summary>
     public string CardNoText
     {
-        get { return CardNo.CardNoText(); }
+        get { return CardNo.CardNoText1(); }
     }
 }
 
@@ -23,6 +23,10 @@ public class UserBankCardDto : BindBankCardInput
 /// </summary>
 public class BindBankCardInput
 {
+    /// <summary>
+    /// id
+    /// </summary>
+    public long Id { get; set; }
     /// <summary>
     ///  银行Id
     /// </summary>

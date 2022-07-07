@@ -137,6 +137,7 @@ public class UserWalletService : IUserWalletService
                     OperateType = WalletOperateEnums.User
                 });
             });
+            return "without_success";
         }
         //代还
         else if (input.SourceType == WalletSourceEnums.RepayApply)

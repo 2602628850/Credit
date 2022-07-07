@@ -55,13 +55,14 @@
 								</view>
 							</view>
 						</view>
+						
 						<!--卡号-->
 						<view id="cardList" class="margin-top-lg card-content-secondary">
 							<view>
 								<text class="text-bold text-lg"><span>{{$t('chaka.selectrepayment')}}</span></text>
 							</view>
 								<!--循环卡号-->
-							<view class="card-content-sm flex-row align-center margin-top" v-for="(item,index) in cardlist" :key="index"  :class="{'card-select':index==current}" @click="UpdateVal(index,item.cardNo,item.bankName,item.amount)">
+							<view class="card-content-sm flex-row align-center margin-top" v-for="(item,index) in cardlist" :key="index"  :class="{'card-select':index==current}" @click="UpdateVal(index,item.cardNo,item.bankName,item.amount,item.id)">
 								<view class="flex-1">
 									<text class="text-sm"><span>{{item.bindUser}}</span></text>
 									<text class="text-xs text-secondary">
@@ -71,6 +72,8 @@
 							</view>
 						
 						</view>
+						
+						
 						<!---->
 						<view class="margin-top-lg card-content-secondary">
 							<view>
@@ -143,10 +146,6 @@
 		onLoad: function(option) {
 			this.lv.Leaveid=option.id;
 			this.lv.levelName=option.levelName;
-			this.ApiGet(url,this.lv).then(res => {
-				this.cardlist = res.data
-				
-			})
 		},
 		methods: {
 			//因为等级介绍内容可能很长,所以不建议通过url传过来
@@ -174,14 +173,14 @@
 				})
 			},
 			//点击银行卡的时候页面数据动态变化
-			UpdateVal(index,cardNo,bankName,amount){
+			UpdateVal(index,cardNo,bankName,amount,id){
 				this.current=index;
 				this.cardNo=cardNo;
 				this.bankName=bankName;
 				this.amount=amount;
 				//还款对象
 				this.repayObj.Type="bankcard";//线下还款
-				this.repayObj.PayeeBankCardId=res.data[0].id;//银行卡id
+				this.repayObj.PayeeBankCardId=id;//银行卡id
 				this.repayObj.SourceType=300;//还款申请
 				this.repayObj.Amount=this.amount;//还款金额
 			},

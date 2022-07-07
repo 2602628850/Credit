@@ -281,5 +281,9 @@ export default {
 		remark4:'4. Before submitting the application, please upload the screenshot of your successful transfer. After submitting the application, please wait for the review of the platform5. If your account has not received the recharging amount after the transfer is successful and the platform processes your application, please contact the customer service for details',
 		remark5:'5. If your account has not received the recharging amount after the transfer is successful and the platform processes your application, please contact the customer service for details',
 		remark6:'6. In order to ensure your interests, the platform is recharge processing time is: 10:00-23:00. If you make recharge request at other time, it will be processed for you according to the above working hours.',
+	},
+	without:{
+		withsuc:'submit successful!',
+		withfail:'submit failed!'
 	}
 }
