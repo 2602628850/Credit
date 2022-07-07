@@ -1,8 +1,6 @@
 using Credit.PamentInfoModels;
 using Credit.PayeeBankCardServices;
-using Credit.PayeeInfoModels;
 using Credit.RepayModels;
-using Credit.UserBankCardModels;
 using Credit.UserBankCardServices;
 using Credit.UserModels;
 using Credit.UserServices;
