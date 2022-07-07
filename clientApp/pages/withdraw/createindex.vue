@@ -1,19 +1,19 @@
 <template>
-	<navigation-bar title="银行卡提款申请"></navigation-bar>
+	<navigation-bar :title="$t('without.title')"></navigation-bar>
 	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="false">
 		<view style="margin-top: 6%;margin-left: 3%; font-weight: 600;font-size: 16px;">
-			<text>当前余额</text>
+			<text>{{$t('without.balance')}}</text>
 		</view>
 		<view style="font-weight: 800;font-size: 20px;margin-top: 2%;margin-left: 3%;color:rgb(0, 135, 90);">
 			<text>${{userinfo.balance}}</text>
 		</view>
 		<view style="margin-top: 6%;margin-left: 3%; font-weight: 600;font-size: 16px;">
-			<text>提现金额</text>
+			<text>{{$t('without.withmoney')}}</text>
 		</view>
 		<view style="width: 110%;margin-left: -5%;">
 		<register-input-item style="margin-top: 20px">
 			<template v-slot:default>
-				<input placeholder="输入提款金额, 最低$20" v-model="numberinput" class="input"/>
+				<input :placeholder="$t('without.inputdes')" type="number" v-model="numberinput" class="input"/>
 			</template>
 		</register-input-item>
 		</view>
@@ -21,7 +21,7 @@
 		<!--卡号-->
 		<view class="margin-top-lg card-content-secondary" >
 			<view>
-				<text class="text-bold text-lg">请您选择银行卡</text>
+				<text class="text-bold text-lg">{{$t('without.choosecard')}}</text>
 			</view>
 				<!--循环卡号-->
 			<view class="card-content-sm flex-row align-center margin-top" v-for="(item,index) in cardlist" :key="index"  :class="{'card-select':index==current}" @click="UpdateVal(index,item.id)">
@@ -36,9 +36,29 @@
 		
 		
 		<view style="margin-top: 20px;">
-			<button class="view-select" @click="withOut()">提现</button>
+			<button class="view-select" @click="withOut()">{{$t('without.with')}}</button>
 		</view>
-		
+		<view style="margin-top: 20px;margin-left: 3%;">
+			<text style="display: flex;font-weight: 800;">{{$t('without.remark')}}</text>
+			<text style="display: flex;margin-top: 10px;">
+				{{$t('without.remark1')}}
+			</text>
+			<text style="display: flex;">
+				{{$t('without.remark2')}}
+			</text>
+			<text style="display: flex;">
+					{{$t('without.remark3')}}
+			</text>
+			<text style="display: flex;">
+					{{$t('without.remark4')}}
+			</text>
+			<text style="display: flex;">
+					{{$t('without.remark5')}}
+			</text>
+			<text>
+					{{$t('without.remark6')}}
+			</text>
+		</view>
 	</app-content-view>
 </template>
 
@@ -50,7 +70,7 @@
 		},
 		data() {
 			return {
-				numberinput: 0,
+				numberinput: '',
 				userinfo: {},//用户对象
 				withoutObj:{},//提款对象
 			    cardlist:{},//用户卡号集合
@@ -80,22 +100,23 @@
 			},
 			//用户提款
 			withOut(){
+				if(this.numberinput.split(" ").join("").length === 0||parseFloat(this.numberinput)<=0){
+					var msg=this.$t('without.withnull');
+					this.TitleResult(msg)
+					return;
+				}
 				this.withoutObj.Amount=this.numberinput;
 				var url = "/User/UserWithdrawal";
 				this.ApiPost(url,this.withoutObj).then(res => {
 					if(res.data=="without_success"){
-						uni.showToast({
-							title:this.$t('without.withsuc'),
-							duration: 3000,
-						})
+						var msg=this.$t('without.withsuc');
+						this.TitleResult(msg)
 						uni.navigateTo({
 							url: '/pages/index/indexPage'
 						})
 					}else{
-						uni.showToast({
-							title: this.$t('without.withfail'),
-							duration: 3000,
-						})
+						var msg=res.data;
+						this.TitleResult(msg)
 					}
 				})
 			},
@@ -110,6 +131,12 @@
 			UpdateVal(index,id){
 				this.current=index;
 				this.withoutObj.PayeeBankCardId=id;
+			},
+			TitleResult(msg){
+				uni.showToast({
+					title: msg,
+					duration: 3000,
+				})
 			}
 
 

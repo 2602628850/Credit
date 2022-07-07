@@ -184,23 +184,25 @@
 				this.repayObj.SourceType=300;//还款申请
 				this.repayObj.Amount=this.amount;//还款金额
 			},
+			TitleResult(msg){
+				uni.showToast({
+					title: msg,
+					duration: 3000,
+				})
+			},
 			//还款
 			rePay(){
 				var url = "/Repay/RepayApplication";
 				this.ApiPost(url,this.repayObj).then(res => {
 					if(res.data=="repay_success"){
-						uni.showToast({
-							title: "还款成功",
-							duration: 3000,
-						})
+						var msg=this.$t('chaka.Charresult');
+						this.TitleResult(msg)
 						uni.navigateTo({
 							url: '/pages/prohall/creditIndex'
 						})
 					}else{
-						uni.showToast({
-							title: "还款失败!",
-							duration: 3000,
-						})
+						var msg= res.data;
+						this.TitleResult(msg)
 					}
 				})
 			}

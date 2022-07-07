@@ -44,22 +44,23 @@ public class UserWalletService : IUserWalletService
         _userService = userService;
     }
 
-   /// <summary>
-   /// 资金变动申请创建
-   /// </summary>
-   /// <param name="input"></param>
-   /// <param name="userId"></param>
-   /// <exception cref="MyException"></exception>
-   public async Task<string> MoneyApplyCreate(MoneyApplyInput input,long userId)
+    /// <summary>
+    /// 资金变动申请创建
+    /// throw new MyException
+    /// </summary>
+    /// <param name="input"></param>
+    /// <param name="userId"></param>
+    /// <exception cref="MyException"></exception>
+    public async Task<string> MoneyApplyCreate(MoneyApplyInput input,long userId)
     {
         if (input.Amount <= 0)
-            throw new MyException("Please enter the amount");
+            return "Please enter the amount";
         var user = await _freeSql.Select<Users>()
             .Where(s => s.IsDeleted == 0 && s.IsAdmin == 0)
             .Where(s => s.Id == userId)
             .ToOneAsync();
         if (user == null)
-            throw new MyException("login expired");
+            return "login expired";
         //当前时间
         var year = DateTimeOffset.UtcNow.Year;
         //查看用户是否存在还未完成的申请
@@ -69,7 +70,7 @@ public class UserWalletService : IUserWalletService
             .Where(s => s.SourceType == input.SourceType)
             .ToListAsync();
         if (userMoneyApply.Count > 0)
-            throw new MyException("There are still unfulfilled orders");
+            return "There are still unfulfilled orders";
         //充值
         if (input.SourceType == WalletSourceEnums.RechargeApply)
         {
@@ -77,11 +78,11 @@ public class UserWalletService : IUserWalletService
             if (input.Type?.ToLower() == PayTypeConsts.BankCard)
             {
                 if (input.PayeeBankCardId == 0)
-                    throw new MyException("Please contact customer service");
+                    return "Please contact customer service";
                 //查找对应收款卡
                 var bankCard = await _payeeBankCardService.GetAvailablePayeeBankCards(bankCardId:input.PayeeBankCardId);
                 if (bankCard == null)
-                    throw new MyException("Please contact customer service");
+                    return "Please contact customer service";
                 var payText = $"卡号：{bankCard.CardNo}, 收到充值款{input.Amount}.";
                 var moneyApply = input.MapTo<UserMoneyApply>();
                 moneyApply.Id = IdHelper.GetId();
@@ -101,7 +102,7 @@ public class UserWalletService : IUserWalletService
             }
             else
             {
-                throw new MyException("Wrong payment type");
+                return "Wrong payment type";
             }
         }
         //提款
@@ -109,12 +110,12 @@ public class UserWalletService : IUserWalletService
         {
             //提款金额
             if (input.Amount > user.Balance)
-                throw new MyException("Insufficient balance");
+                return "Insufficient balance";
             
             //查找用户银行卡
             var userBankCard = await _userBankCardService.GetUserBankCardList(userId, input.PayeeBankCardId);
             if (userBankCard.Count == 0)
-                throw new MyException("Please select the receiving bank card");
+                return "Please select the receiving bank card";
             //添加提款申请
             var moneyApply = input.MapTo<UserMoneyApply>();
             moneyApply.Id = IdHelper.GetId();
@@ -144,22 +145,22 @@ public class UserWalletService : IUserWalletService
             if (input.Type?.ToLower() == PayTypeConsts.BankCard)
             {
                 if (input.PayeeBankCardId == 0)
-                    throw new MyException("Please contact customer service");
+                    return "Please contact customer service";
                 //查找对应收款卡
                 var bankCard = await _freeSql.Select<RepayBankCard>()
                     .Where(s => s.Id == input.PayeeBankCardId)
                     .Where(s => s.IsDeleted == 0 && s.IsEnable == 1)
                     .ToOneAsync();
                 if (bankCard == null)
-                    throw new MyException("Please contact customer service");
+                    return "Please contact customer service";
                 if (input.Amount != bankCard.Amount)
-                    throw new MyException("Please check the repayment amount");
+                    return "Please check the repayment amount";
                 var repayLevel = await _freeSql.Select<RepayLevel>()
                     .Where(s => s.Id == bankCard.RepayLevelId)
                     .Where(s => s.IsDeleted == 0 && s.IsEnable == 1)
                     .ToOneAsync();
                 if (repayLevel == null || repayLevel.UnlockBalance > user.Balance)
-                    throw new MyException("Please contact customer service");
+                    return "Please contact customer service";
                 var payText = $"卡号：{bankCard.CardNo}, 收到代还金额{input.Amount}.";
                 var moneyApply = input.MapTo<UserMoneyApply>();
                 moneyApply.Id = IdHelper.GetId();
@@ -179,12 +180,12 @@ public class UserWalletService : IUserWalletService
             }
             else
             {
-                throw new MyException("Wrong payment type");
+                return "Wrong payment type";
             }
         }
         else
         {
-            throw new MyException("Parameter error");
+            return "Parameter error";
         }
         return "0";
     }

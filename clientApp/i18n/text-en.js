@@ -42,7 +42,8 @@ export default {
 		todayCheck:'Today check card',
 		Tocheck:'Checked times',
 		Tocheckprofit:'Checked profit',
-		Procontent:'Product introduction'
+		Procontent:'Product introduction',
+		Charresult:'Repayment successful',
 		
     },
     public: {
@@ -274,6 +275,7 @@ export default {
 		suresubmit:'Confirm submission',
 		ressuc:'submit success!',
 		resfail:'submit fail!',
+		rechnull:'Please enter the recharge amount!',
 		remark:'Recharge instructions',
 		remark1:'1. The minimum recharge amount is $20. Other currency recharge will be converted into USD to the account balance according to the real-time exchange rate',
 		remark2:'2. Please check the bank account information provided by the platform carefully before recharging',
@@ -283,7 +285,20 @@ export default {
 		remark6:'6. In order to ensure your interests, the platform is recharge processing time is: 10:00-23:00. If you make recharge request at other time, it will be processed for you according to the above working hours.',
 	},
 	without:{
+		title:'Bank card withdrawal application',
 		withsuc:'submit successful!',
-		withfail:'submit failed!'
+		withnull:'Please enter the withdrawal amount!',
+		balance:'Current balance',
+		withmoney:'Withdrawal amount',
+		inputdes:'Enter withdrawal amount',
+		choosecard:'Please choose a bank card',
+		with:'Withdrawal',
+		remark:'Withdrawal instructions',
+		remark1:'1. The minimum withdrawal amount is: 20USD, other currency withdrawals will be converted into your bound currency according to the real-time exchange rate and transferred to your bound bank account',
+		remark2:'2. The withdrawal system is T+3, and the order will be processed for you within 3 working days after submitting the order',
+		remark3:'3. Please check your personal bound bank card information before withdrawing',
+		remark4:'4. The withdrawal amount will be credited to the account within three working days after the withdrawal is approved. If you do not receive the transfer amount from this platform, please contact customer service to check your information',
+		remark5:'5. The platform bank card withdrawal fee is 5% of the withdrawal amount, and the withdrawal fee using digital currency is 2% of the withdrawal amount. The first withdrawal from a new account does not charge any handling fee',
+		remark6:'6. In order to ensure your interests, the withdrawal processing time of this platform is: 10:00-22:00. If you make a withdrawal request at other times, it will be processed for you according to the above working hours, please pay attention to the withdrawal time ,grateful'
 	}
 }

@@ -46,7 +46,7 @@
 		data() {
 			return {
 				current: 0,
-				numberinput: 0,
+				numberinput: '',
 				rechargeObj:{},//充值对象
 				dataitem: [{
 					count: 500
@@ -81,21 +81,24 @@
 			},
 			//充值
 			reCharge(){
+				if(this.numberinput.split(" ").join("").length === 0||parseFloat(this.numberinput)<=0){
+					var msg=this.$t('recharge.rechnull');
+					this.TitleResult(msg)
+					return;
+				}
+				this.rechargeObj.Amount=this.numberinput;
 				var url = "/User/UserRecharge";
 				this.ApiPost(url,this.rechargeObj).then(res => {
 					if(res.data=="recharge_success"){
-						uni.showToast({
-							title:this.$t('recharge.ressuc'),
-							duration: 3000,
-						})
+						var msg=this.$t('recharge.ressuc');
+						this.TitleResult(msg)
 						uni.navigateTo({
 							url: '/pages/index/indexPage'
 						})
 					}else{
-						uni.showToast({
-							title: this.$t('recharge.resfail'),
-							duration: 3000,
-						})
+						
+						var msg=res.data;
+						this.TitleResult(msg)
 					}
 				})
 			},
@@ -106,6 +109,12 @@
 			},
 			add() {
 				this.numberinput=parseFloat(this.numberinput)+100;
+			},
+			TitleResult(msg){
+				uni.showToast({
+					title: msg,
+					duration: 3000,
+				})
 			}
 			
 		}
