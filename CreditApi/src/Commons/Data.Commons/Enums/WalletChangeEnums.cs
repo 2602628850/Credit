@@ -70,6 +70,12 @@ public enum WalletSourceEnums
     FinancilProfit = 230,
     
     /// <summary>
+    ///  理财佣金
+    /// </summary>
+    [Description("理财佣金")]
+    FianncilCommission = 240,
+    
+    /// <summary>
     ///  代还申请
     /// </summary>
     [Description("代还申请")]

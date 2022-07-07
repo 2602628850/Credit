@@ -1,6 +1,7 @@
 using Credit.OrderModels;
 using Credit.OrderServices.Dtos;
 using Credit.ProductModels;
+using Credit.TeamServices;
 using Credit.UserModels;
 using Credit.UserWalletServices;
 using Credit.UserWalletServices.Dtos;
@@ -20,15 +21,18 @@ public class FinancilOrderService : IFinancilOrderService
     private readonly IFreeSql _freeSql;
 
     private readonly IUserWalletService _userWalletService;
+    private readonly ITeamService _teamService;
 
     /// <summary>
     ///  
     /// </summary>
     public FinancilOrderService(IFreeSql freeSql
-    ,IUserWalletService userWalletService)
+    ,IUserWalletService userWalletService
+    ,ITeamService teamService)
     {
         _freeSql = freeSql;
         _userWalletService = userWalletService;
+        _teamService = teamService;
     }
 
     /// <summary>
@@ -207,6 +211,8 @@ public class FinancilOrderService : IFinancilOrderService
             .UpdateTableTime(TableTimeFormat.Year,order.CreateAt)
             .SetSource(order)
             .ExecuteAffrowsAsync();
+        //订单团队结算
+        await _teamService.UserTeamMemberProfit(order.UserId, order.TotalAmount);
     }
 
     /// <summary>

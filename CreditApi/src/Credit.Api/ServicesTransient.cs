@@ -7,6 +7,7 @@ using Credit.PayeeBankCardServices;
 using Credit.ProductServices;
 using Credit.RepayServices;
 using Credit.SettingServices;
+using Credit.TeamServices;
 using Credit.UserBankCardServices;
 using Credit.UserServices;
 using Credit.UserWalletServices;
@@ -38,7 +39,8 @@ namespace Credit.Api
                 .AddTransient<IIntegralOrderService, IntegralOrderService>()
                 .AddTransient<IIntegralRecodeService, IntegralRecodeService>()
                 .AddTransient<IRepayService,RepayService>()
-                .AddTransient<ISettingService,SettingService>();
+                .AddTransient<ISettingService,SettingService>()
+                .AddTransient<ITeamService,TeamService>();
         }
     }
 }

@@ -83,5 +83,21 @@ namespace Credit.UserServices
         /// <param name="userId"></param>
         /// <returns></returns>
         Task AddUserTeam(long userId);
+
+        /// <summary>
+        /// 获取用户团队父级成员
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="maxSort"></param>
+        /// <returns></returns>
+        Task<List<TeamUsersDto>> GetUserTeamParentMembers(long userId,int maxSort = 0);
+
+        /// <summary>
+        ///  获取用户团队子级成员
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="maxSort"></param>
+        /// <returns></returns>
+        Task<List<TeamUsersDto>> GetUserTeamChildMembers(long userId,int maxSort = 0);
     }
 }

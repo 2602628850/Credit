@@ -52,17 +52,18 @@ namespace Credit.UserModels
         ///  积分
         /// </summary>
         public decimal Integral { get; set; }
-        /// <summary>
-        ///  是否管理员
-        /// </summary>
-        public int IsAdmin { get; set; }
+        
         /// <summary>
         /// 邀请人
         /// </summary>
 
         public long ParentId { get; set; }
 
-
+        /// <summary>
+        ///  根级用户ID
+        /// </summary>
+        public long RootParentId { get; set; }
+        
         /// <summary>
         /// 个人团队等级
         /// </summary>
@@ -78,6 +79,22 @@ namespace Credit.UserModels
         /// </summary>
 
         public long Level { get; set; }
+        
+        /// <summary>
+        ///  邀请人数
+        /// </summary>
+        public int InviteCount { get; set; }
 
+
+        /// <summary>
+        ///  是否团队人员
+        /// </summary>
+        public int IsTeamUser { get; set; }
+
+        
+        /// <summary>
+        ///  是否管理员
+        /// </summary>
+        public int IsAdmin { get; set; }
     }
 }
