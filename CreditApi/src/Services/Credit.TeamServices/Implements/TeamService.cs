@@ -171,37 +171,6 @@ public class TeamService : ITeamService
         return output;
     }
 
-    /// <summary>
-    ///  更新用户团队等级
-    /// </summary>
-    /// <param name="userId"></param>
-    public async Task UpdateTeamLevel(long userId = 0)
-    {
-        var users = await _freeSql.Select<Users>()
-            .WhereIf(userId > 0,s => s.Id == userId)
-            .Where(s => s.IsDeleted == 0 && s.IsTeamUser == 1)
-            .ToListAsync();
-
-        var teamLevels = await _freeSql.Select<TeamLevel>()
-            .Where(s => s.IsDeleted == 0)
-            .ToListAsync();
-
-        users.ForEach(item =>
-        {
-            var level = teamLevels.Where(s => s.InviteCount <= item.InviteCount)
-                .OrderBy(s => s.LevelSort)
-                .FirstOrDefault();
-            if (level != null)
-                item.TeamLevel = level.Id;
-            else
-            {
-                item.Level = 0;
-            }
-        });
-        await _freeSql.Update<Users>()
-            .SetSource(users)
-            .ExecuteAffrowsAsync();
-    }
 
    
 

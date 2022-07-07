@@ -76,14 +76,7 @@ namespace Credit.UserServices
         /// <param name="CreditValue"></param>
         /// <returns></returns>
         Task AddUserXYZ(long userId, int CreditValue);
-         
-        /// <summary>
-        /// 增加用用户团队等级
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        Task AddUserTeam(long userId);
-
+          
         /// <summary>
         /// 获取用户团队父级成员
         /// </summary>
@@ -106,5 +99,12 @@ namespace Credit.UserServices
         /// <param name="userId"></param>
         /// <returns></returns>
         void UserBecomeTeamUser(long userId);
+
+        /// <summary>
+        ///  更新用户团队等级
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task UpdateTeamLevel(long userId);
     }
 }
