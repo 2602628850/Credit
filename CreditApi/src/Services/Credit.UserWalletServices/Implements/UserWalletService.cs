@@ -5,6 +5,7 @@ using Credit.RepayModels;
 using Credit.UserBankCardModels;
 using Credit.UserBankCardServices;
 using Credit.UserModels;
+using Credit.UserServices;
 using Credit.UserWalletModels;
 using Credit.UserWalletServices.Dtos;
 using Data.Commons.Consts;
@@ -25,6 +26,7 @@ public class UserWalletService : IUserWalletService
 
     private readonly IPayeeBankCardService _payeeBankCardService;
     private readonly IUserBankCardService _userBankCardService;
+    private readonly IUserService _userService;
 
     /// <summary>
     /// 
@@ -32,13 +34,16 @@ public class UserWalletService : IUserWalletService
     /// <param name="freeSql"></param>
     /// <param name="payeeBankCardService"></param>
     /// <param name="userBankCardService"></param>
+    /// <param name="userService"></param>
     public UserWalletService(IFreeSql freeSql,
         IPayeeBankCardService payeeBankCardService,
-        IUserBankCardService userBankCardService)
+        IUserBankCardService userBankCardService,
+        IUserService userService)
     {
         _freeSql = freeSql;
         _payeeBankCardService = payeeBankCardService;
         _userBankCardService = userBankCardService;
+        _userService = userService;
     }
 
    /// <summary>
@@ -591,7 +596,10 @@ public class UserWalletService : IUserWalletService
                    OperateUserId = auditUserId,
                    UserId = moneyApply.UserId
                });
+               //更新用户为团队成员
+               _userService.UserBecomeTeamUser(moneyApply.UserId);
            }
        });
+       
    }
 }

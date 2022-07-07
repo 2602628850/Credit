@@ -14,6 +14,7 @@
       <ProjectReference Include="..\..\Models\Credit.UserWalletModels\Credit.UserWalletModels.csproj" />
       <ProjectReference Include="..\Credit.PayeeBankCardServices\Credit.PayeeBankCardServices.csproj" />
       <ProjectReference Include="..\Credit.UserBankCardServices\Credit.UserBankCardServices.csproj" />
+      <ProjectReference Include="..\Credit.UserServices\Credit.UserServices.csproj" />
     </ItemGroup>
 
     <ItemGroup>

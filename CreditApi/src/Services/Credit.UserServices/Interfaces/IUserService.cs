@@ -99,5 +99,12 @@ namespace Credit.UserServices
         /// <param name="maxSort"></param>
         /// <returns></returns>
         Task<List<TeamUsersDto>> GetUserTeamChildMembers(long userId,int maxSort = 0);
+
+        /// <summary>
+        ///  用户成为团队成员
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        void UserBecomeTeamUser(long userId);
     }
 }

@@ -395,7 +395,23 @@ namespace Credit.UserServices
             output.AddRange(parentMembers);
             return output;
         }
-        
+
+        /// <summary>
+        ///  成为团队人员
+        /// </summary>
+        /// <param name="userId"></param>
+        public void UserBecomeTeamUser(long userId)
+        {
+            var user = _freeSql.Select<Users>()
+                .Where(s => s.IsDeleted == 0 && s.IsTeamUser == 0)
+                .ToOne();
+            if (user == null)
+                return; 
+            _freeSql.Update<Users>(user.Id)
+                .SetDto(new {IsTeamUser = 1})
+                .ExecuteAffrows();
+        }
+
         /// <summary>
         /// 获取子级成员
         /// </summary>
