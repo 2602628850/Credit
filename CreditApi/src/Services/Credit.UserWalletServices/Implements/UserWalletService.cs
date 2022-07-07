@@ -1,8 +1,6 @@
 using Credit.PamentInfoModels;
 using Credit.PayeeBankCardServices;
-using Credit.PayeeInfoModels;
 using Credit.RepayModels;
-using Credit.UserBankCardModels;
 using Credit.UserBankCardServices;
 using Credit.UserModels;
 using Credit.UserServices;
@@ -137,6 +135,7 @@ public class UserWalletService : IUserWalletService
                     OperateType = WalletOperateEnums.User
                 });
             });
+            return "without_success";
         }
         //代还
         else if (input.SourceType == WalletSourceEnums.RepayApply)

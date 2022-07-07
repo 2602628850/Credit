@@ -9,7 +9,7 @@
 
 		<view style="margin-top: 20px;text-align: center;margin-left: 7%;">
 			<view @click="reduce" class="countBtn reduceBtn" style="float: left;"> － </view>
-		    <input type="number" v-model="numberinput" @input="getCardId()" class="sumTotal" style="width: 70%;float: left;" />
+		    <input type="number" v-model="numberinput" class="sumTotal" style="width: 70%;float: left;" />
 			<view @click="add" class="countBtn addBtn"  style="float: left;"> + </view>
 		</view>
 		<view>&nbsp;</view>
@@ -48,7 +48,6 @@
 				current: 0,
 				numberinput: 0,
 				rechargeObj:{},//充值对象
-				monyobj:{},//获取收款银行卡id需要传入金额
 				dataitem: [{
 					count: 500
 				}, {
@@ -70,9 +69,6 @@
 			this.rechargeObj.Amount=this.numberinput;
 			this.rechargeObj.Type="bankcard";//线下支付
 			this.rechargeObj.PaymentInfoId=0;//三方支付默认为0
-			
-			this.monyobj.Amount=this.numberinput;//获取收款银行卡id需要传入的金额
-			this.getCardId();//给收款银行卡id赋值
 		},
 		methods: {
 			UpdateView(index,count) {
@@ -82,11 +78,6 @@
 				this.rechargeObj.Amount=this.numberinput;
 				this.rechargeObj.Type="bankcard";//线下支付
 				this.rechargeObj.PaymentInfoId=0;//三方支付默认为0
-				var url = "/PayeeBankCard/GetPayeeBankCard";
-				this.monyobj.Amount=count;////获取收款银行卡id需要传入的金额
-				this.ApiGet(url,this.monyobj).then(res => {
-						this.rechargeObj.PayeeBankCardId=res.data.id;//给收款银行卡id赋值
-				})
 			},
 			//充值
 			reCharge(){
@@ -111,21 +102,10 @@
 			reduce() {
 				if (parseFloat(this.numberinput) - 100 >= 0) {
 					this.numberinput=parseFloat(this.numberinput)-100;
-					this.getCardId()
 				}
 			},
 			add() {
 				this.numberinput=parseFloat(this.numberinput)+100;
-				this.getCardId()
-			},
-			getCardId(){
-				var url = "/PayeeBankCard/GetPayeeBankCard";
-				this.monyobj.Amount=this.numberinput;
-				this.ApiGet(url,this.monyobj).then(res => {
-						this.rechargeObj.PayeeBankCardId=res.data.id;//充值传收款银行卡id
-						
-						
-				})
 			}
 			
 		}

@@ -26,4 +26,18 @@ public static class StringExtensions
 
         return noText.ToString();
     }
+    /// <summary>
+    ///  卡号显示
+    /// </summary>
+    /// <param name="cardNo"></param>
+    /// <returns></returns>
+    public static string CardNoText1(this string cardNo)
+    {
+        if (cardNo.Length <= 4)
+        { 
+            return cardNo; 
+        }
+        cardNo ="**** **** **** " +cardNo.Substring(cardNo.Length - 4, 4);
+        return cardNo;
+    }
 }

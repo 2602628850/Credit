@@ -651,7 +651,7 @@
              用户接口管理
             </summary>
         </member>
-        <member name="M:Credit.Api.Controllers.UserController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.UserServices.IUserService,Credit.UserWalletServices.IUserWalletService,Credit.UserBankCardServices.IUserBankCardService,Credit.IntegralServices.IIntegralOrderService,Credit.IntegralServices.IIntegralRecodeService)">
+        <member name="M:Credit.Api.Controllers.UserController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.UserServices.IUserService,Credit.UserWalletServices.IUserWalletService,Credit.UserBankCardServices.IUserBankCardService,Credit.IntegralServices.IIntegralOrderService,Credit.IntegralServices.IIntegralRecodeService,Credit.PayeeBankCardServices.IPayeeBankCardService)">
             <summary>
             
             </summary>

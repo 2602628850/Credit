@@ -12,6 +12,8 @@ using Data.Core.Controllers;
 using Credit.IntegralServices;
 using Credit.IntegralServices.Dtos;
 using Credit.IntegralServices.Implements;
+using Credit.PayeeBankCardServices;
+using Credit.PayeeBankCardServices.Dtos;
 
 namespace Credit.Api.Controllers
 {
@@ -25,6 +27,7 @@ namespace Credit.Api.Controllers
         private readonly IUserBankCardService _userBankCardService;
         private readonly IIntegralOrderService _integralOrderService;
         private readonly IIntegralRecodeService _integralRecodeService;
+        private readonly IPayeeBankCardService _payeeBankCardService;
 
         /// <summary>
         /// 
@@ -35,13 +38,15 @@ namespace Credit.Api.Controllers
             ,IUserWalletService walletService
             ,IUserBankCardService userBankCardService,
             IIntegralOrderService integralOrderService,
-            IIntegralRecodeService integralRecodeService) : base(tokenManager)
+            IIntegralRecodeService integralRecodeService,
+            IPayeeBankCardService payeeBankCardService) : base(tokenManager)
         {
             _userService = userService;
             _walletService = walletService;
             _userBankCardService = userBankCardService;
             _integralOrderService = integralOrderService;
             _integralRecodeService = integralRecodeService;
+            _payeeBankCardService = payeeBankCardService;
         }
 
         /// <summary>
@@ -83,12 +88,14 @@ namespace Credit.Api.Controllers
         [HttpPost]
         public async Task<string> UserRecharge([FromBody]UserMoneyApplyInput input)
         {
-          return  await _walletService.MoneyApplyCreate(new MoneyApplyInput
+            PayeeBankCardSelectDto payeeBankCard = await _payeeBankCardService.GetAvailablePayeeBankCards(input.Amount);
+            long payeeBankCardId = payeeBankCard.Id;//收款卡id
+            return  await _walletService.MoneyApplyCreate(new MoneyApplyInput
             {
                 Amount = input.Amount,
                 SourceType = WalletSourceEnums.RechargeApply,
                 Type = input.Type,
-                PayeeBankCardId = input.PayeeBankCardId,
+                PayeeBankCardId = payeeBankCardId,// input.PayeeBankCardId,这里最好不要通过前台接收,因为很可能前端网络不稳定造成后台数据不准确
                 PaymentInfoId = input.PaymentInfoId,
                 Remark = input.Remark
             },CurrentUser.UserId);
@@ -99,13 +106,14 @@ namespace Credit.Api.Controllers
         /// </summary>
         /// <param name="input"></param>
         [HttpPost]
-        public async Task UserWithdrawal([FromBody]UserMoneyApplyInput input)
+        public async Task<string> UserWithdrawal([FromBody]UserMoneyApplyInput input)
         {
-            await _walletService.MoneyApplyCreate(new MoneyApplyInput
+           
+          return  await _walletService.MoneyApplyCreate(new MoneyApplyInput
             {
                 Amount = input.Amount,
                 SourceType = WalletSourceEnums.WithdrawalApply,
-                PayeeBankCardId = input.PayeeBankCardId,
+                PayeeBankCardId =input.PayeeBankCardId,
                 PaymentInfoId = input.PaymentInfoId,
                 Remark = input.Remark
             },CurrentUser.UserId);
@@ -135,7 +143,7 @@ namespace Credit.Api.Controllers
         ///   获取用户绑定银行卡
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         public async Task<List<UserBankCardDto>> GetUserBindCardList()
         {
             return await _userBankCardService.GetUserBankCardList(CurrentUser.UserId);
