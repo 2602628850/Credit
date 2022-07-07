@@ -52,12 +52,6 @@ public interface ITeamService
    /// <returns></returns>
    Task<PagedOutput<TeamLevelDto>> GetTeamLevelPagedList(TeamLevelPagedInput input);
 
-   /// <summary>
-   ///  更新用户团队等级
-   /// </summary>
-   /// <param name="userId"></param>
-   /// <returns></returns>
-   Task UpdateTeamLevel(long userId = 0);
 
    #endregion
 

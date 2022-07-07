@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Commons\Data.Commons\Data.Commons.csproj" />
+    <ProjectReference Include="..\Credit.CreditLevelModels\Credit.CreditLevelModels.csproj" />
+    <ProjectReference Include="..\Models\Credit.UserModels\Credit.UserModels.csproj" />
+  </ItemGroup>
+
+</Project>

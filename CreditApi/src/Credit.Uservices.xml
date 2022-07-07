@@ -61,12 +61,12 @@
         </member>
         <member name="T:Credit.UserServices.Dtos.AdminLoginDto">
             <summary>
-              管理员登录信息
+              管理员登录信�
             </summary>
         </member>
         <member name="P:Credit.UserServices.Dtos.AdminLoginDto.IsAdmin">
             <summary>
-             是否管理员
+             是否管理�
             </summary>
         </member>
         <member name="T:Credit.UserServices.Dtos.UserLoginOutput">
@@ -106,7 +106,7 @@
         </member>
         <member name="P:Credit.UserServices.Dtos.RegisterUserInput.Code">
             <summary>
-            验证码
+            验证�
             </summary>
         </member>
         <member name="P:Credit.UserServices.Dtos.RegisterUserInput.InvCode">
@@ -179,7 +179,7 @@
         </member>
         <member name="M:Credit.UserServices.UserService.AdminUserLogin(Credit.UserServices.Dtos.UserLoginInput)">
             <summary>
-             管理员登录
+             管理员登�
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -216,7 +216,7 @@
         </member>
         <member name="M:Credit.UserServices.UserService.ExchangeIntegral(Credit.UserServices.Dtos.UserDto)">
             <summary>
-             用户积分转余额
+             用户积分转余�
             </summary>
             <param name="input"></param>
         </member>
@@ -230,7 +230,7 @@
         </member>
         <member name="M:Credit.UserServices.UserService.AddUserXYZ(System.Int64,System.Int32)">
             <summary>
-            增加用户信用值
+            增加用户信用�
             </summary>
             <param name="userId"></param>
             <param name="CreditValue"></param>
@@ -245,9 +245,17 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
+        <member name="M:Credit.UserServices.UserService.AddUserTeam(System.Int64)">
+            <summary>
+            增加用户团队等级
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
         <member name="M:Credit.UserServices.UserService.GetTeamUserAllMembers(System.Int64)">
             <summary>
-             获取团队所有成员
+             获取团队所有成�
             </summary>
             <param name="userId"></param>
             <returns></returns>
@@ -284,6 +292,12 @@
             </summary>
             <param name="userId"></param>
         </member>
+        <member name="M:Credit.UserServices.UserService.UpdateTeamLevel(System.Int64)">
+            <summary>
+             更新用户团队等级
+            </summary>
+            <param name="userId"></param>
+        </member>
         <member name="M:Credit.UserServices.UserService.TeamChildMembers(System.Int64,System.Collections.Generic.List{Credit.UserModels.Users},System.Int32,System.Int32)">
             <summary>
             获取子级成员
@@ -315,7 +329,7 @@
         </member>
         <member name="M:Credit.UserServices.IUserService.AdminUserLogin(Credit.UserServices.Dtos.UserLoginInput)">
             <summary>
-             管理员用户登录
+             管理员用户登�
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -343,7 +357,7 @@
         </member>
         <member name="M:Credit.UserServices.IUserService.ExchangeIntegral(Credit.UserServices.Dtos.UserDto)">
             <summary>
-             用户积分转余额
+             用户积分转余�
             </summary>
             <param name="input"></param>
         </member>
@@ -364,17 +378,10 @@
         </member>
         <member name="M:Credit.UserServices.IUserService.AddUserXYZ(System.Int64,System.Int32)">
             <summary>
-            增加用户信用值
+            增加用户信用�
             </summary>
             <param name="userId"></param>
             <param name="CreditValue"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Credit.UserServices.IUserService.AddUserTeam(System.Int64)">
-            <summary>
-            增加用用户团队等级
-            </summary>
-            <param name="userId"></param>
             <returns></returns>
         </member>
         <member name="M:Credit.UserServices.IUserService.GetUserTeamParentMembers(System.Int64,System.Int32)">
@@ -396,6 +403,13 @@
         <member name="M:Credit.UserServices.IUserService.UserBecomeTeamUser(System.Int64)">
             <summary>
              用户成为团队成员
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.UpdateTeamLevel(System.Int64)">
+            <summary>
+             更新用户团队等级
             </summary>
             <param name="userId"></param>
             <returns></returns>

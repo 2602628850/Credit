@@ -79,15 +79,15 @@ public class AdminTeamController : BaseAdminController
         return await _teamService.GetTeamLevelPagedList(input);
     }
 
-    /// <summary>
-    ///  更新用户团队等级
-    /// </summary>
-    /// <param name="input"></param>
-    [HttpPost]
-    public async Task UpdateTeamLevel(UserIdInput input)
-    {
-        await _teamService.UpdateTeamLevel(input.UserId);
-    }
+    ///// <summary>
+    /////  更新用户团队等级
+    ///// </summary>
+    ///// <param name="input"></param>
+    //[HttpPost]
+    //public async Task UpdateTeamLevel(UserIdInput input)
+    //{
+    //    await _teamService.UpdateTeamLevel(input.UserId);
+    //}
 
     #endregion
 

@@ -1,4 +1,5 @@
-﻿using Credit.UserModels;
+﻿using Credit.TeamModels;
+using Credit.UserModels;
 using Credit.UserServices.Dtos;
 using Data.Commons.Dtos;
 using Data.Commons.Extensions;
@@ -70,21 +71,11 @@ namespace Credit.UserServices
             //邀请码注册
             if (input.InvCode != null)
             {
-                //邀请码邀请人数
-                var Directnum = 0;
                 //增加邀请人积分
                 await AddUserJF(Team.Id, 100);
-                //查询邀请码邀请人数
-                var teams = await GetTeamCountById(Team.Id);
-                if (teams != null)
-                {
-                    //邀请人数达到一定数量时
-                    if (teams.Direct == Directnum)
-                    {
-                        //增加 邀请人团队等级
-                        await AddUserTeam(Team.Id);
-                    }
-                }
+                //增加邀请人数
+                _freeSql.Update<Users>(Team.Id)
+                    .SetDto(new { InviteCount = Team.InviteCount + 1 }).ExecuteAffrows();
             }
         }
 
@@ -288,22 +279,6 @@ namespace Credit.UserServices
         }
 
         /// <summary>
-        /// 增加用户团队等级
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task AddUserTeam(long userId)
-        {
-            var user = await _freeSql.Select<Users>()
-            .Where(s => s.Id == userId)
-            .ToOneAsync();
-            user.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            user.TeamLevel = user.TeamLevel + 1;// 邀请人数注册人数达到对应等级是团队等级自动+一级
-            await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
-        }
-
-        /// <summary>
         ///  获取团队所有成员
         /// </summary>
         /// <param name="userId"></param>
@@ -343,7 +318,7 @@ namespace Credit.UserServices
             });
             var teamUsers = await GetTeamUserAllMembers(userId);
             var parentId = teamUsers.FirstOrDefault(s => s.Id == userId)?.ParentId ?? 0;
-            var parentMembers = await TeamParentMembers(parentId,teamUsers,maxSort,1);
+            var parentMembers = await TeamParentMembers(parentId, teamUsers, maxSort, 1);
             output.AddRange(parentMembers);
             return output;
         }
@@ -356,7 +331,7 @@ namespace Credit.UserServices
         /// <param name="maxSort"></param>
         /// <param name="sort"></param>
         /// <returns></returns>
-        private async Task<List<TeamUsersDto>> TeamParentMembers(long parentId,List<Users> teamUsers,int maxSort,int sort = 0)
+        private async Task<List<TeamUsersDto>> TeamParentMembers(long parentId, List<Users> teamUsers, int maxSort, int sort = 0)
         {
             var output = new List<TeamUsersDto>();
             var user = teamUsers.FirstOrDefault(s => s.Id == parentId);
@@ -369,7 +344,7 @@ namespace Credit.UserServices
             });
             if (user.ParentId == 0 || (maxSort > 0 && maxSort == sort))
                 return output;
-            var members = await TeamParentMembers(user.ParentId,teamUsers,maxSort,sort+1);
+            var members = await TeamParentMembers(user.ParentId, teamUsers, maxSort, sort + 1);
             output.AddRange(members);
 
             return output;
@@ -391,7 +366,7 @@ namespace Credit.UserServices
             });
             var teamUsers = await GetTeamUserAllMembers(userId);
             var parentId = teamUsers.FirstOrDefault(s => s.Id == userId)?.ParentId ?? 0;
-            var parentMembers = await TeamChildMembers(parentId,teamUsers,maxSort,1);
+            var parentMembers = await TeamChildMembers(parentId, teamUsers, maxSort, 1);
             output.AddRange(parentMembers);
             return output;
         }
@@ -400,18 +375,57 @@ namespace Credit.UserServices
         ///  成为团队人员
         /// </summary>
         /// <param name="userId"></param>
-        public void UserBecomeTeamUser(long userId)
+        public async void UserBecomeTeamUser(long userId)
         {
             var user = _freeSql.Select<Users>()
                 .Where(s => s.IsDeleted == 0 && s.IsTeamUser == 0)
                 .ToOne();
             if (user == null)
-                return; 
+                return;
             _freeSql.Update<Users>(user.Id)
-                .SetDto(new {IsTeamUser = 1})
+                .SetDto(new { IsTeamUser = 1 })
                 .ExecuteAffrows();
+            //增加直接团队成员
+            var Parent = _freeSql.Select<Users>()
+                .Where(s => s.Id == user.ParentId)
+                .ToOne();
+            Parent.DirectCount = Parent.DirectCount + 1;
+            await _freeSql.Update<Users>().SetSource(Parent).ExecuteAffrowsAsync();
+            //更新团队等级
+            await UpdateTeamLevel(user.ParentId);
         }
 
+        /// <summary>
+        ///  更新用户团队等级
+        /// </summary>
+        /// <param name="userId"></param>
+        public async Task UpdateTeamLevel(long userId)
+        {
+            var users = await _freeSql.Select<Users>()
+                .WhereIf(userId > 0, s => s.Id == userId)
+                .Where(s => s.IsDeleted == 0 && s.IsTeamUser == 1)
+                .ToListAsync();
+
+            var teamLevels = await _freeSql.Select<TeamLevel>()
+                .Where(s => s.IsDeleted == 0)
+                .ToListAsync();
+
+            users.ForEach(item =>
+            {
+                var level = teamLevels.Where(s => s.InviteCount <= item.DirectCount)
+                    .OrderBy(s => s.LevelSort)
+                    .FirstOrDefault();
+                if (level != null)
+                    item.TeamLevel = level.Id;
+                else
+                {
+                    item.Level = 0;
+                }
+            });
+            await _freeSql.Update<Users>()
+                .SetSource(users)
+                .ExecuteAffrowsAsync();
+        }
         /// <summary>
         /// 获取子级成员
         /// </summary>
@@ -420,7 +434,7 @@ namespace Credit.UserServices
         /// <param name="maxSort"></param>
         /// <param name="sort"></param>
         /// <returns></returns>
-        private async Task<List<TeamUsersDto>> TeamChildMembers(long parentId,List<Users> teamUsers,int maxSort,int sort = 0)
+        private async Task<List<TeamUsersDto>> TeamChildMembers(long parentId, List<Users> teamUsers, int maxSort, int sort = 0)
         {
             var output = new List<TeamUsersDto>();
             var user = teamUsers.FirstOrDefault(s => s.ParentId == parentId);
@@ -433,7 +447,7 @@ namespace Credit.UserServices
             });
             if (maxSort == sort && maxSort > 0)
                 return output;
-            var members = await TeamChildMembers(user.Id,teamUsers,maxSort,sort+1);
+            var members = await TeamChildMembers(user.Id, teamUsers, maxSort, sort + 1);
             output.AddRange(members);
 
             return output;
