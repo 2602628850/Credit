@@ -368,6 +368,88 @@
             </summary>
             <param name="taskIntegral"></param>
         </member>
+        <member name="T:Credit.Api.Controllers.AdminTeamController">
+            <summary>
+             管理员团队管理
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminTeamController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.TeamServices.ITeamService)">
+            <summary>
+            
+            </summary>
+            <param name="tokenManager"></param>
+            <param name="teamService"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminTeamController.TeamLevelCreate(Credit.TeamServices.Dtos.TeamLevelInput)">
+            <summary>
+             团队等级添加
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminTeamController.TeamLevelUpdate(Credit.TeamServices.Dtos.TeamLevelInput)">
+            <summary>
+             团队等级编辑
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminTeamController.TeamLevelDelete(Data.Commons.Dtos.IdInput)">
+            <summary>
+             团队等级删除
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminTeamController.GetTeamLevel(Data.Commons.Dtos.IdInput)">
+            <summary>
+             获取团队等级
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminTeamController.GetTeamLevelPagedList(Credit.TeamServices.Dtos.TeamLevelPagedInput)">
+            <summary>
+             获取团队等级列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminTeamController.UpdateTeamLevel(Credit.TeamServices.Dtos.UserIdInput)">
+            <summary>
+             更新用户团队等级
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminTeamController.TeamProfitCreate(Credit.TeamServices.Dtos.TeamBuyProfitSettingInput)">
+            <summary>
+             团队分润层级添加
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminTeamController.TeamProfitUpdate(Credit.TeamServices.Dtos.TeamBuyProfitSettingInput)">
+            <summary>
+             团队分润层级编辑
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminTeamController.TeamProfitDelete(Data.Commons.Dtos.IdInput)">
+            <summary>
+             团队分润层级删除
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminTeamController.GetTeamProfit(Data.Commons.Dtos.IdInput)">
+            <summary>
+             获取团队分润层级
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminTeamController.GetTeamProfitPagedList(Data.Commons.Dtos.PagedInput)">
+            <summary>
+             获取团队分润层级列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:Credit.Api.Controllers.AdminWalletController">
             <summary>
              钱包资金管理
@@ -549,6 +631,24 @@
         <member name="M:Credit.Api.Controllers.SettingController.GetTaskIntegralSetting">
             <summary>
              获取任务积分配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Credit.Api.Controllers.TeamController">
+            <summary>
+             团队管理
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.TeamController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.TeamServices.ITeamService)">
+            <summary>
+            
+            </summary>
+            <param name="tokenManager"></param>
+            <param name="teamService"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.TeamController.GetAllTeamLevels">
+            <summary>
+             获取所有团队等级
             </summary>
             <returns></returns>
         </member>

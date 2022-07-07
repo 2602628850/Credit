@@ -4,6 +4,21 @@
         <name>Credit.UserServices</name>
     </assembly>
     <members>
+        <member name="T:Credit.UserServices.Dtos.TeamUsersDto">
+            <summary>
+             团队成员DTO
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.TeamUsersDto.UserId">
+            <summary>
+             团队成员Id
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.TeamUsersDto.LevelSort">
+            <summary>
+             团队成员相对层级
+            </summary>
+        </member>
         <member name="T:Credit.UserServices.Dtos.UserLoginInput">
             <summary>
              用户登录输入
@@ -230,6 +245,49 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
+        <member name="M:Credit.UserServices.UserService.GetTeamUserAllMembers(System.Int64)">
+            <summary>
+             获取团队所有成员
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.UserService.GetUserTeamParentMembers(System.Int64,System.Int32)">
+            <summary>
+             获取用户团队父级成员
+            </summary>
+            <param name="userId"></param>
+            <param name="maxSort"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.UserService.TeamParentMembers(System.Int64,System.Collections.Generic.List{Credit.UserModels.Users},System.Int32,System.Int32)">
+            <summary>
+            获取父级成员
+            </summary>
+            <param name="parentId"></param>
+            <param name="teamUsers"></param>
+            <param name="maxSort"></param>
+            <param name="sort"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.UserService.GetUserTeamChildMembers(System.Int64,System.Int32)">
+            <summary>
+             获取用户团队子级成员
+            </summary>
+            <param name="userId"></param>
+            <param name="maxSort"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.UserService.TeamChildMembers(System.Int64,System.Collections.Generic.List{Credit.UserModels.Users},System.Int32,System.Int32)">
+            <summary>
+            获取子级成员
+            </summary>
+            <param name="parentId"></param>
+            <param name="teamUsers"></param>
+            <param name="maxSort"></param>
+            <param name="sort"></param>
+            <returns></returns>
+        </member>
         <member name="T:Credit.UserServices.IUserService">
             <summary>
              用户管理接口定义
@@ -311,6 +369,22 @@
             增加用用户团队等级
             </summary>
             <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.GetUserTeamParentMembers(System.Int64,System.Int32)">
+            <summary>
+            获取用户团队父级成员
+            </summary>
+            <param name="userId"></param>
+            <param name="maxSort"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.GetUserTeamChildMembers(System.Int64,System.Int32)">
+            <summary>
+             获取用户团队子级成员
+            </summary>
+            <param name="userId"></param>
+            <param name="maxSort"></param>
             <returns></returns>
         </member>
     </members>

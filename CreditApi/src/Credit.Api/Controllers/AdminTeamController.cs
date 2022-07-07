@@ -25,6 +25,8 @@ public class AdminTeamController : BaseAdminController
         _teamService = teamService;
     }
 
+    #region 团队等级
+
     /// <summary>
     ///  团队等级添加
     /// </summary>
@@ -86,4 +88,62 @@ public class AdminTeamController : BaseAdminController
     {
         await _teamService.UpdateTeamLevel(input.UserId);
     }
+
+    #endregion
+
+    #region 团队分润
+
+    /// <summary>
+    ///  团队分润层级添加
+    /// </summary>
+    /// <param name="input"></param>
+    [HttpPost]
+    public async Task TeamProfitCreate([FromBody]TeamBuyProfitSettingInput input)
+    {
+        await _teamService.TeamProfitCreate(input);
+    }
+    
+    /// <summary>
+    ///  团队分润层级编辑
+    /// </summary>
+    /// <param name="input"></param>
+    [HttpPost]
+    public async Task TeamProfitUpdate([FromBody]TeamBuyProfitSettingInput input)
+    {
+        await _teamService.TeamProfitUpdate(input);
+    }
+
+    /// <summary>
+    ///  团队分润层级删除
+    /// </summary>
+    /// <param name="input"></param>
+    [HttpPost]
+    public async Task TeamProfitDelete([FromBody]IdInput input)
+    {
+        await _teamService.TeamProfitDelete(input.Id, CurrentAdmin.UserId);
+    }
+
+    /// <summary>
+    ///  获取团队分润层级
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet]
+    public async Task<TeamBuyProfitSettingDto> GetTeamProfit([FromQuery]IdInput input)
+    {
+        return await _teamService.GetTeamProfit(input.Id);
+    }
+
+    /// <summary>
+    ///  获取团队分润层级列表
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet]
+    public async Task<PagedOutput<TeamBuyProfitSettingDto>> GetTeamProfitPagedList([FromQuery]PagedInput input)
+    {
+        return await _teamService.GetTeamProfitPagedList(input);
+    }
+
+    #endregion
 }
