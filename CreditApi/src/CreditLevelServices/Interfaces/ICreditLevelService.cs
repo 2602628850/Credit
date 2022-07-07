@@ -9,6 +9,6 @@ namespace Credit.CreditLevelServices.Interfaces
 {
     public interface ICreditLevelService
     {
-        Task TeamLevelCreate(CerditLeveDto input);
+        Task TeamLevelCreate(CerditLevelInput input);
     }
 }

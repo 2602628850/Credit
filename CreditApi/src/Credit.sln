@@ -21,51 +21,55 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.Api", "Credit.Api\Cr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Core", "Commons\Data.Core\Data.Core.csproj", "{94E62E16-583F-4E7F-B966-5F9B30BC9F50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Commons", "Commons\Data.Commons\Data.Commons.csproj", "{CB906D20-00C4-4683-9291-E3E4F1A98246}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Commons", "Commons\Data.Commons\Data.Commons.csproj", "{CB906D20-00C4-4683-9291-E3E4F1A98246}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.PamentInfoModels", "Models\Credit.PamentInfoModels\Credit.PamentInfoModels.csproj", "{1F7EE252-2EB8-4BFC-AA9C-3E8B93975D07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.PamentInfoModels", "Models\Credit.PamentInfoModels\Credit.PamentInfoModels.csproj", "{1F7EE252-2EB8-4BFC-AA9C-3E8B93975D07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.PayeeInfoModels", "Models\Credit.PayeeInfoModels\Credit.PayeeInfoModels.csproj", "{2CDACF3B-8371-4BBB-94E5-80481F695E18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.PayeeInfoModels", "Models\Credit.PayeeInfoModels\Credit.PayeeInfoModels.csproj", "{2CDACF3B-8371-4BBB-94E5-80481F695E18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.BankModels", "Models\Credit.BankModels\Credit.BankModels.csproj", "{13278EA7-21C6-4547-9E40-56AAAE739C8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.BankModels", "Models\Credit.BankModels\Credit.BankModels.csproj", "{13278EA7-21C6-4547-9E40-56AAAE739C8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.BankServices", "Services\Credit.BankServices\Credit.BankServices.csproj", "{70464718-A44C-4458-849E-0DF9BE22AF33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.BankServices", "Services\Credit.BankServices\Credit.BankServices.csproj", "{70464718-A44C-4458-849E-0DF9BE22AF33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.PayeeBankCardServices", "Services\Credit.PayeeBankCardServices\Credit.PayeeBankCardServices.csproj", "{C3A036D8-AA27-4E79-98D5-9A75AE1AE1D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.PayeeBankCardServices", "Services\Credit.PayeeBankCardServices\Credit.PayeeBankCardServices.csproj", "{C3A036D8-AA27-4E79-98D5-9A75AE1AE1D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.UserWalletModels", "Models\Credit.UserWalletModels\Credit.UserWalletModels.csproj", "{2D19F5F7-2562-4DD1-9AAF-D4CBFA66C9D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.UserWalletModels", "Models\Credit.UserWalletModels\Credit.UserWalletModels.csproj", "{2D19F5F7-2562-4DD1-9AAF-D4CBFA66C9D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.UserWalletServices", "Services\Credit.UserWalletServices\Credit.UserWalletServices.csproj", "{B2B2FADF-4BC5-4961-A3B2-EDF274BEC3FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.UserWalletServices", "Services\Credit.UserWalletServices\Credit.UserWalletServices.csproj", "{B2B2FADF-4BC5-4961-A3B2-EDF274BEC3FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.UserBankCardModels", "Models\Credit.UserBankCardModels\Credit.UserBankCardModels.csproj", "{668C9CAC-240C-4BB6-9CB3-B6C5C6B3CDF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.UserBankCardModels", "Models\Credit.UserBankCardModels\Credit.UserBankCardModels.csproj", "{668C9CAC-240C-4BB6-9CB3-B6C5C6B3CDF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.UserBankCardServices", "Services\Credit.UserBankCardServices\Credit.UserBankCardServices.csproj", "{873B1AE9-FB4E-4432-A82C-E207609610E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.UserBankCardServices", "Services\Credit.UserBankCardServices\Credit.UserBankCardServices.csproj", "{873B1AE9-FB4E-4432-A82C-E207609610E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.ProductModels", "Models\Credit.ProductModels\Credit.ProductModels.csproj", "{5BF7BAF6-2F69-4101-ACF2-C3631FA0A319}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.ProductModels", "Models\Credit.ProductModels\Credit.ProductModels.csproj", "{5BF7BAF6-2F69-4101-ACF2-C3631FA0A319}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.ProductServices", "Services\Credit.ProductServices\Credit.ProductServices.csproj", "{C529126C-4DA6-423C-8B30-12EF6B7C4A53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.ProductServices", "Services\Credit.ProductServices\Credit.ProductServices.csproj", "{C529126C-4DA6-423C-8B30-12EF6B7C4A53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.OrderModels", "Models\Credit.OrderModels\Credit.OrderModels.csproj", "{9002E2BC-5E47-4012-A9AE-EAEE7400AEBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.OrderModels", "Models\Credit.OrderModels\Credit.OrderModels.csproj", "{9002E2BC-5E47-4012-A9AE-EAEE7400AEBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.OrderServices", "Services\Credit.OrderServices\Credit.OrderServices.csproj", "{3D522D13-9FBC-4C49-9E1B-7B3790FA8EB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.OrderServices", "Services\Credit.OrderServices\Credit.OrderServices.csproj", "{3D522D13-9FBC-4C49-9E1B-7B3790FA8EB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.RepayServices", "Services\Credit.RepayServices\Credit.RepayServices.csproj", "{6358CABD-EC2C-40D1-AA78-65B661B6C488}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.RepayServices", "Services\Credit.RepayServices\Credit.RepayServices.csproj", "{6358CABD-EC2C-40D1-AA78-65B661B6C488}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.IntegralModels", "Models\Credit.Integral\Credit.IntegralModels.csproj", "{F497DDF2-094D-48AE-8F27-220E0EE6A767}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.IntegralModels", "Models\Credit.Integral\Credit.IntegralModels.csproj", "{F497DDF2-094D-48AE-8F27-220E0EE6A767}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.IntegralServices", "Services\Credit.IntegralServices\Credit.IntegralServices.csproj", "{D354084B-535C-4E30-AC05-E393463F7F26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.IntegralServices", "Services\Credit.IntegralServices\Credit.IntegralServices.csproj", "{D354084B-535C-4E30-AC05-E393463F7F26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.SettingModels", "Models\Credit.SettingModels\Credit.SettingModels.csproj", "{C3C5F1DC-BC57-49C4-AC98-30C2BDE17BEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.SettingModels", "Models\Credit.SettingModels\Credit.SettingModels.csproj", "{C3C5F1DC-BC57-49C4-AC98-30C2BDE17BEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.SettingServices", "Services\Credit.SettingServices\Credit.SettingServices.csproj", "{E6C62DE5-2B09-404D-A628-69C3020A8AC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.SettingServices", "Services\Credit.SettingServices\Credit.SettingServices.csproj", "{E6C62DE5-2B09-404D-A628-69C3020A8AC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.RepayModels", "Models\Credit.RepayModels\Credit.RepayModels.csproj", "{2731A8CB-EA9F-4399-8F57-7AF406CBCE3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.RepayModels", "Models\Credit.RepayModels\Credit.RepayModels.csproj", "{2731A8CB-EA9F-4399-8F57-7AF406CBCE3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.Hangfire", "Credit.Hangfire\Credit.Hangfire.csproj", "{6BFEE2EA-CB03-4376-9220-A917BE736E9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.Hangfire", "Credit.Hangfire\Credit.Hangfire.csproj", "{6BFEE2EA-CB03-4376-9220-A917BE736E9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.TeamModels", "Models\Credit.TeamModels\Credit.TeamModels.csproj", "{2DF05225-BFB8-4938-910A-C086A684FAF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.TeamModels", "Models\Credit.TeamModels\Credit.TeamModels.csproj", "{2DF05225-BFB8-4938-910A-C086A684FAF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.TeamServices", "Services\Credit.TeamServices\Credit.TeamServices.csproj", "{C91B9B00-D857-4485-9144-28B24B21A789}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credit.TeamServices", "Services\Credit.TeamServices\Credit.TeamServices.csproj", "{C91B9B00-D857-4485-9144-28B24B21A789}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.CreditLevelModels", "Credit.CreditLevelModels\Credit.CreditLevelModels.csproj", "{C6C417F3-6481-4A91-B558-2902774D75B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit.CreditLevelServices", "CreditLevelServices\Credit.CreditLevelServices.csproj", "{C3CE9AD0-8AB0-4DBA-A354-DF41C5E266E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -189,6 +193,14 @@ Global
 		{C91B9B00-D857-4485-9144-28B24B21A789}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C91B9B00-D857-4485-9144-28B24B21A789}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C91B9B00-D857-4485-9144-28B24B21A789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6C417F3-6481-4A91-B558-2902774D75B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6C417F3-6481-4A91-B558-2902774D75B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6C417F3-6481-4A91-B558-2902774D75B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6C417F3-6481-4A91-B558-2902774D75B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3CE9AD0-8AB0-4DBA-A354-DF41C5E266E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3CE9AD0-8AB0-4DBA-A354-DF41C5E266E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3CE9AD0-8AB0-4DBA-A354-DF41C5E266E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3CE9AD0-8AB0-4DBA-A354-DF41C5E266E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -221,6 +233,8 @@ Global
 		{2731A8CB-EA9F-4399-8F57-7AF406CBCE3B} = {CE159541-6753-4927-8909-6161E8E9F7C5}
 		{2DF05225-BFB8-4938-910A-C086A684FAF1} = {CE159541-6753-4927-8909-6161E8E9F7C5}
 		{C91B9B00-D857-4485-9144-28B24B21A789} = {AD38372F-7AFB-4F7A-BC6E-042A321B8EA8}
+		{C6C417F3-6481-4A91-B558-2902774D75B9} = {CE159541-6753-4927-8909-6161E8E9F7C5}
+		{C3CE9AD0-8AB0-4DBA-A354-DF41C5E266E5} = {AD38372F-7AFB-4F7A-BC6E-042A321B8EA8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C3532953-9A99-4976-8D3B-355D741B2207}

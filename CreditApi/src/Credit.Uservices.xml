@@ -237,14 +237,6 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:Credit.UserServices.UserService.AddUserTeam(System.Int64)">
-            <summary>
-            增加用户团队等级
-            </summary>
-            <param name="userId"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
         <member name="M:Credit.UserServices.UserService.GetTeamUserAllMembers(System.Int64)">
             <summary>
              获取团队所有成员
@@ -281,6 +273,12 @@
         <member name="M:Credit.UserServices.UserService.UserBecomeTeamUser(System.Int64)">
             <summary>
              成为团队人员
+            </summary>
+            <param name="userId"></param>
+        </member>
+        <member name="M:Credit.UserServices.UserService.UpdateTeamLevel(System.Int64)">
+            <summary>
+             更新用户团队等级
             </summary>
             <param name="userId"></param>
         </member>
@@ -370,13 +368,6 @@
             <param name="CreditValue"></param>
             <returns></returns>
         </member>
-        <member name="M:Credit.UserServices.IUserService.AddUserTeam(System.Int64)">
-            <summary>
-            增加用用户团队等级
-            </summary>
-            <param name="userId"></param>
-            <returns></returns>
-        </member>
         <member name="M:Credit.UserServices.IUserService.GetUserTeamParentMembers(System.Int64,System.Int32)">
             <summary>
             获取用户团队父级成员
@@ -396,6 +387,13 @@
         <member name="M:Credit.UserServices.IUserService.UserBecomeTeamUser(System.Int64)">
             <summary>
              用户成为团队成员
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.UpdateTeamLevel(System.Int64)">
+            <summary>
+             更新用户团队等级
             </summary>
             <param name="userId"></param>
             <returns></returns>
