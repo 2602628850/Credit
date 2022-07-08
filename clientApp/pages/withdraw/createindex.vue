@@ -1,11 +1,12 @@
 <template>
 	<navigation-bar :title="$t('without.title')"></navigation-bar>
 	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="false">
-		<view style="margin-left: 75%;margin-top: 5%;color: #00875a;font-weight: 800;">
-			<text @click="Todetail()">申请记录</text>
-		</view>
-		<view style="margin-top: 6%;margin-left: 3%; font-weight: 600;font-size: 16px;">
+		
+		<view style="margin-top: 5%;margin-left: 3%; font-weight: 600;font-size: 16px;float: left;">
 			<text>{{$t('without.balance')}}</text>
+		</view>
+		<view style="margin-left: 75%;margin-top: 5%;color: #00875a;font-weight: 800;">
+			<text @click="Todetail()">{{$t('without.recode')}}</text>
 		</view>
 		<view style="font-weight: 800;font-size: 20px;margin-top: 2%;margin-left: 3%;color:rgb(0, 135, 90);">
 			<text>${{userinfo.balance}}</text>
