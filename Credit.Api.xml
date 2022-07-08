@@ -96,6 +96,50 @@
             </summary>
             <param name="bankIds"></param>
         </member>
+        <member name="T:Credit.Api.Controllers.AdminCreditLevelController">
+            <summary>
+            信用等级后台设置
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminCreditLevelController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.CreditLevelServices.Interfaces.ICreditLevelService)">
+            <summary>
+            
+            </summary>
+            <param name="tokenManager"></param>
+            <param name="creditService"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminCreditLevelController.CreditLevelCreate(Credit.CreditLevelServices.Dtos.CreditLevelInput)">
+            <summary>
+             信用等级添加
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminCreditLevelController.CreditLevelUpdate(Credit.CreditLevelServices.Dtos.CreditLevelInput)">
+            <summary>
+             信用等级编辑
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminCreditLevelController.CreditLevelDelete(Data.Commons.Dtos.IdInput)">
+            <summary>
+             信用等级删除
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminCreditLevelController.GetCreditLevel(Data.Commons.Dtos.IdInput)">
+            <summary>
+             获取信用等级
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminCreditLevelController.GetCreditLevelPagedList(Credit.TeamServices.Dtos.CreditLevelPagedInput)">
+            <summary>
+             获取信用等级列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:Credit.Api.Controllers.AdminOrderController">
             <summary>
              管理员订单管理
@@ -491,6 +535,19 @@
         <member name="M:Credit.Api.Controllers.BankController.GetBankList">
             <summary>
              获取银行
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.CreditLevelController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.CreditLevelServices.Interfaces.ICreditLevelService)">
+            <summary>
+            
+            </summary>
+            <param name="tokenManager"></param>
+            <param name="creditService"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.CreditLevelController.GetAllCreditLevels">
+            <summary>
+             获取所有信用等级
             </summary>
             <returns></returns>
         </member>

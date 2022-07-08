@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Commons\Data.Commons\Data.Commons.csproj" />
+    <ProjectReference Include="..\..\Credit.CreditLevelModels\Credit.CreditLevelModels.csproj" />
     <ProjectReference Include="..\..\Models\Credit.TeamModels\Credit.TeamModels.csproj" />
     <ProjectReference Include="..\..\Models\Credit.UserModels\Credit.UserModels.csproj" />
   </ItemGroup>

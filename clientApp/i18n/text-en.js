@@ -158,7 +158,9 @@ export default {
 		table3:"This level of privilege",
 		Creditvalue:"credit value",
 		toFinish: 'to finish',
-		memberBenefits: 'member benefits',
+		memberBenefits: 'member benefits',	
+		DailyCK:"Daily card checking times+",
+		Income:"Income from loan repayment+",
 
 	},
 	tongji:{

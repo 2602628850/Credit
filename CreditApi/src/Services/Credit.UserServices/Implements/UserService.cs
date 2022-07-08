@@ -1,4 +1,5 @@
-﻿using Credit.TeamModels;
+﻿using Credit.CreditLevelModels;
+using Credit.TeamModels;
 using Credit.UserModels;
 using Credit.UserServices.Dtos;
 using Data.Commons.Dtos;
@@ -263,14 +264,10 @@ namespace Credit.UserServices
            .ToOneAsync();
             user.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             user.CreditValue = user.CreditValue + CreditValue;
-            //获取配置的等级积分
-            var xydj = 0;
-
-            if (user.CreditValue >= xydj)
-            {
-                user.Level = 1;//相应信用等级 
-            }
+            
             await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
+            //增加信用等级
+            await UpdateCreditLevel(userId);
         }
 
         public int SelectUserTeam(long userId)
@@ -417,6 +414,38 @@ namespace Credit.UserServices
                     .FirstOrDefault();
                 if (level != null)
                     item.TeamLevel = level.Id;
+                else
+                {
+                    item.TeamLevel = 0;
+                }
+            });
+            await _freeSql.Update<Users>()
+                .SetSource(users)
+                .ExecuteAffrowsAsync();
+        }
+
+        /// <summary>
+        ///  更新用户信用等级
+        /// </summary>
+        /// <param name="userId"></param>
+        public async Task UpdateCreditLevel(long userId)
+        {
+            var users = await _freeSql.Select<Users>()
+                .WhereIf(userId > 0, s => s.Id == userId)
+                .Where(s => s.IsDeleted == 0)
+                .ToListAsync();
+
+            var creditLevels = await _freeSql.Select<CreditLevel>()
+                .Where(s => s.IsDeleted == 0)
+                .ToListAsync();
+
+            users.ForEach(item =>
+            {
+                var level = creditLevels.Where(s => s.CreditValue <= item.CreditValue)
+                    .OrderBy(s => s.LevelSort)
+                    .FirstOrDefault();
+                if (level != null)
+                    item.Level = level.Id;
                 else
                 {
                     item.Level = 0;

@@ -1,4 +1,6 @@
 ﻿using Credit.BankServices;
+using Credit.CreditLevelServices;
+using Credit.CreditLevelServices.Interfaces;
 using Credit.IntegralServices;
 using Credit.IntegralServices.Implements;
 using Credit.OrderServices;
@@ -40,7 +42,8 @@ namespace Credit.Api
                 .AddTransient<IIntegralRecodeService, IntegralRecodeService>()
                 .AddTransient<IRepayService,RepayService>()
                 .AddTransient<ISettingService,SettingService>()
-                .AddTransient<ITeamService,TeamService>();
+                .AddTransient<ITeamService,TeamService>()
+                .AddTransient<ICreditLevelService, CreditLevelService>();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Credit.UserServices
         /// <param name="input"></param>
         /// <returns></returns>
         Task<UserLoginOutput> AdminUserLogin(UserLoginInput input);
-        
+
         /// <summary>
         ///  用户新增
         /// </summary>
@@ -42,7 +42,7 @@ namespace Credit.UserServices
         /// <param name="userId"></param>
         /// <returns></returns>
         Task<UserDto> GetUserById(long userId);
-        
+
         /// <summary>
         ///  获取用户列表
         /// </summary>
@@ -76,14 +76,14 @@ namespace Credit.UserServices
         /// <param name="CreditValue"></param>
         /// <returns></returns>
         Task AddUserXYZ(long userId, int CreditValue);
-          
+
         /// <summary>
         /// 获取用户团队父级成员
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="maxSort"></param>
         /// <returns></returns>
-        Task<List<TeamUsersDto>> GetUserTeamParentMembers(long userId,int maxSort = 0);
+        Task<List<TeamUsersDto>> GetUserTeamParentMembers(long userId, int maxSort = 0);
 
         /// <summary>
         ///  获取用户团队子级成员
@@ -91,7 +91,7 @@ namespace Credit.UserServices
         /// <param name="userId"></param>
         /// <param name="maxSort"></param>
         /// <returns></returns>
-        Task<List<TeamUsersDto>> GetUserTeamChildMembers(long userId,int maxSort = 0);
+        Task<List<TeamUsersDto>> GetUserTeamChildMembers(long userId, int maxSort = 0);
 
         /// <summary>
         ///  用户成为团队成员
@@ -106,5 +106,13 @@ namespace Credit.UserServices
         /// <param name="userId"></param>
         /// <returns></returns>
         Task UpdateTeamLevel(long userId);
+
+
+        /// <summary>
+        ///  更新用户信用等级
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task UpdateCreditLevel(long userId);
     }
 }

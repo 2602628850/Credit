@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Credit.CreditLevelServices.Dtos
 {
-    public class CerditLevelDto : CerditLevelInput
+    public class CreditLevelDto : CreditLevelInput
     {
         /// <summary>
         ///  添加时间
@@ -17,8 +17,12 @@ namespace Credit.CreditLevelServices.Dtos
     /// <summary>
     ///  信用等级输入
     /// </summary>
-    public class CerditLevelInput
+    public class CreditLevelInput
     {
+        /// <summary>
+        ///  主键Id
+        /// </summary>
+        public long Id { get; set; }
 
         /// <summary>
         ///  信用等级名称

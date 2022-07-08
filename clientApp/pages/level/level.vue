@@ -123,21 +123,21 @@
 								<view class="level-td-1">
 									<image class="vip-logo-mini margin-bottom-xs" :src="item.url">
 									</image>
-									<text class="text-xxs text-bold"><span>{{item.title}}</span>
+									<text class="text-xxs text-bold"><span>{{item.levelName}}</span>
 									</text>
 								</view>
 								<view class="level-td-2 align-center margin-right-xs">
 									<text class="text-xxs text-secondary margin-bottom-xs">
 										<span>{{$t('level.Creditvalue')}}</span>
 									</text>
-									<text class="text-bold text-primary"><span>{{item.Creditvalue}}</span>
+									<text class="text-bold text-primary"><span>{{item.creditValue}}</span>
 									</text>
 								</view>
 								<view>
 									<text class="text-xxs margin-bottom-sm">
-										<span>{{item.Equity1}}</span>
+										<span>{{$t('level.DailyCK')}}{{item.chakaNum}}</span>
 									</text>
-									<text class="text-xxs"><span>{{item.Equity2}}</span></text>
+									<text class="text-xxs"><span>{{$t('level.Income')}}{{item.profit}}%</span></text>
 								</view>
 							</view>
 						</view>
@@ -201,54 +201,24 @@
 						url: '/static/vip/v5.png'
 					}
 				],
-				Vipdata: [{
-						id: 1,
-						title: "Standard", 
-						Creditvalue: "0",  
-						Equity1:"每日查卡次数+3",
-						Equity2:"贷款代还收益+5%",
-						url: '/static/vip/v1.png'
-					},
-					{
-						id: 2, 
-						title: "Silver",
-						Creditvalue: "80",  
-						Equity1:"每日查卡次数+1",
-						Equity2:"贷款代还收益+8%",
-						url: '/static/vip/v2.png'
-					},
-					{
-						id: 3, 
-						title: "Gold",
-						Creditvalue: "200",  
-						Equity1:"每日查卡次数+1",
-						Equity2:"贷款代还收益+12%",
-						url: '/static/vip/v3.png'
-					},
-					{
-						id: 4, 
-						title: "Platinum",
-						Creditvalue: "500",  
-						Equity1:"每日查卡次数+1",
-						Equity2:"贷款代还收益+15%",
-						url: '/static/vip/v4.png'
-					},
-					{
-						id: 5, 
-						title: "Diamond",
-						Creditvalue: "100",  
-						Equity1:"每日查卡次数+1",
-						Equity2:"贷款代还收益+20%",
-						url:'/static/vip/v5.png'
-					}
-				],
+				Vipdata: [],
 
 			}
+		},
+		
+		mounted(){
+			this.GetData()
 		},
 		methods: {
 			SharedTo(uri) {
 				uni.navigateTo({
 					url: uri
+				})
+			},
+			GetData() {
+				var url = "/CreditLevel/GetAllCreditLevels";
+				this.ApiGet(url).then(res => {
+					this.Vipdata=res.data
 				})
 			}
 		}

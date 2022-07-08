@@ -107,6 +107,8 @@ export default {
 		Tocheckprofit: '已查卡利润',
 		Procontent: '产品简介',
 		Charresult:'还款成功',
+		
+		
 
 	},
 	interal: {
@@ -159,7 +161,9 @@ export default {
 		table3: "该等级特权",
 		Creditvalue: "信用值",
 		toFinish: '去完成',
-		memberBenefits: '会员权益',
+		memberBenefits: '会员权益',		
+		DailyCK:"每日查卡次数+",
+		Income:"贷款代还收益+",
 	},
 	tongji: {
 		title: '统计报表',

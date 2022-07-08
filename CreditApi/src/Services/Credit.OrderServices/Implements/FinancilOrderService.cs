@@ -22,8 +22,9 @@ public class FinancilOrderService : IFinancilOrderService
     private readonly IFreeSql _freeSql;
 
     private readonly IUserWalletService _userWalletService;
-    private readonly ITeamService _teamService;
+
     private readonly IUserService _userService;
+    private readonly ITeamService _teamService;
 
     /// <summary>
     ///  

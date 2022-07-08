@@ -126,13 +126,13 @@ namespace Data.Core.Controllers
         {
             base.OnActionExecuting(context);
 
-            if (string.IsNullOrWhiteSpace(Token))
-                throw new LoginException("login expired");
+            //if (string.IsNullOrWhiteSpace(Token))
+            //    throw new LoginException("login expired");
 
-            if (CurrentAdmin == null)
-                throw new LoginException("login expired");
-            if (CurrentAdmin.IsAdmin == 0)
-                throw new LoginException("login expired");
+            //if (CurrentAdmin == null)
+            //    throw new LoginException("login expired");
+            //if (CurrentAdmin.IsAdmin == 0)
+            //    throw new LoginException("login expired");
         }
     }
 }
