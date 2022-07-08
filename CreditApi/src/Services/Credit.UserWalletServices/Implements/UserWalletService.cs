@@ -87,7 +87,7 @@ public class UserWalletService : IUserWalletService
                 var moneyApply = input.MapTo<UserMoneyApply>();
                 moneyApply.Id = IdHelper.GetId();
                 moneyApply.PayText = payText;
-                moneyApply.AuditStatus = AuditStatusEnums.Default;
+                moneyApply.AuditStatus = AuditStatusEnums.Ing;
                 moneyApply.ChangeType = WalletChangeEnums.In;
                 moneyApply.UserId = userId;
                 moneyApply.AuditText = "用户充值";
@@ -119,7 +119,7 @@ public class UserWalletService : IUserWalletService
             //添加提款申请
             var moneyApply = input.MapTo<UserMoneyApply>();
             moneyApply.Id = IdHelper.GetId();
-            moneyApply.AuditStatus = AuditStatusEnums.Default;
+            moneyApply.AuditStatus = AuditStatusEnums.Ing;
             moneyApply.ChangeType = WalletChangeEnums.Out;
             moneyApply.PayText = $"提款：{input.Amount}, 提款卡号：{userBankCard.First().CardNo}.";
             moneyApply.UserId = userId;
@@ -165,7 +165,7 @@ public class UserWalletService : IUserWalletService
                 var moneyApply = input.MapTo<UserMoneyApply>();
                 moneyApply.Id = IdHelper.GetId();
                 moneyApply.PayText = payText;
-                moneyApply.AuditStatus = AuditStatusEnums.Default;
+                moneyApply.AuditStatus = AuditStatusEnums.Ing;
                 moneyApply.ChangeType = WalletChangeEnums.In;
                 moneyApply.UserId = userId;
                 moneyApply.AuditText = "代理还款";
@@ -255,14 +255,15 @@ public class UserWalletService : IUserWalletService
 
        return output;
    }
+    
 
-   /// <summary>
-   ///  资金变动审核
-   /// </summary>
-   /// <param name="input"></param>
-   /// <param name="auditUserId"></param>
-   /// <returns></returns>
-   public async Task MoneyApplyAudit(MoneyApplyAuditInput input, long auditUserId)
+        /// <summary>
+        ///  资金变动审核
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="auditUserId"></param>
+        /// <returns></returns>
+        public async Task MoneyApplyAudit(MoneyApplyAuditInput input, long auditUserId)
    {
        if (input.Status == AuditStatusEnums.Ing)
        {
@@ -602,4 +603,18 @@ public class UserWalletService : IUserWalletService
        });
        
    }
+    /// <summary>
+    ///  获取当前用户当年的所有提现记录
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    public async Task<List<MoneyApplyDto>> GetMoneyApplyRecode(long userid)
+    {
+        var year = DateTimeOffset.UtcNow.Year;
+        var userMoneyApply = await _freeSql.Select<UserMoneyApply>().AsTable((type, table) => $"{table}_{year}")
+            .Where(s => s.UserId == userid && s.IsDeleted == 0)
+            .Where(s => s.SourceType == WalletSourceEnums.WithdrawalApply).OrderByDescending(m => m.CreateAt)
+            .ToListAsync<MoneyApplyDto>();
+        return userMoneyApply;
+    }
 }
