@@ -108,7 +108,7 @@ namespace Credit.Api.Controllers
         [HttpPost]
         public async Task<string> UserWithdrawal([FromBody]UserMoneyApplyInput input)
         {
-           
+          
           return  await _walletService.MoneyApplyCreate(new MoneyApplyInput
             {
                 Amount = input.Amount,
@@ -246,6 +246,15 @@ namespace Credit.Api.Controllers
         public async Task<UserTeamDto> GetTeamCountById()
         {
             return await _userService.GetTeamCountById(CurrentUser.UserId);
+        }
+        /// <summary>
+        ///   获取当前用户当年的所有提现记录
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<List<MoneyApplyDto>> GetUserMoneyApplyList()
+        {
+            return await _walletService.GetMoneyApplyRecode(CurrentUser.UserId);
         }
     }
 }

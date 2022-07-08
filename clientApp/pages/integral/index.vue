@@ -3,20 +3,26 @@
 		<navigation-bar :title="intereal"></navigation-bar>
 		<app-content-view style="width: 98%;margin-left: 1%;" :show-tab-bar="false" :show-navigation-bar="true">
 
-			<view class="uni-padding-wrap uni-common-mt">
+			<view class="uni-padding-wrap uni-common-mt" >
 				<view style="margin-top: 20px;">
-					<uni-card class="box-card" @click="ToRecode()">
-						<uni-row :gutter="20" style="height: 50px;">
-							<uni-col :span="11">
+					<uni-card class="box-card" @click="ToRecode()" >
+						<uni-row :gutter="20" style="height: 50px;line-height: 40px;">
+							<uni-col :span="9">
 								<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 									{{$t('interal.currentinte')}}
 								</view>
 							</uni-col>
-							<uni-col :span="13">
+							<uni-col :span="9">
 								<view style="font-size: 16px; opacity: 1;font-weight: bold;text-align: left;">
 									{{interealCount}}
 								</view>
-								<view style="text-align: right;margin-top: -10%;">
+								<!-- <view style="text-align: right;margin-top: -20%;">
+									<text class="g-icons"></text>
+								</view> -->
+							</uni-col>
+							<uni-col :span="6">
+								
+								<view style="text-align: right;">
 									<text class="g-icons"></text>
 								</view>
 							</uni-col>

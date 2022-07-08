@@ -302,5 +302,15 @@ export default {
 		remark4:'4. The withdrawal amount will be credited to the account within three working days after the withdrawal is approved. If you do not receive the transfer amount from this platform, please contact customer service to check your information',
 		remark5:'5. The platform bank card withdrawal fee is 5% of the withdrawal amount, and the withdrawal fee using digital currency is 2% of the withdrawal amount. The first withdrawal from a new account does not charge any handling fee',
 		remark6:'6. In order to ensure your interests, the withdrawal processing time of this platform is: 10:00-22:00. If you make a withdrawal request at other times, it will be processed for you according to the above working hours, please pay attention to the withdrawal time ,grateful'
+	},
+	withoutrecode:{
+		title:'Withdrawal application record',
+		status:'state：',
+		status0:'default',
+		status1:'Processing',
+		status2:'success',
+		status3:'fail',
+		mount:'Requested withdrawal amount：',
+		time:'Application time：'
 	}
 }

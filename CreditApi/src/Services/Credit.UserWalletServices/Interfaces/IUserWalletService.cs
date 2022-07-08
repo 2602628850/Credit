@@ -46,5 +46,11 @@ public interface IUserWalletService
     /// <param name="input"></param>
     /// <returns></returns>
     Task<PagedOutput<UserWalletRecordDto>> GetUserWalletRecordPagedList(WalletRecordPagedInput input);
+    /// <summary>
+    ///  获取当前用户当年的所有提现记录
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<List<MoneyApplyDto>> GetMoneyApplyRecode(long userid);
 
 }

@@ -1,4 +1,5 @@
 using Data.Commons.Enums;
+using Data.Commons.Helpers;
 
 namespace Credit.UserWalletServices.Dtos;
 
@@ -136,6 +137,16 @@ public class MoneyApplyDto : UserMoneyApplyInput
     ///  申请时间
     /// </summary>
     public long CreateAt { get; set; }
+    /// <summary>
+    /// 申请时间
+    /// </summary>
+    public string TodateTime
+    {
+        get
+        {
+            return DateTimeHelper.UnixTimeToDateTime(CreateAt).ToString("yyyy-MM-dd HH:mm");
+        }
+    }
 
     /// <summary>
     ///  三方接口

@@ -1,8 +1,12 @@
 <template>
 	<navigation-bar :title="$t('without.title')"></navigation-bar>
 	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="false">
-		<view style="margin-top: 6%;margin-left: 3%; font-weight: 600;font-size: 16px;">
+		
+		<view style="margin-top: 5%;margin-left: 3%; font-weight: 600;font-size: 16px;float: left;">
 			<text>{{$t('without.balance')}}</text>
+		</view>
+		<view style="margin-left: 75%;margin-top: 5%;color: #00875a;font-weight: 800;">
+			<text @click="Todetail()">{{$t('without.recode')}}</text>
 		</view>
 		<view style="font-weight: 800;font-size: 20px;margin-top: 2%;margin-left: 3%;color:rgb(0, 135, 90);">
 			<text>${{userinfo.balance}}</text>
@@ -78,18 +82,18 @@
 			}
 		},
 		onLoad(){
+			this.getBalance();
 			this.getCardlist();
+			
 		},
 		mounted() {
-            this.getBalance();
-			
-			
 			//要提交的数据
 			this.withoutObj.Amount=this.numberinput;
 			this.withoutObj.Type="bankcard";//线下支付
 			this.withoutObj.PaymentInfoId=0;//三方支付默认为0
 			
 		},
+		
 		methods: {
 			//获取用户余额
 			getBalance() {
@@ -137,7 +141,13 @@
 					title: msg,
 					duration: 3000,
 				})
+			},
+			Todetail() {
+				uni.navigateTo({
+					url: '/pages/withdraw/recode'
+				})
 			}
+
 
 
 
