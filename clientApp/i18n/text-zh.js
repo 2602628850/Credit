@@ -315,6 +315,12 @@ export default {
 		status3:'失败',
 		mount:'申请提款金额：',
 		time:'申请时间：'
+	},
+	financialproduct:{
+		daday:"天",
+		inputval:'请输入购买份数!',
+		buysuc:'购买成功!',
+		
 	}
 	
 }

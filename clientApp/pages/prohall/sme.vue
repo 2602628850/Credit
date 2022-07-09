@@ -23,7 +23,7 @@
 							</uni-col>
 							<uni-col :span="12">
 								<view class="align-center flex-1">
-									<text class="text-bold text-primary text-lg"><span>{{item.cycle}}天</span></text>
+									<text class="text-bold text-primary text-lg"><span>{{item.cycle}}{{$t('financialproduct.daday')}}</span></text>
 								</view>
 								<view class="align-center flex-1">
 									<text class="text-secondary text-center text-xxs margin-top-xs">

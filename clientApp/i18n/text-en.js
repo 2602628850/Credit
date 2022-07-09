@@ -311,5 +311,11 @@ export default {
 		status3:'fail',
 		mount:'Requested withdrawal amount：',
 		time:'Application time：'
+	},
+	financialproduct:{
+		daday:"day",
+		inputval:'Please enter the number of copies to purchase!',
+		buysuc:'Purchase successful!',
+		
 	}
 }

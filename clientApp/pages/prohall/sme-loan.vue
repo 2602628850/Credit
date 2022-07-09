@@ -30,7 +30,7 @@
 						<span>{{$t('semloan.cycle')}}</span>
 					</uni-col>
 					<uni-col :span="4">
-						<text style="margin-right: 5px;"><span>{{productObj.cycle}}天</span></text>
+						<text style="margin-right: 5px;"><span>{{productObj.cycle}}{{$t('financialproduct.daday')}}</span></text>
 					</uni-col>
 				</uni-row>
 
@@ -142,7 +142,7 @@
 			//购买
 			submitProduct(){
 				if(this.numberinput.split(" ").join("").length === 0||parseFloat(this.numberinput)<=0){
-					var msg="请输入购买份数!";
+					var msg=this.$t('financialproduct.inputval');
 					this.TitleResult(msg)
 					return;
 				}
@@ -150,7 +150,8 @@
 				const url = decodeURI(encodeURI('/Order​/BuyFinancilProduct').replace(/%E2%80%8B/g, ""));
 				this.ApiPost(url,this.buyParam).then(res => {
 					if(res.data=="add_success"){
-						this.TitleResult("购买成功!")
+						var msg=this.$t('financialproduct.buysuc');
+						this.TitleResult(msg)
 						uni.navigateTo({
 							url: '/pages/prohall/sme'
 						})
