@@ -1,6 +1,6 @@
 using Data.Commons.Dtos;
 
-namespace Credit.TeamServices.Dtos;
+namespace Credit.CreditLevelServices.Dtos;
 
 public class CreditLevelPagedInput : PagedInput
 {

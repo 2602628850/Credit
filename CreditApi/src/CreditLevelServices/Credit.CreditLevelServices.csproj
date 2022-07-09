@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -10,7 +10,6 @@
     <ProjectReference Include="..\Commons\Data.Commons\Data.Commons.csproj" />
     <ProjectReference Include="..\Credit.CreditLevelModels\Credit.CreditLevelModels.csproj" />
     <ProjectReference Include="..\Models\Credit.UserModels\Credit.UserModels.csproj" />
-    <ProjectReference Include="..\Services\Credit.UserWalletServices\Credit.UserWalletServices.csproj" />
   </ItemGroup>
 
 </Project>

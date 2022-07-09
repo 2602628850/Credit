@@ -133,7 +133,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Credit.Api.Controllers.AdminCreditLevelController.GetCreditLevelPagedList(Credit.TeamServices.Dtos.CreditLevelPagedInput)">
+        <member name="M:Credit.Api.Controllers.AdminCreditLevelController.GetCreditLevelPagedList(Credit.CreditLevelServices.Dtos.CreditLevelPagedInput)">
             <summary>
              获取信用等级列表
             </summary>
@@ -722,6 +722,12 @@
         <member name="M:Credit.Api.Controllers.UserController.GetUserInfo">
             <summary>
              获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.GetCreditLevleById">
+            <summary>
+             获取用户信用等级
             </summary>
             <returns></returns>
         </member>

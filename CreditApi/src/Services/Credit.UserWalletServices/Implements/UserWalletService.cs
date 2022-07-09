@@ -610,11 +610,24 @@ public class UserWalletService : IUserWalletService
     /// <returns></returns>
     public async Task<List<MoneyApplyDto>> GetMoneyApplyRecode(long userid)
     {
+        var user = await _freeSql.Select<Users>()
+                   .Where(s => s.Id == userid)
+                   .ToOneAsync();
         var year = DateTimeOffset.UtcNow.Year;
         var userMoneyApply = await _freeSql.Select<UserMoneyApply>().AsTable((type, table) => $"{table}_{year}")
             .Where(s => s.UserId == userid && s.IsDeleted == 0)
             .Where(s => s.SourceType == WalletSourceEnums.WithdrawalApply).OrderByDescending(m => m.CreateAt)
             .ToListAsync<MoneyApplyDto>();
+        foreach (var item in userMoneyApply)
+        {
+            item.WalletSourceName = item.WalletSource.ToDescriptionOrString();
+            item.Balance = user.Balance;
+            if (item.WalletSource== WalletSourceEnums.Recharge) 
+                item.ChangeName = "+ $" + item.Amount; 
+            if (item.WalletSource == WalletSourceEnums.Withdrawal)
+                item.ChangeName = "- $" + item.Amount;
+
+        }
         return userMoneyApply;
     }
 }
