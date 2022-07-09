@@ -26,7 +26,7 @@
 				</uni-row>
 			</uni-card>
 		</view>
-		<view style="margin-top:20px;" @click="toP2P">
+		<!-- <view style="margin-top:20px;" @click="toP2P">
 			<uni-card class="box-card">
 				<uni-row :gutter="20">
 					<uni-col :span="6">
@@ -50,7 +50,7 @@
 					</uni-col>
 				</uni-row>
 			</uni-card>
-		</view>
+		</view> -->
 		<view style="margin-top:20px;" @click="toSme">
 			<uni-card class="box-card">
 				<uni-row :gutter="20">
