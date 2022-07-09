@@ -60,12 +60,10 @@ public class FinancilProductInput
     ///  购买最高限制（份）
     /// </summary>
     public int BuyMaxUnit { get; set; }
-
     /// <summary>
-    ///  产品介绍
+    /// 产品介绍
     /// </summary>
-    public string ProductIntroduction { get; set; } = string.Empty;
-
+    public string Introduction { get; set; }
     /// <summary>
     ///  启用  0 未启用  1 启用
     /// </summary>

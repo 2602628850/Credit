@@ -1,20 +1,20 @@
 <template>
 	<navigation-bar :title="$t('sem.title')"></navigation-bar>
 	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="false">
-		<view style="margin-top:30px;" @click="tocreditDetail" v-for="item in creditdata">
+		<view style="margin-top:30px;" @click="tocreditDetail(item.id)" v-for="(item,index) in productlist.items" :key="index">
 			<uni-card class="box-card">
 				<view class="card-content product-item margin-bottom-lg">
 					<view class="product-header">
-						<image class="product-logo" src="/static/image/hall/sem1.png">
+						<image class="product-logo" :src="item.coverImage">
 						</image>
 						<!---->
-						<text class="product-title line-1"><span>{{item.title}}</span></text> 
+						<text class="product-title line-1"><span>{{item.productName}}</span></text> 
 					</view>
 					<view class="product-body flex-row solid-bottom" style=" text-align: center;">
 						<uni-row :gutter="20">
 							<uni-col :span="12">
 								<view class="align-center flex-1">
-									<text class="text-bold text-primary text-lg"><span>{{item.profit}}</span></text>
+									<text class="text-bold text-primary text-lg"><span>{{item.dailyRate}}</span></text>
 								</view>
 								<view class="align-center flex-1">
 									<text class="text-secondary text-center text-xxs margin-top-xs">
@@ -23,7 +23,7 @@
 							</uni-col>
 							<uni-col :span="12">
 								<view class="align-center flex-1">
-									<text class="text-bold text-primary text-lg"><span>{{item.cycle}}</span></text>
+									<text class="text-bold text-primary text-lg"><span>{{item.cycle}}天</span></text>
 								</view>
 								<view class="align-center flex-1">
 									<text class="text-secondary text-center text-xxs margin-top-xs">
@@ -50,51 +50,36 @@
 	export default {
 		data() {
 			return {
-				creditdata: [{
-						id: 1,
-						title: "Bad debt handling area",
-						profit: "0.30%",
-						cycle: "7天",
-						url: '/static/image/hall/sem1.png'
-					},
-					{
-						id: 2,
-						title: "Small amount payment area",
-						profit: "0.22%",
-						cycle: "15天",
-						url: '/static/image/hall/sem2.png'
-					},
-					{
-						id: 3,
-						title: "Ordinary repayment area",
-						profit: "0.24%",
-						cycle: "30天",
-						url: '/static/image/hall/sem3.png'
-					},
-					{
-						id: 4,
-						title: "High-value repayment area",
-						profit: "0.28%",
-						cycle: "90天",
-						url: '/static/image/hall/sem4.png'
-					},
-					{
-						id: 4,
-						title: "High-value repayment area",
-						profit: "0.28%",
-						cycle: "180天",
-						url: '/static/image/hall/sem5.png'
-					}
-				]
-
+				productlist:[],//理财参评列表
+				proparam:{},//获取理财产品时需要的参数
 			}
 		},
+		onLoad(){
+			this.getProducts();
+		},
+		mounted(){
+			
+		},
 		methods: {
-			tocreditDetail() {
+			tocreditDetail(id) {
 				uni.navigateTo({
-					url: '/pages/prohall/sme-loan'
+					url: '/pages/prohall/sme-loan?id='+id
 				})
-			}
+				},
+				//获取理财产品
+				getProducts(){
+					this.proparam.IsEnable=1;
+					this.proparam.PageIndex=0;
+					this.proparam.PageSize=10000;
+					const url = decodeURI(encodeURI('/Product​/GetProductPagedList').replace(/%E2%80%8B/g, ""));
+					this.ApiGet(url,this.proparam).then(res => {
+						this.productlist = res.data;
+						console.log(this.productlist.items)
+					})
+				}
+				
+				
+			
 		}
 	}
 </script>

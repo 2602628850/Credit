@@ -14,7 +14,7 @@ public interface IFinancilOrderService
     /// <param name="input"></param>
     /// <param name="userId"></param>
     /// <returns></returns>
-    Task BuyFinancilProduct(FinancilOrderInput input,long userId);
+    Task<string> BuyFinancilProduct(FinancilOrderInput input,long userId);
 
     /// <summary>
     ///  获取理财订单

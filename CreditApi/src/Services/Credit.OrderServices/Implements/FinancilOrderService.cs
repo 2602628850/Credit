@@ -42,36 +42,37 @@ public class FinancilOrderService : IFinancilOrderService
 
     /// <summary>
     ///  理财订单提交
+    ///  throw new MyException
     /// </summary>
     /// <param name="input"></param>
     /// <param name="userId"></param>
     /// <exception cref="MyException"></exception>
-    public async Task BuyFinancilProduct(FinancilOrderInput input,long userId)
+    public async Task<string> BuyFinancilProduct(FinancilOrderInput input,long userId)
     {
         if (input.UnitCount <= 0)
-            throw new MyException("Please enter purchase share");
+            return "Please enter purchase share";
         //理财产品验证
         var product = await _freeSql.Select<FinancialProduct>()
             .Where(s => s.Id == input.ProductId)
             .Where(s => s.IsDeleted == 0)
             .ToOneAsync();
         if (product == null)
-            throw new MyException("Please select a new product");
+            return "Please select a new product";
         if (product.IsEnable == 0)
-            throw new MyException("Product has been discontinued");
+            return "Product has been discontinued";
         //用户验证
         var user = await _freeSql.Select<Users>()
             .Where(s => s.Id == userId)
             .Where(s => s.IsDeleted == 0)
             .ToOneAsync();
         if (user == null)
-            throw new MyException("Please login again");
+            return "Please login again";
         var amount = product.Price * input.UnitCount;
         if (user.Balance < amount)
-            throw new MyException("Insufficient balance");
+            return "Insufficient balance";
         //购买份数验证
         if (input.UnitCount < product.BuyMinUnit)
-            throw new MyException($"Purchase at least {product.BuyMinUnit} copies");
+            return $"Purchase at least {product.BuyMinUnit} copies";
         var productOrder = await _freeSql.Select<FinancilOrder>()
             .Where(s => s.ProductId == input.ProductId && s.UserId == userId)
             .Where(s => s.IsDeleted == 0 && s.IsSold == 0
@@ -113,6 +114,7 @@ public class FinancilOrderService : IFinancilOrderService
             //创建订单 表按年分表
             _freeSql.Insert(newOrder).InsertTableTime(TableTimeFormat.Year).ExecuteAffrows();
         });
+        return "add_success";
     }
 
     /// <summary>

@@ -31,9 +31,9 @@ public class OrderController : BaseUserController
     /// </summary>
     /// <param name="input"></param>
     [HttpPost]
-    public async Task BuyFinancilProduct([FromBody]FinancilOrderInput input)
+    public async Task<string> BuyFinancilProduct([FromBody]FinancilOrderInput input)
     {
-        await _financilOrderService.BuyFinancilProduct(input, CurrentUser.UserId);
+      return  await _financilOrderService.BuyFinancilProduct(input, CurrentUser.UserId);
     }
 
     /// <summary>
