@@ -1,4 +1,5 @@
 ﻿using Credit.CreditLevelModels;
+using Credit.CreditLevelServices.Interfaces;
 using Credit.TeamModels;
 using Credit.UserModels;
 using Credit.UserServices.Dtos;
@@ -16,15 +17,18 @@ namespace Credit.UserServices
     {
         private readonly IFreeSql _freeSql;
         private readonly ITokenManager _tokenManager;
+        private readonly ICreditLevelService _creditLevelService;
 
         /// <summary>
         /// 
         /// </summary>
         public UserService(IFreeSql freeSql,
-            ITokenManager tokenManager)
+            ITokenManager tokenManager,
+            ICreditLevelService creditLevelService)
         {
             _freeSql = freeSql;
             _tokenManager = tokenManager;
+            _creditLevelService = creditLevelService;
         }
 
         /// <summary>
@@ -47,12 +51,13 @@ namespace Credit.UserServices
             var nameExist = await _freeSql.Select<Users>()
                     .Where(s => s.Username == input.Username)
                     .AnyAsync();
-            //邀请码是否正确
-            var Team = await _freeSql.Select<Users>()
-               .Where(s => s.InvCode == input.InvCode)
-               .ToOneAsync();
-            if (Team == null)
-                throw new MyException("is incorrect");
+            // 邀请码是否正确
+
+            var InvCode = "";
+            InvCode = GetRandomString(6);
+            var InvCodeExist = await _freeSql.Select<Users>()
+                    .Where(s => s.InvCode == InvCode)
+                    .AnyAsync();
             var user = new Users
             {
                 Id = IdHelper.GetId(),
@@ -61,17 +66,25 @@ namespace Credit.UserServices
                 Nickname = input.Nickname,
                 CountryName = input.CountryName,
                 Code = input.Code,
-                InvCode = input.InvCode,
-                ParentId = Team.Id,
+                InvCode = InvCode,
+                ParentId = 0,
+                RootParentId = 0,
                 TeamLevel = 0,
                 CreditValue = 0,
                 Level = 0,
 
             };
             await _freeSql.Insert(user).ExecuteAffrowsAsync();
+            await UpdateCreditLevel(user.Id);
             //邀请码注册
-            if (input.InvCode != null)
+            if (!string.IsNullOrEmpty(input.InvCode))
             {
+                var Team = await _freeSql.Select<Users>()
+                   .Where(s => s.InvCode == input.InvCode)
+                   .ToOneAsync();
+                user.ParentId = Team.ParentId;
+                user.RootParentId = Team.RootParentId;
+                await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
                 //增加邀请人积分
                 await AddUserJF(Team.Id, 100);
                 //增加邀请人数
@@ -79,7 +92,24 @@ namespace Credit.UserServices
                     .SetDto(new { InviteCount = Team.InviteCount + 1 }).ExecuteAffrows();
             }
         }
-
+        /// <summary>
+        /// 生成邀请
+        /// </summary>
+        /// <param name="len"></param>
+        /// <returns></returns>
+        public string GetRandomString(int len)
+        {
+            string s = "123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ";
+            string reValue = string.Empty;
+            Random rd = new Random();
+            while (reValue.Length < len)
+            {
+                string s1 = s[rd.Next(0, s.Length)].ToString();
+                if (reValue.IndexOf(s1) == -1)
+                    reValue += s1;
+            }
+            return reValue;
+        }
         /// <summary>
         ///  用户登录
         /// </summary>
@@ -183,7 +213,31 @@ namespace Credit.UserServices
                     .ToOneAsync();
             return user.MapTo<UserDto>();
         }
+        /// <summary>
+        /// 获取信用等级
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<UserCreditDto> GetCreditLevleById(long userId)
+        {
+            var UserLevel = new UserCreditDto();
+            var user = await _freeSql.Select<Users>()
+                    .Where(s => s.Id == userId)
+                    .ToOneAsync();
+            if (user.Level > 0)
+            {
+                var Level = await _creditLevelService.GetCreditLevel(user.Level);
+                UserLevel.UserId = user.Id;
+                UserLevel.Nickname = user.Nickname;
+                UserLevel.LevelId = Level.Id;
+                UserLevel.LevelName = Level.LevelName;
+                UserLevel.CreditValue = user.CreditValue;
+                UserLevel.ChakaNum = Level.ChakaNum;
+                UserLevel.Profit = Level.Id;
+            }
 
+            return UserLevel.MapTo<UserCreditDto>();
+        }
         /// <summary>
         ///  获取用户团队人数
         /// </summary>
@@ -264,7 +318,7 @@ namespace Credit.UserServices
            .ToOneAsync();
             user.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             user.CreditValue = user.CreditValue + CreditValue;
-            
+
             await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
             //增加信用等级
             await UpdateCreditLevel(userId);

@@ -139,6 +139,51 @@
              余额
             </summary>
         </member>
+        <member name="T:Credit.UserServices.Dtos.UserCreditDto">
+            <summary>
+             用户信用等级信息
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserCreditDto.UserId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserCreditDto.Nickname">
+            <summary>
+             昵称
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserCreditDto.LevelId">
+            <summary>
+            等级
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserCreditDto.LevelName">
+            <summary>
+             信用等级名称
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserCreditDto.CreditValue">
+            <summary>
+             等级信用值
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserCreditDto.LevelSort">
+            <summary>
+             信用等级
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserCreditDto.ChakaNum">
+            <summary>
+             查卡次数
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserCreditDto.Profit">
+            <summary>
+             收益比例
+            </summary>
+        </member>
         <member name="T:Credit.UserServices.Dtos.UserTeamDto">
             <summary>
              团队人数统计
@@ -159,7 +204,7 @@
              用户管理接口方法实现
             </summary>
         </member>
-        <member name="M:Credit.UserServices.UserService.#ctor(IFreeSql,Data.Commons.Helpers.ITokenManager)">
+        <member name="M:Credit.UserServices.UserService.#ctor(IFreeSql,Data.Commons.Helpers.ITokenManager,Credit.CreditLevelServices.Interfaces.ICreditLevelService)">
             <summary>
             
             </summary>
@@ -169,6 +214,13 @@
              注册用户
             </summary>
             <param name="input"></param>
+        </member>
+        <member name="M:Credit.UserServices.UserService.GetRandomString(System.Int32)">
+            <summary>
+            生成邀请
+            </summary>
+            <param name="len"></param>
+            <returns></returns>
         </member>
         <member name="M:Credit.UserServices.UserService.UserLogin(Credit.UserServices.Dtos.UserLoginInput)">
             <summary>
@@ -195,6 +247,13 @@
         <member name="M:Credit.UserServices.UserService.GetUserById(System.Int64)">
             <summary>
              获取用户信息
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.UserService.GetCreditLevleById(System.Int64)">
+            <summary>
+            获取信用等级
             </summary>
             <param name="userId"></param>
             <returns></returns>
@@ -334,6 +393,13 @@
         <member name="M:Credit.UserServices.IUserService.GetUserById(System.Int64)">
             <summary>
              获取用户信息
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.GetCreditLevleById(System.Int64)">
+            <summary>
+             获取用户信用等级
             </summary>
             <param name="userId"></param>
             <returns></returns>

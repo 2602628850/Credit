@@ -44,6 +44,12 @@ namespace Credit.UserServices
         Task<UserDto> GetUserById(long userId);
 
         /// <summary>
+        ///  获取用户信用等级
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task<UserCreditDto> GetCreditLevleById(long userId);
+        /// <summary>
         ///  获取用户列表
         /// </summary>
         /// <param name="input"></param>

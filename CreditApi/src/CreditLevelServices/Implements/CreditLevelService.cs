@@ -1,13 +1,8 @@
 ﻿using Credit.CreditLevelModels;
 using Credit.CreditLevelServices.Dtos;
 using Credit.CreditLevelServices.Interfaces;
-using Credit.TeamServices.Dtos;
 using Credit.UserModels;
-using Credit.UserServices;
-using Credit.UserWalletServices;
-using Credit.UserWalletServices.Dtos;
 using Data.Commons.Dtos;
-using Data.Commons.Enums;
 using Data.Commons.Extensions;
 using Data.Commons.Helpers;
 using Data.Commons.Runtime;
@@ -18,8 +13,6 @@ namespace Credit.CreditLevelServices;
 public class CreditLevelService : ICreditLevelService
 {
     private readonly IFreeSql _freeSql;
-    private readonly IUserService _userService;
-    private readonly IUserWalletService _userWalletService;
 
     /// <summary>
     /// 
@@ -27,17 +20,13 @@ public class CreditLevelService : ICreditLevelService
     /// <param name="freeSql"></param>
     /// <param name="userService"></param>
     /// <param name="userWalletService"></param>
-    public CreditLevelService(IFreeSql freeSql
-    , IUserService userService
-    , IUserWalletService userWalletService)
+    public CreditLevelService(IFreeSql freeSql)
     {
         _freeSql = freeSql;
-        _userService = userService;
-        _userWalletService = userWalletService;
     }
     #region 信用等级
     /// <summary>
-    ///  团队等级信息验证
+    ///  信用等级信息验证
     /// </summary>
     /// <param name="input"></param>
     /// <exception cref="MyException"></exception>
@@ -94,7 +83,7 @@ public class CreditLevelService : ICreditLevelService
 
 
     /// <summary>
-    ///  团队等级删除
+    ///  信用等级删除
     /// </summary>
     /// <param name="levelId"></param>
     /// <param name="deleteUserId"></param>
@@ -121,7 +110,7 @@ public class CreditLevelService : ICreditLevelService
     }
 
     /// <summary>
-    ///  获取团队等级
+    ///  获取信用等级
     /// </summary>
     /// <param name="levelId"></param>
     /// <returns></returns>
@@ -134,7 +123,7 @@ public class CreditLevelService : ICreditLevelService
     }
 
     /// <summary>
-    ///  获取所有团队等级
+    ///  获取所有信用等级
     /// </summary>
     /// <returns></returns>
     public async Task<List<CreditLevelDto>> GetAllCreditLevels()
@@ -146,7 +135,7 @@ public class CreditLevelService : ICreditLevelService
     }
 
     /// <summary>
-    ///  获取团队等级列表
+    ///  获取信用等级列表
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>

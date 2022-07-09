@@ -136,6 +136,48 @@ namespace Credit.UserServices.Dtos
         public decimal Balance { get; set; }
     }
 
+
+    /// <summary>
+    ///  用户信用等级信息
+    /// </summary>
+    public class UserCreditDto  
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public long UserId { get; set; }
+
+        /// <summary>
+        ///  昵称
+        /// </summary>
+        public string Nickname { get; set; } = string.Empty;
+        /// <summary>
+        /// 等级
+        /// </summary>
+        public long LevelId { get; set; }
+        /// <summary>
+        ///  信用等级名称
+        /// </summary>
+        public string LevelName { get; set; } = string.Empty;
+
+        /// <summary>
+        ///  等级信用值
+        /// </summary>
+        public int CreditValue { get; set; }
+
+        /// <summary>
+        ///  信用等级
+        /// </summary>
+        public int LevelSort { get; set; }
+        /// <summary>
+        ///  查卡次数
+        /// </summary>
+        public int ChakaNum { get; set; }
+        /// <summary>
+        ///  收益比例
+        /// </summary>
+        public decimal Profit { get; set; }
+    }
     /// <summary>
     ///  团队人数统计
     /// </summary>

@@ -77,12 +77,27 @@ public class MoneyApplyDto : UserMoneyApplyInput
     ///    申请id
     /// </summary>
     public long ApplyId { get; set; }
-    
+
     /// <summary>
     ///  收支来源  0 充值  10 提款
     /// </summary>
     public WalletSourceEnums WalletSource { get; set; }
-    
+
+
+    /// <summary>
+    /// 收支名称
+    /// </summary>
+    public string WalletSourceName { get; set; }
+    /// <summary>
+    /// 当前余额
+    /// </summary>
+    public decimal Balance { get; set; }
+
+    /// <summary>
+    /// 当前余额
+    /// </summary>
+    public string ChangeName { get; set; }
+
     /// <summary>
     ///   支付信息
     /// </summary>
@@ -92,12 +107,12 @@ public class MoneyApplyDto : UserMoneyApplyInput
     ///  审核信息
     /// </summary>
     public string AuditText { get; set; } = string.Empty;
-    
+
     /// <summary>
     ///   审核状态
     /// </summary>
     public AuditStatusEnums AuditStatus { get; set; }
-    
+
     /// <summary>
     ///  审核人员Id
     /// </summary>

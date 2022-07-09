@@ -5,38 +5,22 @@
 
 
 			<view style="margin-top: 20px;">
-				<uni-card class="box-card" style="padding: 0;">
-					<uni-row :gutter="20" v-on:click="ToShop()" style="height: 60px;">
+				<uni-card class="box-card" style="padding: 0;"> 
+					<uni-row :gutter="20" style="height: 50px;margin-top: 10%;" v-for="item in MoneyApplyData">
 						<uni-col :span="3">
 							<image src="/static/image/static/bdjl.jpg" style="width: 30px;height: 30px;"></image>
 						</uni-col>
 						<uni-col :span="21">
 							<view style="font-size: 16px; opacity: 1;font-weight: bold;">
-								{{$t('monchange.cz')}}
+								{{item.walletSourceName}}
 							</view>
-							<view style="font-size: 8px"><span>{{ $t('monchange.banlance') }}:$1000.00</span></view>
-							<view style="font-size: 8px"><span>{{totime }}</span></view>
+							<view style="font-size: 8px"><span>{{ $t('monchange.banlance') }}:$ {{item.balance}}</span></view>
+							<view style="font-size: 8px"><span>{{item.todateTime }}</span></view>
 							<view style="margin-top:10px;text-align: right;margin-top: -15%;">
 
-								<text class="g-icons">+$1000</text>
+								<text class="g-icons">{{item.changeName}}</text>
 							</view>
-						</uni-col>
-					</uni-row>
-					<uni-row :gutter="20" style="height: 50px;margin-top: 10%;">
-						<uni-col :span="3">
-							<image src="/static/image/static/bdjl.jpg" style="width: 30px;height: 30px;"></image>
-						</uni-col>
-						<uni-col :span="21">
-							<view style="font-size: 16px; opacity: 1;font-weight: bold;">
-								{{$t('monchange.cz')}}
-							</view>
-							<view style="font-size: 8px"><span>{{ $t('monchange.banlance') }}:$1000.00</span></view>
-							<view style="font-size: 8px"><span>{{totime }}</span></view>
-							<view style="margin-top:10px;text-align: right;margin-top: -15%;">
-
-								<text class="g-icons">+$1000</text>
-							</view>
-						</uni-col>
+						</uni-col> 
 					</uni-row>
 					<view style="margin-bottom: 10px;">&nbsp;</view>
 				</uni-card>
@@ -53,7 +37,8 @@
 		data() {
 			return {
 				intereal: this.$t('monchange.jebd'),
-				totime: ''
+				totime: '',
+				MoneyApplyData: []
 			}
 		},
 
@@ -70,6 +55,7 @@
 			} else {
 				this.totime = this.formatDate(1527488790000) //英文时间
 			}
+			this.GetData()
 		},
 		methods: {
 			//将毫秒的时间转换成美式英语的时间格式,eg:3rd May 2018
@@ -103,6 +89,12 @@
 				var sh = date.getHours(); //时
 				var mi = date.getMinutes();
 				return year + "-" + month + " " + ddate + " " + sh + ":" + mi;
+			},
+			GetData() {
+				var url = "/User/GetUserMoneyApplyList";
+				this.ApiGet(url).then(res => {
+					this.MoneyApplyData=res.data
+				})
 			}
 		},
 	}

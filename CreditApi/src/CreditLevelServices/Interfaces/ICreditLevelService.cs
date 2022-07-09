@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Credit.CreditLevelServices.Dtos;
-using Credit.TeamServices.Dtos;
+using Credit.CreditLevelServices.Dtos; 
 using Data.Commons.Dtos;
 namespace Credit.CreditLevelServices.Interfaces
 {
@@ -19,27 +18,27 @@ namespace Credit.CreditLevelServices.Interfaces
         Task CreditLevelUpdate(CreditLevelInput input);
 
         /// <summary>
-        ///  团队等级删除
+        ///  信用等级删除
         /// </summary>
         /// <param name="levelId"></param>
         /// <param name="deleteUserId"></param>
         /// <returns></returns>
         Task CreditLevelDelete(long levelId, long deleteUserId);
         /// <summary>
-        ///  获取团队等级
+        ///  获取信用等级
         /// </summary>
         /// <param name="levelId"></param>
         /// <returns></returns>
         Task<CreditLevelDto> GetCreditLevel(long levelId);
 
         /// <summary>
-        ///  获取所有团队等级
+        ///  获取所有信用等级
         /// </summary>
         /// <returns></returns>
         Task<List<CreditLevelDto>> GetAllCreditLevels();
 
         /// <summary>
-        ///  获取团队等级列表
+        ///  获取信用等级列表
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
