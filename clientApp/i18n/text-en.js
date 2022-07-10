@@ -35,7 +35,7 @@ export default {
         title: 'Check card',		
 		bankname:'Bank Name',	
 		repayment:'Repayment',
-		todayCheckNum:'Today remaining check time',
+		todayCheckNum:'Remaining card checking times today',
 		checkButton:'Check card',
 		selectrepayment:'Select repayment',
 		behalfButton:'Repayment on behalf',
@@ -251,7 +251,9 @@ export default {
     	srmm:'Please fill in the password and confirm the password!',
     	surepass:'The two passwords are inconsistent!',
     	registersuc:'Registration succeeded, please login!',
-    	loginresult:'Wrong user name or password!'
+    	loginresult:'Wrong user name or password!',
+		sureuser:'enter one user name',
+		surepass:'The password cannot be less than 6 digits!',
     },
 	inteorder:{
 		intetitle:'Point order',

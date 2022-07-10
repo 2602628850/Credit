@@ -26,9 +26,9 @@ public class AccountController : BaseController
     /// </summary>
     /// <param name="input"></param>
     [HttpPost]
-    public async Task RegisterAccount([FromBody]RegisterUserInput input)
+    public async Task<string> RegisterAccount([FromBody]RegisterUserInput input)
     {
-        await _userService.RegisterUser(input);
+      return  await _userService.RegisterUser(input);
     }
 
     /// <summary>

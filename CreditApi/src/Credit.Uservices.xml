@@ -89,6 +89,11 @@
              用户信息
             </summary>
         </member>
+        <member name="P:Credit.UserServices.Dtos.UserLoginOutput.Msg">
+            <summary>
+            登录结果提示
+            </summary>
+        </member>
         <member name="T:Credit.UserServices.Dtos.RegisterUserInput">
             <summary>
              注册用户输入

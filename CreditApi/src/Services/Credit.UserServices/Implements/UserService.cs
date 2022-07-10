@@ -37,18 +37,18 @@ namespace Credit.UserServices
         ///  注册用户
         /// </summary>
         /// <param name="input"></param>
-        public async Task RegisterUser(RegisterUserInput input)
+        public async Task<string> RegisterUser(RegisterUserInput input)
         {
             if (string.IsNullOrEmpty(input.Username))
-                throw new MyException("Please enter your username");
+                return "Please enter your username";
             if (string.IsNullOrEmpty(input.Password))
-                throw new MyException("Please enter your password");
+                return "Please enter your password";
             if (input.Password.Length < 6)
-                throw new MyException("Password must be at least 6 characters long");
+                return "Password must be at least 6 characters long";
             if (string.IsNullOrEmpty(input.ConfirmPassword))
-                throw new MyException("Please confirm your password");
+                return "Please confirm your password";
             if (input.Password != input.ConfirmPassword)
-                throw new MyException("Password does not match");
+                return "Password does not match";
             //账号是否已存在
             var nameExist = await _freeSql.Select<Users>()
                     .Where(s => s.Username == input.Username)
@@ -84,6 +84,10 @@ namespace Credit.UserServices
                 var Team = await _freeSql.Select<Users>()
                    .Where(s => s.InvCode == input.InvCode)
                    .ToOneAsync();
+                if (Team == null)
+                {
+                    return "Invitation code error!";
+                }
                 user.ParentId = Team.ParentId;
                 user.RootParentId = Team.RootParentId;
                 await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
@@ -93,6 +97,7 @@ namespace Credit.UserServices
                 _freeSql.Update<Users>(Team.Id)
                     .SetDto(new { InviteCount = Team.InviteCount + 1 }).ExecuteAffrows();
             }
+            return "register_success";
         }
         /// <summary>
         /// 生成邀请
@@ -119,19 +124,32 @@ namespace Credit.UserServices
         /// <returns></returns>
         public async Task<UserLoginOutput> UserLogin(UserLoginInput input)
         {
+            UserLoginOutput output = new UserLoginOutput();
             if (string.IsNullOrEmpty(input.Username))
-                throw new MyException("Please enter your username");
+            {
+                output.Msg = "Please enter your username";
+                return output;
+            }
             if (string.IsNullOrEmpty(input.Password))
-                throw new MyException("Please enter your password");
+            {
+                output.Msg = "Please enter your password";
+                return output;
+            }
             var user = await _freeSql.Select<Users>()
                 .Where(s => s.IsDeleted == 0)
                 .Where(s => s.Username == input.Username.ToLower())
                 .Where(s => s.IsAdmin == 0)
                 .ToOneAsync();
             if (user == null)
-                throw new MyException("Username does not exist");
+            {
+                output.Msg = "Username does not exist";
+                return output;
+            }
             if (user.Password != input.Password)
-                throw new MyException("Wrong password");
+            {
+                output.Msg = "Wrong password";
+                return output;
+            }
             var userToken = new UserLoginDto
             {
                 UserId = user.Id,
@@ -140,11 +158,9 @@ namespace Credit.UserServices
                 HeadImage = user.HeadImage
             };
             var token = await _tokenManager.GenerateToken(userToken, 24 * 608 * 60);
-            var output = new UserLoginOutput
-            {
-                User = userToken,
-                Token = token
-            };
+            output.User = userToken;
+            output.Token = token;
+            output.Msg = "logon_success";
             return output;
         }
 

@@ -13,7 +13,7 @@ namespace Credit.UserServices
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task RegisterUser(RegisterUserInput input);
+        Task<string> RegisterUser(RegisterUserInput input);
 
         /// <summary>
         ///  用户登录
