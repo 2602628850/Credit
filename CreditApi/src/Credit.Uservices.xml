@@ -204,6 +204,26 @@
              团队注册人数
             </summary>
         </member>
+        <member name="T:Credit.UserServices.Dtos.UserProfitDto">
+            <summary>
+            用户收益统计
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserProfitDto.ChaKaProfit">
+            <summary>
+            查卡收益
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserProfitDto.SMEProfit">
+            <summary>
+            理财收益
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserProfitDto.TeamProfit">
+            <summary>
+            团队收益
+            </summary>
+        </member>
         <member name="T:Credit.UserServices.Dtos.UserTeamImfoDto">
             <summary>
             用户团队收益
@@ -310,9 +330,16 @@
             <param name="userId"></param>
             <returns></returns>
         </member>
+        <member name="M:Credit.UserServices.UserService.GetUserProfitById(System.Int64)">
+            <summary>
+             收益统计
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
         <member name="M:Credit.UserServices.UserService.GetUserTeamCountById(System.Int64)">
             <summary>
-             获取用户团队信息
+             获取用户团队收益信息
             </summary>
             <param name="userId"></param>
             <returns></returns>
@@ -479,6 +506,13 @@
         <member name="M:Credit.UserServices.IUserService.GetUserTeamCountById(System.Int64)">
             <summary>
              获取用户团队信息
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.GetUserProfitById(System.Int64)">
+            <summary>
+             获取用户收益信息
             </summary>
             <param name="userId"></param>
             <returns></returns>

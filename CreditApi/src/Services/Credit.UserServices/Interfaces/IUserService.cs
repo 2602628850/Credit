@@ -75,6 +75,14 @@ namespace Credit.UserServices
         /// <param name="userId"></param>
         /// <returns></returns>
         Task<UserTeamImfoDto> GetUserTeamCountById(long userId);
+
+        /// <summary>
+        ///  获取用户收益信息
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task<UserProfitDto> GetUserProfitById(long userId);
+        
         /// <summary>
         /// 增加用户任务积分
         /// </summary>

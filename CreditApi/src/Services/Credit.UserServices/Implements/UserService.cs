@@ -265,7 +265,59 @@ namespace Credit.UserServices
             return output;
         }
         /// <summary>
-        ///  获取用户团队信息
+        ///  收益统计
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<UserProfitDto> GetUserProfitById(long userId)
+        {
+            //查询用户
+            var user = await _freeSql.Select<Users>()
+                    .Where(s => s.Id == userId)
+                    .ToOneAsync();
+            //查卡
+            var CKRepayment = await _freeSql.Select<UserWalletRecord>()
+                 .Where(s => s.UserId == userId && s.SourceType == WalletSourceEnums.Repayment)
+                 .ToListAsync();
+            var CKAmountCount = CKRepayment.Sum(s => s.Amount);
+
+            //理财
+            var SEMFinancil = await _freeSql.Select<UserWalletRecord>()
+                 .Where(s => s.UserId == userId && s.SourceType == WalletSourceEnums.FinancilProfit)
+                 .ToListAsync();
+            var SEMCount = SEMFinancil.Sum(s => s.Amount);
+
+            //团队收益
+            //团队注册人数
+            var TeamRegisterCount = await _freeSql.Select<Users>()
+                    .Where(s => s.RootParentId == user.RootParentId && s.RootParentId != 0)
+                    .ToListAsync();
+            //成为团员的人数
+            var TeamMemberCount = await _freeSql.Select<Users>()
+                    .Where(s => s.RootParentId == user.RootParentId && s.IsTeamUser == 1 && s.RootParentId != 0)
+                    .ToListAsync();
+
+            //团队代还总金额
+            decimal TeamRepaymentCount = 0;
+            foreach (var item in TeamMemberCount)
+            {
+                var TeamRepayment = await _freeSql.Select<UserWalletRecord>()
+                     .Where(s => s.UserId == item.Id && s.SourceType == WalletSourceEnums.Repayment)
+                     .ToListAsync();
+                var AmountCount = TeamRepayment.Sum(s => s.Amount);
+                TeamRepaymentCount += AmountCount;//
+            }
+
+            var output = new UserProfitDto
+            {
+                ChaKaProfit = CKAmountCount,
+                TeamProfit = TeamRepaymentCount*3/100,
+                SMEProfit = SEMCount
+            };
+            return output;
+        }
+        /// <summary>
+        ///  获取用户团队收益信息
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
@@ -313,6 +365,7 @@ namespace Credit.UserServices
             };
             return output;
         }
+
 
         /// <summary>
         ///   获取用户列表
