@@ -52,5 +52,10 @@ public interface IUserWalletService
     /// <param name="input"></param>
     /// <returns></returns>
     Task<List<MoneyApplyDto>> GetMoneyApplyRecode(long userid);
+    /// <summary>
+    /// 获取今日剩余查卡次数
+    /// </summary>
+    /// <returns></returns>
+    Task<RepayIndexDto> GetRemainingChaka(long userid);
 
 }

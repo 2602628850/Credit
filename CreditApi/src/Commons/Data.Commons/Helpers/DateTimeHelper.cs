@@ -23,4 +23,13 @@ public static class DateTimeHelper
         dateTime = dateTime.AddMilliseconds(unixTime).ToLocalTime();
         return dateTime;
     }
+    /// <summary>
+    /// 获取今天的开始时间
+    /// </summary>
+    /// <returns></returns>
+    public static long GetToday()
+    {
+        var now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).Date;
+        return new DateTimeOffset(now).ToUnixTimeMilliseconds();
+    }
 }

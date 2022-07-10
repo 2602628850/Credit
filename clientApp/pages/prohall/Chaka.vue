@@ -47,7 +47,7 @@
 								<view class="flex-row align-center flex-1">
 									<text class="text-small"><span>{{$t('chaka.todayCheckNum')}}:</span>
 									</text>
-									<text class="text-small text-bold text-primary margin-left-xs"><span>3</span>
+									<text class="text-small text-bold text-primary margin-left-xs">{{remaining.remainingTime}}
 									</text>
 								</view>
 								<view class="margin-top">
@@ -95,13 +95,13 @@
 							<view class="flex-row margin-top">
 								<view class="flex-1">
 									<text class="text-bold text-primary text-21">
-										<span>0</span></text>
+										<span>{{remaining.repaymentTimes}}</span></text>
 									<text class="text-xs text-secondary margin-top-xs">
 										<span>{{$t('chaka.Tocheck')}}</span></text>
 								</view>
 								<view class="flex-1">
 									<text class="text-bold text-primary text-21">
-										<span>$0</span></text>
+										<span>${{remaining.repaymentIncome}}</span></text>
 									<text class="text-xs text-secondary margin-top-xs">
 										<span>{{$t('chaka.Tocheckprofit')}}</span></text>
 								</view>
@@ -138,14 +138,17 @@
 			   leaveobj:{},//还款等级对象
 			   repayObj:{},//还款对象
 			   PayeeBankCardId:0,//银行卡id
+			   remaining:{},//剩余还款次数,已还次数,还款收益
 			}
 		},
 		mounted() {
-			this.GetRepayLevel();
+			
 		},
 		onLoad: function(option) {
 			this.lv.Leaveid=option.id;
 			this.lv.levelName=option.levelName;
+			this.GetRemainingChaka();
+			this.GetRepayLevel();
 		},
 		methods: {
 			//因为等级介绍内容可能很长,所以不建议通过url传过来
@@ -188,6 +191,12 @@
 				uni.showToast({
 					title: msg,
 					duration: 3000,
+				})
+			},
+			GetRemainingChaka() {//获取用户剩余查卡次数
+				var url = "/User/GetRemainingChaka";
+				this.ApiGet(url).then(res => {
+					this.remaining=res.data	
 				})
 			},
 			//还款

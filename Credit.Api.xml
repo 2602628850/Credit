@@ -831,6 +831,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Credit.Api.Controllers.UserController.GetRemainingChaka">
+            <summary>
+              获取当前用户代还申请次数，已还次数，代换收益
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Credit.Api.ServicesTransient">
             <summary>
             

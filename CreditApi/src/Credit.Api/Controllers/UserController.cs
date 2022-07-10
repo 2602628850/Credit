@@ -274,5 +274,14 @@ namespace Credit.Api.Controllers
         {
             return await _walletService.GetMoneyApplyRecode(CurrentUser.UserId);
         }
+        /// <summary>
+        ///   获取当前用户代还申请次数，已还次数，代换收益
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<RepayIndexDto> GetRemainingChaka()
+        {
+            return await _walletService.GetRemainingChaka(CurrentUser.UserId);
+        }
     }
 }

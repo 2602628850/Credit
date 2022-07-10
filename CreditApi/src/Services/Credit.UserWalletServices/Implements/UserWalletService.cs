@@ -1,3 +1,4 @@
+using Credit.CreditLevelModels;
 using Credit.PamentInfoModels;
 using Credit.PayeeBankCardServices;
 using Credit.RepayModels;
@@ -629,5 +630,42 @@ public class UserWalletService : IUserWalletService
 
         }
         return userMoneyApply;
+    }
+    /// <summary>
+    /// 获取今日剩余查卡次数
+    /// </summary>
+    /// <returns></returns>
+    public async Task<RepayIndexDto> GetRemainingChaka(long userid)
+    {
+        RepayIndexDto repayIndexDto = new RepayIndexDto();
+        //当前用户今日已经申请还款的次数
+        long time = DateTimeHelper.GetToday();//获取今天的开始时间
+        var year = DateTimeOffset.UtcNow.Year;
+        List<UserMoneyApply> userMoneyApplys = _freeSql.Select<UserMoneyApply>()
+            .AsTable((type, table) => $"{table}_{year}").Where(m=>m.IsDeleted==0&&m.CreateAt>= time&&m.SourceType== WalletSourceEnums.RepayApply&&m.UserId==userid)
+            .ToList();
+       //获取当前用户
+        var user = await _freeSql.Select<Users>()
+                  .Where(s => s.Id == userid)
+                  .ToOneAsync();
+        //获取当前用户信用等级
+        var userleavel = await _freeSql.Select<CreditLevel>()
+                 .Where(s => s.Id == user.Level)
+                 .ToOneAsync();
+        int count= userleavel==null?0: userleavel.ChakaNum - userMoneyApplys.Count;
+        repayIndexDto.RemainingTime = count;//剩余还款次数
+        repayIndexDto.RepaymentTimes = userMoneyApplys.Count;//已还款次数
+        //算代还款收益
+        List<UserMoneyApply> audutsuccess = _freeSql.Select<UserMoneyApply>()
+           .AsTable((type, table) => $"{table}_{year}").Where(m => m.IsDeleted == 0 && m.CreateAt >= time && m.SourceType == WalletSourceEnums.RepayApply&&m.AuditStatus== AuditStatusEnums.Success&& m.UserId == userid)
+           .ToList();
+        if (userleavel != null)
+        {
+
+            decimal profit = userleavel.Profit;
+            repayIndexDto.RepaymentIncome = audutsuccess.Sum(m => ((m.Amount * profit) / 100));
+            
+        }
+        return repayIndexDto;
     }
 }
