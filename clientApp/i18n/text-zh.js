@@ -98,7 +98,7 @@ export default {
 		title: '查卡',
 		bankname: '银行',
 		repayment: '还款金额',
-		todayCheckNum: '今日查卡次数',
+		todayCheckNum: '今日剩余查卡次数',
 		checkButton: '查卡',
 		selectrepayment: '选择还款',
 		behalfButton: '代还款',

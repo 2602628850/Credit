@@ -35,7 +35,7 @@ export default {
         title: 'Check card',		
 		bankname:'Bank Name',	
 		repayment:'Repayment',
-		todayCheckNum:'Today remaining check time',
+		todayCheckNum:'Remaining card checking times today',
 		checkButton:'Check card',
 		selectrepayment:'Select repayment',
 		behalfButton:'Repayment on behalf',
