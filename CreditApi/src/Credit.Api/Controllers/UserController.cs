@@ -248,13 +248,22 @@ namespace Credit.Api.Controllers
             return integralOrderList;
         }
         /// <summary>
-        ///  获取用户信息
+        ///  用户团队人数统计
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         public async Task<UserTeamDto> GetTeamCountById()
         {
             return await _userService.GetTeamCountById(CurrentUser.UserId);
+        }
+        /// <summary>
+        ///  获取用户团队信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<UserTeamImfoDto> GetUserTeamCountById()
+        {
+            return await _userService.GetUserTeamCountById(CurrentUser.UserId);
         }
         /// <summary>
         ///   获取当前用户当年的所有提现记录

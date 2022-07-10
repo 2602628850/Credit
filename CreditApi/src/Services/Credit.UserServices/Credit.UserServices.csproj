@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\CreditLevelServices\Credit.CreditLevelServices.csproj" />
     <ProjectReference Include="..\..\Models\Credit.TeamModels\Credit.TeamModels.csproj" />
     <ProjectReference Include="..\..\Models\Credit.UserModels\Credit.UserModels.csproj" />
+    <ProjectReference Include="..\..\Models\Credit.UserWalletModels\Credit.UserWalletModels.csproj" />
   </ItemGroup>
 
 </Project>
