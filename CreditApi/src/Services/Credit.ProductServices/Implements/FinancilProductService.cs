@@ -27,7 +27,7 @@ public class FinancilProductService : IFinancilProductService
     {
         if (string.IsNullOrEmpty(input.ProductName))
             throw new MyException("Please input the product name");
-        if (string.IsNullOrEmpty(input.ProductIntroduction))
+        if (string.IsNullOrEmpty(input.Introduction))
             throw new MyException("Please input the product introduction");
         if (input.DailyRate <= 0)
             throw new MyException("Product revenue ratio must be greater than 0");
@@ -70,7 +70,7 @@ public class FinancilProductService : IFinancilProductService
             throw new MyException("Edit information does not exist");
         product.ProductName = input.ProductName;
         product.CoverImage = input.CoverImage;
-        product.Introduction = input.ProductIntroduction;
+        product.Introduction = input.Introduction;
         product.DailyRate = input.DailyRate;
         product.Cycle = input.Cycle;
         product.BuyMinUnit = input.BuyMinUnit;

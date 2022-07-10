@@ -615,7 +615,7 @@
             <param name="tokenManager"></param>
             <param name="financialProductService"></param>
         </member>
-        <member name="M:Credit.Api.Controllers.ProductController.GetFinancialProduct(System.Int64)">
+        <member name="M:Credit.Api.Controllers.ProductController.GetFinancialProduct(Credit.ProductServices.Dtos.FinancilProductDto)">
             <summary>
              获取理财产品
             </summary>

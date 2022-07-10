@@ -12,7 +12,7 @@
 						<span>{{$t('semloan.UnitPrice')}}</span>
 					</uni-col>
 					<uni-col :span="4">
-						<text style="margin-right: 5px;"><span>$100.00</span></text>
+						<text style="margin-right: 5px;"><span>${{productObj.price}}</span></text>
 					</uni-col>
 				</uni-row>
 
@@ -21,7 +21,7 @@
 						<span>{{$t('semloan.Minimum')}}</span>
 					</uni-col>
 					<uni-col :span="4">
-						<text style="text-align: right;"><span>1份</span></text>
+						<text style="text-align: right;"><span>{{productObj.buyMinUnit}}份</span></text>
 					</uni-col>
 				</uni-row>
 
@@ -30,7 +30,7 @@
 						<span>{{$t('semloan.cycle')}}</span>
 					</uni-col>
 					<uni-col :span="4">
-						<text style="margin-right: 5px;"><span>7天</span></text>
+						<text style="margin-right: 5px;"><span>{{productObj.cycle}}{{$t('financialproduct.daday')}}</span></text>
 					</uni-col>
 				</uni-row>
 
@@ -39,7 +39,7 @@
 						<span>{{$t('semloan.returnrate')}}</span>
 					</uni-col>
 					<uni-col :span="4">
-						<text style="margin-right: 5px;"><span>1.00%</span></text>
+						<text style="margin-right: 5px;"><span>{{productObj.dailyRate}}%</span></text>
 					</uni-col>
 				</uni-row>
 
@@ -53,7 +53,7 @@
 						<view class="numberBtn">
 							<view @click="reduce" class="countBtn reduceBtn"> － </view>
 							<view>
-								<input type="number" v-model="numberinput" class="sumTotal" />
+								<input type="number" @input="getamount()" v-model="numberinput" class="sumTotal" />
 							</view>
 							<view @click="add" class="countBtn addBtn"> + </view>
 						</view>
@@ -67,12 +67,11 @@
 						<span>{{$t('semloan.buyprice')}}</span>
 					</uni-col>
 					<uni-col :span="6">
-						<text>$100.00</text>
-						<text>≈ 3556.49THB </text>
+						<text>${{amount}}</text>
 					</uni-col>
 				</uni-row>
 				<view style="margin-top: 15px;font-size: 15px">
-					<button class="btn-task">
+					<button class="btn-task" @click="submitProduct()">
 						<!---->
 						<text class="text-small text-white"><span>{{$t('semloan.button')}}</span></text>
 					</button>
@@ -85,16 +84,7 @@
 						<text class="text-bold text-lg"><span>{{$t('chaka.Procontent')}}</span></text>
 					</view>
 					<text class=" margin-top text-sm line-height-16">
-						<span>
-							Personal credit card repayment" products are divided into special areas
-							for bad debt processing, small-amount repayment area, general repayment
-							area, high-amount repayment area and large-amount repayment area. Users can
-							enter to check the card and make repayment, and the area that has not
-							reached the amount is grayed out and cannot be entered. The amount of the
-							repayment products that do not use the special area is different, and the
-							commission rate paid by the platform is also different. All users in the bad
-							debt processing area can enter and check the card, but the platform account
-							wallet has no balance and cannot continue the repayment task.</span>
+							{{productObj.introduction}}
 					</text>
 				</view>
 
@@ -108,18 +98,70 @@
 	export default {
 		data() {
 			return {
-				numberinput: 0
+			    price:0,//购买单价	
+				amount:0,//购买总金额
+				numberinput: '0',//购买份数
+				deparam:{},//获取产品对象需要传的参数
+				productObj:{},//当前的产品对象
+				buyParam:{},//购买需要的参数
 			}
+		},
+		onLoad: function(option) {
+			this.deparam.Id=option.id;
+			this.getDetail();
+			
 		},
 		methods: {
 			reduce() {
 				if(this.numberinput-1>=0){
 				this.numberinput--
+				this.getamount()
 				}
 			},
 			add() {
 				this.numberinput++
+				this.getamount()
+			},
+			getDetail(){
+				var url="/Product/GetFinancialProduct";
+				this.ApiGet(url,this.deparam).then(res => {
+					this.productObj = res.data;
+					this.price=this.productObj.price
+					this.buyParam.ProductId=this.productObj.id;//购买时需要传产品id
+				})
+			},
+			getamount(){
+				this.amount=this.numberinput*this.price;
+			},
+			TitleResult(msg){
+				uni.showToast({
+					title: msg,
+					duration: 3000,
+				})
+			},
+			//购买
+			submitProduct(){
+				if(this.numberinput.split(" ").join("").length === 0||parseFloat(this.numberinput)<=0){
+					var msg=this.$t('financialproduct.inputval');
+					this.TitleResult(msg)
+					return;
+				}
+				this.buyParam.UnitCount=this.numberinput;//购买份数
+				const url = decodeURI(encodeURI('/Order​/BuyFinancilProduct').replace(/%E2%80%8B/g, ""));
+				this.ApiPost(url,this.buyParam).then(res => {
+					if(res.data=="add_success"){
+						var msg=this.$t('financialproduct.buysuc');
+						this.TitleResult(msg)
+						uni.navigateTo({
+							url: '/pages/prohall/sme'
+						})
+					}else{
+						var msg= res.data;
+						this.TitleResult(msg)
+					}
+				})
 			}
+			
 		}
 	}
 </script>

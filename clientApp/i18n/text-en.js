@@ -158,9 +158,7 @@ export default {
 		table3:"This level of privilege",
 		Creditvalue:"credit value",
 		toFinish: 'to finish',
-		memberBenefits: 'member benefits',	
-		DailyCK:"Daily card checking times+",
-		Income:"Income from loan repayment+",
+		memberBenefits: 'member benefits',
 
 	},
 	tongji:{
@@ -287,6 +285,7 @@ export default {
 		remark6:'6. In order to ensure your interests, the platform is recharge processing time is: 10:00-23:00. If you make recharge request at other time, it will be processed for you according to the above working hours.',
 	},
 	without:{
+		recode:'Application record',
 		title:'Bank card withdrawal application',
 		withsuc:'submit successful!',
 		withnull:'Please enter the withdrawal amount!',
@@ -312,5 +311,11 @@ export default {
 		status3:'fail',
 		mount:'Requested withdrawal amount：',
 		time:'Application time：'
+	},
+	financialproduct:{
+		daday:"day",
+		inputval:'Please enter the number of copies to purchase!',
+		buysuc:'Purchase successful!',
+		
 	}
 }

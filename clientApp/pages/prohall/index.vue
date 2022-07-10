@@ -1,32 +1,16 @@
 <template>
 	<navigation-bar :title="protitle" :show-back="false"></navigation-bar>
 	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="true" :show-navigation-bar="true">
-		<!-- <uni-page-head uni-page-head-type="default">
-			<div class="uni-page-head" style="background-color: rgb(244, 245, 247); color: rgb(0, 0, 0);">
-				<div class="uni-page-head-hd">
-					<div class="uni-page-head-btn" style="display: none;"><i class="uni-btn-icon"
-							style="color: rgb(0, 0, 0); font-size: 27px;"></i></div>
-					<div class="uni-page-head-ft"></div>
-				</div>
-				<div class="uni-page-head-bd">
-					<div class="uni-page-head__title" style="font-size: 16px; opacity: 1;">
-						{{$t('prohall.title')}}
-					</div>
-				</div>
-				<div class="uni-page-head-ft"></div>
-			</div>
-			<div class="uni-placeholder"></div>
-		</uni-page-head> -->
 		<view style="margin-top:20px;" @click="tocredit">
 			<uni-card class="box-card">
 				<uni-row :gutter="20">
 					<uni-col :span="6">
 						<image class="logo" src="/static/icons/task-credit.png"></image>
 					</uni-col>
-					<uni-col :span="8">
+					<uni-col :span="6">
 						&nbsp;
 					</uni-col>
-					<uni-col :span="10">
+					<uni-col :span="12">
 						<div style="font-size: 16px; opacity: 1;font-weight: bold;">
 							{{$t('prohall.repayment')}}
 						</div>
@@ -42,7 +26,7 @@
 				</uni-row>
 			</uni-card>
 		</view>
-		<view style="margin-top:20px;" @click="toP2P">
+		<!-- <view style="margin-top:20px;" @click="toP2P">
 			<uni-card class="box-card">
 				<uni-row :gutter="20">
 					<uni-col :span="6">
@@ -66,7 +50,7 @@
 					</uni-col>
 				</uni-row>
 			</uni-card>
-		</view>
+		</view> -->
 		<view style="margin-top:20px;" @click="toSme">
 			<uni-card class="box-card">
 				<uni-row :gutter="20">
@@ -82,7 +66,7 @@
 						</div>
 						<view style="font-size: 8px"><span>{{$t('prohall.buycon')}}</span></view>
 
-						<view style="margin-top:30px;margin-right: 10px;;">
+						<view style="margin-top:30px; right;">
 							<text> <button type="primary"
 									class="text-center btn-task">{{$t('prohall.buysend')}}</button> </text>
 						</view>
