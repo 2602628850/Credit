@@ -251,7 +251,9 @@ export default {
     	srmm:'Please fill in the password and confirm the password!',
     	surepass:'The two passwords are inconsistent!',
     	registersuc:'Registration succeeded, please login!',
-    	loginresult:'Wrong user name or password!'
+    	loginresult:'Wrong user name or password!',
+		sureuser:'enter one user name',
+		surepass:'The password cannot be less than 6 digits!',
     },
 	inteorder:{
 		intetitle:'Point order',

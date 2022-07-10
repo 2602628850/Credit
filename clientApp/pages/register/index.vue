@@ -38,14 +38,14 @@
 	</register-input-item>
 
 
-	<register-input-item :tip="$t('register.code')" class="mgt">
+	<!-- <register-input-item :tip="$t('register.code')" class="mgt">
 		<template v-slot:img>
 			<view class="input-icon iconfont icon-yanzheng"></view>
 		</template>
 		<template v-slot:default>
 			<input :placeholder="$t('register.codeTip')" class="input" v-model="editItem.Code" />
 		</template>
-	</register-input-item>
+	</register-input-item> -->
 
 	<register-input-item :tip="$t('register.invCode')" class="mgt">
 		<template v-slot:img>
@@ -119,7 +119,8 @@
 				countryIndex: 0,
 				editItem: {
 					CountryName: '',
-					countryCode: ''
+					countryCode: '',
+					Username:'',
 				},
 				isAgree: false
 			}
@@ -153,9 +154,18 @@
 					this.showMsg(this.$t('registerandlog.gxxy'));
 					return;
 				}
+				if(this.editItem.Username.split(" ").join("").length === 0){
+					var msg=this.$t('registerandlog.sureuser');
+					this.showMsg(msg)
+					return;
+				}
 				if (this.editItem.Password == null || this.editItem.ConfirmPassword == null || this.editItem
 					.ConfirmPassword == '' || this.editItem.Password == '') {
 					this.showMsg(this.$t('registerandlog.srmm'));
+					return;
+				}
+				if(this.editItem.Password.length<6){
+					this.showMsg(this.$t('registerandlog.surepass'));
 					return;
 				}
 				if (this.editItem.Password != this.editItem.ConfirmPassword) {
@@ -164,12 +174,17 @@
 				}
 				var url = "/Account/RegisterAccount";
 				this.ApiPost(url, this.editItem).then(res => {
+					if(res.data=="register_success"){
 					this.showMsg(this.$t('registerandlog.registersuc'));
 					//注册成功后登录
 					uni.navigateTo({
 						url: '/pages/login/login'
 					})
 					return;
+					}else{
+						this.showMsg(res.data);
+					}
+					
 				})
 
 

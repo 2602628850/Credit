@@ -62,19 +62,21 @@
 			doLogin() {
 				var url = "/Account/UserLogin";
 				this.ApiPost(url, this.editItem).then(res => {
-					if(res.data==null){
-						uni.showToast({
-							title:this.$t('registerandlog.loginresult'),
-							duration:2000,
-						})
-						
-					}else{
+					if(res.data.msg=="logon_success"){
 						//登录成功,缓存token
 						this.$StoreUtil.set('token',res.data.token);
 						//跳首页
 						uni.navigateTo({
 						url: '/pages/index/indexPage'
 						})
+						
+						
+					}else{
+						uni.showToast({
+							title:res.data.msg,
+							duration:2000,
+						})
+						
 					}
 				})
 				

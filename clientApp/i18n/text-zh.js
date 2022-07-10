@@ -255,7 +255,9 @@ export default {
 		srmm: '请填写密码和确认密码!',
 		surepass: '两次密码不一致!',
 		registersuc: '注册成功,请登录!',
-		loginresult: '用户名或密码错误!'
+		loginresult: '用户名或密码错误!',
+		sureuser:'请输入用户名',
+		surepass:'密码不能小于6位!',
 	},
 	inteorder: {
 		intetitle: '积分订单',

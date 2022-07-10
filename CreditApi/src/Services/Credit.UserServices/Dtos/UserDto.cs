@@ -77,6 +77,10 @@ namespace Credit.UserServices.Dtos
         ///  用户信息
         /// </summary>
         public UserLoginDto User { get; set; } = new UserLoginDto();
+        /// <summary>
+        /// 登录结果提示
+        /// </summary>
+        public string Msg { get; set; } = string.Empty;
     }
 
     /// <summary>
