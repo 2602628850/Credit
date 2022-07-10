@@ -112,11 +112,18 @@
 				})
 			},
 			getServerData() {
+				var url = "/User/GetUserProfitById";
+				this.ApiGet(url).then(res => {
 				var obj = this.demodataarray.PieA.series[0].data;
 				obj[0].name = this.$t('tongji.cksy')
 				obj[1].name = this.$t('tongji.sme')
 				obj[2].name = this.$t('tongji.tdsy')
+				
+				obj[0].value = res.data.chaKaProfit
+				obj[1].value = res.data.smeProfit
+				obj[2].value = res.data.teamProfit
 				this.chartsDataRing1 = JSON.parse(JSON.stringify(this.demodataarray.PieA))
+				})
 			},
 		}
 	};

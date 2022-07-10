@@ -49,18 +49,18 @@ namespace Credit.UserServices.Dtos
         ///  头像
         /// </summary>
         public string HeadImage { get; set; } = string.Empty;
-        
+
     }
-    
+
     /// <summary>
     ///   管理员登录信息
     /// </summary>
-    public class AdminLoginDto : UserLoginDto,ITokenAdmin
+    public class AdminLoginDto : UserLoginDto, ITokenAdmin
     {
-            /// <summary>
-            ///  是否管理员
-            /// </summary>
-            public int IsAdmin { get; set; }
+        /// <summary>
+        ///  是否管理员
+        /// </summary>
+        public int IsAdmin { get; set; }
     }
 
     /// <summary>
@@ -144,7 +144,7 @@ namespace Credit.UserServices.Dtos
     /// <summary>
     ///  用户信用等级信息
     /// </summary>
-    public class UserCreditDto  
+    public class UserCreditDto
     {
         /// <summary>
         /// 
@@ -196,4 +196,25 @@ namespace Credit.UserServices.Dtos
         /// </summary>
         public int TeamUser { get; set; }
     }
+
+    /// <summary>
+    /// 用户收益统计
+    /// </summary>
+    public class UserProfitDto : UserInput
+    {
+        /// <summary>
+        /// 查卡收益
+        /// </summary>
+        public decimal ChaKaProfit { get; set; }
+        /// <summary>
+        /// 理财收益
+        /// </summary>
+        public decimal SMEProfit { get; set; }
+
+        /// <summary>
+        /// 团队收益
+        /// </summary>
+        public decimal TeamProfit { get; set; }
+    }
+
 }

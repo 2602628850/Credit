@@ -266,6 +266,15 @@ namespace Credit.Api.Controllers
             return await _userService.GetUserTeamCountById(CurrentUser.UserId);
         }
         /// <summary>
+        ///  获取用户收益信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<UserProfitDto> GetUserProfitById()
+        {
+            return await _userService.GetUserProfitById(CurrentUser.UserId);
+        }
+        /// <summary>
         ///   获取当前用户当年的所有提现记录
         /// </summary>
         /// <returns></returns>
