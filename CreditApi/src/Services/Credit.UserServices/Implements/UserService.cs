@@ -3,7 +3,9 @@ using Credit.CreditLevelServices.Interfaces;
 using Credit.TeamModels;
 using Credit.UserModels;
 using Credit.UserServices.Dtos;
+using Credit.UserWalletModels;
 using Data.Commons.Dtos;
+using Data.Commons.Enums;
 using Data.Commons.Extensions;
 using Data.Commons.Helpers;
 using Data.Commons.Runtime;
@@ -233,7 +235,7 @@ namespace Credit.UserServices
                 UserLevel.LevelName = Level.LevelName;
                 UserLevel.CreditValue = user.CreditValue;
                 UserLevel.ChakaNum = Level.ChakaNum;
-                UserLevel.Profit = Level.Id;
+                UserLevel.Profit = Level.Profit;
             }
 
             return UserLevel.MapTo<UserCreditDto>();
@@ -245,13 +247,69 @@ namespace Credit.UserServices
         /// <returns></returns>
         public async Task<UserTeamDto> GetTeamCountById(long userId)
         {
+            //查询用户
+            var user = await _freeSql.Select<Users>()
+                    .Where(s => s.Id == userId)
+                    .ToOneAsync();
             var DirectCount = await _freeSql.Select<Users>()
-                    .Where(s => s.ParentId == userId)
+                    .Where(s => s.ParentId == user.Id && s.IsTeamUser == 1)
+                    .ToListAsync();
+            var TeamUserCount = await _freeSql.Select<Users>()
+                    .Where(s => s.RootParentId == user.RootParentId && s.IsTeamUser == 1 && s.RootParentId != 0)
                     .ToListAsync();
             var output = new UserTeamDto
             {
                 Direct = DirectCount.Count,
-                TeamUser = DirectCount.Count
+                TeamUser = TeamUserCount.Count
+            };
+            return output;
+        }
+        /// <summary>
+        ///  获取用户团队信息
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<UserTeamImfoDto> GetUserTeamCountById(long userId)
+        {
+            //查询用户
+            var user = await _freeSql.Select<Users>()
+                    .Where(s => s.Id == userId)
+                    .ToOneAsync();
+            //用户团队等级
+            var UserTeamLevel = await _freeSql.Select<TeamLevel>()
+                .Where(s => s.Id == user.TeamLevel)
+                .ToOneAsync();
+            //团队注册人数
+            var TeamRegisterCount = await _freeSql.Select<Users>()
+                    .Where(s => s.RootParentId == user.RootParentId && s.RootParentId != 0)
+                    .ToListAsync();
+            //成为团员的人数
+            var TeamMemberCount = await _freeSql.Select<Users>()
+                    .Where(s => s.RootParentId == user.RootParentId && s.IsTeamUser == 1 && s.RootParentId != 0)
+                    .ToListAsync();
+
+            //团队代还总金额
+            decimal TeamRepaymentCount = 0;
+            foreach (var item in TeamMemberCount)
+            {
+                var TeamRepayment = await _freeSql.Select<UserWalletRecord>()
+                     .Where(s => s.UserId == item.Id && s.SourceType == WalletSourceEnums.Repayment)
+                     .ToListAsync();
+                var AmountCount = TeamRepayment.Sum(s => s.Amount);
+                TeamRepaymentCount += AmountCount;//
+            }
+
+            var userTeam = await GetUserTeamChildMembers(userId, 2);
+
+            var output = new UserTeamImfoDto
+            {
+                UserId = userId,
+                TeamRegister = TeamRegisterCount.Count,
+                TeamMember = TeamMemberCount.Count,
+                TeamRepayment = TeamRepaymentCount,
+                TeamEstimateRepaymentRevenue = 0,
+                TeamEstimatePurchaseRevenue = 0,
+                TotalRevenue = 0
             };
             return output;
         }

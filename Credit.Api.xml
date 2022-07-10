@@ -815,7 +815,13 @@
         </member>
         <member name="M:Credit.Api.Controllers.UserController.GetTeamCountById">
             <summary>
-             获取用户信息
+             用户团队人数统计
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.GetUserTeamCountById">
+            <summary>
+             获取用户团队信息
             </summary>
             <returns></returns>
         </member>

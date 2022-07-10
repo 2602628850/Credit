@@ -19,6 +19,11 @@
              团队成员相对层级
             </summary>
         </member>
+        <member name="T:Credit.UserServices.Dtos.UserCreditLevel">
+            <summary>
+            个人信用等级信息
+            </summary>
+        </member>
         <member name="T:Credit.UserServices.Dtos.UserLoginInput">
             <summary>
              用户登录输入
@@ -199,6 +204,46 @@
              团队注册人数
             </summary>
         </member>
+        <member name="T:Credit.UserServices.Dtos.UserTeamImfoDto">
+            <summary>
+            用户团队收益
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.TeamRegister">
+            <summary>
+            团队注册人数
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.TeamMember">
+            <summary>
+            团队正式人数
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.TeamRepayment">
+            <summary>
+            团队总还款
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.TeamEstimateRepaymentRevenue">
+            <summary>
+            预计还款收益
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.TeamEstimatePurchaseRevenue">
+            <summary>
+            预计理财购买收益
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.TotalRevenue">
+            <summary>
+            团队总收益
+            </summary>
+        </member>
         <member name="T:Credit.UserServices.UserService">
             <summary>
              用户管理接口方法实现
@@ -261,6 +306,13 @@
         <member name="M:Credit.UserServices.UserService.GetTeamCountById(System.Int64)">
             <summary>
              获取用户团队人数
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.UserService.GetUserTeamCountById(System.Int64)">
+            <summary>
+             获取用户团队信息
             </summary>
             <param name="userId"></param>
             <returns></returns>
@@ -420,6 +472,13 @@
         <member name="M:Credit.UserServices.IUserService.GetTeamCountById(System.Int64)">
             <summary>
              用户团队人数统计
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.GetUserTeamCountById(System.Int64)">
+            <summary>
+             获取用户团队信息
             </summary>
             <param name="userId"></param>
             <returns></returns>

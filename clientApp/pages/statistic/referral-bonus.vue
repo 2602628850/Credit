@@ -7,9 +7,10 @@
 					<view class="padding-xs flex-row align-center justify-between margin-bottom-sm">
 						<uni-row :gutter="20" style="margin-top: 20px;">
 							<uni-col :span="19">
-								<text class="text-bold text-lg text-color" style="margin-left: 14px;;"><span>{{$t('team.Totaldata')}}</span></text>
+								<text class="text-bold text-lg text-color"
+									style="margin-left: 14px;;"><span>{{$t('team.Totaldata')}}</span></text>
 							</uni-col>
-							<uni-col :span="4" >
+							<uni-col :span="4">
 								<picker class="flex-row align-center">
 									<view class="uni-picker-container uni-selector-select">
 										<view class="uni-mask uni-picker-mask" style="display: none;"></view>
@@ -42,29 +43,29 @@
 					<uni-card class="box-card">
 						<uni-row :gutter="20" style="margin-top: 15px;text-align: center;">
 							<uni-col :span="8">
-								<view class="text-size"><span>0</span></view>
+								<view class="text-size"><span>{{UserTeamInfo.teamRegister}}</span></view>
 								<view class="text-size-1"><span>{{$t('team.Tuser')}}</span></view>
 							</uni-col>
 							<uni-col :span="8">
-								<view class="text-size"><span>0</span></view>
+								<view class="text-size"><span>{{UserTeamInfo.teamMember}}</span></view>
 								<view class="text-size-1"><span>{{$t('team.TformalUser')}}</span></view>
 							</uni-col>
 							<uni-col :span="8">
-								<view class="text-size"><span>0</span></view>
+								<view class="text-size"><span>{{UserTeamInfo.teamRepayment}}</span></view>
 								<view class="text-size-1"><span>{{$t('team.Totalteamrepayment')}}</span></view>
 							</uni-col>
 						</uni-row>
 						<uni-row :gutter="20" style="margin-top: 15px;text-align: center;">
 							<uni-col :span="8">
-								<view class="text-size"><span>0</span></view>
+								<view class="text-size"><span>{{UserTeamInfo.teamEstimateRepaymentRevenue}}</span></view>
 								<view class="text-size-1"><span>{{$t('team.Expectedteamrepaymentincome')}}</span></view>
 							</uni-col>
 							<uni-col :span="8">
-								<view class="text-size"><span>0</span></view>
+								<view class="text-size"><span>{{UserTeamInfo.teamEstimatePurchaseRevenue}}</span></view>
 								<view class="text-size-1"><span>{{$t('team.ExpectedteamSMEprofit')}}</span></view>
 							</uni-col>
 							<uni-col :span="8">
-								<view class="text-size"><span>0</span></view>
+								<view class="text-size"><span>{{UserTeamInfo.totalRevenue}}</span></view>
 								<view class="text-size-1"><span>{{$t('team.Expectedtotalprofit')}}</span></view>
 							</uni-col>
 						</uni-row>
@@ -79,14 +80,28 @@
 					<view class="padding-xs flex-row align-center justify-between margin-bottom-sm">
 						<text class="text-bold text-lg text-color"><span>{{$t('team.Subordinateddata')}}</span></text>
 					</view>
-					<view class="card-content">
-						<view class="empty align-center empty-mini">
-							<image src="/static/icons/empty.png" style="width: 66px; height: 66px;">
+					<view style="margin-top: 20px;">
+						<uni-card class="box-card" style="padding: 0;">
+							<uni-row :gutter="20" style="height: 50px;margin-top: 10%;" v-for="item in MoneyApplyData">
+								<uni-col :span="3">
+									<image src="/static/image/static/bdjl.jpg" style="width: 30px;height: 30px;">
+									</image>
+								</uni-col>
+								<uni-col :span="21">
+									<view style="font-size: 16px; opacity: 1;font-weight: bold;">
+										{{item.walletSourceName}}
+									</view>
+									<view style="font-size: 8px"><span>{{ $t('monchange.banlance') }}:$
+											{{item.balance}}</span></view>
+									<view style="font-size: 8px"><span>{{item.todateTime }}</span></view>
+									<view style="margin-top:10px;text-align: right;margin-top: -15%;">
 
-							</image>
-							<text class="text-secondary text-small text-center padding-lg">
-								<span>未开通代理</span></text>
-						</view>
+										<text class="g-icons">{{item.changeName}}</text>
+									</view>
+								</uni-col>
+							</uni-row>
+							<view style="margin-bottom: 10px;">&nbsp;</view>
+						</uni-card>
 					</view>
 				</view>
 				<view class="margin-bottom"></view>
@@ -100,13 +115,23 @@
 	export default {
 		data() {
 			return {
-
+				UserTeamInfo: {},
+				UserTeamDirect: []
 			}
+		},
+		mounted(){
+			this.GetData()
 		},
 		methods: {
 			toteam() {
 				uni.navigateTo({
 					url: '/pages/statistic/teamabout'
+				})
+			},
+			GetData() {
+				var url = "/User/GetUserTeamCountById";
+				this.ApiGet(url).then(res => {
+					this.UserTeamInfo=res.data
 				})
 			}
 		}

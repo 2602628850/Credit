@@ -31,7 +31,7 @@
 													<span>{{$t('level.currentCreditValue')}}</span>
 												</text>
 												<text class="text-xl text-white margin-left-xs">
-													<span>0</span>
+													<span>{{CreditLevle.creditValue}}</span>
 												</text>
 											</view>
 											<view class="level-progress margin-top-xs">
@@ -202,12 +202,14 @@
 					}
 				],
 				Vipdata: [],
+				CreditLevle:{}
 
 			}
 		},
 		
 		mounted(){
 			this.GetData()
+			this.GetUserCreditinfo()
 		},
 		methods: {
 			SharedTo(uri) {
@@ -215,6 +217,12 @@
 					url: uri
 				})
 			},
+			GetUserCreditinfo() {
+				var url = "/User/GetCreditLevleById";
+				this.ApiGet(url).then(res => {
+					this.CreditLevle=res.data
+				})
+			},			
 			GetData() {
 				var url = "/CreditLevel/GetAllCreditLevels";
 				this.ApiGet(url).then(res => {
