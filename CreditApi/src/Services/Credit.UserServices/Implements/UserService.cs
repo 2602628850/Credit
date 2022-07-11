@@ -323,11 +323,31 @@ namespace Credit.UserServices
                 var AmountCount = TeamRepayment.Sum(s => s.Amount);
                 TeamRepaymentCount += AmountCount;//
             }
-
+            decimal TeamSemCount = 0;
+            foreach (var item in TeamMemberCount)
+            {
+                var TeamFinancilProfit = await _freeSql.Select<UserWalletRecord>()
+                     .Where(s => s.UserId == item.Id && s.SourceType == WalletSourceEnums.FinancilProfit)
+                     .ToListAsync();
+                var FinancilProfitCount = TeamFinancilProfit.Sum(s => s.Amount);
+                TeamSemCount += FinancilProfitCount;//
+            }
+            decimal TeamEstimateRepaymentRevenue = 0;
+            decimal TeamEstimatePurchaseRevenue = 0;
+            if (user.TeamLevel != 0)
+            {
+                //用户团队等级
+                var UserTeamLevel = await _freeSql.Select<TeamLevel>()
+                    .Where(s => s.Id == user.TeamLevel)
+                    .ToOneAsync();
+                TeamEstimateRepaymentRevenue = UserTeamLevel.TeamRepayRate * TeamRepaymentCount / 100;
+                TeamEstimatePurchaseRevenue = UserTeamLevel.TeamRepayRate * TeamSemCount / 100;
+            }
+            var TotalRevenue = TeamEstimatePurchaseRevenue + TeamEstimatePurchaseRevenue;
             var output = new UserProfitDto
             {
                 ChaKaProfit = CKAmountCount,
-                TeamProfit = TeamRepaymentCount*3/100,
+                TeamProfit = TotalRevenue,
                 SMEProfit = SEMCount
             };
             return output;
@@ -343,10 +363,6 @@ namespace Credit.UserServices
             var user = await _freeSql.Select<Users>()
                     .Where(s => s.Id == userId)
                     .ToOneAsync();
-            //用户团队等级
-            var UserTeamLevel = await _freeSql.Select<TeamLevel>()
-                .Where(s => s.Id == user.TeamLevel)
-                .ToOneAsync();
             //团队注册人数
             var TeamRegisterCount = await _freeSql.Select<Users>()
                     .Where(s => s.RootParentId == user.RootParentId && s.RootParentId != 0)
@@ -366,6 +382,29 @@ namespace Credit.UserServices
                 var AmountCount = TeamRepayment.Sum(s => s.Amount);
                 TeamRepaymentCount += AmountCount;//
             }
+            decimal TeamSemCount = 0;
+            foreach (var item in TeamMemberCount)
+            {
+                var TeamFinancilProfit = await _freeSql.Select<UserWalletRecord>()
+                     .Where(s => s.UserId == item.Id && s.SourceType == WalletSourceEnums.FinancilProfit)
+                     .ToListAsync();
+                var FinancilProfitCount = TeamFinancilProfit.Sum(s => s.Amount);
+                TeamSemCount += FinancilProfitCount;//
+            }
+
+
+            decimal TeamEstimateRepaymentRevenue = 0;
+            decimal TeamEstimatePurchaseRevenue = 0;
+            if (user.TeamLevel != 0)
+            {
+                //用户团队等级
+                var UserTeamLevel = await _freeSql.Select<TeamLevel>()
+                    .Where(s => s.Id == user.TeamLevel)
+                    .ToOneAsync();
+                TeamEstimateRepaymentRevenue = UserTeamLevel.TeamRepayRate * TeamRepaymentCount / 100;
+                TeamEstimatePurchaseRevenue = UserTeamLevel.TeamRepayRate * TeamSemCount / 100;
+            }
+
 
             var userTeam = await GetUserTeamChildMembers(userId, 2);
 
@@ -375,9 +414,9 @@ namespace Credit.UserServices
                 TeamRegister = TeamRegisterCount.Count,
                 TeamMember = TeamMemberCount.Count,
                 TeamRepayment = TeamRepaymentCount,
-                TeamEstimateRepaymentRevenue = 0,
-                TeamEstimatePurchaseRevenue = 0,
-                TotalRevenue = 0
+                TeamEstimateRepaymentRevenue = TeamEstimateRepaymentRevenue,
+                TeamEstimatePurchaseRevenue = TeamEstimatePurchaseRevenue,
+                TotalRevenue = TeamEstimatePurchaseRevenue + TeamEstimatePurchaseRevenue
             };
             return output;
         }
@@ -640,6 +679,7 @@ namespace Credit.UserServices
         /// 获取子级成员
         /// </summary>
         /// <param name="parentId"></param>
+        /// .
         /// <param name="teamUsers"></param>
         /// <param name="maxSort"></param>
         /// <param name="sort"></param>
