@@ -647,8 +647,8 @@ namespace Credit.UserServices
         private async Task<List<TeamUsersDto>> TeamChildMembers(long parentId, List<Users> teamUsers, int maxSort, int sort = 0)
         {
             var output = new List<TeamUsersDto>();
-            var user = teamUsers.FirstOrDefault(s => s.ParentId == parentId);
-            if (user == null)
+            var users = teamUsers.Where(s => s.ParentId == parentId).ToList();
+            if (users.Count == 0)
                 return output;
             output.Add(new TeamUsersDto
             {
@@ -657,8 +657,12 @@ namespace Credit.UserServices
             });
             if (maxSort == sort && maxSort > 0)
                 return output;
-            var members = await TeamChildMembers(user.Id, teamUsers, maxSort, sort + 1);
-            output.AddRange(members);
+            sort += 1;
+            foreach (var user in users)
+            {
+                var members = await TeamChildMembers(user.Id, teamUsers, maxSort,sort);
+                output.AddRange(members);
+            }
 
             return output;
         }
