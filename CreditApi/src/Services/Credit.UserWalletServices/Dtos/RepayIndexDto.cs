@@ -19,4 +19,8 @@ namespace Credit.UserWalletServices.Dtos;
     /// 还款收益
     /// </summary>
     public decimal RepaymentIncome { get; set; } = 0;
+    /// <summary>
+    /// 账户余额
+    /// </summary>
+    public decimal Balance { get; set; }
     }

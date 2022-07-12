@@ -117,19 +117,19 @@
 			<view style="padding: 10px 5px;">
 				<uni-col :span="3" :offset="1" style="margin-top: 1px;">
 					<view class="demo-uni-col-anniu dark">
-						<text style="color: green;display: flex;">$10000</text>
+						<text style="color: green;display: flex;">${{remaining.balance}}</text>
 						<text style="margin-left: 10%;font-size: 13px;">{{ $t('indexpages.balance') }}</text>
 					</view>
 				</uni-col>
-				<uni-col :span="10" :offset="3">
+				<uni-col :span="9" :offset="5">
 					<view class="demo-uni-col-anniu light">
-						<text style="margin-left: 30%;color: green;display: flex;">3</text>
+						<text style="margin-left: 35%;color: green;display: flex;text-align: center;" >{{remaining.remainingTime}}</text>
 						<text style="font-size: 13px;">{{ $t('indexpages.todayremain') }}</text>
 					</view>
 				</uni-col>
-				<uni-col :span="7">
+				<uni-col :span="4" :offset="2">
 					<view class="demo-uni-col-anniu light">
-						<text style="margin-left: 10%;color: green;display: flex;">+$0</text>
+						<text style="color: green;display: flex;">+${{remaining.repaymentIncome}}</text>
 						<text style="font-size: 13px;">{{ $t('indexpages.todayincome') }}</text>
 					</view>
 				</uni-col>
@@ -225,8 +225,17 @@
 				uni.navigateTo({
 					url: uri
 				})
-			}
+			},
+			GetRemainingChaka() {//获取用户剩余查卡次数，今日查卡次数，今日收益
+				var url = "/User/GetRemainingChaka";
+				this.ApiGet(url).then(res => {
+					this.remaining=res.data	
+				})
+			},
 
+		},
+		onLoad(){
+			this.GetRemainingChaka();
 		},
 		mounted() {
 			if (!uni.getStorageSync('token')) {
@@ -237,6 +246,7 @@
 		},
 		data() {
 			return {
+				remaining:{},//剩余还款次数,今日收入，用户余额
 				rotation: [{
 						id: 1,
 						url: '/static/image/lb1.jpg'

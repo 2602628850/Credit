@@ -655,9 +655,9 @@ public class UserWalletService : IUserWalletService
         int count= userleavel==null?0: userleavel.ChakaNum - userMoneyApplys.Count;
         repayIndexDto.RemainingTime = count;//剩余还款次数
         repayIndexDto.RepaymentTimes = userMoneyApplys.Count;//已还款次数
-        //算代还款收益
+        //算代还款收益,AuditAt因为审核通过后才会有收益,所以今天审核通过的才算是今日收益
         List<UserMoneyApply> audutsuccess = _freeSql.Select<UserMoneyApply>()
-           .AsTable((type, table) => $"{table}_{year}").Where(m => m.IsDeleted == 0 && m.CreateAt >= time && m.SourceType == WalletSourceEnums.RepayApply&&m.AuditStatus== AuditStatusEnums.Success&& m.UserId == userid)
+           .AsTable((type, table) => $"{table}_{year}").Where(m => m.IsDeleted == 0 && m.AuditAt >= time && m.SourceType == WalletSourceEnums.RepayApply&&m.AuditStatus== AuditStatusEnums.Success&& m.UserId == userid)
            .ToList();
         if (userleavel != null)
         {
@@ -666,6 +666,8 @@ public class UserWalletService : IUserWalletService
             repayIndexDto.RepaymentIncome = audutsuccess.Sum(m => ((m.Amount * profit) / 100));
             
         }
+        //获取用户账户余额
+        repayIndexDto.Balance = user.Balance;
         return repayIndexDto;
     }
 }
