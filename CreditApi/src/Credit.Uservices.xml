@@ -436,6 +436,7 @@
             获取子级成员
             </summary>
             <param name="parentId"></param>
+            .
             <param name="teamUsers"></param>
             <param name="maxSort"></param>
             <param name="sort"></param>
