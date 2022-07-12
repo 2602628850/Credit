@@ -165,7 +165,7 @@
 		justify-content: space-between !important;
 	}
 
-	<style>.flex-row {
+	.flex-row {
 		flex-direction: row !important;
 	}
 </style>
