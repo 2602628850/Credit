@@ -20,6 +20,13 @@ builder.Services.AddControllers(options =>
     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
     options.SerializerSettings.Converters.Add(new IdToStringConverter());
 });
+#if DEBUG
+#else
+//端口监听
+builder.WebHost.UseKestrel(so => {
+    so.ListenAnyIP(80);
+});
+#endif
 builder.Services.AddEndpointsApiExplorer();
 //加载json文件
 builder.Configuration.LoadJsonFile();
