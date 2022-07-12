@@ -30,9 +30,9 @@ public class FinancilOrderService : IFinancilOrderService
     ///  
     /// </summary>
     public FinancilOrderService(IFreeSql freeSql
-    ,IUserWalletService userWalletService
-    ,ITeamService teamService
-    ,IUserService userService)
+    , IUserWalletService userWalletService
+    , ITeamService teamService
+    , IUserService userService)
     {
         _freeSql = freeSql;
         _userWalletService = userWalletService;
@@ -47,7 +47,7 @@ public class FinancilOrderService : IFinancilOrderService
     /// <param name="input"></param>
     /// <param name="userId"></param>
     /// <exception cref="MyException"></exception>
-    public async Task<string> BuyFinancilProduct(FinancilOrderInput input,long userId)
+    public async Task<string> BuyFinancilProduct(FinancilOrderInput input, long userId)
     {
         if (input.UnitCount <= 0)
             return "Please enter purchase share";
@@ -76,7 +76,8 @@ public class FinancilOrderService : IFinancilOrderService
         var productOrder = await _freeSql.Select<FinancilOrder>()
             .Where(s => s.ProductId == input.ProductId && s.UserId == userId)
             .Where(s => s.IsDeleted == 0 && s.IsSold == 0
-                                         && s.Status != AuditStatusEnums.Default && s.Status != AuditStatusEnums.Ing)
+             && s.Status != AuditStatusEnums.Fail)//默认,处理中，已经审核成功的都要算到已经购买的份数里面去
+                                                  //&& s.Status != AuditStatusEnums.Default && s.Status != AuditStatusEnums.Ing)
             .ToListAsync();
         var buyUnitCount = productOrder.Sum(s => s.UnitCount);
         if (buyUnitCount + input.UnitCount > product.BuyMaxUnit)
@@ -196,7 +197,7 @@ public class FinancilOrderService : IFinancilOrderService
     /// <param name="orderId"></param>
     /// <param name="auditText"></param>
     /// <param name="auditUserId"></param>
-    private async Task BuyAuditSuccess(long orderId,string auditText,long auditUserId)
+    private async Task BuyAuditSuccess(long orderId, string auditText, long auditUserId)
     {
         var order = await Get(orderId);
         if (order == null)
@@ -215,7 +216,7 @@ public class FinancilOrderService : IFinancilOrderService
         var nextSettleDate = settleTimeDate.ToString("yyyyMMdd");
         order.NextSettledDate = nextSettleDate;
         await _freeSql.Update<FinancilOrder>()
-            .UpdateTableTime(TableTimeFormat.Year,order.CreateAt)
+            .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
             .SetSource(order)
             .ExecuteAffrowsAsync();
         //订单团队结算
@@ -230,7 +231,7 @@ public class FinancilOrderService : IFinancilOrderService
     /// <param name="orderId"></param>
     /// <param name="auditText"></param>
     /// <param name="auditUserId"></param>
-    private async Task BuyAuditFail(long orderId,string auditText,long auditUserId)
+    private async Task BuyAuditFail(long orderId, string auditText, long auditUserId)
     {
         var order = await Get(orderId);
         if (order == null)
@@ -259,7 +260,7 @@ public class FinancilOrderService : IFinancilOrderService
             });
             //修改订单审核信息
             _freeSql.Update<FinancilOrder>()
-                .UpdateTableTime(TableTimeFormat.Year,order.CreateAt)
+                .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
                 .SetSource(order)
                 .ExecuteAffrows();
         });
@@ -271,7 +272,7 @@ public class FinancilOrderService : IFinancilOrderService
     /// <param name="orderId"></param>
     /// <param name="auditText"></param>
     /// <param name="auditUserId"></param>
-    private async Task BuyAuditIng(long orderId,string auditText,long auditUserId)
+    private async Task BuyAuditIng(long orderId, string auditText, long auditUserId)
     {
         var order = await Get(orderId);
         if (order == null)
@@ -286,7 +287,7 @@ public class FinancilOrderService : IFinancilOrderService
         order.AuditUserId = auditUserId;
         order.AuditAt = DateTimeHelper.UtcNow();
         await _freeSql.Update<FinancilOrder>()
-            .UpdateTableTime(TableTimeFormat.Year,order.CreateAt)
+            .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
             .SetSource(order)
             .ExecuteAffrowsAsync();
     }
@@ -306,7 +307,7 @@ public class FinancilOrderService : IFinancilOrderService
         order.IsSold = 1;
         order.UpdateAt = DateTimeHelper.UtcNow();
         await _freeSql.Update<FinancilOrder>()
-            .UpdateTableTime(TableTimeFormat.Year,order.CreateAt)
+            .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
             .SetSource(order)
             .ExecuteAffrowsAsync();
     }
@@ -343,7 +344,7 @@ public class FinancilOrderService : IFinancilOrderService
     /// <param name="orderId"></param>
     /// <param name="auditText"></param>
     /// <param name="auditUserId"></param>
-    private async Task SoldSuccess(long orderId,string auditText,long auditUserId)
+    private async Task SoldSuccess(long orderId, string auditText, long auditUserId)
     {
         var order = await Get(orderId);
         if (order == null)
@@ -369,7 +370,7 @@ public class FinancilOrderService : IFinancilOrderService
             });
             //修改订单信息
             _freeSql.Update<FinancilOrder>()
-                .UpdateTableTime(TableTimeFormat.Year,order.CreateAt)
+                .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
                 .SetSource(order)
                 .ExecuteAffrows();
         });
@@ -381,7 +382,7 @@ public class FinancilOrderService : IFinancilOrderService
     /// <param name="orderId"></param>
     /// <param name="auditText"></param>
     /// <param name="auditUserId"></param>
-    private async Task SoldFail(long orderId,string auditText,long auditUserId)
+    private async Task SoldFail(long orderId, string auditText, long auditUserId)
     {
         var order = await Get(orderId);
         if (order == null)
@@ -407,7 +408,7 @@ public class FinancilOrderService : IFinancilOrderService
     /// <param name="orderId"></param>
     /// <param name="auditText"></param>
     /// <param name="auditUserId"></param>
-    private async Task SoldIng(long orderId,string auditText,long auditUserId)
+    private async Task SoldIng(long orderId, string auditText, long auditUserId)
     {
         var order = await Get(orderId);
         if (order == null)
@@ -416,7 +417,7 @@ public class FinancilOrderService : IFinancilOrderService
             throw new MyException("Not sold");
         if (order.SoldStatus != AuditStatusEnums.Default)
             throw new MyException("Order reviewed");
-       
+
         order.SoldStatus = AuditStatusEnums.Ing;
         order.SoldAuditText = auditText;
         order.AuditUserId = auditUserId;
@@ -501,7 +502,7 @@ public class FinancilOrderService : IFinancilOrderService
                 {
                     //更新订单结算信息
                     _freeSql.Update<FinancilOrder>(order.Id)
-                        .SetDto(new {NextSettledDate = nextSettledDate, SettledCount = settledCount})
+                        .SetDto(new { NextSettledDate = nextSettledDate, SettledCount = settledCount })
                         .ExecuteAffrows();
                     //增加用户理财收益流水
                     _userWalletService.WalletRecordCreate(new UserWalletRecordInput

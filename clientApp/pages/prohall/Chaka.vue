@@ -15,14 +15,14 @@
 										<text class="text-white text-lg text-bold">
 											<span>CREDIT</span></text>
 									</view>
-									<view >
+									<view>
 										<text class="font-italic text-bold text-white">
 											{{lv.levelName}}</text>
 									</view>
 								</view>
 								<view>
 									<text class="card-num">**** {{this.cardNo}}
-											****</text>
+										****</text>
 								</view>
 								<view class="flex-row justify-between">
 									<view>
@@ -47,22 +47,26 @@
 								<view class="flex-row align-center flex-1">
 									<text class="text-small"><span>{{$t('chaka.todayCheckNum')}}:</span>
 									</text>
-									<text class="text-small text-bold text-primary margin-left-xs">{{remaining.remainingTime}}
+									<text
+										class="text-small text-bold text-primary margin-left-xs">{{remaining.remainingTime}}
 									</text>
 								</view>
 								<view class="margin-top">
-									<button class="btn-search" style="width: 100%;" @click="GetChData()">{{$t('chaka.checkButton')}}</button>
+									<button class="btn-search" style="width: 100%;"
+										@click="GetChData()">{{$t('chaka.checkButton')}}</button>
 								</view>
 							</view>
 						</view>
-						
+
 						<!--卡号-->
 						<view id="cardList" class="margin-top-lg card-content-secondary">
 							<view>
 								<text class="text-bold text-lg"><span>{{$t('chaka.selectrepayment')}}</span></text>
 							</view>
-								<!--循环卡号-->
-							<view class="card-content-sm flex-row align-center margin-top" v-for="(item,index) in cardlist" :key="index"  :class="{'card-select':index==current}" @click="UpdateVal(index,item.cardNo,item.bankName,item.amount,item.id)">
+							<!--循环卡号-->
+							<view class="card-content-sm flex-row align-center margin-top"
+								v-for="(item,index) in cardlist" :key="index" :class="{'card-select':index==current}"
+								@click="UpdateVal(index,item.cardNo,item.bankName,item.amount,item.id)">
 								<view class="flex-1">
 									<text class="text-sm"><span>{{item.bindUser}}</span></text>
 									<text class="text-xs text-secondary">
@@ -70,10 +74,10 @@
 								</view>
 								<text class="text-lg"><span>${{item.amount}}</span></text>
 							</view>
-						
+
 						</view>
-						
-						
+
+
 						<!---->
 						<view class="margin-top-lg card-content-secondary">
 							<view>
@@ -83,7 +87,8 @@
 								<text class="text-21"><span>${{this.amount}}</span></text>
 							</view>
 							<view class="flex-row margin-top">
-								<button class="flex-1 btn-primary" @click="rePay()">{{$t('chaka.behalfButton')}}</button>
+								<button class="flex-1 btn-primary"
+									@click="rePay()">{{$t('chaka.behalfButton')}}</button>
 							</view>
 						</view>
 						<view class="margin-top-xl card-content-secondary">
@@ -93,13 +98,15 @@
 								<!---->
 							</view>
 							<view class="flex-row margin-top">
-								<view class="flex-1">
+								<view class="flex-1" style="text-align: center;">
 									<text class="text-bold text-primary text-21">
-										<span>{{remaining.repaymentTimes}}</span></text>
+										{{remaining.repaymentTimes}}
+									</text>
 									<text class="text-xs text-secondary margin-top-xs">
-										<span>{{$t('chaka.Tocheck')}}</span></text>
+										{{$t('chaka.Tocheck')}}
+									</text>
 								</view>
-								<view class="flex-1">
+								<view class="flex-1" style="text-align: center;">
 									<text class="text-bold text-primary text-21">
 										<span>${{remaining.repaymentIncome}}</span></text>
 									<text class="text-xs text-secondary margin-top-xs">
@@ -129,88 +136,88 @@
 	export default {
 		data() {
 			return {
-               lv:{}, //等级id
-			   cardlist:{},//卡号集合
-			   current:0,//当前选中银行卡序号
-			   cardNo:'**** ****',//卡号
-			   bankName:'****',//银行名称
-			   amount:0,//还款金额
-			   leaveobj:{},//还款等级对象
-			   repayObj:{},//还款对象
-			   PayeeBankCardId:0,//银行卡id
-			   remaining:{},//剩余还款次数,已还次数,还款收益
+				lv: {}, //等级id
+				cardlist: {}, //卡号集合
+				current: 0, //当前选中银行卡序号
+				cardNo: '**** ****', //卡号
+				bankName: '****', //银行名称
+				amount: 0, //还款金额
+				leaveobj: {}, //还款等级对象
+				repayObj: {}, //还款对象
+				PayeeBankCardId: 0, //银行卡id
+				remaining: {}, //剩余还款次数,已还次数,还款收益
 			}
 		},
 		mounted() {
-			
+
 		},
 		onLoad: function(option) {
-			this.lv.Leaveid=option.id;
-			this.lv.levelName=option.levelName;
+			this.lv.Leaveid = option.id;
+			this.lv.levelName = option.levelName;
 			this.GetRemainingChaka();
 			this.GetRepayLevel();
 		},
 		methods: {
 			//因为等级介绍内容可能很长,所以不建议通过url传过来
-			GetRepayLevel(){
+			GetRepayLevel() {
 				var url = "/Repay/GetRepayLevel";
-				this.ApiGet(url,this.lv).then(res => {
+				this.ApiGet(url, this.lv).then(res => {
 					this.leaveobj = res.data
-					
+
 				})
 			},
-			GetChData() {//获取页面基础数据
+			GetChData() { //获取页面基础数据
 				var url = "/Repay/GetRepayBankCardList";
-				this.ApiGet(url,this.lv).then(res => {
+				this.ApiGet(url, this.lv).then(res => {
 					this.cardlist = res.data
-					this.cardNo=res.data[0].cardNo;
-					this.bankName=res.data[0].bankName;
-					this.amount=res.data[0].amount;
+					this.cardNo = res.data[0].cardNo;
+					this.bankName = res.data[0].bankName;
+					this.amount = res.data[0].amount;
 					//还款对象
-					this.repayObj.Type="bankcard";//线下还款
-					this.repayObj.PayeeBankCardId=res.data[0].id;//银行卡id
-					this.repayObj.SourceType=300;//代理还款申请
-					this.repayObj.Amount=this.amount;//还款金额
-					
-					
+					this.repayObj.Type = "bankcard"; //线下还款
+					this.repayObj.PayeeBankCardId = res.data[0].id; //银行卡id
+					this.repayObj.SourceType = 300; //代理还款申请
+					this.repayObj.Amount = this.amount; //还款金额
+
+
 				})
 			},
 			//点击银行卡的时候页面数据动态变化
-			UpdateVal(index,cardNo,bankName,amount,id){
-				this.current=index;
-				this.cardNo=cardNo;
-				this.bankName=bankName;
-				this.amount=amount;
+			UpdateVal(index, cardNo, bankName, amount, id) {
+				this.current = index;
+				this.cardNo = cardNo;
+				this.bankName = bankName;
+				this.amount = amount;
 				//还款对象
-				this.repayObj.Type="bankcard";//线下还款
-				this.repayObj.PayeeBankCardId=id;//银行卡id
-				this.repayObj.SourceType=300;//还款申请
-				this.repayObj.Amount=this.amount;//还款金额
+				this.repayObj.Type = "bankcard"; //线下还款
+				this.repayObj.PayeeBankCardId = id; //银行卡id
+				this.repayObj.SourceType = 300; //还款申请
+				this.repayObj.Amount = this.amount; //还款金额
 			},
-			TitleResult(msg){
+			TitleResult(msg) {
 				uni.showToast({
 					title: msg,
 					duration: 3000,
 				})
 			},
-			GetRemainingChaka() {//获取用户剩余查卡次数
+			GetRemainingChaka() { //获取用户剩余查卡次数，今日查卡次数，今日收益
 				var url = "/User/GetRemainingChaka";
 				this.ApiGet(url).then(res => {
-					this.remaining=res.data	
+					this.remaining = res.data
 				})
 			},
 			//还款
-			rePay(){
+			rePay() {
 				var url = "/Repay/RepayApplication";
-				this.ApiPost(url,this.repayObj).then(res => {
-					if(res.data=="repay_success"){
-						var msg=this.$t('chaka.Charresult');
+				this.ApiPost(url, this.repayObj).then(res => {
+					if (res.data == "repay_success") {
+						var msg = this.$t('chaka.Charresult');
 						this.TitleResult(msg)
 						uni.navigateTo({
 							url: '/pages/prohall/creditIndex'
 						})
-					}else{
-						var msg= res.data;
+					} else {
+						var msg = res.data;
 						this.TitleResult(msg)
 					}
 				})
