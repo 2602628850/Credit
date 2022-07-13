@@ -292,5 +292,14 @@ namespace Credit.Api.Controllers
         {
             return await _walletService.GetRemainingChaka(CurrentUser.UserId);
         }
+        /// <summary>
+        ///   获取当前用户当年的所有信用卡代还申请记录
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<List<MoneyApplyDto>> GetUserMoneyWithoutList(MoneyApplyDto moneyApplyDto)
+        {
+            return await _walletService.GetMoneyWithoutRecode(CurrentUser.UserId, moneyApplyDto);
+        }
     }
 }

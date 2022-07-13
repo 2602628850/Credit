@@ -57,5 +57,9 @@ public interface IUserWalletService
     /// </summary>
     /// <returns></returns>
     Task<RepayIndexDto> GetRemainingChaka(long userid);
-
+    /// 获取用户所有代还
+    /// </summary>
+    /// <param name="userid"></param>
+    /// <returns></returns>
+    Task<List<MoneyApplyDto>> GetMoneyWithoutRecode(long userid, MoneyApplyDto moneyApplyDto);
 }

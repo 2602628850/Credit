@@ -670,4 +670,30 @@ public class UserWalletService : IUserWalletService
         repayIndexDto.Balance = user.Balance;
         return repayIndexDto;
     }
+    /// <summary>
+    /// 获取用户所有代还
+    /// </summary>
+    /// <param name="userid"></param>
+    /// <returns></returns>
+    public async Task<List<MoneyApplyDto>> GetMoneyWithoutRecode(long userid, MoneyApplyDto moneyApplyDto)
+    {
+        var user = await _freeSql.Select<Users>()
+                   .Where(s => s.Id == userid)
+                   .ToOneAsync();
+        //获取当前用户信用等级
+        var userleavel = await _freeSql.Select<CreditLevel>()
+                 .Where(s => s.Id == user.Level)
+                 .ToOneAsync();
+        var year = DateTimeOffset.UtcNow.Year;
+        var userMoneyApply = await _freeSql.Select<UserMoneyApply>().AsTable((type, table) => $"{table}_{year}")
+            .Where(s => s.UserId == userid && s.IsDeleted == 0)
+            .Where(s => s.SourceType == WalletSourceEnums.RepayApply).OrderByDescending(m => m.CreateAt)
+            //带状态的查询
+            .WhereIf(moneyApplyDto.AuditStatus.HasValue, s=>s.AuditStatus== moneyApplyDto.AuditStatus)
+            .ToListAsync<MoneyApplyDto>();
+        userMoneyApply.ForEach(m => {
+            m.Profits = (m.Amount * userleavel.Profit) / 100;
+        });
+        return userMoneyApply;
+    }
 }

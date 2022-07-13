@@ -1,4 +1,5 @@
 using Data.Commons.Enums;
+using Data.Commons.Helpers;
 
 namespace Credit.OrderServices.Dtos;
 
@@ -101,6 +102,16 @@ public class FinancilOrderDto
     ///  审核时间
     /// </summary>
     public long AuditAt { get; set; }
+    /// <summary>
+    /// 审核时间
+    /// </summary>
+    public string ToAuditAt
+    {
+        get
+        {
+            return DateTimeHelper.UnixTimeToDateTime(AuditAt).ToString("yyyy-MM-dd HH:mm");
+        }
+    }
 
     /// <summary>
     ///  审核文字
@@ -126,6 +137,16 @@ public class FinancilOrderDto
     ///  购买时间
     /// </summary>
     public long CreateAt { get; set; }
+    /// <summary>
+    ///  购买时间
+    /// </summary>
+    public string TodateTime
+    {
+        get
+        {
+            return DateTimeHelper.UnixTimeToDateTime(CreateAt).ToString("yyyy-MM-dd HH:mm");
+        }
+    }
 }
 
 /// <summary>

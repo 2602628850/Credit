@@ -111,7 +111,7 @@ public class MoneyApplyDto : UserMoneyApplyInput
     /// <summary>
     ///   审核状态
     /// </summary>
-    public AuditStatusEnums AuditStatus { get; set; }
+    public AuditStatusEnums? AuditStatus { get; set; }
 
     /// <summary>
     ///  审核人员Id
@@ -162,9 +162,23 @@ public class MoneyApplyDto : UserMoneyApplyInput
             return DateTimeHelper.UnixTimeToDateTime(CreateAt).ToString("yyyy-MM-dd HH:mm");
         }
     }
+    /// <summary>
+    /// 审核时间
+    /// </summary>
+    public string ToAuditAt
+    {
+        get
+        {
+            return DateTimeHelper.UnixTimeToDateTime(AuditAt).ToString("yyyy-MM-dd HH:mm");
+        }
+    }
 
     /// <summary>
     ///  三方接口
     /// </summary>
     public string PaymentInfoName { get; set; } = string.Empty;
+    /// <summary>
+    /// 还款收益
+    /// </summary>
+    public decimal Profits { get; set; }
 }

@@ -316,7 +316,8 @@ export default {
 		status2:'成功',
 		status3:'失败',
 		mount:'申请提款金额：',
-		time:'申请时间：'
+		time:'申请时间：',
+		audittime:'审核时间：',
 	},
 	financialproduct:{
 		daday:"天",

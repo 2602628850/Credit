@@ -312,7 +312,8 @@ export default {
 		status2:'success',
 		status3:'fail',
 		mount:'Requested withdrawal amount：',
-		time:'Application time：'
+		time:'Application time：',
+		audittime:'Audit time：',
 	},
 	financialproduct:{
 		daday:"day",
