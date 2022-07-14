@@ -4,6 +4,7 @@ export default {
 		welSub: '欢迎您归来!',
 		remember: '记住用户名和密码',
 		register: '创建账号',
+		lauout:'退出登录',
 	},
 	register: {
 		wel: '注册',
@@ -85,7 +86,8 @@ export default {
 		copylink: "点击下面的链接内容复制您的推广链接",
 		bottonc: "复制",
 		bottomcontent: "每成功邀请一名好友成为平台正式会员，即可获得100积分。",
-		copyresult: "复制成功!"
+		copyresult: "复制成功!",
+		clicopy:'点击复制',
 	},
 	credit: {
 		title: '信用代还专区',

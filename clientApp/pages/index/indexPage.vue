@@ -20,7 +20,7 @@
 		<!-- 首页轮播图 -->
 		<uni-row class="demo-uni-row" style="margin-left: 7%;margin-top: 5%;">
 			<uni-col :xs="8" :sm="6" :md="5" :lg="6" :xl="1">
-				<view class="demo-uni-col dark">
+				<view class="demo-uni-col dark" v-on:click="SharedTo('/pages/order/createindex')">
 					<text style="display: flex;">
 						<image style="width: 3.5em;height: 3.5em;" src="../../static/image/index/order.png"></image>
 					</text>
@@ -235,14 +235,16 @@
 
 		},
 		onLoad(){
-			this.GetRemainingChaka();
+			
 		},
 		mounted() {
 			if (!uni.getStorageSync('token')) {
 			uni.reLaunch({
 				url:'/pages/login/login'
 			})
+			return;
 			}
+			this.GetRemainingChaka();
 		},
 		data() {
 			return {

@@ -45,8 +45,8 @@
 	export default {
 		data() {
 			return {
-				current: 0,
 				numberinput: '',
+				current: 0,
 				rechargeObj:{},//充值对象
 				dataitem: [{
 					count: 500
@@ -64,7 +64,7 @@
 			}
 		},
 		mounted(){
-			this.numberinput=this.dataitem[0].count;
+			this.numberinput=this.dataitem[0].count+'';
 			//要提交的数据
 			this.rechargeObj.Amount=this.numberinput;
 			this.rechargeObj.Type="bankcard";//线下支付
@@ -73,7 +73,7 @@
 		methods: {
 			UpdateView(index,count) {
 				this.current = index;
-				this.numberinput=count;
+				this.numberinput=count+'';
 				//要提交的数据
 				this.rechargeObj.Amount=this.numberinput;
 				this.rechargeObj.Type="bankcard";//线下支付
@@ -104,11 +104,11 @@
 			},
 			reduce() {
 				if (parseFloat(this.numberinput) - 100 >= 0) {
-					this.numberinput=parseFloat(this.numberinput)-100;
+					this.numberinput=(parseFloat(this.numberinput)-100)+'';
 				}
 			},
 			add() {
-				this.numberinput=parseFloat(this.numberinput)+100;
+				this.numberinput=(parseFloat(this.numberinput)+100)+'';
 			},
 			TitleResult(msg){
 				uni.showToast({
