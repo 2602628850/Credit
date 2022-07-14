@@ -11,7 +11,7 @@
 	</view>
 	<view style="text-align: center;" v-on:click="copyUrl()" >
 		<input class="uni-input" v-model="copyurl" style="border: 1px solid darkgray;width: 90%;margin-left: 2.5%;margin-top: 10px;"/>
-		<button type="default" style="width: 96%; margin-top: 3%;margin-left:2%;border: solid 1px;border-color: gray;">点击复制</button>
+		<button type="default" style="width: 96%; margin-top: 3%;margin-left:2%;border: solid 1px;border-color: gray;">{{$t('share.clicopy')}}</button>
 	
 	</view>
 

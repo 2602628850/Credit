@@ -106,7 +106,8 @@ export default {
 		copylink:"Click The following links copy promotion link",
 		bottonc:"Copy",
 		bottomcontent:"Every time you successfully invite a friend to become an official member of the platform, you can get 100 points. ",
-		copyresult:"Copy Success!"
+		copyresult:"Copy Success!",
+		clicopy:'Click Copy',
 	},
 	interal:{
 		intereal:"Integral",
