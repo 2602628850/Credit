@@ -236,6 +236,21 @@ export default {
 		cycle:'Cycle',
 		button:'Enter'	
     },
+	setUp: {
+		title: 'Setting',
+		UserName: "UserName",
+		InviteCode: "Invitation code",
+		UserInfo: "Personal information",
+		ChangePassword: "Change password",
+		LoginOut: "Logout"
+	},
+	changepwd: {
+		title: ' Change password ',
+		oldpwd: "Old password",
+		newpwd: "New password",
+		confirmpwd: "Confirm password",
+		button: "Confirm password"
+	},
     semloan: {
         title: ' SME Loans ',		
 		UnitPrice:'Price per unit',		

@@ -139,14 +139,99 @@
              用户信息
             </summary>
         </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.CountryName">
+            <summary>
+            国家
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.Username">
+            <summary>
+             账号
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.Password">
+            <summary>
+             密码
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.Nickname">
+            <summary>
+             昵称
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.Code">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.InvCode">
+            <summary>
+            邀请码
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.HeadImage">
+            <summary>
+             头像
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.Balance">
+            <summary>
+             可用余额
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.FreezeFunds">
+            <summary>
+             冻结资金
+            </summary>
+        </member>
         <member name="P:Credit.UserServices.Dtos.UserDto.Integral">
             <summary>
              积分
             </summary>
         </member>
-        <member name="P:Credit.UserServices.Dtos.UserDto.Balance">
+        <member name="P:Credit.UserServices.Dtos.UserDto.ParentId">
             <summary>
-             余额
+            邀请人
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.RootParentId">
+            <summary>
+             根级用户ID
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.TeamLevel">
+            <summary>
+            个人团队等级
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.CreditValue">
+            <summary>
+            信用值
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.Level">
+            <summary>
+            信用等级
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.InviteCount">
+            <summary>
+             邀请人数
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.DirectCount">
+            <summary>
+            直属下级
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.IsTeamUser">
+            <summary>
+             是否团队人员
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserDto.IsAdmin">
+            <summary>
+             是否管理员
             </summary>
         </member>
         <member name="T:Credit.UserServices.Dtos.UserCreditDto">
@@ -274,10 +359,17 @@
              用户管理接口方法实现
             </summary>
         </member>
-        <member name="M:Credit.UserServices.UserService.#ctor(IFreeSql,Data.Commons.Helpers.ITokenManager,Credit.CreditLevelServices.Interfaces.ICreditLevelService)">
+        <member name="M:Credit.UserServices.UserService.#ctor(IFreeSql,Data.Commons.Helpers.ITokenManager,Credit.CreditLevelServices.Interfaces.ICreditLevelService,Credit.SettingServices.ISettingService)">
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Credit.UserServices.UserService.InvCodeAny(System.String)">
+            <summary>
+             邀请码是否存在
+            </summary>
+            <param name="invCode"></param>
+            <returns></returns>
         </member>
         <member name="M:Credit.UserServices.UserService.RegisterUser(Credit.UserServices.Dtos.RegisterUserInput)">
             <summary>

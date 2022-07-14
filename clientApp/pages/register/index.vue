@@ -36,17 +36,7 @@
 			<input :placeholder="$t('public.nikenameTip')" class="input" v-model="editItem.Nickname" />
 		</template>
 	</register-input-item>
-
-
-	<!-- <register-input-item :tip="$t('register.code')" class="mgt">
-		<template v-slot:img>
-			<view class="input-icon iconfont icon-yanzheng"></view>
-		</template>
-		<template v-slot:default>
-			<input :placeholder="$t('register.codeTip')" class="input" v-model="editItem.Code" />
-		</template>
-	</register-input-item> -->
-
+ 
 	<register-input-item :tip="$t('register.invCode')" class="mgt">
 		<template v-slot:img>
 			<view class="input-icon iconfont icon-JC_054"></view>

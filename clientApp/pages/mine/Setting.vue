@@ -1,54 +1,40 @@
 <template>
 	<!--我的-->
-	<navigation-bar :title="$t('mine.title')" :show-back="false"></navigation-bar>
+	<navigation-bar :title="$t('setUp.title')"></navigation-bar>
 	<app-content-view :show-tab-bar="true" :show-navigation-bar="true">
-		<view class="mine-item-box flex-row-between">
-			<image class="mine-header-img" :src="UserInfo.headImage" @click="goInfo"></image>
-			<view class="flex-column-center mgr mgl" style="flex: 1;align-items: flex-start">
-				<view>{{UserInfo.username}}</view>
-				<view class="flex-row-start text-grey">
-					<view>{{UserInfo.invCode}}</view>
-					<image class="mine-inv-img mgl" :src="'/static/Icons/mine/v1.png'"></image>
-				</view>
-			</view>
-			<image class="mine-level-img" :src="'/static/Icons/mine/v1.png'" @click="goLevel"></image>
-		</view>
-
-
 		<view class="mine-item-box">
-			<view class="text-small text-grey">{{$t('mine.balance')}}</view>
-			<view class="flex-row-start mgt" style="height: 30px">
-				<view class="text-26 text-primary">{{UserInfo.balance}}</view>
-				<view class="text-primary mgl flex-column-end text-small" style="font-weight: bold;height: 100%">USD
+			<view style="border-bottom: 1px solid rgb(241, 241, 241)" class="mine-cell-item flex-row-between">
+				<view style="flex: 1" class="flex-row-start mgr">
+					<view class="mgl text-color">{{$t('setUp.UserName')}}</view>
 				</view>
+				<view>{{UserInfo.username}}</view>
 			</view>
-			<view class="text-small text-tip mgt">
-				≈ 30000 THB
-			</view>
-			<view class="flex-row-between" style="margin-top: 20px">
-				<view class="mine-button mine-button-primary text-primary flex-row-center">{{$t('public.recharge')}}
+			<view style="border-bottom: 1px solid rgb(241, 241, 241)" class="mine-cell-item flex-row-between">
+				<view style="flex: 1" class="flex-row-start mgr">
+					<view class="mgl text-color">{{$t('setUp.InviteCode')}}</view>
 				</view>
-				<view class="mine-button mine-button-second text-primary flex-row-center">{{$t('public.withdraw')}}
-				</view>
+				<view class="right">{{UserInfo.invCode}}</view>
 			</view>
 		</view>
-
-
-		<view class="mine-item-box" v-for="item in bottomItems">
-			<view v-for="(cell,index) in item" @click="SharedTo(cell.url)" class="mine-cell-item flex-row-between"
-				:style="getLineStyle(item,index)">
+		<view class="mine-item-box">
+			<view @click="SharedTo('/pages/mine/UserInfo')" style="border-bottom: 1px solid rgb(241, 241, 241)"
+				class="mine-cell-item flex-row-between">
 				<view style="flex: 1" class="flex-row-start mgr">
-					<view class="mine-cell-img" :class="cell.image" :style="{color: cell.imageColor}"></view>
-					<view class="mgl text-color">{{cell.title}}</view>
+					<view class="mgl text-color">{{$t('setUp.UserInfo')}}</view>
+				</view>
+				<view class="mine-cell-img text-tip iconfont icon-right"></view>
+			</view>
+			<view @click="SharedTo('/pages/mine/changePwd')" style="border-bottom: 1px solid rgb(241, 241, 241)"
+				class="mine-cell-item flex-row-between">
+				<view style="flex: 1" class="flex-row-start mgr">
+					<view class="mgl text-color">{{$t('setUp.ChangePassword')}}</view>
 				</view>
 				<view class="mine-cell-img text-tip iconfont icon-right"></view>
 			</view>
 		</view>
 
-		<view style="height: 1px"></view>
-
 	</app-content-view>
-	<bottomhand :selected="4"></bottomhand>
+	<button @click="quitLogin()" type="primary" style="background-color:#fce1e1;color: red;">{{$t('setUp.LoginOut')}}</button>
 </template>
 
 <script>
@@ -114,21 +100,27 @@
 					url: '/pages/mine/change-info'
 				})
 			},
+			goLevel() {
+				uni.navigateTo({
+					url: '/pages/mine/level'
+				})
+			},
 			GetUserinfo() {
 				var url = "/User/GetUserInfo";
 				this.ApiGet(url).then(res => {
 					this.UserInfo = res.data
 				})
 			},
-			goLevel() {
-				uni.navigateTo({
-					url: '/pages/mine/level'
-				})
-			},
 			SharedTo(uri) {
 				uni.navigateTo({
 					url: uri
 				})
+			},
+			quitLogin() {
+				// location.reload()
+				localStorage.clear()
+				window.sessionStorage.clear()
+				this.$router.push('/pages/login/login')
 			},
 			getLineStyle(item, index) {
 				if (item.length == 1) {

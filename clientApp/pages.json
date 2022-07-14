@@ -125,6 +125,12 @@
 			"style": {
 				"navigationBarTitleText": ""
 			}
+		},
+		{
+			"path": "pages/mine/Setting",
+			"style": {
+				"navigationBarTitleText": ""
+			}
 		}
         ,{
             "path" : "pages/wallet/record",
@@ -293,7 +299,21 @@
 		        "enablePullDownRefresh": false
 		    }
 		    
-		}
+		},{
+            "path" : "pages/mine/UserInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": ""
+            }
+            
+        },{
+            "path" : "pages/mine/changePwd",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": ""
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",
