@@ -139,6 +139,7 @@ namespace Credit.UserServices
                     parentUser.Integral += invIntegral;
                     await userRepository.UpdateAsync(parentUser);
                 }
+                uow.Commit();
             }
             return "register_success";
         }
