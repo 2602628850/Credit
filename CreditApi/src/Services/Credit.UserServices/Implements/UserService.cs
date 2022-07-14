@@ -1,5 +1,8 @@
-﻿using Credit.CreditLevelModels;
+﻿using System.Globalization;
+using Credit.CreditLevelModels;
 using Credit.CreditLevelServices.Interfaces;
+using Credit.SettingServices;
+using Credit.SettingServices.Dtos;
 using Credit.TeamModels;
 using Credit.UserModels;
 using Credit.UserServices.Dtos;
@@ -20,17 +23,32 @@ namespace Credit.UserServices
         private readonly IFreeSql _freeSql;
         private readonly ITokenManager _tokenManager;
         private readonly ICreditLevelService _creditLevelService;
+        private readonly ISettingService _settingService;
 
         /// <summary>
         /// 
         /// </summary>
         public UserService(IFreeSql freeSql,
             ITokenManager tokenManager,
-            ICreditLevelService creditLevelService)
+            ICreditLevelService creditLevelService,
+            ISettingService settingService)
         {
             _freeSql = freeSql;
             _tokenManager = tokenManager;
             _creditLevelService = creditLevelService;
+            _settingService = settingService;
+        }
+
+        /// <summary>
+        ///  邀请码是否存在
+        /// </summary>
+        /// <param name="invCode"></param>
+        /// <returns></returns>
+        private async Task<bool> InvCodeAny(string invCode)
+        {
+            return await _freeSql.Select<Users>()
+                .Where(s => s.InvCode == invCode)
+                .AnyAsync();
         }
 
         /// <summary>
@@ -53,49 +71,74 @@ namespace Credit.UserServices
             var nameExist = await _freeSql.Select<Users>()
                     .Where(s => s.Username == input.Username)
                     .AnyAsync();
+            //父级用户ID
+            var parentUserId = 0l;
+            //团队根级Id
+            var rootParentId = 0l;
+            //上级
+            Users parentUser = null;
+            //邀请积分
+            var invIntegral = 0;
             // 邀请码是否正确
+            if (!string.IsNullOrEmpty(input.InvCode))
+            { 
+                parentUser = await _freeSql.Select<Users>()
+                    .Where(s => s.InvCode == input.InvCode)
+                    .Where(s => s.IsDeleted == 0)
+                    .ToOneAsync();
+                if (parentUser == null)
+                    throw new MyException("Invitation code error");
+                parentUserId = parentUser.Id;
+                rootParentId = parentUser.RootParentId;
+                var taskSetting = await _settingService.GetSetting<TaskIntegralSetting>();
+                invIntegral = taskSetting.InvitationIntegral;
+            }
 
-            var InvCode = "";
-            InvCode = GetRandomString(6);
-            var InvCodeExist = await _freeSql.Select<Users>()
-                    .Where(s => s.InvCode == InvCode)
-                    .AnyAsync();
+            //用户邀请码
+            var invCode = GetRandomString(6);
+            var invCodeExist = await InvCodeAny(invCode);
+            while (invCodeExist)
+            {
+                invCode = GetRandomString(6);
+                invCodeExist = await InvCodeAny(invCode);
+            }
+
+            //默认信用等级
+            var defaultCredit = await _freeSql.Select<CreditLevel>()
+                .Where(s => s.IsDeleted == 0 && s.CreditValue <= 0)
+                .ToOneAsync();
+            
+            var userId = IdHelper.GetId();
             var user = new Users
             {
-                Id = IdHelper.GetId(),
+                Id = userId,
                 Username = input.Username.ToLower(),
                 Password = input.Password,
                 Nickname = input.Nickname,
                 CountryName = input.CountryName,
                 Code = input.Code,
-                InvCode = InvCode,
-                ParentId = 0,
-                RootParentId = 0,
+                InvCode = invCode,
+                ParentId = parentUserId,
+                RootParentId = rootParentId == 0 ? userId : rootParentId,
                 TeamLevel = 0,
                 CreditValue = 0,
-                Level = 0,
-
+                Level = defaultCredit?.Id ?? 0, //信用等级
             };
-            await _freeSql.Insert(user).ExecuteAffrowsAsync();
-            await UpdateCreditLevel(user.Id);
-            //邀请码注册
-            if (!string.IsNullOrEmpty(input.InvCode))
+
+            //事务开始
+            using (var uow = _freeSql.CreateUnitOfWork())
             {
-                var Team = await _freeSql.Select<Users>()
-                   .Where(s => s.InvCode == input.InvCode)
-                   .ToOneAsync();
-                if (Team == null)
+                var userRepository = _freeSql.GetRepository<Users>();
+                userRepository.UnitOfWork = uow;
+                //添加新用户
+                await userRepository.InsertAsync(user);
+                //增加邀请人积分和邀请人邀请人数
+                if (parentUserId > 0 && parentUser != null)
                 {
-                    return "Invitation code error!";
+                    parentUser.InviteCount += 1;
+                    parentUser.Integral += invIntegral;
+                    await userRepository.UpdateAsync(parentUser);
                 }
-                user.ParentId = Team.ParentId;
-                user.RootParentId = Team.RootParentId;
-                await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync();
-                //增加邀请人积分
-                await AddUserJF(Team.Id, 100);
-                //增加邀请人数
-                _freeSql.Update<Users>(Team.Id)
-                    .SetDto(new { InviteCount = Team.InviteCount + 1 }).ExecuteAffrows();
             }
             return "register_success";
         }
