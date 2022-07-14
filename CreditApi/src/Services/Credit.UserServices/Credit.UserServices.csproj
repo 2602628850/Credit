@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FreeSql.DbContext" Version="3.2.661" />
     <PackageReference Include="FreeSql.Provider.MySql" Version="3.2.661" />
   </ItemGroup>
 
@@ -19,6 +20,7 @@
     <ProjectReference Include="..\..\Models\Credit.TeamModels\Credit.TeamModels.csproj" />
     <ProjectReference Include="..\..\Models\Credit.UserModels\Credit.UserModels.csproj" />
     <ProjectReference Include="..\..\Models\Credit.UserWalletModels\Credit.UserWalletModels.csproj" />
+    <ProjectReference Include="..\Credit.SettingServices\Credit.SettingServices.csproj" />
   </ItemGroup>
 
 </Project>

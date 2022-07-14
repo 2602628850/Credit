@@ -14,4 +14,9 @@ public class TaskIntegralSetting : ISetting
     ///  代还积分
     /// </summary>
     public int RepaymentIntegral { get; set; }
+
+    /// <summary>
+    ///  邀请用户积分
+    /// </summary>
+    public int InvitationIntegral { get; set; }
 }
