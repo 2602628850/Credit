@@ -2,7 +2,7 @@
 	<navigation-bar :title="$t('share.title')"></navigation-bar>
 	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
 	<view class="imgvew">
-		<image src="../../static/image/share/share.png" style="width: 150px; height: 150px;" draggable="true"></image>
+		<image src="/static/image/share/share.png" style="width: 150px; height: 150px;" draggable="true"></image>
 	</view>
 	<view style="width: 100%;color: green;font-size: 13px;text-align: center;"  v-on:click="copyUrl()" >
 		<text>
@@ -10,7 +10,8 @@
 		</text>
 	</view>
 	<view style="text-align: center;" v-on:click="copyUrl()" >
-		<input class="uni-input" v-model="copyurl" style="border: 1px solid darkgray;width: 60%;margin-left: 15%;margin-top: 10px;"/>
+		<input class="uni-input" v-model="copyurl" style="border: 1px solid darkgray;width: 90%;margin-left: 2.5%;margin-top: 10px;"/>
+		<button type="default" style="width: 96%; margin-top: 3%;margin-left:2%;border: solid 1px;border-color: gray;">点击复制</button>
 	
 	</view>
 
@@ -30,7 +31,7 @@
 	export default {
 		data() {
 			return {
-				copyurl: "https://www.thirdcredit.net?t=25202"
+				copyurl: "http://h5.credit.ceshi-api.com/"
 			}
 		},
 		mounted() {
