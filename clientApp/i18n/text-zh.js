@@ -4,6 +4,7 @@ export default {
 		welSub: '欢迎您归来!',
 		remember: '记住用户名和密码',
 		register: '创建账号',
+		lauout:'退出登录',
 	},
 	register: {
 		wel: '注册',

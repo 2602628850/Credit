@@ -4,6 +4,7 @@ export default {
         welSub: 'Welcome back, you’ve been missed!',
         remember: 'Remember username and password',
         register: 'Create an account',
+		lauout:'Log out',
     },
     register: {
         wel : 'Sign In',

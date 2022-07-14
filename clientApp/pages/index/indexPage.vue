@@ -235,14 +235,16 @@
 
 		},
 		onLoad(){
-			this.GetRemainingChaka();
+			
 		},
 		mounted() {
 			if (!uni.getStorageSync('token')) {
 			uni.reLaunch({
 				url:'/pages/login/login'
 			})
+			return;
 			}
+			this.GetRemainingChaka();
 		},
 		data() {
 			return {

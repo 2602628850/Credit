@@ -274,10 +274,17 @@
              用户管理接口方法实现
             </summary>
         </member>
-        <member name="M:Credit.UserServices.UserService.#ctor(IFreeSql,Data.Commons.Helpers.ITokenManager,Credit.CreditLevelServices.Interfaces.ICreditLevelService)">
+        <member name="M:Credit.UserServices.UserService.#ctor(IFreeSql,Data.Commons.Helpers.ITokenManager,Credit.CreditLevelServices.Interfaces.ICreditLevelService,Credit.SettingServices.ISettingService)">
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Credit.UserServices.UserService.InvCodeAny(System.String)">
+            <summary>
+             邀请码是否存在
+            </summary>
+            <param name="invCode"></param>
+            <returns></returns>
         </member>
         <member name="M:Credit.UserServices.UserService.RegisterUser(Credit.UserServices.Dtos.RegisterUserInput)">
             <summary>
