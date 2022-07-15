@@ -314,6 +314,21 @@
             团队收益
             </summary>
         </member>
+        <member name="T:Credit.UserServices.Dtos.ChangePwdInput">
+            <summary>
+             修改密码
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.ChangePwdInput.OldPwd">
+            <summary>
+             直属下级
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.ChangePwdInput.NewPwd">
+            <summary>
+             团队注册人数
+            </summary>
+        </member>
         <member name="T:Credit.UserServices.Dtos.UserTeamImfoDto">
             <summary>
             用户团队收益
@@ -402,6 +417,13 @@
         <member name="M:Credit.UserServices.UserService.CreateUser(Credit.UserServices.Dtos.UserInput)">
             <summary>
              新建用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.UserService.UpdateUser(Credit.UserServices.Dtos.UserInput)">
+            <summary>
+             修改
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -563,6 +585,20 @@
         <member name="M:Credit.UserServices.IUserService.CreateUser(Credit.UserServices.Dtos.UserInput)">
             <summary>
              用户新增
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.UpdateUser(Credit.UserServices.Dtos.UserInput)">
+            <summary>
+             用户新增
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.UpdateUserPwd(System.Int64,System.String,System.String)">
+            <summary>
+             修改密码
             </summary>
             <param name="input"></param>
             <returns></returns>

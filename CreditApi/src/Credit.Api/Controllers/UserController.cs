@@ -59,7 +59,27 @@ namespace Credit.Api.Controllers
             await _userService.CreateUser(input);
         }
 
-
+        /// <summary>
+        ///  用户新增
+        /// </summary>
+        /// <param name="input"></param>
+        [HttpPost]
+        public async Task<string> UpdateUser([FromBody] UserInput input)
+        {
+            input.Id = CurrentUser.UserId;
+            return await _userService.UpdateUser(input);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oldPwd"></param>
+        /// <param name="newPwd"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<string> UpdateUserPwd([FromBody] ChangePwdInput input)
+        {
+            return await _userService.UpdateUserPwd(CurrentUser.UserId, input.OldPwd, input.NewPwd);
+        }
         /// <summary>
         ///  获取用户信息
         /// </summary>

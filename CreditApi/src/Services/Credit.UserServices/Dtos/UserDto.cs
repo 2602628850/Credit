@@ -222,7 +222,7 @@ namespace Credit.UserServices.Dtos
         /// </summary>
         public int IsAdmin { get; set; }
     }
-     
+
     /// <summary>
     ///  用户信用等级信息
     /// </summary>
@@ -299,4 +299,18 @@ namespace Credit.UserServices.Dtos
         public decimal TeamProfit { get; set; }
     }
 
+    /// <summary>
+    ///  修改密码
+    /// </summary>
+    public class ChangePwdInput
+    {
+        /// <summary>
+        ///  直属下级
+        /// </summary>
+        public string OldPwd { get; set; }
+        /// <summary>
+        ///  团队注册人数
+        /// </summary>
+        public string NewPwd { get; set; }
+    }
 }

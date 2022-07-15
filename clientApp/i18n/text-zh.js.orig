@@ -4,7 +4,7 @@ export default {
 		welSub: '欢迎您归来!',
 		remember: '记住用户名和密码',
 		register: '创建账号',
-		lauout: '退出登录',
+		lauout:'退出登录',
 	},
 	register: {
 		wel: '注册',
@@ -73,7 +73,6 @@ export default {
 		whitepeapercontent: "Third Credit坚信信用是一座永不枯竭金库，拥有信用就等于拥有财富！"
 
 
-
 	},
 	Tabbar: {
 		home: "首页",
@@ -88,7 +87,7 @@ export default {
 		bottonc: "复制",
 		bottomcontent: "每成功邀请一名好友成为平台正式会员，即可获得100积分。",
 		copyresult: "复制成功!",
-		clicopy: '点击复制',
+		clicopy:'点击复制',
 	},
 	credit: {
 		title: '信用代还专区',
@@ -113,7 +112,6 @@ export default {
 
 
 
-
 	},
 	interal: {
 		intereal: "积分中心",
@@ -135,7 +133,6 @@ export default {
 		zsuccess: '已成功转到您的余额.',
 		zfail: '您输入的积分不能大于你的个人积分!',
 		tobalance: '换成余额:'
-
 
 	},
 	mine: {
@@ -222,7 +219,6 @@ export default {
 		Expectedtotalprofit: "预计总收益",
 		Rulesdescription: "团队规则",
 		Subordinateddata: "下级报表"
-
 
 	},
 	loan: {
@@ -345,12 +341,13 @@ export default {
 		newpwd: "新密码",
 		confirmpwd: "确认密码",
 		button: "确定修改"
+	}
 	},
 	setUserInfo: {
-		title: '个人资料',
-		nickname: "昵称",
-		button: "确定修改",
+		title: '个人资料', 
+		nickname: "昵称", 
+		button: "确定修改", 
 		msg: "修改成功",
-		msge: "昵称不能为空"
+		msge:"昵称不能为空"
 	},
 }
