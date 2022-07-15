@@ -1,4 +1,5 @@
 ﻿using Data.Commons.Enums;
+using Data.Commons.Helpers;
 using Data.Commons.Models;
 
 namespace Credit.UserWalletModels;
@@ -42,4 +43,5 @@ public class UserWalletRecord : BaseModel
     ///  变动后余额
     /// </summary>
     public decimal Balance { get; set; }
+    
 }

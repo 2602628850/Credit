@@ -395,6 +395,7 @@ public class UserWalletService : IUserWalletService
            item.OperateUsername = users.FirstOrDefault(s => s.Id == item.OperateUserId)?.Username ?? string.Empty;
            item.OperateTypeText = EnumHelper.GetDescription(item.OperateType);
            item.SourceTypeText = EnumHelper.GetDescription(item.SourceType);
+           item.ChangeTypeText = item.ChangeType == WalletChangeEnums.In ? "+" : "-";
        });
        
        var output = new PagedOutput<UserWalletRecordDto>

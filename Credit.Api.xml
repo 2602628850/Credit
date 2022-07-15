@@ -831,12 +831,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Credit.Api.Controllers.UserController.GetUserMoneyApplyList">
-            <summary>
-              获取当前用户当年的所有提现记录
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Credit.Api.Controllers.UserController.GetRemainingChaka">
             <summary>
               获取当前用户代还申请次数，已还次数，代换收益

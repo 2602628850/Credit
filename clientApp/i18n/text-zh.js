@@ -341,6 +341,5 @@ export default {
 		newpwd: "新密码",
 		confirmpwd: "确认密码",
 		button: "确定修改"
-	},
-
+	}
 }

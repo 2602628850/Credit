@@ -1,4 +1,5 @@
 using Data.Commons.Enums;
+using Data.Commons.Helpers;
 
 namespace Credit.UserWalletServices.Dtos;
 
@@ -58,6 +59,24 @@ public class UserWalletRecordDto : UserWalletRecordInput
     ///  来源
     /// </summary>
     public string SourceTypeText { get; set; } = string.Empty;
+    /// <summary>
+    /// 变动时间
+    /// </summary>
+    public string TodateTime
+    {
+        get
+        {
+            return DateTimeHelper.UnixTimeToDateTime(CreateAt).ToString("yyyy-MM-dd HH:mm");
+        }
+    }
+    /// <summary>
+    ///  改变类型  0 入账  10 出账
+    /// </summary>
+    public WalletChangeEnums ChangeType { get; set; }
+    /// <summary>
+    ///  改变类型  0 入账  10 出账
+    /// </summary>
+    public string ChangeTypeText { get; set; }
 }
 
 /// <summary>
