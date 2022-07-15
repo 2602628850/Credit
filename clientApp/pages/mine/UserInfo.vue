@@ -1,52 +1,19 @@
 <template>
-	<navigation-bar :title="$t('setUp.title')" :show-back="false"></navigation-bar>
-	<app-content-view :show-tab-bar="true" :show-navigation-bar="true" >
-
-
-		<register-input-item :tip="$t('register.country')" style="margin-top: 20px" >
-
-			<template v-slot:default>
-				<view class="flex-row-between" style="position: relative" @click="countryPickerShow">
-					<input disabled :placeholder="$t('register.countryTip')" class="input mgr"
-						v-model="editItem.CountryName" />
-					<view class="text-tip iconfont icon-xiala" style="font-size: 16px"></view>
-
-					<picker style="position: absolute;width: 100%;height: 100%;z-index: 9999;top: 0;left: 0;"
-						:range="countryList" :index="countryIndex" range-key="name" @change="countryChange"></picker>
-				</view>
-			</template>
-		</register-input-item>
-
-		<register-input-item :tip="$t('public.mail')" class="mgt">
+	<navigation-bar :title="$t('setUserInfo.title')"></navigation-bar>
+	<app-content-view :show-tab-bar="true" :show-navigation-bar="true" >  
+		<register-input-item :tip="$t('setUserInfo.nickname')" class="mgt">
 			<template v-slot:img>
 				<view class="input-icon iconfont icon-youxiang"></view>
 			</template>
 			<template v-slot:default>
-				<input :placeholder="$t('public.mailTip')" class="input" v-model="editItem.Username" />
+				<input   class="input" v-model="editItem.nickname" v />
 			</template>
-		</register-input-item>
-		<register-input-item :tip="$t('public.nikename')" class="mgt">
-			<template v-slot:img>
-				<view class="input-icon iconfont icon-youxiang"></view>
-			</template>
-			<template v-slot:default>
-				<input :placeholder="$t('public.nikenameTip')" class="input" v-model="editItem.Nickname" />
-			</template>
-		</register-input-item>
-
-		<register-input-item :tip="$t('register.invCode')" class="mgt">
-			<template v-slot:img>
-				<view class="input-icon iconfont icon-JC_054"></view>
-			</template>
-			<template v-slot:default>
-				<input :placeholder="$t('register.invCodeTip')" class="input" v-model="editItem.InvCode" />
-			</template>
-		</register-input-item>
+		</register-input-item> 
 		<view class="mgt w100 margin-left-right-20 flex-row-start text-small"> 
 			<view class="mgl agree text-primary" ></view>
 		</view>
 		<view class="button-primary margin-left-right-20 flex-row-center" @click="doRegister">
-			{{$t('public.register')}}
+			{{$t('setUserInfo.button')}}
 		</view>
 	</app-content-view>
 </template>
@@ -60,69 +27,46 @@
 			RegisterTopItem
 		},
 		data() {
-			return {
-				countryList: [{
-						name: 'England',
-						code: 'U.K.'
-					},
-					{
-						name: 'United States',
-						code: 'USA'
-					},
-					{
-						name: '中国',
-						code: 'zh'
-					}
-				],
-				countryIndex: 0,
+			return {  
 				editItem: {
-					CountryName: '',
-					countryCode: '',
-					Username: '',
+					Nickname: '',
 				},
-				isAgree: false
-
-
 			}
 		},
-		methods: {
-
-			countryChange(e) {
-				this.countryIndex = e.detail.value;
-				let item = this.countryList[this.countryIndex];
-				this.editItem.countryCode = item.code;
-				this.editItem.CountryName = item.name;
+		mounted() {
+			if (!uni.getStorageSync('token')) {
+				uni.reLaunch({
+					url: '/pages/login/login'
+				})
+			}
+			this.GetUserinfo()
+		},
+		methods: { 
+			showMsg(msg) {
+				uni.showToast({
+					title: msg,
+					duration: 2000,
+				})
 			},
-			doRegister() {
-				if (this.isAgree == false) {
-					this.showMsg(this.$t('registerandlog.gxxy'));
-					return;
-				}
-				if (this.editItem.Username.split(" ").join("").length === 0) {
-					var msg = this.$t('registerandlog.sureuser');
+			GetUserinfo() {
+				var url = "/User/GetUserInfo";
+				this.ApiGet(url).then(res => {
+					this.editItem = res.data
+				})
+			},
+			doRegister() { 
+				if (this.editItem.nickname.split(" ").join("").length === 0) {
+					var msg = this.$t('setUserInfo.msge');
 					this.showMsg(msg)
 					return;
-				}
-				if (this.editItem.Password == null || this.editItem.ConfirmPassword == null || this.editItem
-					.ConfirmPassword == '' || this.editItem.Password == '') {
-					this.showMsg(this.$t('registerandlog.srmm'));
-					return;
-				}
-				if (this.editItem.Password.length < 6) {
-					this.showMsg(this.$t('registerandlog.surepass'));
-					return;
-				}
-				if (this.editItem.Password != this.editItem.ConfirmPassword) {
-					this.showMsg(this.$t('registerandlog.surepass'));
-					return;
-				}
-				var url = "/Account/RegisterAccount";
+				} 
+				var url = "/User/UpdateUser";
 				this.ApiPost(url, this.editItem).then(res => {
-					if (res.data == "register_success") {
-						this.showMsg(this.$t('registerandlog.registersuc'));
+					if (res.data == "success") {
+						this.showMsg(this.$t('setUserInfo.msg'));
 						//注册成功后登录
 						uni.navigateTo({
-							url: '/pages/login/login'
+							url: '/pages/mine/mine'
 						})
 						return;
 					} else {
@@ -130,8 +74,6 @@
 					}
 
 				})
-
-
 
 			}
 		}

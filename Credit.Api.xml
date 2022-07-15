@@ -719,6 +719,20 @@
             </summary>
             <param name="input"></param>
         </member>
+        <member name="M:Credit.Api.Controllers.UserController.UpdateUser(Credit.UserServices.Dtos.UserInput)">
+            <summary>
+             用户新增
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.UpdateUserPwd(Credit.UserServices.Dtos.ChangePwdInput)">
+            <summary>
+            
+            </summary>
+            <param name="oldPwd"></param>
+            <param name="newPwd"></param>
+            <returns></returns>
+        </member>
         <member name="M:Credit.Api.Controllers.UserController.GetUserInfo">
             <summary>
              获取用户信息

@@ -81,7 +81,7 @@ namespace Credit.UserServices
             var invIntegral = 0;
             // 邀请码是否正确
             if (!string.IsNullOrEmpty(input.InvCode))
-            { 
+            {
                 parentUser = await _freeSql.Select<Users>()
                     .Where(s => s.InvCode == input.InvCode)
                     .Where(s => s.IsDeleted == 0)
@@ -107,7 +107,7 @@ namespace Credit.UserServices
             var defaultCredit = await _freeSql.Select<CreditLevel>()
                 .Where(s => s.IsDeleted == 0 && s.CreditValue <= 0)
                 .ToOneAsync();
-            
+
             var userId = IdHelper.GetId();
             var user = new Users
             {
@@ -263,6 +263,21 @@ namespace Credit.UserServices
             await _freeSql.Insert(user).ExecuteAffrowsAsync();
         }
 
+        /// <summary>
+        ///  修改
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<string> UpdateUser(UserInput input)
+        {
+
+            var UserInfo = await _freeSql.Select<Users>()
+                .Where(s => s.Id == input.Id)
+                .ToOneAsync();
+            UserInfo.Nickname = input.Nickname;
+            await _freeSql.Update<Users>().SetSource(UserInfo).ExecuteAffrowsAsync();
+            return "success";
+        }
         /// <summary>
         ///  获取用户信息
         /// </summary>
@@ -744,11 +759,23 @@ namespace Credit.UserServices
             sort += 1;
             foreach (var user in users)
             {
-                var members = await TeamChildMembers(user.Id, teamUsers, maxSort,sort);
+                var members = await TeamChildMembers(user.Id, teamUsers, maxSort, sort);
                 output.AddRange(members);
             }
 
             return output;
+        }
+
+        public async Task<string> UpdateUserPwd(long userId, string oldPwd, string newPwd)
+        {
+            var UserInfo = await _freeSql.Select<Users>()
+                .Where(s => s.Id == userId)
+                .ToOneAsync();
+            if (UserInfo.Password!= oldPwd)
+                return "Old password error";
+            UserInfo.Password = newPwd;
+            await _freeSql.Update<Users>().SetSource(UserInfo).ExecuteAffrowsAsync();
+            return "success";
         }
     }
 }

@@ -6,7 +6,7 @@
 				<view class="input-icon iconfont icon-mima"></view>
 			</template>
 			<template v-slot:default>
-				<input  class="input" v-model="editItem.Username" />
+				<input  class="input" v-model="editItem.oldPwd" />
 			</template>
 		</register-input-item>
 
@@ -15,7 +15,7 @@
 				<view class="input-icon iconfont icon-mima"></view>
 			</template>
 			<template v-slot:default>
-				<input  class="input" v-model="editItem.Password" />
+				<input  class="input" v-model="editItem.newPwd" />
 			</template>
 		</register-input-item>
 
@@ -24,7 +24,7 @@
 				<view class="input-icon iconfont icon-mima"></view>
 			</template>
 			<template v-slot:default>
-				<input class="input" v-model="editItem.ConfirmPassword" />
+				<input class="input" v-model="editItem.ConfirmPwd" />
 			</template>
 		</register-input-item>
 		<view class="mgt w100 margin-left-right-20 flex-row-start text-small">
@@ -45,63 +45,33 @@
 			RegisterTopItem
 		},
 		data() {
-			return {
-				countryList: [{
-						name: 'England',
-						code: 'U.K.'
-					},
-					{
-						name: 'United States',
-						code: 'USA'
-					},
-					{
-						name: '中国',
-						code: 'zh'
-					}
-				],
+			return { 
 				countryIndex: 0,
-				editItem: {
-					CountryName: '',
-					countryCode: '',
-					Username: '',
-				},
-				isAgree: false
-
-
+				editItem: {oldPwd:'',newPwd:'' }, 
 			}
 		},
-		methods: {
-
-			countryChange(e) {
-				this.countryIndex = e.detail.value;
-				let item = this.countryList[this.countryIndex];
-				this.editItem.countryCode = item.code;
-				this.editItem.CountryName = item.name;
+		methods: { 
+			showMsg(msg) {
+				uni.showToast({
+					title: msg,
+					duration: 2000,
+				})
 			},
 			doRegister() {
-				if (this.isAgree == false) {
-					this.showMsg(this.$t('registerandlog.gxxy'));
-					return;
-				}
-				if (this.editItem.Username.split(" ").join("").length === 0) {
-					var msg = this.$t('registerandlog.sureuser');
-					this.showMsg(msg)
-					return;
-				}
-				if (this.editItem.Password == null || this.editItem.ConfirmPassword == null || this.editItem
-					.ConfirmPassword == '' || this.editItem.Password == '') {
+				if (this.editItem.newPwd == null || this.editItem.ConfirmPwd == null || this.editItem
+					.ConfirmPwd == '' || this.editItem.newPwd == '') {
 					this.showMsg(this.$t('registerandlog.srmm'));
 					return;
 				}
-				if (this.editItem.Password.length < 6) {
+				if (this.editItem.newPwd.length < 6) {
 					this.showMsg(this.$t('registerandlog.surepass'));
 					return;
 				}
-				if (this.editItem.Password != this.editItem.ConfirmPassword) {
+				if (this.editItem.newPwd != this.editItem.ConfirmPwd) {
 					this.showMsg(this.$t('registerandlog.surepass'));
 					return;
 				}
-				var url = "/Account/RegisterAccount";
+				var url = "/User/UpdateUserPwd";
 				this.ApiPost(url, this.editItem).then(res => {
 					if (res.data == "register_success") {
 						this.showMsg(this.$t('registerandlog.registersuc'));

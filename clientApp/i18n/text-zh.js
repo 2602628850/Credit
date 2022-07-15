@@ -342,5 +342,12 @@ export default {
 		confirmpwd: "确认密码",
 		button: "确定修改"
 	},
+	setUserInfo: {
+		title: '个人资料', 
+		nickname: "昵称", 
+		button: "确定修改", 
+		msg: "修改成功",
+		msge:"昵称不能为空"
+	},
 
 }

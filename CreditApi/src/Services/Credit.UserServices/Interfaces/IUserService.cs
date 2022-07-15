@@ -37,6 +37,20 @@ namespace Credit.UserServices
         Task CreateUser(UserInput input);
 
         /// <summary>
+        ///  用户新增
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<string> UpdateUser(UserInput input);
+
+        /// <summary>
+        ///  修改密码
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<string> UpdateUserPwd(long userId, string oldPwd, string newPwd);
+
+        /// <summary>
         ///  获取用户信息
         /// </summary>
         /// <param name="userId"></param>
@@ -82,7 +96,7 @@ namespace Credit.UserServices
         /// <param name="userId"></param>
         /// <returns></returns>
         Task<UserProfitDto> GetUserProfitById(long userId);
-        
+
         /// <summary>
         /// 增加用户任务积分
         /// </summary>
