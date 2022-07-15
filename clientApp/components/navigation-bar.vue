@@ -4,7 +4,7 @@
 	<view class="navi flex-row-between" :style="{backgroundColor: barColor,color: titleColor}" style="position: relative;">
 		<view v-if="showBack" class="navi-back-icon mgl iconfont icon-back" @click="goBack"></view>
 		<view style="position: absolute;top: 0;left: 0;width: 100%;z-index: 0;height: 49px;" class="flex-row-center">{{title}}</view>
-	<view style="margin-left: 73%;z-index: 1;font-size: 13px;" @click="Laout">{{$t('login.lauout')}}</view>&nbsp;
+	<!-- <view style="margin-left: 73%;z-index: 1;font-size: 13px;" @click="Laout">{{$t('login.lauout')}}</view>&nbsp; -->
 	</view>
 
 
