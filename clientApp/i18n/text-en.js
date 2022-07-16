@@ -348,5 +348,23 @@ export default {
 	},
 	timestate:{
 		status:'1'
+	},
+	wallet:{
+		title:'My wallet',
+		balance:'Account balance',
+		reachage:'recharge',
+		without:'Withdrawal',
+		detail:'detailed',
+		bank:'bank card',
+		online:'Contact the customer',
+		bindbank:'Bind bank card',
+		contry:'contry',
+		bank:'bank',
+		zhihang:'bank branch',
+		card:'Bank card number',
+		person:'Cardholder',
+		phone:'cell-phone number',
+		submit:'binding',
+		bindsuccess:'Binding successful!'
 	}
 }

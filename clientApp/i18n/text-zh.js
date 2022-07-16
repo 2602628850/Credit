@@ -365,5 +365,23 @@ export default {
 	},
 	timestate:{
 		status:'0'
+	},
+	wallet:{
+		title:'我的钱包',
+		balance:'账户余额',
+		reachage:'充值',
+		without:'提现',
+		detail:'明细',
+		bank:'银行卡',
+		online:'联系客户',
+		bindbank:'绑定银行卡',
+		contry:'国家',
+		bank:'银行',
+		zhihang:'支行名称',
+		card:'银行卡号',
+		person:'持卡人',
+		phone:'手机号',
+		submit:'绑定',
+		bindsuccess:'绑定成功!'
 	}
 }

@@ -1,9 +1,9 @@
 <template>
 	
-		<navigation-bar title="绑定银行卡"></navigation-bar>
+		<navigation-bar :title="$t('wallet.bindbank')"></navigation-bar>
 		<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
 	
-	<register-input-item tip="国家" class="mgt" style="margin-top: 20px;">
+	<register-input-item :tip="$t('wallet.contry')" class="mgt" style="margin-top: 20px;">
 		<template v-slot:img>
 			<view class="input-icon iconfont icon-diqiu"></view>
 		</template>
@@ -19,7 +19,7 @@
 		</template>
 	</register-input-item>
 	
-	<register-input-item tip="银行" class="mgt" style="margin-top: 20px;">
+	<register-input-item :tip="$t('wallet.bank')" class="mgt" style="margin-top: 20px;">
 		<template v-slot:img>
 			<view class="input-icon iconfont icon-qianbao"></view>
 		</template>
@@ -36,7 +36,7 @@
 	</register-input-item>
 	
 	
-	<register-input-item tip="支行名称" class="mgt">
+	<register-input-item :tip="$t('wallet.zhihang')" class="mgt">
 		<template v-slot:img>
 			<view class="input-icon iconfont icon-wodekefu"></view>
 		</template>
@@ -45,7 +45,7 @@
 		</template>
 	</register-input-item>
 	
-	<register-input-item tip="银行卡号" class="mgt">
+	<register-input-item :tip="$t('wallet.card')" class="mgt">
 		<template v-slot:img>
 			<view class="input-icon iconfont icon-yanzheng"></view>
 		</template>
@@ -54,7 +54,7 @@
 		</template>
 	</register-input-item>
 
-<register-input-item tip="持卡人" class="mgt">
+<register-input-item :tip="$t('wallet.person')" class="mgt">
 		<template v-slot:img>
 			<view class="input-icon iconfont icon-geren"></view>
 		</template>
@@ -63,7 +63,7 @@
 		</template>
 	</register-input-item>
 
-<register-input-item tip="手机号码" class="mgt">
+<register-input-item :tip="$t('wallet.phone')" class="mgt">
 		<template v-slot:img>
 			<view class="input-icon iconfont icon-lianxi"></view>
 		</template>
@@ -74,7 +74,7 @@
 
 
 <view class="button-primary margin-left-right-20 flex-row-center" @click="doRegister" style="margin-top: 20px;">
-		提交
+		{{$t('wallet.submit')}}
 	</view>
 	</app-content-view>
 
@@ -133,7 +133,7 @@
 				var url = "/User/BindBankCard";
 				this.ApiPost(url, this.editItem).then(res => {
 					if(res.data=="bind_success"){
-					this.showMsg("绑定成功");
+					this.showMsg(this.$t('wallet.bindsuccess'));
 					//注册成功后跳个人钱包
 					uni.navigateTo({
 						url: '/pages/wallet/index'

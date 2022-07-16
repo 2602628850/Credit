@@ -1,5 +1,5 @@
 <template>
-	<navigation-bar title="我的钱包"></navigation-bar>
+	<navigation-bar :title="$t('wallet.title')"></navigation-bar>
 	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
 
 		<view class="credit-card position-relative" style="margin-top: 10px;width: 95%;margin-left: 2.5%;">
@@ -10,7 +10,7 @@
 				<view class="flex-row justify-between">
 					<view>
 						<text class="text-white " style="font-size: 17px;">
-							<span>账户余额</span></text>
+							<span>{{$t('wallet.balance')}}</span></text>
 					</view>
 
 				</view>
@@ -29,7 +29,7 @@
 								<image style="width:40px;height: 40px;" src="/static/image/static/wallet-recharge.png">
 								</image>
 							</text>
-							<text style="font-size: 13px;margin-left: 5px;">充值</text>
+							<text style="font-size: 13px;margin-left: 5px;">{{$t('wallet.reachage')}}</text>
 						</view>
 					</uni-col>
 					<uni-col :span="5" offset="3">
@@ -38,7 +38,7 @@
 								<image style="width:40px;height: 40px;" src="/static/image/static/wallet-withdraw.png">
 								</image>
 							</text>
-							<text style="font-size: 13px;margin-left: 5px;">提现</text>
+							<text style="font-size: 13px;margin-left: 5px;">{{$t('wallet.without')}}</text>
 						</view>
 					</uni-col>
 					<uni-col :span="5" offset="3">
@@ -47,7 +47,7 @@
 								<image style="width:40px;height: 40px;" src="/static/image/static/wallet-record.png">
 								</image>
 							</text>
-							<text style="font-size: 13px;margin-left: 5px;">明细</text>
+							<text style="font-size: 13px;margin-left: 5px;">{{$t('wallet.detail')}}</text>
 						</view>
 					</uni-col>
 				</uni-row>
@@ -63,7 +63,7 @@
 					</uni-col>
 					<uni-col :span="19">
 						<view style="font-size: 16px; opacity: 1;font-weight: bold;" @click="bindBank()">
-							<text>银行卡</text>
+							<text>{{$t('wallet.bank')}}</text>
 						</view>
 
 					</uni-col>
@@ -78,7 +78,7 @@
 					</uni-col>
 					<uni-col :span="19">
 						<view style="font-size: 16px; opacity: 1;font-weight: bold;">
-							<text>联系客户</text>
+							<text>{{$t('wallet.online')}}</text>
 						</view>
 
 					</uni-col>
