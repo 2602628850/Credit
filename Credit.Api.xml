@@ -770,6 +770,7 @@
             </summary>
             <param name="input"></param>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:Credit.Api.Controllers.UserController.GetBanks" -->
         <member name="M:Credit.Api.Controllers.UserController.DeleteBankCard(Data.Commons.Dtos.IdInput)">
             <summary>
              银行卡删除

@@ -26,26 +26,26 @@ public class UserBankCardService : IUserBankCardService
     /// <param name="input"></param>
     /// <param name="userId"></param>
     /// <returns></returns>
-    public async Task UserBankCardCreate(BindBankCardInput input,long userId)
+    public async Task<string> UserBankCardCreate(BindBankCardInput input,long userId)
     {
         var userAny = await _freeSql.Select<Users>()
             .Where(s => s.IsAdmin == 0 && s.IsDeleted == 0)
             .Where(s => s.Id == userId)
             .AnyAsync();
         if (!userAny)
-            throw new MyException("Please login again");
+           return "Please login again";
         if (string.IsNullOrEmpty(input.CardNo))
-            throw new MyException("Please enter the card number");
+            return "Please enter the card number";
         if (string.IsNullOrEmpty(input.BindUser))
-            throw new MyException("Please enter your real name");
+            return "Please enter your real name";
         var bankAny = await _freeSql.Select<BankInfo>()
             .Where(s => s.IsEnable == 1 && s.IsDeleted == 0 && s.Id == input.BankId)
             .AnyAsync();
         if (!bankAny)
-            throw new MyException("Please select a bank");
+            return "Please select a bank";
         var bankCards = await GetUserBankCardList(userId);
         if (bankCards.Count >= 5)
-            throw new MyException("Up to 5 bank cards can be bound");
+            return "Up to 5 bank cards can be bound";
         var userBankCard = new UserBankCard
         {
             Id = IdHelper.GetId(),
@@ -53,11 +53,25 @@ public class UserBankCardService : IUserBankCardService
             BankBranch = input.BankBranch,
             BindUser = input.BindUser,
             UserId = userId,
-            CardNo = input.CardNo
+            CardNo = input.CardNo,
+            CountryName = input.CountryName,
+            Phone=input.Phone,
         };
         await _freeSql.Insert(userBankCard).ExecuteAffrowsAsync();
+        return "bind_success";
     }
 
+    /// <summary>
+    ///  获取银行
+    /// </summary>
+    /// <returns></returns>
+    public async Task<List<BankInfo>> GetBanks()
+    {
+        List <BankInfo>list= await _freeSql.Select<BankInfo>()
+           .Where(s => s.IsEnable == 1 && s.IsDeleted == 0).ToListAsync();
+        return list;
+         
+    }
     /// <summary>
     ///  接触银行卡绑定
     /// </summary>

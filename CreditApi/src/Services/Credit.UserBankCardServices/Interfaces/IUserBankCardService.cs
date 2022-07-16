@@ -1,3 +1,4 @@
+using Credit.BankModels;
 using Credit.UserBankCardServices.Dtos;
 
 namespace Credit.UserBankCardServices;
@@ -13,7 +14,12 @@ public interface IUserBankCardService
     /// <param name="input"></param>
     /// <param name="userId"></param>
     /// <returns></returns>
-    Task UserBankCardCreate(BindBankCardInput input,long userId);
+    Task<string> UserBankCardCreate(BindBankCardInput input,long userId);
+    /// <summary>
+    ///  获取银行
+    /// </summary>
+    /// <returns></returns>
+    Task<List<BankInfo>>GetBanks();
 
     /// <summary>
     ///   删除银行卡

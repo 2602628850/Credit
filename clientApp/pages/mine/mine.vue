@@ -18,17 +18,17 @@
 		<view class="mine-item-box">
 			<view class="text-small text-grey">{{$t('mine.balance')}}</view>
 			<view class="flex-row-start mgt" style="height: 30px">
-				<view class="text-26 text-primary">{{UserInfo.balance}}</view>
-				<view class="text-primary mgl flex-column-end text-small" style="font-weight: bold;height: 100%">USD
-				</view>
+				<view class="text-26 text-primary">${{UserInfo.balance}}</view>
+				<!-- <view class="text-primary mgl flex-column-end text-small" style="font-weight: bold;height: 100%">
+				</view> -->
 			</view>
-			<view class="text-small text-tip mgt">
+			<!-- <view class="text-small text-tip mgt">
 				≈ 30000 THB
-			</view>
+			</view> -->
 			<view class="flex-row-between" style="margin-top: 20px">
-				<view class="mine-button mine-button-primary text-primary flex-row-center">{{$t('public.recharge')}}
+				<view @click="torecharge()" class="mine-button mine-button-primary text-primary flex-row-center">{{$t('public.recharge')}}
 				</view>
-				<view class="mine-button mine-button-second text-primary flex-row-center">{{$t('public.withdraw')}}
+				<view @click="towithout()" class="mine-button mine-button-second text-primary flex-row-center">{{$t('public.withdraw')}}
 				</view>
 			</view>
 		</view>
@@ -70,7 +70,7 @@
 							title: this.$t('mine.purse'),
 							image: ['iconfont', 'icon-qianbao'],
 							imageColor: '#00875a',
-							url: ''
+							url: '/pages/wallet/index'
 						},
 						{
 							title: this.$t('mine.financial'),
@@ -95,7 +95,7 @@
 						title: this.$t('mine.service'),
 						image: ['iconfont', 'icon-lianxi'],
 						imageColor: '#666666',
-						url: ''
+						url: '/pages/onlinecustomers/index'
 					}]
 				]
 			}
@@ -170,6 +170,17 @@
 			SharedTo(uri) {
 				uni.navigateTo({
 					url: uri
+				})
+			},
+			torecharge() {
+				uni.navigateTo({
+					url: '/pages/recharge/createindex'
+				})
+			},
+			
+			towithout() {
+				uni.navigateTo({
+					url: '/pages/withdraw/createindex'
 				})
 			},
 			getLineStyle(item, index) {

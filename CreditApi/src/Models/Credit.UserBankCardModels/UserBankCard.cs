@@ -28,4 +28,13 @@ public class UserBankCard : BaseModel
     ///  绑定用户名称
     /// </summary>
     public string BindUser { get; set; } = string.Empty;
+    /// <summary>
+    /// 用户手机号
+    /// </summary>
+    public string Phone { get; set; } = string.Empty;
+    /// <summary>
+    /// 国家
+    /// </summary>
+    public string CountryName { get; set; } = string.Empty;
+
 }

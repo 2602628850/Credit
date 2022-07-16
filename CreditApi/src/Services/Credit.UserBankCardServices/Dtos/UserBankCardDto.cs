@@ -46,4 +46,12 @@ public class BindBankCardInput
     ///  绑定用户
     /// </summary>
     public string BindUser { get; set; } = string.Empty;
+    /// <summary>
+    /// 用户手机号
+    /// </summary>
+    public string Phone { get; set; } = string.Empty;
+    /// <summary>
+    /// 国家
+    /// </summary>
+    public string CountryName { get; set; } = string.Empty;
 }

@@ -14,6 +14,7 @@ using Credit.IntegralServices.Dtos;
 using Credit.IntegralServices.Implements;
 using Credit.PayeeBankCardServices;
 using Credit.PayeeBankCardServices.Dtos;
+using Credit.BankModels;
 
 namespace Credit.Api.Controllers
 {
@@ -153,9 +154,18 @@ namespace Credit.Api.Controllers
         /// </summary>
         /// <param name="input"></param>
         [HttpPost]
-        public async Task BindBankCard([FromBody] BindBankCardInput input)
+        public async Task<string> BindBankCard([FromBody] BindBankCardInput input)
         {
-            await _userBankCardService.UserBankCardCreate(input, CurrentUser.UserId);
+           return await _userBankCardService.UserBankCardCreate(input, CurrentUser.UserId);
+        }
+        /// <summary>
+        ///  绑定银行卡
+        /// </summary>
+        /// < name="input"></param>
+        [HttpGet]
+        public async Task<List<BankInfo>> GetBanks()
+        {
+            return await _userBankCardService.GetBanks();
         }
 
         /// <summary>

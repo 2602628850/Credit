@@ -62,7 +62,7 @@
 						</image>
 					</uni-col>
 					<uni-col :span="19">
-						<view style="font-size: 16px; opacity: 1;font-weight: bold;">
+						<view style="font-size: 16px; opacity: 1;font-weight: bold;" @click="bindBank()">
 							<text>银行卡</text>
 						</view>
 
@@ -126,6 +126,11 @@
 			toService(){
 				uni.navigateTo({
 					url: '/pages/onlinecustomers/index'
+				})
+			},
+			bindBank(){
+				uni.navigateTo({
+					url: '/pages/wallet/bingcard'
 				})
 			},
 			GetUser() {
