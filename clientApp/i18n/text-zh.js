@@ -353,4 +353,7 @@ export default {
 		msg: "修改成功",
 		msge: "昵称不能为空"
 	},
+	timestate:{
+		status:'0'
+	}
 }

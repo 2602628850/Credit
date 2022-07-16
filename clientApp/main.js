@@ -10,7 +10,9 @@ import * as langUtil from "/common/js/Utils/LangUtil"
 
 // 多语言
 
-import {createI18n} from "vue-i18n"
+import {
+	createI18n
+} from "vue-i18n"
 
 import zh from '/i18n/text-zh'
 import en from '/i18n/text-en'
@@ -18,12 +20,12 @@ import tabBar from '@/components/bottomhand.vue'
 import NavigationBar from "@/components/navigation-bar.vue";
 import AppContentView from "@/components/app-content-view.vue";
 const i18n = createI18n({
-    globalInjection: true,
-    locale: langUtil.getLang() || "en",
-    messages: {
-        zh: zh,
-        en: en,
-    },
+	globalInjection: true,
+	locale: langUtil.getLang() || "en",
+	messages: {
+		zh: zh,
+		en: en,
+	},
 })
 
 // #ifndef VUE3
@@ -35,7 +37,7 @@ Vue.config.productionTip = false
 
 App.mpType = 'app'
 const app = new Vue({
-    ...App
+	...App
 })
 
 // #ifndef H5
@@ -47,42 +49,53 @@ app.$mount(); //为了兼容小程序及app端必须这样写才有效果
 // #ifdef VUE3
 
 
-import {createSSRApp} from 'vue'
 import {
-		get,
-		post
-	} from '@/common/js/API/Query.js'
+	createSSRApp
+} from 'vue'
+import {
+	get,
+	post
+} from '@/common/js/API/Query.js'
+
+import {
+	formatDate,
+	formatDateCh,
+} from '@/common/js/Utils/todate.js'
 export function createApp() {
-    const app = createSSRApp(App)
+	const app = createSSRApp(App)
 
-    app.config.globalProperties.$windowHeight = uni.getSystemInfoSync().windowHeight;
-    app.config.globalProperties.$windowWidth = uni.getSystemInfoSync().windowWidth > 906 ? 500 : uni.getSystemInfoSync().windowWidth;
-    app.config.globalProperties.$screenHeight = uni.getSystemInfoSync().screenHeight;
-    app.config.globalProperties.$screenWidth = uni.getSystemInfoSync().screenWidth > 960 ? 500 : uni.getSystemInfoSync().screenWidth;
-    app.config.globalProperties.$statusBarHeight = uni.getSystemInfoSync().statusBarHeight;
-    app.config.globalProperties.$safeTop = uni.getSystemInfoSync().safeAreaInsets.top;
-    app.config.globalProperties.$safeBottom = uni.getSystemInfoSync().safeAreaInsets.bottom;
-    app.config.globalProperties.$pixelRatio = uni.getSystemInfoSync().windowWidth / 750;
-    // 多语言
-    app.config.globalProperties.$i18n = i18n;
-    // API
-    app.config.globalProperties.$Api = API;
-    // 工具
-    app.config.globalProperties.$StoreUtil = storeUtil;
-    app.config.globalProperties.$Const = constUtil;
-    app.config.globalProperties.$LangUtil = langUtil;
+	app.config.globalProperties.$windowHeight = uni.getSystemInfoSync().windowHeight;
+	app.config.globalProperties.$windowWidth = uni.getSystemInfoSync().windowWidth > 906 ? 500 : uni.getSystemInfoSync()
+		.windowWidth;
+	app.config.globalProperties.$screenHeight = uni.getSystemInfoSync().screenHeight;
+	app.config.globalProperties.$screenWidth = uni.getSystemInfoSync().screenWidth > 960 ? 500 : uni.getSystemInfoSync()
+		.screenWidth;
+	app.config.globalProperties.$statusBarHeight = uni.getSystemInfoSync().statusBarHeight;
+	app.config.globalProperties.$safeTop = uni.getSystemInfoSync().safeAreaInsets.top;
+	app.config.globalProperties.$safeBottom = uni.getSystemInfoSync().safeAreaInsets.bottom;
+	app.config.globalProperties.$pixelRatio = uni.getSystemInfoSync().windowWidth / 750;
+	// 多语言
+	app.config.globalProperties.$i18n = i18n;
+	// API
+	app.config.globalProperties.$Api = API;
+	// 工具
+	app.config.globalProperties.$StoreUtil = storeUtil;
+	app.config.globalProperties.$Const = constUtil;
+	app.config.globalProperties.$LangUtil = langUtil;
+	app.config.globalProperties.formatDate = formatDate;
+	app.config.globalProperties.formatDateCh = formatDateCh;
 
-    app.use(ElementPlus)
-    app.use(i18n)
+	app.use(ElementPlus)
+	app.use(i18n)
 	app.component('tabBar', tabBar)
 	//将顶部导航栏注册到main里面，就不用在每个页面在单独去注册引用了,页面就可以直接调用了
 	app.component('NavigationBar', NavigationBar)
 	app.component('AppContentView', AppContentView)
-    app.config.globalProperties.ApiPost = post;
-    app.config.globalProperties.ApiGet = get;
-    return {
-        app
-    }
+	app.config.globalProperties.ApiPost = post;
+	app.config.globalProperties.ApiGet = get;
+	return {
+		app
+	}
 }
 
 
