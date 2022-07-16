@@ -354,6 +354,7 @@ export default {
 		msg: "修改成功",
 		msge: "昵称不能为空"
 	},
+<<<<<<< HEAD
 	bills: {
 		title: '财务报表',
 		RechargeRecord: "充值记录",
@@ -363,7 +364,9 @@ export default {
 		ChaKaRecord:'查卡记录',
 		OrderRecord:'订单中心'
 	},
+=======
 	timestate:{
 		status:'0'
 	}
+>>>>>>> 5e8b8ded597a2f1d888cb8f3d56c1dce00bc31d1
 }
