@@ -336,6 +336,7 @@ export default {
 		UserName: "登录账号",
 		InviteCode: "邀请码",
 		UserInfo: "个人资料",
+		language: "语言切换",
 		ChangePassword: "修改密码",
 		LoginOut: "退出登录"
 	},
@@ -352,5 +353,14 @@ export default {
 		button: "确定修改",
 		msg: "修改成功",
 		msge: "昵称不能为空"
+	},
+	bills: {
+		title: '财务报表',
+		RechargeRecord: "充值记录",
+		WithdrawalRecord: "提现记录",
+		CapitalChangeRecord: "资金变动记录",
+		IntegralRecord: "积分记录",
+		ChaKaRecord:'查卡记录',
+		OrderRecord:'订单中心'
 	},
 }

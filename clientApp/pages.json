@@ -314,6 +314,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/bills/bills",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",

@@ -243,6 +243,7 @@ export default {
 		UserName: "UserName",
 		InviteCode: "Invitation code",
 		UserInfo: "Personal information",
+		language:'Change language',
 		ChangePassword: "Change password",
 		LoginOut: "Logout"
 	},
@@ -252,6 +253,13 @@ export default {
 		newpwd: "New password",
 		confirmpwd: "Confirm password",
 		button: "Confirm password"
+	},
+	setUserInfo: {
+		title: 'personal data', 
+		nickname: "nickname", 
+		button: "Submit", 
+		msg: "Successfully modified",
+		msge:"Nickname cannot be empty"
 	},
     semloan: {
         title: ' SME Loans ',		

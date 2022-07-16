@@ -6,7 +6,7 @@
 			<image class="mine-header-img" :src="UserInfo.headImage" @click="goInfo"></image>
 			<view class="flex-column-center mgr mgl" style="flex: 1;align-items: flex-start">
 				<view>{{UserInfo.username}}</view>
-				<view class="flex-row-start text-grey">
+				<view class="flex-row-start text-grey" v-on:click="copyUrl()">
 					<view>{{UserInfo.invCode}}</view>
 					<image class="mine-inv-img mgl" :src="'/static/Icons/mine/v1.png'"></image>
 				</view>
@@ -76,7 +76,7 @@
 							title: this.$t('mine.financial'),
 							image: ['iconfont', 'icon-caiwubaobiao'],
 							imageColor: '#00875a',
-							url: ''
+							url: '/pages/bills/bills'
 						},
 						{
 							title: this.$t('mine.setUp'),
@@ -109,6 +109,48 @@
 			this.GetUserinfo()
 		},
 		methods: {
+			copyUrl() {
+				let content =this.UserInfo.invCode;
+				content = typeof content === 'string' ? content : content.toString()
+				//#ifndef H5
+				uni.setClipboardData({
+					data: content,
+					success: function() {
+						uni.showToast({
+							title: this.$t('share.copyresult'),
+							duration:2000
+						});
+					},
+					fail:function(){
+						uni.showToast({
+							title: '复制失败,请重新尝试!',
+							icon:"none",
+							duration:2000
+						});
+					}
+				});
+				//#endif
+			
+				// #ifdef H5
+				if(!document.queryCommandSupported('copy')){
+					error('浏览器不支持')
+				}
+				let textarea = document.createElement("textarea")
+				textarea.value = content
+				textarea.readOnly = "readOnly"
+				document.body.appendChild(textarea)
+				textarea.select() // 选择对象
+				textarea.setSelectionRange(0, content.length) //核心
+				let result = document.execCommand("copy") // 执行浏览器复制命令
+				if(result){
+					uni.showToast({
+						title: this.$t('share.copyresult'),
+						duration:2000
+					});
+				}	
+				textarea.remove()
+				// #endif
+			},
 			goInfo() {
 				uni.navigateTo({
 					url: '/pages/mine/change-info'

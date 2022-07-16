@@ -393,14 +393,15 @@ namespace Credit.UserServices
             }
             decimal TeamEstimateRepaymentRevenue = 0;
             decimal TeamEstimatePurchaseRevenue = 0;
+            decimal bfb = 1 / 100;
             if (user.TeamLevel != 0)
             {
                 //用户团队等级
                 var UserTeamLevel = await _freeSql.Select<TeamLevel>()
                     .Where(s => s.Id == user.TeamLevel)
                     .ToOneAsync();
-                TeamEstimateRepaymentRevenue = UserTeamLevel.TeamRepayRate * TeamRepaymentCount / 100;
-                TeamEstimatePurchaseRevenue = UserTeamLevel.TeamRepayRate * TeamSemCount / 100;
+                TeamEstimateRepaymentRevenue = UserTeamLevel.TeamRepayRate * TeamRepaymentCount * bfb;
+                TeamEstimatePurchaseRevenue = UserTeamLevel.TeamRepayRate * TeamSemCount * bfb;
             }
             var TotalRevenue = TeamEstimatePurchaseRevenue + TeamEstimatePurchaseRevenue;
             var output = new UserProfitDto
@@ -454,14 +455,16 @@ namespace Credit.UserServices
 
             decimal TeamEstimateRepaymentRevenue = 0;
             decimal TeamEstimatePurchaseRevenue = 0;
+
+            decimal bfb = 1 / 100;
             if (user.TeamLevel != 0)
             {
                 //用户团队等级
                 var UserTeamLevel = await _freeSql.Select<TeamLevel>()
                     .Where(s => s.Id == user.TeamLevel)
                     .ToOneAsync();
-                TeamEstimateRepaymentRevenue = UserTeamLevel.TeamRepayRate * TeamRepaymentCount / 100;
-                TeamEstimatePurchaseRevenue = UserTeamLevel.TeamRepayRate * TeamSemCount / 100;
+                TeamEstimateRepaymentRevenue = UserTeamLevel.TeamRepayRate * TeamRepaymentCount * bfb;
+                TeamEstimatePurchaseRevenue = UserTeamLevel.TeamRepayRate * TeamSemCount * bfb;
             }
 
 
@@ -771,7 +774,7 @@ namespace Credit.UserServices
             var UserInfo = await _freeSql.Select<Users>()
                 .Where(s => s.Id == userId)
                 .ToOneAsync();
-            if (UserInfo.Password!= oldPwd)
+            if (UserInfo.Password != oldPwd)
                 return "Old password error";
             UserInfo.Password = newPwd;
             await _freeSql.Update<Users>().SetSource(UserInfo).ExecuteAffrowsAsync();

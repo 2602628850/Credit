@@ -1,50 +1,57 @@
 <template>
 	<!--我的-->
-	<navigation-bar :title="$t('setUp.title')"></navigation-bar>
-	<app-content-view :show-tab-bar="true" :show-navigation-bar="true">
-		<view class="mine-item-box">
-			<view style="border-bottom: 1px solid rgb(241, 241, 241)" class="mine-cell-item flex-row-between">
-				<view style="flex: 1" class="flex-row-start mgr">
-					<view class="mgl text-color">{{$t('setUp.UserName')}}</view>
-				</view>
-				<view>{{UserInfo.username}}</view>
-			</view>
-			<view style="border-bottom: 1px solid rgb(241, 241, 241)" class="mine-cell-item flex-row-between">
-				<view style="flex: 1" class="flex-row-start mgr">
-					<view class="mgl text-color">{{$t('setUp.InviteCode')}}</view>
-				</view>
-				<view class="right">{{UserInfo.invCode}}</view>
-			</view>
-		</view>
+	<navigation-bar :title="$t('bills.title')"></navigation-bar>
+	<app-content-view :show-tab-bar="true" :show-navigation-bar="true"> 
 		<view class="mine-item-box">
 			<view @click="SharedTo('/pages/mine/UserInfo')" style="border-bottom: 1px solid rgb(241, 241, 241)"
 				class="mine-cell-item flex-row-between">
 				<view style="flex: 1" class="flex-row-start mgr">
-					<view class="mgl text-color">{{$t('setUp.UserInfo')}}</view>
+					<view class="mgl text-color">{{$t('bills.RechargeRecord')}}</view>
 				</view>
 				<view class="mine-cell-img text-tip iconfont icon-right"></view>
 			</view>
 			<view @click="SharedTo('/pages/mine/changePwd')" style="border-bottom: 1px solid rgb(241, 241, 241)"
 				class="mine-cell-item flex-row-between">
 				<view style="flex: 1" class="flex-row-start mgr">
-					<view class="mgl text-color">{{$t('setUp.ChangePassword')}}</view>
+					<view class="mgl text-color">{{$t('bills.WithdrawalRecord')}}</view>
+				</view>
+				<view class="mine-cell-img text-tip iconfont icon-right"></view>
+			</view>
+			<view @click="SharedTo('/pages/statistic/moneychangerecord')" style="border-bottom: 1px solid rgb(241, 241, 241)"
+				class="mine-cell-item flex-row-between">
+				<view style="flex: 1" class="flex-row-start mgr">
+					<view class="mgl text-color">{{$t('bills.CapitalChangeRecord')}}</view>
+				</view>
+				<view class="mine-cell-img text-tip iconfont icon-right"></view>
+			</view>
+			<view @click="SharedTo('/pages/integral/currentintegral')" style="border-bottom: 1px solid rgb(241, 241, 241)"
+				class="mine-cell-item flex-row-between">
+				<view style="flex: 1" class="flex-row-start mgr">
+					<view class="mgl text-color">{{$t('bills.IntegralRecord')}}</view>
 				</view>
 				<view class="mine-cell-img text-tip iconfont icon-right"></view>
 			</view>
 		</view>
 		<view class="mine-item-box">
-			<view @click="changeLang()" style="border-bottom: 1px solid rgb(241, 241, 241)" class="mine-cell-item flex-row-between">
+			<view @click="SharedTo('/pages/mine/UserInfo')" style="border-bottom: 1px solid rgb(241, 241, 241)"
+				class="mine-cell-item flex-row-between">
 				<view style="flex: 1" class="flex-row-start mgr">
-					<view class="mgl text-color">{{$t('setUp.language')}}</view>
+					<view class="mgl text-color">{{$t('bills.ChaKaRecord')}}</view>
 				</view>
-				<view>{{language}}</view>
 				<view class="mine-cell-img text-tip iconfont icon-right"></view>
-			</view>
+			</view> 
+		</view>
+		<view class="mine-item-box">
+			<view @click="SharedTo('/pages/order/createindex')" style="border-bottom: 1px solid rgb(241, 241, 241)"
+				class="mine-cell-item flex-row-between">
+				<view style="flex: 1" class="flex-row-start mgr">
+					<view class="mgl text-color">{{$t('bills.OrderRecord')}}</view>
+				</view>
+				<view class="mine-cell-img text-tip iconfont icon-right"></view>
+			</view> 
 		</view>
 
 	</app-content-view>
-	<button @click="quitLogin()" type="primary"
-		style="background-color:#fce1e1;color: red;">{{$t('setUp.LoginOut')}}</button>
 </template>
 
 <script>
@@ -59,9 +66,7 @@
 			NavigationBar
 		},
 		data() {
-			return {
-				UserInfo: {},
-				language:"English"
+			return { 
 			}
 		},
 		mounted() {
@@ -69,36 +74,13 @@
 				uni.reLaunch({
 					url: '/pages/login/login'
 				})
-			}
-			this.GetUserinfo()
+			} 
 		},
-		methods: {
-			goInfo() {
-				uni.navigateTo({
-					url: '/pages/mine/change-info'
-				})
-			},
-			goLevel() {
-				uni.navigateTo({
-					url: '/pages/mine/level'
-				})
-			},
-			GetUserinfo() {
-				var url = "/User/GetUserInfo";
-				this.ApiGet(url).then(res => {
-					this.UserInfo = res.data
-				})
-			},
+		methods: { 
 			SharedTo(uri) {
 				uni.navigateTo({
 					url: uri
 				})
-			},
-			quitLogin() {
-				// location.reload()
-				localStorage.clear()
-				window.sessionStorage.clear()
-				this.$router.push('/pages/login/login')
 			},
 			getLineStyle(item, index) {
 				if (item.length == 1) {
@@ -111,23 +93,6 @@
 					borderBottomStyle: 'solid',
 					borderBottomWidth: '1px',
 					borderBottomColor: '#f1f1f1'
-				}
-			},
-			changeLang() {
-				let oldLang = this.$StoreUtil.get('lang');
-				if (!oldLang) {
-					oldLang = 'en';
-					this.language="中文";
-				}
-
-				if (oldLang == 'en') {
-					this.$i18n.locale = 'zh';
-					this.language="English";
-					this.$StoreUtil.set('lang', 'zh');
-				} else {
-					this.$i18n.locale = 'en';
-					this.language="中文";
-					this.$StoreUtil.set('lang', 'en');
 				}
 			}
 		}
