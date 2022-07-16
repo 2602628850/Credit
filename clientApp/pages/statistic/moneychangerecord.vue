@@ -16,16 +16,17 @@
 							</view>
 							<view style="font-size: 8px"><span>{{ $t('monchange.banlance') }}:$ {{item.balance}}</span>
 							</view>
-							<view style="font-size: 8px"><span>{{item.todateTime }}</span></view>
+							<view style="font-size: 8px" v-if=" $t('timestate.status')=='1'"><span>{{this.formatDate(parseFloat(item.createAt)) }}</span></view>
+							<view style="font-size: 8px" v-if=" $t('timestate.status')=='0'"><span>{{this.formatDateCh(parseFloat(item.createAt)) }}</span></view>
 							<view style="margin-top:10px;text-align: right;margin-top: -15%;">
-                                
+
 								<text class="g-icons">{{item.changeTypeText}}${{item.amount}}</text>
 							</view>
 							<view style="margin-top: 20px;">&nbsp;</view>
 						</uni-col>
-						
+
 					</uni-row>
-					
+
 				</uni-card>
 
 			</view>
@@ -42,10 +43,13 @@
 				intereal: this.$t('monchange.jebd'),
 				totime: '',
 				MoneyApplyData: [],
-				param:{PageIndex:0,PageSize:10000},
+				param: {
+					PageIndex: 0,
+					PageSize: 10000
+				},
 			}
 		},
-        onLoad(){
+		onLoad() {
 			if (!uni.getStorageSync('token')) {
 				uni.reLaunch({
 					url: '/pages/login/login'
@@ -54,14 +58,15 @@
 			this.GetData()
 		},
 		mounted() {
-			
+
 		},
 		methods: {
-
+			
 			GetData() {
 				var url = "/User/GetUserWalletRecordPagedList";
-				this.ApiGet(url,this.param).then(res => {
+				this.ApiGet(url, this.param).then(res => {
 					this.MoneyApplyData = res.data.items
+					
 				})
 			}
 		},
@@ -72,46 +77,3 @@
 <style>
 
 </style>
-
-
-
-
-<!-- if (this.$t('monchange.sj') == "0") {
-this.totime = this.formatDateCh(1527488790000) //中文时间
-
-} else {
-this.totime = this.formatDate(1527488790000) //英文时间
-}
-//将毫秒的时间转换成美式英语的时间格式,eg:3rd May 2018
-formatDate(millinSeconds) {
-var date = new Date(millinSeconds);
-var monthArr = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Spt", "Oct", "Nov",
-"Dec");
-var suffix = new Array("st", "nd", "rd", "th");
-
-var year = date.getFullYear(); //年
-var month = monthArr[date.getMonth()]; //月
-var ddate = date.getDate(); //日
-
-if (ddate % 10 < 1 || ddate % 10> 3) {
-	ddate = ddate + suffix[3];
-	} else if (ddate % 10 == 1) {
-	ddate = ddate + suffix[0];
-	} else if (ddate % 10 == 2) {
-	ddate = ddate + suffix[1];
-	} else {
-	ddate = ddate + suffix[2];
-	}
-	var dt = date.getHours() + " : " + date.getMinutes();
-	return ddate + " " + month + " " + year + " " + dt;
-	},
-	formatDateCh(millinSeconds) {
-	var date = new Date(millinSeconds);
-	var year = date.getFullYear(); //年
-	var month = date.getMonth(); //月
-	var ddate = date.getDate(); //日
-	var sh = date.getHours(); //时
-	var mi = date.getMinutes();
-	return year + "-" + month + " " + ddate + " " + sh + ":" + mi;
-	},
- -->

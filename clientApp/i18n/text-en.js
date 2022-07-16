@@ -345,5 +345,8 @@ export default {
 		inputval:'Please enter the number of copies to purchase!',
 		buysuc:'Purchase successful!',
 		
+	},
+	timestate:{
+		status:'1'
 	}
 }

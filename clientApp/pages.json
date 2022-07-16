@@ -313,6 +313,13 @@
                 "navigationBarTitleText": ""
             }
             
+        },{
+            "path" : "pages/wallet/bingcard",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": ""
+            }
+            
         }
         ,{
             "path" : "pages/bills/bills",
