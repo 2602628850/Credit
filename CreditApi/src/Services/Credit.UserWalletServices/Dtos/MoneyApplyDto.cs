@@ -152,26 +152,6 @@ public class MoneyApplyDto : UserMoneyApplyInput
     ///  申请时间
     /// </summary>
     public long CreateAt { get; set; }
-    /// <summary>
-    /// 申请时间
-    /// </summary>
-    public string TodateTime
-    {
-        get
-        {
-            return DateTimeHelper.UnixTimeToDateTime(CreateAt).ToString("yyyy-MM-dd HH:mm");
-        }
-    }
-    /// <summary>
-    /// 审核时间
-    /// </summary>
-    public string ToAuditAt
-    {
-        get
-        {
-            return DateTimeHelper.UnixTimeToDateTime(AuditAt).ToString("yyyy-MM-dd HH:mm");
-        }
-    }
 
     /// <summary>
     ///  三方接口

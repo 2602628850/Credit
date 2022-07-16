@@ -216,6 +216,8 @@ public class RepayService : IRepayService
             .ToOneAsync();
         if (level == null)
             throw new MyException("Please select another level");
+        if (input.Amount < level.MinRepayAmount || input.Amount > level.MaxRepayAmount)
+            throw new MyException($"Repayment amount {level.MinRepayAmount} - {level.MaxRepayAmount}.");
         if (string.IsNullOrEmpty(input.CardNo))
             throw new MyException("Please enter the card number");
         if (string.IsNullOrEmpty(input.BindUser))

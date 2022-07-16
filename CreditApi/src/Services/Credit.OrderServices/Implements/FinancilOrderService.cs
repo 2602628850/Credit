@@ -95,7 +95,7 @@ public class FinancilOrderService : IFinancilOrderService
             TotalAmount = amount,
             Cycle = product.Cycle,
             BuyDate = today,
-            Status = AuditStatusEnums.Ing,
+            Status = AuditStatusEnums.Default,
             SettledCount = 0,
             IsSold = 0,
             SoldStatus = null,

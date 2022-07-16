@@ -88,7 +88,7 @@ public class UserWalletService : IUserWalletService
                 var moneyApply = input.MapTo<UserMoneyApply>();
                 moneyApply.Id = IdHelper.GetId();
                 moneyApply.PayText = payText;
-                moneyApply.AuditStatus = AuditStatusEnums.Ing;
+                moneyApply.AuditStatus = AuditStatusEnums.Default;
                 moneyApply.ChangeType = WalletChangeEnums.In;
                 moneyApply.UserId = userId;
                 moneyApply.AuditText = "用户充值";
@@ -348,7 +348,8 @@ public class UserWalletService : IUserWalletService
            Amount = input.Amount,
            ChangeType = changeType,
            OperationType = input.OperateType,
-           OperateUserId = input.OperateUserId
+           OperateUserId = input.OperateUserId,
+           Balance = user.Balance
        };
        _freeSql.Transaction(() =>
        {
@@ -632,6 +633,7 @@ public class UserWalletService : IUserWalletService
         }
         return userMoneyApply;
     }
+    
     /// <summary>
     /// 获取今日剩余查卡次数
     /// </summary>
