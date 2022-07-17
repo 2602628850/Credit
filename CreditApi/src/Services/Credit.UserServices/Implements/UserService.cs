@@ -400,7 +400,7 @@ namespace Credit.UserServices
                     .Where(s => s.Id == user.TeamLevel)
                     .ToOneAsync();
                 TeamEstimateRepaymentRevenue = UserTeamLevel.TeamRepayRate * TeamRepaymentCount * 0.01m;
-                TeamEstimatePurchaseRevenue = UserTeamLevel.TeamRepayRate * TeamSemCount * .0.01m;
+                TeamEstimatePurchaseRevenue = UserTeamLevel.TeamRepayRate * TeamSemCount * 0.01m;
             }
             var TotalRevenue = TeamEstimatePurchaseRevenue + TeamEstimatePurchaseRevenue;
             var output = new UserProfitDto
