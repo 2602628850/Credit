@@ -393,15 +393,14 @@ namespace Credit.UserServices
             }
             decimal TeamEstimateRepaymentRevenue = 0;
             decimal TeamEstimatePurchaseRevenue = 0;
-            decimal bfb = 1 / 100;
             if (user.TeamLevel != 0)
             {
                 //用户团队等级
                 var UserTeamLevel = await _freeSql.Select<TeamLevel>()
                     .Where(s => s.Id == user.TeamLevel)
                     .ToOneAsync();
-                TeamEstimateRepaymentRevenue = UserTeamLevel.TeamRepayRate * TeamRepaymentCount * bfb;
-                TeamEstimatePurchaseRevenue = UserTeamLevel.TeamRepayRate * TeamSemCount * bfb;
+                TeamEstimateRepaymentRevenue = UserTeamLevel.TeamRepayRate * TeamRepaymentCount * 0.01m;
+                TeamEstimatePurchaseRevenue = UserTeamLevel.TeamRepayRate * TeamSemCount * .0.01m;
             }
             var TotalRevenue = TeamEstimatePurchaseRevenue + TeamEstimatePurchaseRevenue;
             var output = new UserProfitDto
@@ -454,17 +453,15 @@ namespace Credit.UserServices
 
 
             decimal TeamEstimateRepaymentRevenue = 0;
-            decimal TeamEstimatePurchaseRevenue = 0;
-
-            decimal bfb = 1 / 100;
+            decimal TeamEstimatePurchaseRevenue = 0; 
             if (user.TeamLevel != 0)
             {
                 //用户团队等级
                 var UserTeamLevel = await _freeSql.Select<TeamLevel>()
                     .Where(s => s.Id == user.TeamLevel)
                     .ToOneAsync();
-                TeamEstimateRepaymentRevenue = UserTeamLevel.TeamRepayRate * TeamRepaymentCount * bfb;
-                TeamEstimatePurchaseRevenue = UserTeamLevel.TeamRepayRate * TeamSemCount * bfb;
+                TeamEstimateRepaymentRevenue = UserTeamLevel.TeamRepayRate * TeamRepaymentCount * 0.01m;
+                TeamEstimatePurchaseRevenue = UserTeamLevel.TeamRepayRate * TeamSemCount * 0.01m;
             }
 
 
