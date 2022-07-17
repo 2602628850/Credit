@@ -1,11 +1,11 @@
 <template>
    <div class="top"></div>
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item  label="用户：" prop="Username">
-            <el-input v-model="ruleForm.Username" autocomplete="off"></el-input>
+        <el-form-item  label="用户：" prop="Username"   class="left435Per">
+            <el-input v-model="ruleForm.Username" autocomplete="off" style="width:200px;"></el-input>
         </el-form-item>
-        <el-form-item label="密码：" prop="Password">
-            <el-input type="password" v-model="ruleForm.Password" autocomplete="off"></el-input>
+        <el-form-item label="密码：" prop="Password"  class="left435Per">
+            <el-input type="password" v-model="ruleForm.Password" autocomplete="off"  style="width:200px;"></el-input>
         </el-form-item>
         <el-form-item class="left40Per">
             <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
@@ -80,6 +80,9 @@
  <style>
   .left40Per{
        margin-left: 40%;
+    }
+     .left435Per{
+       margin-left: 38%;
     }
   .top{
       margin-top: 13%;
