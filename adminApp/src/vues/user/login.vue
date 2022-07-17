@@ -1,17 +1,19 @@
 <template>
-   <div class="top"></div>
-    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item  label="用户：" prop="Username"   class="left435Per">
-            <el-input v-model="ruleForm.Username" autocomplete="off" style="width:200px;"></el-input>
+  <div class="main">
+    <div class="title">用户登录系统</div>
+    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px">
+        <el-form-item  label="用户：" prop="Username" class="fontsize" >
+            <el-input v-model="ruleForm.Username" autocomplete="off" placeholder="请输入用户名" ></el-input>
         </el-form-item>
-        <el-form-item label="密码：" prop="Password"  class="left435Per">
-            <el-input type="password" v-model="ruleForm.Password" autocomplete="off"  style="width:200px;"></el-input>
+        <el-form-item label="密码：" prop="Password" >
+            <el-input type="password" v-model="ruleForm.Password" autocomplete="off"  placeholder="请输入密码" ></el-input>
         </el-form-item>
-        <el-form-item class="left40Per">
+        <el-form-item >
             <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
             <el-button type="primary"  @click="register()">注册</el-button>
         </el-form-item>
     </el-form>
+    </div>
 </template>
  
 <script>
@@ -78,14 +80,19 @@
     }
 </script>
  <style>
-  .left40Per{
-       margin-left: 40%;
-    }
-     .left435Per{
-       margin-left: 38%;
-    }
-  .top{
-      margin-top: 13%;
-  }
-  
+  .main{
+  width: 290px!important;
+  margin-left: 40%;
+  margin-top: 10%;
+
+}
+.title{
+  font-size: 26px;
+  font-weight: bold;
+  color: #353b42;
+  margin: 25px 0;
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+
  </style>

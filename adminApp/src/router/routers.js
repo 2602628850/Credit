@@ -2,7 +2,7 @@ import {createRouter,createWebHashHistory} from 'vue-router'
 //-------路由加载都采用赖加载,避免首页加载页面过多出现卡顿,测试
 //  const App =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/demo/demorouter/demo.vue')
  const App2 =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/demo/demorouter/demoto.vue')
- const App3 =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/demo/demoaxios/demo.vue')
+ const App3 =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/demo/demorouter/demo.vue')
 //-------路由加载都采用赖加载,避免首页加载页面过多出现卡顿，测试
 const IndexPath =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/creditindex/index.vue')
 const LoginPath =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/user/login.vue')
@@ -13,11 +13,15 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes:[
     { path: '', redirect:"/indexPath" },
-    { path: '/indexPath', component: IndexPath },
-  //--测试
-   { path: '/vuedemoto', component: App2,name:"toapp2" },
-   { path: '/axioxdemo', component: App3,name:"toapp3"  },
-   //--测试
+    {
+       path: '/indexPath', component: IndexPath,
+       children:[
+        {path:'',redirect:"/indexPath/axioxdemo"},
+        {path:'axioxdemo',component:App3,name:"toapp3"},
+        {path:'vuedemoto',component:App2,name:"toapp2"}
+      
+       ]
+    },
    { path: '/login', component: LoginPath,name:"LoginPath"  },
    { path: '/register', component: RegisterPath,name:"RegisterPath"  },
    { path: '/register', component: UserAgreementPath,name:"UserAgreementPath"  },

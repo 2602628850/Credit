@@ -27,19 +27,21 @@
             <span>{{item.authName}}</span>
           </template>
           <!-- 二级菜单 -->
-          <el-menu-item :index="subItem.id+''" v-for="subItem in item.children" :key="subItem.id">
+          <el-menu-item :index="subItem.id+''"  v-for="subItem in item.children" :key="subItem.id">
           <template #title>
            <el-icon>
                  <component :is="subItem.ico"></component>
            </el-icon>
-            <span>{{subItem.authName}}</span>
+            <span @click="goToPage(subItem.pathName) "  style="cursor:pointer;">{{subItem.authName}}</span>
           </template>
           </el-menu-item>
         </el-sub-menu>
       </el-menu>
       </el-aside>
       <!-- 右侧内容主体区域 -->
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+        </el-main>
     </el-container>
   </el-container>
 </template>
@@ -68,17 +70,23 @@ export default {
   },
   methods: {
     logout () {
-      window.sessionStorage.clear()
+       this.appls.set('Access-Token','')
       this.$router.push('/login')
+    },
+    //跳转页面
+     goToPage(pathName) {
+      this.$router.push({
+        name:pathName
+      });
     },
     // 获取所有的菜单数据
    getMenuList () {
       var data=[
-        {id:1,authName:"菜单第一个",ico:"ChatDotSquare",children:[
-          {id:51,authName:"32级菜单",ico:"Calendar"}, {id:52,authName:"31级菜单",ico:"DataAnalysis"}, {id:53,authName:"33级菜单",ico:"Discount"}
+        {id:1,authName:"一级菜单一",ico:"ChatDotSquare",children:[
+          {id:51,authName:"子集一",ico:"Calendar",pathName:"toapp2"}, {id:52,authName:"子集二",ico:"DataAnalysis",pathName:"toapp3"}, {id:53,authName:"子集三",ico:"Discount",pathName:"toapp2"}
         ]},
-         {id:2,authName:"菜单第二个",ico:"Box",children:[
-          {id:61,authName:"32级菜单",ico:"Coordinate"}, {id:62,authName:"31级菜单",ico:"CreditCard"}, {id:63,authName:"33级菜单",ico:"Fold"}
+         {id:2,authName:"一级菜单二",ico:"Box",children:[
+          {id:61,authName:"子集四",ico:"Coordinate",pathName:"toapp3"}, {id:62,authName:"子集五",ico:"CreditCard",pathName:"toapp2"}, {id:63,authName:"子集六",ico:"Fold",pathName:"toapp3"}
         ]}
       ]
       this.menulist = data
@@ -123,9 +131,9 @@ export default {
     border-right: none;
   }
 }
-.el-main {
-  background-color: #e9edf1;
-}
+// .el-main {
+//   background-color: #e9edf1;
+// }
 .iconfont{
   margin-right: 10px;
 }

@@ -1,6 +1,9 @@
 <template>
 <el-button type="primary">Primary</el-button>
 <h1>axios</h1>
+<span>
+  首页
+</span>
 </template>
 <script>
 export default {
