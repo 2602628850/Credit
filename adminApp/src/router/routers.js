@@ -18,7 +18,12 @@ const router = createRouter({
             children: [
                 {path: '', redirect: "/indexPath/axioxdemo"},
                 {path: 'axioxdemo', component: App3, name: "toapp3"},
-                {path: 'vuedemoto', component: App2, name: "toapp2"}
+                {path: 'vuedemoto', component: App2, name: "toapp2"},
+                {
+                    path: '/credit',
+                    component: IndexPath,
+                    name: 'credit'
+                }
 
             ]
         },

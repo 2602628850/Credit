@@ -20,7 +20,7 @@
         <el-sub-menu :index="item.id+''" v-for="item in menulist" :key="item.id">
           <!-- 一级菜单模板区域 -->
           <template #title>
-            
+
            <el-icon>
                  <component :is="item.ico"></component>
            </el-icon>
