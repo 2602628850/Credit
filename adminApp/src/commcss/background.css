@@ -1,0 +1,86 @@
+/*搜索条件单个宽度*/
+.search-input {
+    width: 280px;
+}
+/*搜索条件2个宽度*/
+.search-more {
+    width: 568px;
+}
+/*table上方统计*/
+.total {
+    padding: 8px;
+    background-color: #3177be;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px #3177be;
+}
+/*添加数据窗口标题*/
+.in-title {
+    width: 150px;
+    text-align: right;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+/*添加数据内容宽度*/
+.in-input {
+    width: 250px;
+}
+/*顶部间距*/
+.mgt {
+    margin-top: 8px;
+}
+/*左侧间距*/
+.mgl {
+    margin-left: 8px;
+}
+/*右侧间距*/
+.mgr {
+    margin-right: 8px;
+}
+/*底部间距*/
+.mgb {
+    margin-bottom: 8px;
+}
+/*宽度100%*/
+.w100 {
+    width: 100%;
+}
+.h100 {
+    height: 100%;
+}
+/*单页插入数据*/
+.input-style {
+    width: 500px;
+    margin: 8px;
+}
+.input-style-title {
+    width: 120px;
+    text-align: right;
+}
+.input-style-content {
+    width: 372px;
+}
+
+.can-touch {
+    color: blue;
+}
+
+.line {
+    height: 1px;
+    border-bottom-width: 1px;
+    border-bottom-color: #cccccc;
+    border-bottom-style: solid;
+}
+
+.tip {
+    white-space:pre-wrap;
+    font-size: small;
+    color: #7d7d7f;
+}
+.redTip {
+    font-size: large;
+    color: red;
+}

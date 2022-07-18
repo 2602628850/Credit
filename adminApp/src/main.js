@@ -5,6 +5,7 @@ import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import Axios from  './commjs/axios.js'
 import vueis from "./commjs/vueis.js"
+import * as icons from '@element-plus/icons-vue'
 import Qs from 'qs'
 const app=createApp(App);
 //挂在vue-Is
@@ -21,4 +22,7 @@ app.use(Axios)
 app.config.globalProperties.$Http = Axios.Axios
 //格式化参数
 app.config.globalProperties.Qs = Qs
+Object.keys(icons).forEach(key => {
+  app.component(key, icons[key])
+})
 app.mount('#app')

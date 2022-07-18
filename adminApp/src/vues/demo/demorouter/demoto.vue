@@ -1,6 +1,7 @@
 <template>
 <!--<router-link :to="`/axioxdemo`" >测试axios</router-link>-->
-<router-link :to="{ name: 'toapp3' }" >测试axios</router-link>
+<!-- <router-link :to="{ name: 'toapp3' }" >测试axios</router-link> -->
+<h1>已经跳转到另一个页面</h1>
 </template>
 <script>
 export default {
