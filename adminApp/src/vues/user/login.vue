@@ -58,7 +58,7 @@
 				this.$refs[formName].validate((valid) => {
 					if (valid) {
 						//开始提交登录
-						this.$Http.post('/Account/UserLogin', this.ruleForm)
+						this.$Http.post('/Account/AdminUserLogin', this.ruleForm)
 							.then(res => {
 								var result = res.data
 								var token = result.data.token
