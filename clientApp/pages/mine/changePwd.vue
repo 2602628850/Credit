@@ -6,7 +6,7 @@
 				<view class="input-icon iconfont icon-mima"></view>
 			</template>
 			<template v-slot:default>
-				<input  class="input" v-model="editItem.oldPwd" />
+				<input  class="input" v-model="editItem.oldPwd" type="password"  />
 			</template>
 		</register-input-item>
 
@@ -15,7 +15,7 @@
 				<view class="input-icon iconfont icon-mima"></view>
 			</template>
 			<template v-slot:default>
-				<input  class="input" v-model="editItem.newPwd" />
+				<input  class="input" v-model="editItem.newPwd" type="password"  />
 			</template>
 		</register-input-item>
 
@@ -24,7 +24,7 @@
 				<view class="input-icon iconfont icon-mima"></view>
 			</template>
 			<template v-slot:default>
-				<input class="input" v-model="editItem.ConfirmPwd" />
+				<input class="input" v-model="editItem.ConfirmPwd" type="password" />
 			</template>
 		</register-input-item>
 		<view class="mgt w100 margin-left-right-20 flex-row-start text-small">

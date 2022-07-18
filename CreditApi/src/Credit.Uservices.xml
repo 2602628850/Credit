@@ -134,6 +134,11 @@
              昵称
             </summary>
         </member>
+        <member name="P:Credit.UserServices.Dtos.UserInput.HeadImage">
+            <summary>
+             昵称
+            </summary>
+        </member>
         <member name="T:Credit.UserServices.Dtos.UserDto">
             <summary>
              用户信息
@@ -591,7 +596,7 @@
         </member>
         <member name="M:Credit.UserServices.IUserService.UpdateUser(Credit.UserServices.Dtos.UserInput)">
             <summary>
-             用户新增
+             修改个人资料
             </summary>
             <param name="input"></param>
             <returns></returns>

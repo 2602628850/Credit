@@ -97,7 +97,7 @@ public class CreditLevelService : ICreditLevelService
             throw new MyException("Data error");
 
         var userCount = await _freeSql.Select<Users>()
-            .Where(s => s.Level == levelId)
+            .Where(s => s.Level == deleteUserId)
             .Where(s => s.IsDeleted == 0)
             .CountAsync();
         if (userCount > 0)

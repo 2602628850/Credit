@@ -123,6 +123,10 @@ namespace Credit.UserServices.Dtos
         ///  昵称
         /// </summary>
         public string Nickname { get; set; } = string.Empty;
+        /// <summary>
+        ///  昵称
+        /// </summary>
+        public string HeadImage { get; set; } = string.Empty;
     }
 
     /// <summary>

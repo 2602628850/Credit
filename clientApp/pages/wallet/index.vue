@@ -115,12 +115,12 @@
 			},
 			withOut() {
 				uni.navigateTo({
-					url: '/pages/withdraw/createindex'
+					url: '/pages/statistic/WithdrawalRecord'
 				})
 			},
 			recharge() {
 				uni.navigateTo({
-					url: '/pages/recharge/createindex'
+					url: '/pages/statistic/RechargeRecord'
 				})
 			},
 			toService(){

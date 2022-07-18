@@ -1,6 +1,6 @@
 <template>
 	<view class="pagebackground">
-		<navigation-bar :title="intereal"></navigation-bar>
+		<navigation-bar :title="$t('RechargeRecord.title')"></navigation-bar>
 		<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
 
 
@@ -39,8 +39,7 @@
 <script>
 	export default {
 		data() {
-			return {
-				intereal: this.$t('monchange.jebd'),
+			return { 
 				totime: '',
 				MoneyApplyData: [],
 				param: {
@@ -63,7 +62,7 @@
 		methods: {
 			
 			GetData() {
-				var url = "/User/GetUserWalletRecordPagedList";
+				var url = "/User/GetUserRechargePagedList";
 				this.ApiGet(url, this.param).then(res => {
 					this.MoneyApplyData = res.data.items
 				})

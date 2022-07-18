@@ -67,11 +67,11 @@ namespace Data.Core.Controllers
         {
             base.OnActionExecuting(context);
 
-            if (string.IsNullOrWhiteSpace(Token))
-                throw new LoginException("login expired");
+            //if (string.IsNullOrWhiteSpace(Token))
+            //    throw new LoginException("login expired");
 
-            if (CurrentUser == null)
-                throw new LoginException("login expired");
+            //if (CurrentUser == null)
+            //    throw new LoginException("login expired");
         }
     }
 
