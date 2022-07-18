@@ -10,7 +10,7 @@ const RegisterPath = () => import (/* webpackChunkName: "pageFirst" */ './../vue
 const UserAgreementPath = () => import (/* webpackChunkName: "pageFirst" */ './../vues/user/useragreement.vue')
 
 // 信用等级
-const UserLeavelPath = () => import (/* webpackChunkName: "pageFirst" */ './../vues/creditLevel/credit-level-manager.vue')
+const UserLeavelPath = () => import (/* webpackChunkName: "UserLeavelContent" */ './../vues/creditLevel/credit-level-manager.vue')
 
 //创建路由, hash 模式。
 const router = createRouter({
