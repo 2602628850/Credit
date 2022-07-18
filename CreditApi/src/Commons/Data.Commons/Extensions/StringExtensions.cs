@@ -1,4 +1,5 @@
 using System.Text;
+using System.Web.WebPages;
 
 namespace Data.Commons.Extensions;
 
@@ -26,6 +27,28 @@ public static class StringExtensions
 
         return noText.ToString();
     }
+    
+    /// <summary>
+    /// 合并URL
+    /// </summary>
+    /// <param name="val"></param>
+    /// <param name="append"></param>
+    /// <returns></returns>
+    public static string UriCombine(this string val, string append)
+    {
+        if (val.IsEmpty())
+        {
+            return append;
+        }
+
+        if (append.IsEmpty())
+        {
+            return val;
+        }
+
+        return val.TrimEnd('/') + "/" + append.TrimStart('/');
+    }
+    
     /// <summary>
     ///  卡号显示
     /// </summary>

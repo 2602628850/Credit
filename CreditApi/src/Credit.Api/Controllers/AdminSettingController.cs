@@ -44,4 +44,24 @@ public class AdminSettingController : BaseAdminController
     {
         await _settingService.SetSetting(taskIntegral);
     }
+
+    /// <summary>
+    ///  获取阿里巴巴服务设置
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public async Task<AlibabaCloudSetting> GetAlibabaCloudSetting()
+    {
+        return await _settingService.GetSetting<AlibabaCloudSetting>();
+    }
+
+    /// <summary>
+    ///  阿里巴巴服务设置
+    /// </summary>
+    /// <param name="alibabaCloud"></param>
+    [HttpPost]
+    public async Task AlibabaCloudSetting([FromBody]AlibabaCloudSetting alibabaCloud)
+    {
+        await _settingService.SetSetting(alibabaCloud);
+    }
 }
