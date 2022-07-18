@@ -9,9 +9,9 @@
       <el-button type="info" @click="logout">退出</el-button>
     </el-header>
     <!-- 页面主体区域 -->
-    <el-container>
+    <el-container style="height: calc(100% - 60px)">
       <!-- 侧边栏 -->
-      <el-aside width="200px" :style="{ 'height':fullHeight}">
+      <el-aside width="200px">
         <!-- 侧边栏菜单区域 -->
         <el-menu active-text-color="#409Eff"
         background-color="#545c64"
