@@ -87,7 +87,11 @@ export default {
         ]},
          {id:2,authName:"一级菜单二",ico:"Box",children:[
           {id:61,authName:"子集四",ico:"Coordinate",pathName:"toapp3"}, {id:62,authName:"子集五",ico:"CreditCard",pathName:"toapp2"}, {id:63,authName:"子集六",ico:"Fold",pathName:"toapp3"}
-        ]}
+        ]},
+         {id:3,authName:"信用等级",ico:"Box",children:[
+          {id:64,authName:"信用等级管理",ico:"Coordinate",pathName:"UserLeavel"}
+        ]},
+        
       ]
       this.menulist = data
     }

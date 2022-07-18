@@ -8,6 +8,10 @@ const IndexPath = () => import (/* webpackChunkName: "pageFirst" */ './../vues/c
 const LoginPath = () => import (/* webpackChunkName: "pageFirst" */ './../vues/user/login.vue')
 const RegisterPath = () => import (/* webpackChunkName: "pageFirst" */ './../vues/user/register.vue')
 const UserAgreementPath = () => import (/* webpackChunkName: "pageFirst" */ './../vues/user/useragreement.vue')
+
+// 信用等级
+const UserLeavelPath = () => import (/* webpackChunkName: "pageFirst" */ './../vues/creditLevel/credit-level-manager.vue')
+
 //创建路由, hash 模式。
 const router = createRouter({
     history: createWebHashHistory(),
@@ -19,11 +23,8 @@ const router = createRouter({
                 {path: '', redirect: "/indexPath/axioxdemo"},
                 {path: 'axioxdemo', component: App3, name: "toapp3"},
                 {path: 'vuedemoto', component: App2, name: "toapp2"},
-                {
-                    path: '/credit',
-                    component: IndexPath,
-                    name: 'credit'
-                }
+                {path: '/credit',component: IndexPath,name: 'credit' },
+                {path: 'UserLeavel', component: UserLeavelPath, name: "UserLeavel"},
 
             ]
         },
