@@ -725,7 +725,7 @@
             
             </summary>
         </member>
-        <member name="M:Credit.Api.Controllers.UploadController.Upload(Microsoft.AspNetCore.Http.IFormFile)">
+        <member name="M:Credit.Api.Controllers.UploadController.Image(Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
              图片上传
             </summary>

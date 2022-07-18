@@ -124,6 +124,11 @@
             邀请码
             </summary>
         </member>
+        <member name="P:Credit.UserServices.Dtos.RegisterUserInput.IsAdmin">
+            <summary>
+             是否管理员
+            </summary>
+        </member>
         <member name="P:Credit.UserServices.Dtos.UserInput.Id">
             <summary>
             
