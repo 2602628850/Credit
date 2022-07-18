@@ -123,6 +123,7 @@ namespace Credit.UserServices
                 TeamLevel = 0,
                 CreditValue = 0,
                 Level = defaultCredit?.Id ?? 0, //信用等级
+                IsAdmin = input.IsAdmin,
             };
 
             //事务开始

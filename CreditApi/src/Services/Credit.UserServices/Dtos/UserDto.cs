@@ -109,6 +109,10 @@ namespace Credit.UserServices.Dtos
         /// 邀请码
         /// </summary>
         public string InvCode { get; set; } = string.Empty;
+        /// <summary>
+        ///  是否管理员
+        /// </summary>
+        public int IsAdmin { get; set; }
 
     }
 
