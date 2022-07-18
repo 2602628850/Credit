@@ -119,7 +119,7 @@ namespace Credit.UserServices
                 Code = input.Code,
                 InvCode = invCode,
                 ParentId = parentUserId,
-                RootParentId = rootParentId == 0 ? userId : rootParentId,
+                RootParentId = rootParentId == 0 ? rootParentId : userId,
                 TeamLevel = 0,
                 CreditValue = 0,
                 Level = defaultCredit?.Id ?? 0, //信用等级
@@ -275,6 +275,7 @@ namespace Credit.UserServices
                 .Where(s => s.Id == input.Id)
                 .ToOneAsync();
             UserInfo.Nickname = input.Nickname;
+            UserInfo.HeadImage = input.HeadImage;
             await _freeSql.Update<Users>().SetSource(UserInfo).ExecuteAffrowsAsync();
             return "success";
         }
@@ -327,10 +328,10 @@ namespace Credit.UserServices
                     .Where(s => s.Id == userId)
                     .ToOneAsync();
             var DirectCount = await _freeSql.Select<Users>()
-                    .Where(s => s.ParentId == user.Id && s.IsTeamUser == 1)
+                    .Where(s => s.ParentId == user.Id && s.IsTeamUser == 1 && s.Id != userId)
                     .ToListAsync();
             var TeamUserCount = await _freeSql.Select<Users>()
-                    .Where(s => s.RootParentId == user.RootParentId && s.IsTeamUser == 1 && s.RootParentId != 0)
+                    .Where(s => s.RootParentId == user.RootParentId && s.IsTeamUser == 1 && s.RootParentId != 0 && s.Id != userId)
                     .ToListAsync();
             var output = new UserTeamDto
             {
@@ -424,11 +425,11 @@ namespace Credit.UserServices
                     .ToOneAsync();
             //团队注册人数
             var TeamRegisterCount = await _freeSql.Select<Users>()
-                    .Where(s => s.RootParentId == user.RootParentId && s.RootParentId != 0)
+                    .Where(s => s.RootParentId == user.RootParentId && s.RootParentId != 0 && s.Id != userId)
                     .ToListAsync();
             //成为团员的人数
             var TeamMemberCount = await _freeSql.Select<Users>()
-                    .Where(s => s.RootParentId == user.RootParentId && s.IsTeamUser == 1 && s.RootParentId != 0)
+                    .Where(s => s.RootParentId == user.RootParentId && s.IsTeamUser == 1 && s.RootParentId != 0 && s.Id != userId)
                     .ToListAsync();
 
             //团队代还总金额
@@ -453,7 +454,7 @@ namespace Credit.UserServices
 
 
             decimal TeamEstimateRepaymentRevenue = 0;
-            decimal TeamEstimatePurchaseRevenue = 0; 
+            decimal TeamEstimatePurchaseRevenue = 0;
             if (user.TeamLevel != 0)
             {
                 //用户团队等级

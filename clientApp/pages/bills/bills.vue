@@ -3,14 +3,14 @@
 	<navigation-bar :title="$t('bills.title')"></navigation-bar>
 	<app-content-view :show-tab-bar="true" :show-navigation-bar="true"> 
 		<view class="mine-item-box">
-			<view @click="SharedTo( )" style="border-bottom: 1px solid rgb(241, 241, 241)"
+			<view @click="SharedTo('/pages/statistic/RechargeRecord')" style="border-bottom: 1px solid rgb(241, 241, 241)"
 				class="mine-cell-item flex-row-between">
 				<view style="flex: 1" class="flex-row-start mgr">
 					<view class="mgl text-color">{{$t('bills.RechargeRecord')}}</view>
 				</view>
 				<view class="mine-cell-img text-tip iconfont icon-right"></view>
 			</view>
-			<view @click="SharedTo( )" style="border-bottom: 1px solid rgb(241, 241, 241)"
+			<view @click="SharedTo('/pages/statistic/WithdrawalRecord')" style="border-bottom: 1px solid rgb(241, 241, 241)"
 				class="mine-cell-item flex-row-between">
 				<view style="flex: 1" class="flex-row-start mgr">
 					<view class="mgl text-color">{{$t('bills.WithdrawalRecord')}}</view>
@@ -42,7 +42,7 @@
 			</view> 
 		</view>
 		<view class="mine-item-box">
-			<view @click="SharedTo('/pages/order/createindex')" style="border-bottom: 1px solid rgb(241, 241, 241)"
+			<view @click="SharedTo('/pages/integral/inteorder')" style="border-bottom: 1px solid rgb(241, 241, 241)"
 				class="mine-cell-item flex-row-between">
 				<view style="flex: 1" class="flex-row-start mgr">
 					<view class="mgl text-color">{{$t('bills.OrderRecord')}}</view>

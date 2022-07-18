@@ -39,7 +39,10 @@ export default{
           // })
 
         }
-        return response
+        if (!response.data.success) {
+            return Promise.reject(response)
+        }
+          return response
        },err)
 
     

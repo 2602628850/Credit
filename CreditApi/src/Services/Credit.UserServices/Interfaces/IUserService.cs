@@ -37,7 +37,7 @@ namespace Credit.UserServices
         Task CreateUser(UserInput input);
 
         /// <summary>
-        ///  用户新增
+        ///  修改个人资料
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

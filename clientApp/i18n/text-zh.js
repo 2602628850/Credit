@@ -361,10 +361,16 @@ export default {
 		CapitalChangeRecord: "资金变动记录",
 		IntegralRecord: "积分记录",
 		ChaKaRecord:'查卡记录',
-		OrderRecord:'订单中心'
+		OrderRecord:'积分订单'
 	},
 	timestate:{
 		status:'0'
+	},
+	RechargeRecord:{
+		title: '充值记录',
+	},
+	WithdrawalRecord:{
+		title: '提现记录',
 	},
 	wallet:{
 		title:'我的钱包',

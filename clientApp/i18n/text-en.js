@@ -346,8 +346,23 @@ export default {
 		buysuc:'Purchase successful!',
 		
 	},
+	bills: {
+		title: 'Financial Statement ',
+		RechargeRecord: "Recharge Record",
+		WithdrawalRecord: "Withdrawal Record",
+		CapitalChangeRecord: "Capital Change Record",
+		IntegralRecord: "Integral Record",
+		ChaKaRecord:'Check card record',
+		OrderRecord:'Points order'
+	},
 	timestate:{
 		status:'1'
+	},
+	RechargeRecord:{
+		title: 'Recharge Record',
+	},
+	WithdrawalRecord:{
+		title: 'Withdrawal Record',
 	},
 	wallet:{
 		title:'My wallet',

@@ -36,7 +36,7 @@
 			<input :placeholder="$t('public.nikenameTip')" class="input" v-model="editItem.Nickname" />
 		</template>
 	</register-input-item>
- 
+
 	<register-input-item :tip="$t('register.invCode')" class="mgt">
 		<template v-slot:img>
 			<view class="input-icon iconfont icon-JC_054"></view>
@@ -51,7 +51,7 @@
 			<view class="input-icon iconfont icon-mima"></view>
 		</template>
 		<template v-slot:default>
-			<input :placeholder="$t('public.pwdTip')" class="input" v-model="editItem.Password" />
+			<input :placeholder="$t('public.pwdTip')" type="password" class="input" v-model="editItem.Password" />
 		</template>
 	</register-input-item>
 
@@ -60,7 +60,7 @@
 			<view class="input-icon iconfont icon-mima"></view>
 		</template>
 		<template v-slot:default>
-			<input :placeholder="$t('register.rePwdTip')" class="input" v-model="editItem.ConfirmPassword" />
+			<input :placeholder="$t('register.rePwdTip')"  type="password" class="input" v-model="editItem.ConfirmPassword" />
 		</template>
 	</register-input-item>
 
@@ -110,10 +110,14 @@
 				editItem: {
 					CountryName: '',
 					countryCode: '',
-					Username:'',
+					Username: '',
+					InvCode: '',
 				},
 				isAgree: false
 			}
+		},
+		mounted() {
+			this.editItem.InvCode = this.$route.query.invCode;
 		},
 		methods: {
 			countryChange(e) {
@@ -144,8 +148,8 @@
 					this.showMsg(this.$t('registerandlog.gxxy'));
 					return;
 				}
-				if(this.editItem.Username.split(" ").join("").length === 0){
-					var msg=this.$t('registerandlog.sureuser');
+				if (this.editItem.Username.split(" ").join("").length === 0) {
+					var msg = this.$t('registerandlog.sureuser');
 					this.showMsg(msg)
 					return;
 				}
@@ -154,7 +158,7 @@
 					this.showMsg(this.$t('registerandlog.srmm'));
 					return;
 				}
-				if(this.editItem.Password.length<6){
+				if (this.editItem.Password.length < 6) {
 					this.showMsg(this.$t('registerandlog.surepass'));
 					return;
 				}
@@ -164,17 +168,17 @@
 				}
 				var url = "/Account/RegisterAccount";
 				this.ApiPost(url, this.editItem).then(res => {
-					if(res.data=="register_success"){
-					this.showMsg(this.$t('registerandlog.registersuc'));
-					//注册成功后登录
-					uni.navigateTo({
-						url: '/pages/login/login'
-					})
-					return;
-					}else{
+					if (res.data == "register_success") {
+						this.showMsg(this.$t('registerandlog.registersuc'));
+						//注册成功后登录
+						uni.navigateTo({
+							url: '/pages/login/login'
+						})
+						return;
+					} else {
 						this.showMsg(res.data);
 					}
-					
+
 				})
 
 

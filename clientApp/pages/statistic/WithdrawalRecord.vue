@@ -1,9 +1,7 @@
 <template>
 	<view class="pagebackground">
-		<navigation-bar :title="intereal"></navigation-bar>
+		<navigation-bar :title="$t('WithdrawalRecord.title')"></navigation-bar>
 		<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
-
-
 			<view style="margin-top: 20px;">
 				<uni-card class="box-card" style="padding: 0;">
 					<uni-row :gutter="20" style="height: 50px;margin-top: 3%;" v-for="item in MoneyApplyData">
@@ -16,8 +14,12 @@
 							</view>
 							<view style="font-size: 8px"><span>{{ $t('monchange.banlance') }}:$ {{item.balance}}</span>
 							</view>
-							<view style="font-size: 8px" v-if=" $t('timestate.status')=='1'"><span>{{this.formatDate(parseFloat(item.createAt)) }}</span></view>
-							<view style="font-size: 8px" v-if=" $t('timestate.status')=='0'"><span>{{this.formatDateCh(parseFloat(item.createAt)) }}</span></view>
+							<view style="font-size: 8px" v-if=" $t('timestate.status')=='1'">
+								<span>{{this.formatDate(parseFloat(item.createAt)) }}</span>
+							</view>
+							<view style="font-size: 8px" v-if=" $t('timestate.status')=='0'">
+								<span>{{this.formatDateCh(parseFloat(item.createAt)) }}</span>
+							</view>
 							<view style="margin-top:10px;text-align: right;margin-top: -15%;">
 
 								<text class="g-icons">{{item.changeTypeText}}${{item.amount}}</text>
@@ -40,7 +42,6 @@
 	export default {
 		data() {
 			return {
-				intereal: this.$t('monchange.jebd'),
 				totime: '',
 				MoneyApplyData: [],
 				param: {
@@ -61,9 +62,9 @@
 
 		},
 		methods: {
-			
+
 			GetData() {
-				var url = "/User/GetUserWalletRecordPagedList";
+				var url = "/User/GetUserWithdrawalPagedList";
 				this.ApiGet(url, this.param).then(res => {
 					this.MoneyApplyData = res.data.items
 				})

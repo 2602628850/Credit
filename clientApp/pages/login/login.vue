@@ -18,7 +18,7 @@
 			<view class="input-icon iconfont icon-mima"></view>
 		</template>
 		<template v-slot:default>
-			<input :placeholder="$t('public.pwdTip')" class="input" v-model="editItem.Password" />
+			<input :placeholder="$t('public.pwdTip')" type="password"  class="input" v-model="editItem.Password" />
 		</template>
 	</register-input-item>
 

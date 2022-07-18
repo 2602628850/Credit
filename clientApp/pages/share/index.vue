@@ -31,7 +31,7 @@
 	export default {
 		data() {
 			return {
-				copyurl: "http://h5.credit.ceshi-api.com/"
+				copyurl: "http://h5.credit.ceshi-api.com/#/pages/register/index?invCode="
 			}
 		},
 		mounted() {
@@ -40,8 +40,16 @@
 				url:'/pages/login/login'
 			})
 			}
+			this.GetUserinfo()
 		},
 		methods: {
+			GetUserinfo() {
+				var url = "/User/GetUserInfo";
+				this.ApiGet(url).then(res => { 
+					this.copyurl =this.copyurl+ res.data.invCode
+					
+				})
+			},
 			copyUrl() {
 				let content =this.copyurl;
 				content = typeof content === 'string' ? content : content.toString()
