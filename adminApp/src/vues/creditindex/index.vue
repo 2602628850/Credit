@@ -9,18 +9,26 @@
       <el-button type="info" @click="logout">退出</el-button>
     </el-header>
     <!-- 页面主体区域 -->
-    <el-container>
+    <el-container style="height: calc(100% - 60px)">
       <!-- 侧边栏 -->
-      <el-aside width="200px" :style="{ 'height':fullHeight}">
+      <el-aside width="200px">
         <!-- 侧边栏菜单区域 -->
         <el-menu active-text-color="#409Eff"
         background-color="#545c64"
-        text-color="#fff" unique-opened>
+        text-color="#fff" unique-opened >
         <!-- 一级菜单 -->
-        <el-sub-menu :index="item.id+''" v-for="item in menulist" :key="item.id">
+        <view v-for="item in menulist" :key="item.id">
+           <el-menu-item :index="item.id+''" v-if="!item.children||item.children.length<=0">
+          <template #title>
+           <el-icon>
+                 <component :is="item.ico"></component>
+           </el-icon>
+            <span @click="goToPage(item.pathName) "  style="cursor:pointer;">{{item.authName}}</span>
+          </template>
+          </el-menu-item>
+          <el-sub-menu  :index="item.id+''" v-if="item.children&&item.children.length>0">
           <!-- 一级菜单模板区域 -->
           <template #title>
-
            <el-icon>
                  <component :is="item.ico"></component>
            </el-icon>
@@ -36,6 +44,10 @@
           </template>
           </el-menu-item>
         </el-sub-menu>
+        </view>
+
+
+
       </el-menu>
       </el-aside>
       <!-- 右侧内容主体区域 -->
@@ -55,14 +67,6 @@ export default {
        fullHeight: document.documentElement.clientHeight+"px",
       // 左侧菜单数据对象
       menulist: [],
-      // 字体图标对象
-      iconsObj: {
-        125: 'iconfont icon-users',
-        103: 'iconfont icon-tijikongjian',
-        101: 'iconfont icon-shangpin',
-        102: 'iconfont icon-danju',
-        145: 'iconfont icon-baobiao'
-      }
     }
   },
   created () {
@@ -88,9 +92,7 @@ export default {
          {id:2,authName:"一级菜单二",ico:"Box",children:[
           {id:61,authName:"子集四",ico:"Coordinate",pathName:"toapp3"}, {id:62,authName:"子集五",ico:"CreditCard",pathName:"toapp2"}, {id:63,authName:"子集六",ico:"Fold",pathName:"toapp3"}
         ]},
-         {id:3,authName:"信用等级",ico:"Box",children:[
-          {id:64,authName:"信用等级管理",ico:"Coordinate",pathName:"UserLeavel"}
-        ]},
+          {id:3,authName:"信用等级管理",ico:"Box",pathName:"UserLeavel",children:[]},
         
       ]
       this.menulist = data
@@ -141,5 +143,7 @@ export default {
 .iconfont{
   margin-right: 10px;
 }
+
+
 </style>
 
