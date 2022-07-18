@@ -26,6 +26,10 @@ app.use(ElementPlus)
 //注册全局的axios,其它地方都通过this.$Http来取Axios对象
 app.use(Axios)
 app.config.globalProperties.$Http = Axios.Axios
+
+import Query from '/src/commjs/quest.js'
+app.config.globalProperties.$Query = Query;
+
 //格式化参数
 app.config.globalProperties.Qs = Qs
 Object.keys(icons).forEach(key => {
