@@ -19,6 +19,7 @@ export default{
         if(token){
         //后期会把下面代码放出来
         //config.headers.Authorization =token;
+        config.headers.Token=token;
         }
           return config;
       },err);

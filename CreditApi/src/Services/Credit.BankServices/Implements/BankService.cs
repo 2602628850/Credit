@@ -93,7 +93,8 @@ public class BankService : IBankService
         bank.IsDeleted = 1;
         bank.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         bank.DeleteUserId = deleteUserId;
-        await _freeSql.Update<BankInfo>(bank).ExecuteAffrowsAsync();
+        await _freeSql.Update<BankInfo>().SetSource(bank).ExecuteAffrowsAsync();
+        //await _freeSql.Update<BankInfo>(bank).ExecuteAffrowsAsync();
     }
 
     /// <summary>

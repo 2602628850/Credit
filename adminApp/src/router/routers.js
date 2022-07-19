@@ -11,6 +11,8 @@ const UserAgreementPath = () => import (/* webpackChunkName: "pageFirst" */ './.
 
 // 信用等级
 const UserLeavelPath = () => import (/* webpackChunkName: "UserLeavelContent" */ './../vues/creditLevel/credit-level-manager.vue')
+// 银行管理
+const BankPath = () => import (/* webpackChunkName: "bankList" */ './../vues/recharge/bank.vue')
 
 //创建路由, hash 模式。
 const router = createRouter({
@@ -25,6 +27,7 @@ const router = createRouter({
                 {path: 'vuedemoto', component: App2, name: "toapp2"},
                 {path: '/credit',component: IndexPath,name: 'credit' },
                 {path: 'UserLeavel', component: UserLeavelPath, name: "UserLeavel"},
+                {path: 'BankManager', component: BankPath, name: "BankManager"},
 
             ]
         },

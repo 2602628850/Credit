@@ -58,7 +58,7 @@
             </summary>
             <param name="input"></param>
         </member>
-        <member name="M:Credit.Api.Controllers.AdminBankController.BankDelete(System.Int64)">
+        <member name="M:Credit.Api.Controllers.AdminBankController.BankDelete(Credit.BankServices.Dtos.BankInput)">
             <summary>
              银行删除
             </summary>

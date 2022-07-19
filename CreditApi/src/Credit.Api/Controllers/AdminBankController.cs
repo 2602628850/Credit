@@ -42,7 +42,7 @@ public class AdminBankController : BaseAdminController
     [HttpPost]
     public async Task BankUpdate([FromBody]BankInput input)
     {
-        await _bankService.BankCreate(input);
+        await _bankService.BankUpdate(input);
     }
 
     /// <summary>
@@ -50,9 +50,9 @@ public class AdminBankController : BaseAdminController
     /// </summary>
     /// <param name="bankId"></param>
     [HttpPost]
-    public async Task BankDelete([FromBody]long bankId)
+    public async Task BankDelete([FromBody]BankInput input)
     {
-        await _bankService.BankDelete(bankId, CurrentAdmin.UserId);
+        await _bankService.BankDelete(input.Id, CurrentAdmin.UserId);
     }
 
     /// <summary>
