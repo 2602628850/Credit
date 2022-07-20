@@ -46,7 +46,7 @@ public class RepayController : BaseUserController
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public async Task<RepayLevelDto> GetRepayLevel(LeavesInput input)
+    public async Task<RepayLevelDto> GetRepayLevel([FromQuery]LeavesInput input)
     {
         return await _repayService.GetRepayLevel(input.Leaveid);
     }
@@ -57,7 +57,7 @@ public class RepayController : BaseUserController
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public async Task<List<RepayBankCardDto>> GetRepayBankCardList(LeavesInput input)
+    public async Task<List<RepayBankCardDto>> GetRepayBankCardList([FromQuery]LeavesInput input)
     {
         return await _repayService.GetRepayBankCardList(input.Leaveid);
     }

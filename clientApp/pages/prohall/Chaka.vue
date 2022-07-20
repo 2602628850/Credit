@@ -59,7 +59,7 @@
 						</view>
 
 						<!--卡号-->
-						<view id="cardList" class="margin-top-lg card-content-secondary">
+						<view id="cardList" v-show="cardshow!=0" class="margin-top-lg card-content-secondary">
 							<view>
 								<text class="text-bold text-lg"><span>{{$t('chaka.selectrepayment')}}</span></text>
 							</view>
@@ -79,7 +79,7 @@
 
 
 						<!---->
-						<view class="margin-top-lg card-content-secondary">
+						<view class="margin-top-lg card-content-secondary" v-show="cardshow!=0">
 							<view>
 								<text class="text-bold text-lg"><span>{{$t('chaka.repayment')}}</span></text>
 							</view>
@@ -136,6 +136,7 @@
 	export default {
 		data() {
 			return {
+				cardshow: 0,
 				lv: {}, //等级id
 				cardlist: {}, //卡号集合
 				current: 0, //当前选中银行卡序号
@@ -178,6 +179,7 @@
 					this.repayObj.PayeeBankCardId = res.data[0].id; //银行卡id
 					this.repayObj.SourceType = 300; //代理还款申请
 					this.repayObj.Amount = this.amount; //还款金额
+					this.cardshow = 1;
 
 
 				})

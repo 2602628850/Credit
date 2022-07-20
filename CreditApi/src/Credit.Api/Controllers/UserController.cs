@@ -195,11 +195,11 @@ namespace Credit.Api.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PagedOutput<UserWalletRecordDto>> GetUserRechargePagedList(WalletRecordPagedInput input)
+        public async Task<PagedOutput<MoneyApplyDto>> GetUserRechargePagedList([FromQuery]MoneyApplyPagedInput input)
         {
             input.UserId = CurrentUser.UserId;
-            input.WalletSource = WalletSourceEnums.Recharge;
-            return await _walletService.GetUserWalletRecordPagedList(input);
+            input.Source = WalletSourceEnums.RechargeApply;
+            return await _walletService.GetMoneyApplyPagedList(input);
         }
 
         /// <summary>
@@ -208,11 +208,11 @@ namespace Credit.Api.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PagedOutput<UserWalletRecordDto>> GetUserWithdrawalPagedList(WalletRecordPagedInput input)
+        public async Task<PagedOutput<MoneyApplyDto>> GetUserWithdrawalPagedList([FromQuery]MoneyApplyPagedInput input)
         {
             input.UserId = CurrentUser.UserId;
-            input.WalletSource = WalletSourceEnums.Withdrawal;
-            return await _walletService.GetUserWalletRecordPagedList(input);
+            input.Source = WalletSourceEnums.WithdrawalApply;
+            return await _walletService.GetMoneyApplyPagedList(input);
         }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace Credit.Api.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PagedOutput<UserWalletRecordDto>> GetUserWalletRecordPagedList(WalletRecordPagedInput input)
+        public async Task<PagedOutput<UserWalletRecordDto>> GetUserWalletRecordPagedList([FromQuery]WalletRecordPagedInput input)
         {
             input.UserId = CurrentUser.UserId;
             return await _walletService.GetUserWalletRecordPagedList(input);
@@ -327,7 +327,7 @@ namespace Credit.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<List<MoneyApplyDto>> GetUserMoneyWithoutList(MoneyApplyDto moneyApplyDto)
+        public async Task<List<MoneyApplyDto>> GetUserMoneyWithoutList([FromQuery]MoneyApplyDto moneyApplyDto)
         {
             return await _walletService.GetMoneyWithoutRecode(CurrentUser.UserId, moneyApplyDto);
         }

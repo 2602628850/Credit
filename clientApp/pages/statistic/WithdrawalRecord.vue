@@ -12,8 +12,14 @@
 							<view style="font-size: 16px; opacity: 1;font-weight: bold;">
 								{{item.sourceTypeText}}
 							</view>
-							<view style="font-size: 8px"><span>{{ $t('monchange.banlance') }}:$ {{item.balance}}</span>
-							</view>
+							<view style="font-size: 8px" v-if="item.auditStatus==0"><span>
+									{{$t('WithdrawalRecord.state1')}}</span></view>
+							<view style="font-size: 8px" v-if="item.auditStatus==10"><span>
+									{{$t('WithdrawalRecord.state2')}}</span></view>
+							<view style="font-size: 8px" v-if="item.auditStatus==20"><span>
+									{{$t('WithdrawalRecord.state3')}}</span></view>
+							<view style="font-size: 8px" v-if="item.auditStatus==30"><span>
+									{{$t('WithdrawalRecord.state4')}}</span></view>
 							<view style="font-size: 8px" v-if=" $t('timestate.status')=='1'">
 								<span>{{this.formatDate(parseFloat(item.createAt)) }}</span>
 							</view>

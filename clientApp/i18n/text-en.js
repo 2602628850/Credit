@@ -266,6 +266,7 @@ export default {
 		UnitPrice:'Price per unit',		
 		cycle:'Period of payment',
 		Minimum:"Min purchase",
+		Maxmum:"Max purchase",
 		returnrate:"Daily rate of return",
 		buymum:"Purchase share",
 		buyprice:"Purchase price",
@@ -343,6 +344,7 @@ export default {
 	financialproduct:{
 		daday:"day",
 		inputval:'Please enter the number of copies to purchase!',
+		inputvalerr: 'Exceeding the maximum purchase quantity!',
 		buysuc:'Purchase successful!',
 		
 	},
@@ -360,9 +362,17 @@ export default {
 	},
 	RechargeRecord:{
 		title: 'Recharge Record',
+		state1: 'To be reviewed',
+		state2: 'Under review',
+		state3: 'Success',
+		state4: 'Failed',
 	},
 	WithdrawalRecord:{
 		title: 'Withdrawal Record',
+		state1: 'To be reviewed',
+		state2: 'Under review',
+		state3: 'Success',
+		state4: 'Failed',
 	},
 	wallet:{
 		title:'My wallet',

@@ -153,7 +153,7 @@
 			},
 			goInfo() {
 				uni.navigateTo({
-					url: '/pages/mine/change-info'
+					url: '/pages/mine/UserInfo'
 				})
 			},
 			GetUserinfo() {

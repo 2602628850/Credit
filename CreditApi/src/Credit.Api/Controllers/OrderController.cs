@@ -49,12 +49,12 @@ public class OrderController : BaseUserController
     /// <summary>
     ///  获取订单
     /// </summary>
-    /// <param name="orderId"></param>
+    /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<FinancilOrderDto> GetOrder([FromQuery]long orderId)
+    public async Task<FinancilOrderDto> GetOrder([FromQuery]IdInput input)
     {
-        return await _financilOrderService.GetOrder(orderId,CurrentUser.UserId);
+        return await _financilOrderService.GetOrder(input.Id,CurrentUser.UserId);
     }
 
     /// <summary>

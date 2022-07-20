@@ -251,6 +251,7 @@ export default {
 		UnitPrice: '每份单价',
 		cycle: '回款周期',
 		Minimum: "最低购买",
+		Maxmum: "最高购买",
 		returnrate: "回报率",
 		buymum: "购买数量",
 		buyprice: "购买金额",
@@ -328,6 +329,7 @@ export default {
 	financialproduct: {
 		daday: "天",
 		inputval: '请输入购买份数!',
+		inputvalerr: '超过最大购买数量!',
 		buysuc: '购买成功!',
 
 	},
@@ -368,9 +370,17 @@ export default {
 	},
 	RechargeRecord:{
 		title: '充值记录',
+		state1: '待审核',
+		state2: '审核中',
+		state3: '充值成功',
+		state4: '充值失败',
 	},
 	WithdrawalRecord:{
 		title: '提现记录',
+		state1: '待审核',
+		state2: '审核中',
+		state3: '提现成功',
+		state4: '提现失败',
 	},
 	wallet:{
 		title:'我的钱包',

@@ -27,6 +27,16 @@
 
 				<uni-row :gutter="20" style="margin-top: 15px;font-size: 15px">
 					<uni-col :span="18">
+						<span>{{$t('semloan.Maxmum')}}</span>
+					</uni-col>
+					<uni-col :span="4">
+						<text style="text-align: right;"><span>{{productObj.buyMaxUnit}}份</span></text>
+					</uni-col>
+				</uni-row>
+
+
+				<uni-row :gutter="20" style="margin-top: 15px;font-size: 15px">
+					<uni-col :span="18">
 						<span>{{$t('semloan.cycle')}}</span>
 					</uni-col>
 					<uni-col :span="4">
@@ -141,12 +151,17 @@
 			},
 			//购买
 			submitProduct(){
-				if(this.numberinput.split(" ").join("").length === 0||parseFloat(this.numberinput)<=0){
+				if(parseFloat(this.numberinput)<=0){
 					var msg=this.$t('financialproduct.inputval');
 					this.TitleResult(msg)
 					return;
 				}
 				this.buyParam.UnitCount=this.numberinput;//购买份数
+				if(this.numberinput>this.productObj.buyMaxUnit){
+					var msg=this.$t('financialproduct.inputvalerr');
+					this.TitleResult(msg)
+					return;
+				}
 				const url = decodeURI(encodeURI('/Order​/BuyFinancilProduct').replace(/%E2%80%8B/g, ""));
 				this.ApiPost(url,this.buyParam).then(res => {
 					if(res.data=="add_success"){

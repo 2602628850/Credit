@@ -6,6 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <OutputPath>..\Credit.Api\bin\Release/net6.0/net6.0/</OutputPath>
+    </PropertyGroup>
+
     <ItemGroup>
       <ProjectReference Include="..\..\Commons\Data.Commons\Data.Commons.csproj" />
       <ProjectReference Include="..\..\Models\Credit.BankModels\Credit.BankModels.csproj" />
