@@ -41,6 +41,7 @@ namespace Swagger.UI
                 var xmlAssemblies = DependencyContext.Default.CompileLibraries
                         .Where(s => s.Type != "package")
                         .Where(s => s.Name.EndsWith(".Api") || s.Name.EndsWith("Services"));
+                
                 foreach (var assembly in xmlAssemblies)
                 {
                     var path = assembly.Name;

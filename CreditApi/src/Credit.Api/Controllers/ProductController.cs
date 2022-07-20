@@ -28,7 +28,7 @@ public class ProductController : BaseUserController
     /// <param name="productId"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<FinancilProductDto> GetFinancialProduct(FinancilProductDto product)
+    public async Task<FinancilProductDto> GetFinancialProduct([FromQuery]FinancilProductDto product)
     {
         return await _financialProductService.GetFinancialProduct(product.Id);
     }
@@ -39,7 +39,7 @@ public class ProductController : BaseUserController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<PagedOutput<FinancilProductDto>> GetProductPagedList(FinancilProductPagedInput input)
+    public async Task<PagedOutput<FinancilProductDto>> GetProductPagedList([FromQuery]FinancilProductPagedInput input)
     {
         input.IsEnable = 1;
         return await _financialProductService.GetProductPagedList(input);

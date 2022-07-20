@@ -587,11 +587,11 @@
             </summary>
             <param name="input"></param>
         </member>
-        <member name="M:Credit.Api.Controllers.OrderController.GetOrder(System.Int64)">
+        <member name="M:Credit.Api.Controllers.OrderController.GetOrder(Data.Commons.Dtos.IdInput)">
             <summary>
              获取订单
             </summary>
-            <param name="orderId"></param>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:Credit.Api.Controllers.OrderController.GetOrderPagedList(Credit.OrderServices.Dtos.FinancilOrderPagedInput)">
@@ -818,14 +818,14 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Credit.Api.Controllers.UserController.GetUserRechargePagedList(Credit.UserWalletServices.Dtos.WalletRecordPagedInput)">
+        <member name="M:Credit.Api.Controllers.UserController.GetUserRechargePagedList(Credit.UserWalletServices.Dtos.MoneyApplyPagedInput)">
             <summary>
              获取用户充值记录
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Credit.Api.Controllers.UserController.GetUserWithdrawalPagedList(Credit.UserWalletServices.Dtos.WalletRecordPagedInput)">
+        <member name="M:Credit.Api.Controllers.UserController.GetUserWithdrawalPagedList(Credit.UserWalletServices.Dtos.MoneyApplyPagedInput)">
             <summary>
              获取用户提款记录
             </summary>
