@@ -362,9 +362,17 @@ export default {
 	},
 	RechargeRecord:{
 		title: 'Recharge Record',
+		state1: 'To be reviewed',
+		state2: 'Under review',
+		state3: 'Success',
+		state4: 'Failed',
 	},
 	WithdrawalRecord:{
 		title: 'Withdrawal Record',
+		state1: 'To be reviewed',
+		state2: 'Under review',
+		state3: 'Success',
+		state4: 'Failed',
 	},
 	wallet:{
 		title:'My wallet',

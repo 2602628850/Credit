@@ -198,7 +198,7 @@ namespace Credit.Api.Controllers
         public async Task<PagedOutput<MoneyApplyDto>> GetUserRechargePagedList([FromQuery]MoneyApplyPagedInput input)
         {
             input.UserId = CurrentUser.UserId;
-            input.Source = WalletSourceEnums.Recharge;
+            input.Source = WalletSourceEnums.RechargeApply;
             return await _walletService.GetMoneyApplyPagedList(input);
         }
 
@@ -211,7 +211,7 @@ namespace Credit.Api.Controllers
         public async Task<PagedOutput<MoneyApplyDto>> GetUserWithdrawalPagedList([FromQuery]MoneyApplyPagedInput input)
         {
             input.UserId = CurrentUser.UserId;
-            input.Source = WalletSourceEnums.Withdrawal;
+            input.Source = WalletSourceEnums.WithdrawalApply;
             return await _walletService.GetMoneyApplyPagedList(input);
         }
 

@@ -370,9 +370,17 @@ export default {
 	},
 	RechargeRecord:{
 		title: '充值记录',
+		state1: '待审核',
+		state2: '审核中',
+		state3: '充值成功',
+		state4: '充值失败',
 	},
 	WithdrawalRecord:{
 		title: '提现记录',
+		state1: '待审核',
+		state2: '审核中',
+		state3: '提现成功',
+		state4: '提现失败',
 	},
 	wallet:{
 		title:'我的钱包',
