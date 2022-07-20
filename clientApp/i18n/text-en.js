@@ -266,6 +266,7 @@ export default {
 		UnitPrice:'Price per unit',		
 		cycle:'Period of payment',
 		Minimum:"Min purchase",
+		Maxmum:"Max purchase",
 		returnrate:"Daily rate of return",
 		buymum:"Purchase share",
 		buyprice:"Purchase price",
@@ -343,6 +344,7 @@ export default {
 	financialproduct:{
 		daday:"day",
 		inputval:'Please enter the number of copies to purchase!',
+		inputvalerr: 'Exceeding the maximum purchase quantity!',
 		buysuc:'Purchase successful!',
 		
 	},
