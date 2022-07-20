@@ -29,12 +29,13 @@ public class UploadController : BaseUserController
     /// <summary>
     ///  图片上传
     /// </summary>
-    /// <param name="file"></param>
+    /// <param name="file"></param>[FromBody]
     /// <returns></returns>
     [HttpPost]
     [RequestFormLimits(MultipartBodyLengthLimit = int.MaxValue)]
-    public async Task<object> Image([FromBody]IFormFile file)
+    public async Task<object> Image(IFormFile file)
     {
+
         try
         {
             if (file != null)

@@ -1,6 +1,6 @@
 <template>
  <el-form :model="form">
-    <el-form-item label="上传图片：" :label-width="formLabelWidth" style="float:left;" >
+    <el-form-item label="" :label-width="formLabelWidth" style="float:left;" >
       <el-upload
         ref="upload"
         :action="uploadurl"
@@ -12,12 +12,11 @@
         :before-upload="handleBeforeUpload"
         :on-preview="handlePictureCardPreview"
         :on-remove="handleRemove"
-        :on-success="uploadSuccess">
+        :on-success="uploadSuccess"
+        :file-list="fileList"
+        >
            <el-icon style=""><Plus /></el-icon>
       </el-upload>
-      <el-dialog >
-        <img width="90%" :src="dialogImageUrl" alt="">
-      </el-dialog>
     </el-form-item>
     <el-form-item>
       <el-button size="small" type="default"  @click="uploadFile" style="margin-left:10px;margin-top:30px;background-color:gray;color:white;">上传到服务</el-button>
@@ -32,13 +31,13 @@ export default {
     return{
       uploadurl:  process.env.VUE_APP_AXIOS_BASEURL+ process.env.VUE_APP_AXIOS_API+"/Upload/Image",
       fontsize:'0px',
-      dialogImageUrl: '',
-      dialogVisible: false,
-      formLabelWidth: '100px',
+      formLabelWidth: '0px',
       limitNum: 1,
-      form: {}
+      form: {},
+      fileList:[]
     }
   },
+  props:["logourl"],//接收父组件传过来的logo图片路径
   methods: {
     // 上传文件之前的钩子
     handleBeforeUpload(file){
@@ -57,29 +56,38 @@ export default {
         })
       }
     },
+    updateUrl(val){
+    this.fileList=[];//置空图片
+     this.$emit('update:logourl',val)//给首页的logo复制
+    if(val){
+      this.fileList.push({ url: val});//只有不为空的时候才会有默认图片
+      }
+    },
     // 文件超出个数限制时的钩子
     handleExceed(files, fileList) {
        console.log(files, fileList);
     },
     // 文件列表移除文件时的钩子
     handleRemove(file, fileList) {
+      this.$emit('update:logourl','')
       console.log(file, fileList);
     },
     // 点击文件列表中已上传的文件时的钩子
     handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
+      console.log(file)
     },
     uploadFile() {
       this.$refs.upload.submit()
     },
     uploadSuccess(obj){
        if (obj.success) {
-    this.dialogImageUrl =obj.data.src // 后端返给我们的路径
-  } else {
+          //图片上传成功以后改变父组件的值,这里的logourl对应父组件里面的logo
+           this.$emit('update:logourl',obj.data.src )
+       } else {
     // this.$message.error('操作失败')
   }
-    },
+    }
+
   } 
 }
 </script>

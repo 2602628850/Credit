@@ -36,22 +36,28 @@
 	<el-dialog v-model="windowStatus" v-loading="windowSaving" width="600px">
 		<el-space direction="vertical">
 			<el-space>
-				<div class="in-title">银行名称</div>
+				<div class="in-title">银行名称：</div>
 				<el-input class="in-input" v-model="editItem.bankName"></el-input>
 			</el-space>
 			<el-space>
-				<div class="in-title">银行编码</div>
+				<div class="in-title">银行编码：</div>
 				<el-input class="in-input" v-model="editItem.bankCode"></el-input>
 			</el-space>
 			<el-space>
-				<div class="in-title">是否启用</div>
-        <el-radio v-model="editItem.isEnable" label="1">启用</el-radio>
-        <el-radio v-model="editItem.isEnable" label="0">禁用</el-radio>
-			<!-- <el-radio-group v-model="editItem.isEnable"  class="in-input">
+				<div class="in-title">是否启用：</div>
+			<el-radio-group v-model="editItem.isEnable"  class="in-input">
         <el-radio label="1" >启用</el-radio>
         <el-radio label="0" >禁用</el-radio>
-      </el-radio-group> -->
+      </el-radio-group>
 			</el-space>
+				<el-space>
+						<div class="in-title" style="margin-left:-60px;" >银行logo：</div>
+              <upload-picture  v-model:logourl="logo" ref="child">
+
+							</upload-picture>
+				</el-space>
+
+
 			<el-space>
 				<el-button type="primary" @click="saveItem">保存</el-button>
 			</el-space>
@@ -60,6 +66,7 @@
 </template>
 
 <script>
+import uploadFile  from "../../components/uploadPicture.vue"
 	export default {
 		name: "bank-manager",
 		beforeRouteEnter(to, from, next) {
@@ -70,22 +77,36 @@
 		},
 		data() {
 			return {
+			uploadUrl: 'http://localhost:8003/v1/Upload/Image',
 				bankName: '',
-
 				contentHeight: '0px',
-
 				pageIndex: 1,
 				pageSize: 20,
 				total: 0,
 				tableData: [],
 				loading: false,
-
 				windowStatus: false,
-				editItem: {isEnable:"0"},
+				editItem: {isEnable:"0",logo:''},
 				windowSaving: false,
+				logo:'',
 			}
 		},
+	components: {
+  "upload-picture":uploadFile
+  },
 		methods: {
+			// 上传前，限制的上传图片大小
+			beforeImageUpload(rawFile){
+                if(rawFile.size / 1024 / 1024 > 10){
+                    this.$message.error("单张图片大小不能超过10MB!");
+                    return false;
+                }
+                return true;
+            },
+						// 上传成功，获取返回的图片地址
+            handleUpImage(res){
+                this.editItem.logo = res.data.url;
+            },
 			delItem(item) {
 				this.$msgbox({
 					title: '提示',
@@ -122,6 +143,7 @@
 					return;
 				}
 				this.windowSaving = true;
+				this.editItem.logo=this.logo;//图片路径
 				if (this.editItem.id) {
 					this.$Http.post('AdminBank/BankUpdate', this.editItem).then(() => {
 						this.windowStatus = false;
@@ -148,10 +170,15 @@
         this.editItem.isEnable ='1';
 			},
 			updItem(item) {
+				setTimeout(()=>{
+					this.$refs.child.updateUrl(item.logo)
+				},10)
+			
 				this.windowStatus = true;
 				this.windowSaving = false;
 				this.editItem = JSON.parse(JSON.stringify(item));
-         this.editItem.isEnable =''+ item.isEnable+'';
+        this.editItem.isEnable =''+ item.isEnable+'';
+				
 			},
 			getTime(time) {
 				return this.$DateUtil.formatUnix(time / 1000);
