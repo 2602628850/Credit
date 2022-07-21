@@ -119,7 +119,7 @@ public class UserWalletService : IUserWalletService
             //添加提款申请
             var moneyApply = input.MapTo<UserMoneyApply>();
             moneyApply.Id = IdHelper.GetId();
-            moneyApply.AuditStatus = AuditStatusEnums.Ing;
+            moneyApply.AuditStatus = AuditStatusEnums.Default;
             moneyApply.ChangeType = WalletChangeEnums.Out;
             moneyApply.PayText = $"提款：{input.Amount}, 提款卡号：{userBankCard.First().CardNo}.";
             moneyApply.UserId = userId;
@@ -168,7 +168,7 @@ public class UserWalletService : IUserWalletService
                 moneyApply.AuditStatus = AuditStatusEnums.Default;
                 moneyApply.ChangeType = WalletChangeEnums.In;
                 moneyApply.UserId = userId;
-                moneyApply.AuditText = "代理还款";
+                //moneyApply.AuditText = "代理还款";
                 moneyApply.Remark = $"还款：${input.Amount}";
                 await _freeSql.Insert(moneyApply).InsertTableTime(TableTimeFormat.Year).ExecuteAffrowsAsync();
                 return "repay_success";
