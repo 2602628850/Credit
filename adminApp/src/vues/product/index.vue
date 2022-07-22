@@ -11,22 +11,24 @@
 		<el-button type="primary" @click="addItem">添加</el-button>
 	</div>
 	<el-table v-loading="loading" class="mgt w100" stripe :data="tableData" style="flex: 1" border :height="contentHeight">
-		<el-table-column prop="productName" label="产品名称" width="100" align="center"></el-table-column>
+		<el-table-column prop="productName" label="产品名称" width="150" align="center"></el-table-column>
 		
-		<el-table-column prop="productName" label="产品图片" width="100" align="center"></el-table-column>
-		<el-table-column prop="dailyRate" label="日收益比例（%）" width="100" align="center"></el-table-column>
-		<el-table-column prop="cycle" label="收益周期（天）" width="100" align="center"></el-table-column>
+		<el-table-column prop="productName" label="产品图片" width="150" align="center"></el-table-column>
+		<el-table-column prop="dailyRate" label="日收益比例（%）" width="120" align="center"></el-table-column>
+		<el-table-column prop="cycle" label="收益周期（天）" width="120" align="center"></el-table-column>
 		<el-table-column prop="price" label="价格" width="100" align="center"></el-table-column>
 		<el-table-column prop="buyMinUnit" label="最低购买数" width="100" align="center"></el-table-column>
 		<el-table-column prop="buyMaxUnit" label="最大购买数" width="100" align="center"></el-table-column>
 		<el-table-column prop="isEnable" label="是否启用" width="100" align="center">
 			<template #default="scope">
-				{{ scope.row.isEnable=="1"?"启用":"禁用"}}
+				{{ scope.row.isEnable=="1"?"上架":"下架"}}
 			</template>
 		</el-table-column>
-    <el-table-column prop="" label="操作" align="center" width="130">
+    <el-table-column prop="" label="操作" align="center" width="200">
 			<template #default="scope">
 				<el-space>
+					<el-button type="danger" size="small" plain @click="upXJ(scope.row)" v-if="scope.row.isEnable==1">下架</el-button>
+					<el-button type="primary" size="small" plain @click="upQY(scope.row)" v-else>上架</el-button>
 					<el-button type="primary" size="small" plain @click="updItem(scope.row)">修改</el-button>
 					<el-button type="danger" size="small" plain @click="delItem(scope.row)">删除</el-button>
 				</el-space>
@@ -146,6 +148,50 @@ import uploadFile  from "../../components/uploadPicture.vue"
 						if (action == 'confirm') {
 							this.loading = true;
 							this.$Http.post('AdminProduct/ProductDelete', {id: item.id}).then(() => {
+								this.loadData();
+								done();
+							}).catch(res => {
+								this.$message.error(res.data.message);
+								this.loading = false;
+							})
+						} else {
+							done();
+						}
+					}
+				})
+
+			},
+			upQY(item) {
+				this.$msgbox({
+					title: '提示',
+					message: '确认上架' + item.ProductName + '?',
+					showCancelButton: true,
+					beforeClose: (action,instance,done) => {
+						if (action == 'confirm') {
+							this.loading = true;
+							this.$Http.post('AdminProduct/FinancialProductTakeOn', {id: item.id}).then(() => {
+								this.loadData();
+								done();
+							}).catch(res => {
+								this.$message.error(res.data.message);
+								this.loading = false;
+							})
+						} else {
+							done();
+						}
+					}
+				})
+
+			},
+			upXJ(item) {
+				this.$msgbox({
+					title: '提示',
+					message: '确认下架' + item.ProductName + '?',
+					showCancelButton: true,
+					beforeClose: (action,instance,done) => {
+						if (action == 'confirm') {
+							this.loading = true;
+							this.$Http.post('AdminProduct/FinancialProductTakeDown', {id: item.id}).then(() => {
 								this.loadData();
 								done();
 							}).catch(res => {
