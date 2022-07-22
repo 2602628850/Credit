@@ -96,6 +96,9 @@ export default {
           {id:4,authName:"充值中心",ico:"Box",children:[
           {id:64,authName:"银行管理",ico:"Coordinate",pathName:"BankManager"}
         ]},
+          {id:5,authName:"产品管理",ico:"Box",children:[
+          {id:71,authName:"理财产品",ico:"Coordinate",pathName:"Product"}
+        ]},
         
       ]
       this.menulist = data
