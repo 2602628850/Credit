@@ -3,7 +3,7 @@
 	<el-space wrap class="w100" id="search-info">
 		<el-space class="search-input">
 			<div>产品名称</div>
-			<el-input v-model="ProductName"></el-input>
+			<el-input v-model="productName"></el-input>
 		</el-space>
 	</el-space>
 	<div class="w100 mgt flex-row-between" id="search-button">
@@ -45,31 +45,31 @@
 		<el-space direction="vertical">
 			<el-space>
 				<div class="in-title">产品名称：</div>
-				<el-input class="in-input" v-model="editItem.ProductName"></el-input>
+				<el-input class="in-input" v-model="editItem.productName"></el-input>
 			</el-space>
 			<el-space>
 				<div class="in-title">日收益比例（%）：</div>
-				<el-input class="in-input" v-model="editItem.DailyRate"></el-input>
+				<el-input class="in-input" v-model="editItem.dailyRate"></el-input>
 			</el-space>
 			<el-space>
 				<div class="in-title">收益周期（天）：</div>
-				<el-input class="in-input" v-model="editItem.Cycle"></el-input>
+				<el-input class="in-input" v-model="editItem.cycle"></el-input>
 			</el-space>
 			<el-space>
 				<div class="in-title">单价：</div>
-				<el-input class="in-input" v-model="editItem.Price"></el-input>
+				<el-input class="in-input" v-model="editItem.price"></el-input>
 			</el-space>
 			<el-space>
 				<div class="in-title">最低购买数：</div>
-				<el-input class="in-input" v-model="editItem.BuyMinUnit"></el-input>
+				<el-input class="in-input" v-model="editItem.buyMinUnit"></el-input>
 			</el-space>
 			<el-space>
 				<div class="in-title">最高购买数：</div>
-				<el-input class="in-input" v-model="editItem.BuyMaxUnit"></el-input>
+				<el-input class="in-input" v-model="editItem.buyMaxUnit"></el-input>
 			</el-space>
 			<el-space>
 				<div class="in-title">排序：</div>
-				<el-input class="in-input" v-model="editItem.Sort"></el-input>
+				<el-input class="in-input" v-model="editItem.sort"></el-input>
 			</el-space>
 			<el-space>
 				<div class="in-title">是否启用：</div>
@@ -86,7 +86,7 @@
 				</el-space>
 			<el-space>
 				<div class="in-title">产品简介：</div>
-				<el-input  :rows="3"  type="textarea" class="in-input" v-model="editItem.Introduction"></el-input>
+				<el-input  :rows="3"  type="textarea" class="in-input" v-model="editItem.introduction"></el-input>
 			</el-space> 
 
 
@@ -110,7 +110,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 		data() {
 			return {
 			uploadUrl: 'http://localhost:8003/v1/Upload/Image',
-				ProductName: '',
+				productName: '',
 				contentHeight: '0px',
 				pageIndex: 1,
 				pageSize: 20,
@@ -140,14 +140,16 @@ import uploadFile  from "../../components/uploadPicture.vue"
                 this.editItem.CoverImage = res.data.url;
             },
 			delItem(item) {
+				const ids=[];
+				ids.push(item.id);
 				this.$msgbox({
 					title: '提示',
-					message: '确认删除' + item.levelName + '?',
+					message: '确认删除' + item.productName + '?',
 					showCancelButton: true,
 					beforeClose: (action,instance,done) => {
 						if (action == 'confirm') {
 							this.loading = true;
-							this.$Http.post('AdminProduct/ProductDelete', {id: item.id}).then(() => {
+							this.$Http.post('AdminProduct/FinancialProductDelete', {ids: ids}).then(() => {
 								this.loadData();
 								done();
 							}).catch(res => {
@@ -162,14 +164,16 @@ import uploadFile  from "../../components/uploadPicture.vue"
 
 			},
 			upQY(item) {
+				const ids=[];
+				ids.push(item.id);
 				this.$msgbox({
 					title: '提示',
-					message: '确认上架' + item.ProductName + '?',
+					message: '确认上架' + item.productName + '?',
 					showCancelButton: true,
 					beforeClose: (action,instance,done) => {
 						if (action == 'confirm') {
 							this.loading = true;
-							this.$Http.post('AdminProduct/FinancialProductTakeOn', {id: item.id}).then(() => {
+							this.$Http.post('AdminProduct/FinancialProductTakeOn', {ids: ids}).then(() => {
 								this.loadData();
 								done();
 							}).catch(res => {
@@ -184,14 +188,16 @@ import uploadFile  from "../../components/uploadPicture.vue"
 
 			},
 			upXJ(item) {
+				const ids=[];
+				ids.push(item.id);
 				this.$msgbox({
 					title: '提示',
-					message: '确认下架' + item.ProductName + '?',
+					message: '确认下架' + item.productName + '?',
 					showCancelButton: true,
 					beforeClose: (action,instance,done) => {
 						if (action == 'confirm') {
 							this.loading = true;
-							this.$Http.post('AdminProduct/FinancialProductTakeDown', {id: item.id}).then(() => {
+							this.$Http.post('AdminProduct/FinancialProductTakeDown', {ids: ids}).then(() => {
 								this.loadData();
 								done();
 							}).catch(res => {
@@ -206,7 +212,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 
 			},
 			saveItem() {
-				if (!this.editItem.ProductName) {
+				if (!this.editItem.productName) {
 					this.$message.error('请输入产品名称');
 					return;
 				}
@@ -268,12 +274,13 @@ import uploadFile  from "../../components/uploadPicture.vue"
 			},
 
 			loadData(page) {
+			
 				let param = {};
-				if (this.ProductName) {
-					param.ProductName = this.ProductName;
+				if (this.productName) {
+					param.productName = this.productName;
 				}
 				if (page) {
-					this.pageIndex = page;
+					this.pageIndex = page-1;
 				}
 				param.pageIndex = this.pageIndex;
 				param.pageSize = this.pageSize;
