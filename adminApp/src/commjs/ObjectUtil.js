@@ -31,7 +31,39 @@ function copyText(text, callback) {
     callback && callback(false)
 }
 
+function getAuditStatusEnums() {
+    return [
+        {
+            title: '审核中',
+            value: '10'
+        },
+        {
+            title: '审核通过',
+            value: '20'
+        },
+        {
+            title: '审核未通过',
+            value: '30'
+        }
+    ]
+}
+
+function getAuditStatus(status) {
+    let auditStatus = getAuditStatusEnums();
+    let text = '-';
+    for (let i = 0; i < auditStatus.length; i++) {
+        let item = auditStatus[i];
+        if (item.value == status) {
+            text = item.title;
+            break;
+        }
+    }
+    return text;
+}
+
 export {
     isEmpty,
     copyText,
+    getAuditStatusEnums,
+    getAuditStatus,
 }

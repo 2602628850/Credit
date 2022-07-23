@@ -2,6 +2,13 @@
 .search-input {
     width: 280px;
 }
+/**
+搜索条件自动间隔 以及自动宽度
+ */
+.search-flex-sub {
+    margin-left: 8px;
+    flex: 1;
+}
 /*搜索条件2个宽度*/
 .search-more {
     width: 568px;
@@ -83,4 +90,8 @@
 .redTip {
     font-size: large;
     color: red;
+}
+
+.font-size-search {
+    font-size: 14px;
 }

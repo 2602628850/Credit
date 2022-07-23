@@ -13,6 +13,8 @@ const UserAgreementPath = () => import (/* webpackChunkName: "pageFirst" */ './.
 const UserLeavelPath = () => import (/* webpackChunkName: "UserLeavelContent" */ './../vues/creditLevel/credit-level-manager.vue')
 // 银行管理
 const BankPath = () => import (/* webpackChunkName: "bankList" */ './../vues/recharge/bank.vue')
+// 理财订单
+const financialOrder =() => import(/* webpackChunkName: "bankList" */ '/src/vues/order/financial-order.vue')
 
 //创建路由, hash 模式。
 const router = createRouter({
@@ -28,7 +30,7 @@ const router = createRouter({
                 {path: '/credit',component: IndexPath,name: 'credit' },
                 {path: 'UserLeavel', component: UserLeavelPath, name: "UserLeavel"},
                 {path: 'BankManager', component: BankPath, name: "BankManager"},
-
+                {path: 'financial',component: financialOrder, name: 'financial'}
             ]
         },
         {path: '/login', component: LoginPath, name: "LoginPath"},

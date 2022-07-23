@@ -96,7 +96,11 @@ export default {
           {id:4,authName:"充值中心",ico:"Box",children:[
           {id:64,authName:"银行管理",ico:"Coordinate",pathName:"BankManager"}
         ]},
-        
+          {
+              id: 5,authName: '订单管理',ico: 'box', children: [
+                  {id:501,authName: '信用订单管理',ico: 'Coordinate',pathName: 'financial'}
+              ]
+          }
       ]
       this.menulist = data
     }
