@@ -2,8 +2,20 @@
 	<!--信用等级管理-->
 	<el-space wrap class="w100" id="search-info">
 		<el-space class="search-input400">
-			<div>银行名称：</div>
-			<el-input v-model="bankName"></el-input>
+			<div>银行：</div>
+      <el-select v-model="bankId" class="m-2" placeholder="选择银行查询" size="large">
+        <el-option
+      key=""
+      label="请选择"
+      value="请选择"
+    />
+    <el-option
+      v-for="item in banks"
+      :key="item.bankId"
+      :label="item.bankName"
+      :value="item.bankId"
+    />
+  </el-select>
 		</el-space>
 	</el-space>
 	<div class="w100 mgt flex-row-between" id="search-button">
@@ -11,14 +23,20 @@
 		<el-button type="primary" @click="addItem">添加</el-button>
 	</div>
 	<el-table v-loading="loading" class="mgt w100" stripe :data="tableData" style="flex: 1" border :height="contentHeight">
-		<el-table-column prop="bankName" label="银行名称" width="360" align="center"></el-table-column>
-		<el-table-column prop="bankCode" label="银行编码" width="320" align="center"></el-table-column>
-		<el-table-column prop="isEnable" label="是否启用" width="320" align="center">
+		<el-table-column prop="bankName" label="银行名称" width="200" align="center"></el-table-column>
+		<el-table-column prop="cardNo" label="卡号" width="200" align="center"></el-table-column>
+		<el-table-column prop="bindRealName" label="绑定人姓名" width="200" align="center"></el-table-column>
+		<el-table-column prop="bankAddress" label="开户行地址" width="200" align="center"></el-table-column>
+		<el-table-column prop="minPayeeAmount" label="最低收款金额($)" width="200" align="center"></el-table-column>
+		<el-table-column prop="maxPayeeAmount" label="最高收款金额($)" width="200" align="center"></el-table-column>
+		<el-table-column prop="isEnable" label="是否启用" width="200" align="center">
 			<template #default="scope">
 				{{ scope.row.isEnable=="1"?"启用":"禁用"}}
 			</template>
 		</el-table-column>
-    <el-table-column prop="" label="操作" align="center" width="130">
+   <el-table-column prop="startTime" label="开启时间" width="200" align="center">	</el-table-column>
+    <el-table-column prop="endTime" label="关闭时间" width="200" align="center"></el-table-column>
+		<el-table-column prop="" label="操作" align="center" width="130">
 			<template #default="scope">
 				<el-space>
 					<el-button type="primary" size="small" plain @click="updItem(scope.row)">修改</el-button>
@@ -36,28 +54,27 @@
 	<el-dialog v-model="windowStatus" v-loading="windowSaving" width="600px">
 		<el-space direction="vertical">
 			<el-space>
-				<div class="in-title">银行名称：</div>
-				<el-input class="in-input" v-model="editItem.bankName"></el-input>
+				<div class="in-title">等级名称</div>
+				<el-input class="in-input" v-model="editItem.levelName"></el-input>
 			</el-space>
 			<el-space>
-				<div class="in-title">银行编码：</div>
-				<el-input class="in-input" v-model="editItem.bankCode"></el-input>
+				<div class="in-title">等级信用值</div>
+				<el-input class="in-input" v-model="editItem.creditValue"></el-input>
 			</el-space>
 			<el-space>
-				<div class="in-title">是否启用：</div>
-			<el-radio-group v-model="editItem.isEnable"  class="in-input">
-        <el-radio label="1" >启用</el-radio>
-        <el-radio label="0" >禁用</el-radio>
-      </el-radio-group>
+				<div class="in-title">序号</div>
+				<el-input class="in-input" v-model="editItem.levelSort"></el-input>
 			</el-space>
-				<el-space>
-						<div class="in-title" style="margin-left:-60px;" >银行logo：</div>
-              <upload-picture  v-model:logourl="logo" ref="child">
-
-							</upload-picture>
-				</el-space>
-
-
+			<el-space>
+				<div class="in-title">查卡次数</div>
+				<el-input class="in-input" v-model="editItem.chakaNum"></el-input>
+			</el-space>
+			<el-space>
+				<div class="in-title">收益比例</div>
+				<el-input class="in-input" v-model="editItem.profit">
+					<template #append>%</template>
+				</el-input>
+			</el-space>
 			<el-space>
 				<el-button type="primary" @click="saveItem">保存</el-button>
 			</el-space>
@@ -66,9 +83,8 @@
 </template>
 
 <script>
-import uploadFile  from "../../components/uploadPicture.vue"
 	export default {
-		name: "bank-manager",
+		name: "credit-level-manager",
 		beforeRouteEnter(to, from, next) {
 			next(vm => {
 				vm.getTableHeight();
@@ -77,36 +93,28 @@ import uploadFile  from "../../components/uploadPicture.vue"
 		},
 		data() {
 			return {
-			//: 'http://localhost:8003/v1/Upload/Image',
-				bankName: '',
+				bankId: '',
+        banks :[],//银行下拉选择列表
 				contentHeight: '0px',
+
 				pageIndex: 1,
 				pageSize: 20,
 				total: 0,
 				tableData: [],
 				loading: false,
+
 				windowStatus: false,
-				editItem: {isEnable:"0",logo:''},
+				editItem: {},
 				windowSaving: false,
-				logo:'',
 			}
 		},
-	components: {
-  "upload-picture":uploadFile
-  },
+    created(){
+      this.$Http.get('AdminBank/GetBankList').then(res => {
+				this.banks=res.data.data;
+			})
+  
+    },
 		methods: {
-			// 上传前，限制的上传图片大小
-			beforeImageUpload(rawFile){
-                if(rawFile.size / 1024 / 1024 > 10){
-                    this.$message.error("单张图片大小不能超过10MB!");
-                    return false;
-                }
-                return true;
-            },
-						// 上传成功，获取返回的图片地址
-            handleUpImage(res){
-                this.editItem.logo = res.data.url;
-            },
 			delItem(item) {
 				this.$msgbox({
 					title: '提示',
@@ -115,7 +123,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 					beforeClose: (action,instance,done) => {
 						if (action == 'confirm') {
 							this.loading = true;
-							this.$Http.post('AdminBank/BankDelete', {id: item.id}).then(() => {
+							this.$Http.post('AdminCreditLevel/CreditLevelDelete', {id: item.id}).then(() => {
 								this.loadData();
 								done();
 							}).catch(res => {
@@ -127,25 +135,32 @@ import uploadFile  from "../../components/uploadPicture.vue"
 						}
 					}
 				})
-
 			},
 			saveItem() {
-				if (!this.editItem.bankName) {
-					this.$message.error('请输入银行名称');
+				if (!this.editItem.levelName) {
+					this.$message.error('请输入等级名称');
 					return;
 				}
-				if (!this.editItem.bankCode) {
-					this.$message.error('请输入编码');
+				if (!this.editItem.creditValue) {
+					this.$message.error('请输入等级信用值');
 					return;
 				}
-				if (this.$ObjectUtil.isEmpty(this.editItem.isEnable)) {
-					this.$message.error('请选择是否启用');
+				if (this.$ObjectUtil.isEmpty(this.editItem.levelSort)) {
+					this.$message.error('请输入序号');
 					return;
 				}
+				if (!this.editItem.chakaNum) {
+					this.$message.error('请输入查卡次数');
+					return;
+				}
+				if (!this.editItem.profit) {
+					this.$message.error('请输入收益比例');
+					return;
+				}
+
 				this.windowSaving = true;
-				this.editItem.logo=this.logo;//图片路径
 				if (this.editItem.id) {
-					this.$Http.post('AdminBank/BankUpdate', this.editItem).then(() => {
+					this.$Http.post('AdminCreditLevel/CreditLevelUpdate', this.editItem).then(() => {
 						this.windowStatus = false;
 						this.loadData()
 					}).catch(res => {
@@ -153,7 +168,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 						this.$message.error(res.data.message)
 					})
 				} else {
-					this.$Http.post('AdminBank/BankCreate', this.editItem).then(() => {
+					this.$Http.post('AdminCreditLevel/CreditLevelCreate', this.editItem).then(() => {
 						this.windowStatus = false;
 						this.loadData()
 					}).catch(res => {
@@ -167,18 +182,11 @@ import uploadFile  from "../../components/uploadPicture.vue"
 				this.editItem = {};
 				this.windowStatus = true;
 				this.windowSaving = false;
-        this.editItem.isEnable ='1';
 			},
 			updItem(item) {
-				setTimeout(()=>{
-					this.$refs.child.updateUrl(item.logo)
-				},10)
-			
 				this.windowStatus = true;
 				this.windowSaving = false;
 				this.editItem = JSON.parse(JSON.stringify(item));
-        this.editItem.isEnable =''+ item.isEnable+'';
-				
 			},
 			getTime(time) {
 				return this.$DateUtil.formatUnix(time / 1000);
@@ -197,8 +205,8 @@ import uploadFile  from "../../components/uploadPicture.vue"
 
 			loadData(page) {
 				let param = {};
-				if (this.bankName) {
-					param.bankName = this.bankName;
+				if (this.bankId) {
+					param.bankId = this.bankId;
 				}
 				if (page) {
 					this.pageIndex = page;
@@ -206,7 +214,8 @@ import uploadFile  from "../../components/uploadPicture.vue"
 				param.pageIndex = this.pageIndex;
 				param.pageSize = this.pageSize;
 				this.loading = true;
-				this.$Http.get('AdminBank/GetBankPagedList', {params: param}).then(res => {
+        const url = decodeURI(encodeURI('AdminPayeeBankCard​/GetPayeeBankCardPagedList').replace(/%E2%80%8B/g, ""));
+				this.$Http.get(url, {params: param}).then(res => {
 					this.tableData = res.data.data.items;
 					this.total = parseInt(res.data.data.totalCount);
 					this.loading = false;

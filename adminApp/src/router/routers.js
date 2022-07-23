@@ -15,6 +15,10 @@ const UserLeavelPath = () => import (/* webpackChunkName: "UserLeavelContent" */
 const BankPath = () => import (/* webpackChunkName: "bankList" */ './../vues/recharge/bank.vue')
 // 理财订单
 const financialOrder =() => import(/* webpackChunkName: "bankList" */ '/src/vues/order/financial-order.vue')
+// 收款银行卡管理
+const BankCardPath = () => import (/* webpackChunkName: "BankCardList" */ './../vues/recharge/bankcard.vue')
+//产品管理
+const ProductPath = () => import (/* webpackChunkName: "productList" */ './../vues/product/index.vue')
 
 //创建路由, hash 模式。
 const router = createRouter({
@@ -31,6 +35,9 @@ const router = createRouter({
                 {path: 'UserLeavel', component: UserLeavelPath, name: "UserLeavel"},
                 {path: 'BankManager', component: BankPath, name: "BankManager"},
                 {path: 'financial',component: financialOrder, name: 'financial'}
+                {path: 'Product', component: ProductPath, name: "Product"},
+                {path: 'BankCard', component: BankCardPath, name: "BankCard"},
+
             ]
         },
         {path: '/login', component: LoginPath, name: "LoginPath"},

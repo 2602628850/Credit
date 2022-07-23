@@ -9,6 +9,9 @@
     margin-left: 8px;
     flex: 1;
 }
+.search-input400 {
+    width: 400px;
+}
 /*搜索条件2个宽度*/
 .search-more {
     width: 568px;

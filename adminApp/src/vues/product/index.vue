@@ -1,9 +1,9 @@
 <template>
 	<!--信用等级管理-->
 	<el-space wrap class="w100" id="search-info">
-		<el-space class="search-input400">
-			<div>银行名称：</div>
-			<el-input v-model="bankName"></el-input>
+		<el-space class="search-input">
+			<div>产品名称</div>
+			<el-input v-model="productName"></el-input>
 		</el-space>
 	</el-space>
 	<div class="w100 mgt flex-row-between" id="search-button">
@@ -11,16 +11,24 @@
 		<el-button type="primary" @click="addItem">添加</el-button>
 	</div>
 	<el-table v-loading="loading" class="mgt w100" stripe :data="tableData" style="flex: 1" border :height="contentHeight">
-		<el-table-column prop="bankName" label="银行名称" width="360" align="center"></el-table-column>
-		<el-table-column prop="bankCode" label="银行编码" width="320" align="center"></el-table-column>
-		<el-table-column prop="isEnable" label="是否启用" width="320" align="center">
+		<el-table-column prop="productName" label="产品名称" width="150" align="center"></el-table-column>
+		
+		<el-table-column prop="productName" label="产品图片" width="150" align="center"></el-table-column>
+		<el-table-column prop="dailyRate" label="日收益比例（%）" width="120" align="center"></el-table-column>
+		<el-table-column prop="cycle" label="收益周期（天）" width="120" align="center"></el-table-column>
+		<el-table-column prop="price" label="价格" width="100" align="center"></el-table-column>
+		<el-table-column prop="buyMinUnit" label="最低购买数" width="100" align="center"></el-table-column>
+		<el-table-column prop="buyMaxUnit" label="最大购买数" width="100" align="center"></el-table-column>
+		<el-table-column prop="isEnable" label="是否启用" width="100" align="center">
 			<template #default="scope">
-				{{ scope.row.isEnable=="1"?"启用":"禁用"}}
+				{{ scope.row.isEnable=="1"?"上架":"下架"}}
 			</template>
 		</el-table-column>
-    <el-table-column prop="" label="操作" align="center" width="130">
+    <el-table-column prop="" label="操作" align="center" width="200">
 			<template #default="scope">
 				<el-space>
+					<el-button type="danger" size="small" plain @click="upXJ(scope.row)" v-if="scope.row.isEnable==1">下架</el-button>
+					<el-button type="primary" size="small" plain @click="upQY(scope.row)" v-else>上架</el-button>
 					<el-button type="primary" size="small" plain @click="updItem(scope.row)">修改</el-button>
 					<el-button type="danger" size="small" plain @click="delItem(scope.row)">删除</el-button>
 				</el-space>
@@ -36,12 +44,32 @@
 	<el-dialog v-model="windowStatus" v-loading="windowSaving" width="600px">
 		<el-space direction="vertical">
 			<el-space>
-				<div class="in-title">银行名称：</div>
-				<el-input class="in-input" v-model="editItem.bankName"></el-input>
+				<div class="in-title">产品名称：</div>
+				<el-input class="in-input" v-model="editItem.productName"></el-input>
 			</el-space>
 			<el-space>
-				<div class="in-title">银行编码：</div>
-				<el-input class="in-input" v-model="editItem.bankCode"></el-input>
+				<div class="in-title">日收益比例（%）：</div>
+				<el-input class="in-input" v-model="editItem.dailyRate"></el-input>
+			</el-space>
+			<el-space>
+				<div class="in-title">收益周期（天）：</div>
+				<el-input class="in-input" v-model="editItem.cycle"></el-input>
+			</el-space>
+			<el-space>
+				<div class="in-title">单价：</div>
+				<el-input class="in-input" v-model="editItem.price"></el-input>
+			</el-space>
+			<el-space>
+				<div class="in-title">最低购买数：</div>
+				<el-input class="in-input" v-model="editItem.buyMinUnit"></el-input>
+			</el-space>
+			<el-space>
+				<div class="in-title">最高购买数：</div>
+				<el-input class="in-input" v-model="editItem.buyMaxUnit"></el-input>
+			</el-space>
+			<el-space>
+				<div class="in-title">排序：</div>
+				<el-input class="in-input" v-model="editItem.sort"></el-input>
 			</el-space>
 			<el-space>
 				<div class="in-title">是否启用：</div>
@@ -51,11 +79,15 @@
       </el-radio-group>
 			</el-space>
 				<el-space>
-						<div class="in-title" style="margin-left:-60px;" >银行logo：</div>
-              <upload-picture  v-model:logourl="logo" ref="child">
+						<div class="in-title" style="margin-left:-60px;" >产品封面</div>
+              <upload-picture  v-model:logourl="CoverImage" ref="child">
 
 							</upload-picture>
 				</el-space>
+			<el-space>
+				<div class="in-title">产品简介：</div>
+				<el-input  :rows="3"  type="textarea" class="in-input" v-model="editItem.introduction"></el-input>
+			</el-space> 
 
 
 			<el-space>
@@ -68,7 +100,7 @@
 <script>
 import uploadFile  from "../../components/uploadPicture.vue"
 	export default {
-		name: "bank-manager",
+		name: "product-manager",
 		beforeRouteEnter(to, from, next) {
 			next(vm => {
 				vm.getTableHeight();
@@ -77,8 +109,8 @@ import uploadFile  from "../../components/uploadPicture.vue"
 		},
 		data() {
 			return {
-			//: 'http://localhost:8003/v1/Upload/Image',
-				bankName: '',
+			uploadUrl: 'http://localhost:8003/v1/Upload/Image',
+				productName: '',
 				contentHeight: '0px',
 				pageIndex: 1,
 				pageSize: 20,
@@ -86,9 +118,9 @@ import uploadFile  from "../../components/uploadPicture.vue"
 				tableData: [],
 				loading: false,
 				windowStatus: false,
-				editItem: {isEnable:"0",logo:''},
+				editItem: {isEnable:"0",CoverImage:''},
 				windowSaving: false,
-				logo:'',
+				CoverImage:'',
 			}
 		},
 	components: {
@@ -105,17 +137,67 @@ import uploadFile  from "../../components/uploadPicture.vue"
             },
 						// 上传成功，获取返回的图片地址
             handleUpImage(res){
-                this.editItem.logo = res.data.url;
+                this.editItem.CoverImage = res.data.url;
             },
 			delItem(item) {
+				const ids=[];
+				ids.push(item.id);
 				this.$msgbox({
 					title: '提示',
-					message: '确认删除' + item.levelName + '?',
+					message: '确认删除' + item.productName + '?',
 					showCancelButton: true,
 					beforeClose: (action,instance,done) => {
 						if (action == 'confirm') {
 							this.loading = true;
-							this.$Http.post('AdminBank/BankDelete', {id: item.id}).then(() => {
+							this.$Http.post('AdminProduct/FinancialProductDelete', {ids: ids}).then(() => {
+								this.loadData();
+								done();
+							}).catch(res => {
+								this.$message.error(res.data.message);
+								this.loading = false;
+							})
+						} else {
+							done();
+						}
+					}
+				})
+
+			},
+			upQY(item) {
+				const ids=[];
+				ids.push(item.id);
+				this.$msgbox({
+					title: '提示',
+					message: '确认上架' + item.productName + '?',
+					showCancelButton: true,
+					beforeClose: (action,instance,done) => {
+						if (action == 'confirm') {
+							this.loading = true;
+							this.$Http.post('AdminProduct/FinancialProductTakeOn', {ids: ids}).then(() => {
+								this.loadData();
+								done();
+							}).catch(res => {
+								this.$message.error(res.data.message);
+								this.loading = false;
+							})
+						} else {
+							done();
+						}
+					}
+				})
+
+			},
+			upXJ(item) {
+				const ids=[];
+				ids.push(item.id);
+				this.$msgbox({
+					title: '提示',
+					message: '确认下架' + item.productName + '?',
+					showCancelButton: true,
+					beforeClose: (action,instance,done) => {
+						if (action == 'confirm') {
+							this.loading = true;
+							this.$Http.post('AdminProduct/FinancialProductTakeDown', {ids: ids}).then(() => {
 								this.loadData();
 								done();
 							}).catch(res => {
@@ -130,12 +212,8 @@ import uploadFile  from "../../components/uploadPicture.vue"
 
 			},
 			saveItem() {
-				if (!this.editItem.bankName) {
-					this.$message.error('请输入银行名称');
-					return;
-				}
-				if (!this.editItem.bankCode) {
-					this.$message.error('请输入编码');
+				if (!this.editItem.productName) {
+					this.$message.error('请输入产品名称');
 					return;
 				}
 				if (this.$ObjectUtil.isEmpty(this.editItem.isEnable)) {
@@ -143,9 +221,9 @@ import uploadFile  from "../../components/uploadPicture.vue"
 					return;
 				}
 				this.windowSaving = true;
-				this.editItem.logo=this.logo;//图片路径
+				this.editItem.CoverImage=this.CoverImage;//图片路径
 				if (this.editItem.id) {
-					this.$Http.post('AdminBank/BankUpdate', this.editItem).then(() => {
+					this.$Http.post('AdminProduct/FinanacialProductUpdate', this.editItem).then(() => {
 						this.windowStatus = false;
 						this.loadData()
 					}).catch(res => {
@@ -153,7 +231,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 						this.$message.error(res.data.message)
 					})
 				} else {
-					this.$Http.post('AdminBank/BankCreate', this.editItem).then(() => {
+					this.$Http.post('AdminProduct/FinanacialProductCreate', this.editItem).then(() => {
 						this.windowStatus = false;
 						this.loadData()
 					}).catch(res => {
@@ -171,7 +249,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 			},
 			updItem(item) {
 				setTimeout(()=>{
-					this.$refs.child.updateUrl(item.logo)
+					this.$refs.child.updateUrl(item.CoverImage)
 				},10)
 			
 				this.windowStatus = true;
@@ -196,17 +274,19 @@ import uploadFile  from "../../components/uploadPicture.vue"
 			},
 
 			loadData(page) {
+			
 				let param = {};
-				if (this.bankName) {
-					param.bankName = this.bankName;
+				if (this.productName) {
+					param.productName = this.productName;
 				}
 				if (page) {
-					this.pageIndex = page;
+					this.pageIndex = page-1;
 				}
 				param.pageIndex = this.pageIndex;
 				param.pageSize = this.pageSize;
 				this.loading = true;
-				this.$Http.get('AdminBank/GetBankPagedList', {params: param}).then(res => {
+				this.$Http.get('AdminProduct/GetProductPagedList', {params: param}).then(res => {
+				
 					this.tableData = res.data.data.items;
 					this.total = parseInt(res.data.data.totalCount);
 					this.loading = false;
