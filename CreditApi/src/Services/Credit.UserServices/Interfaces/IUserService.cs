@@ -52,12 +52,6 @@ namespace Credit.UserServices
 
 
         /// <summary>
-        ///  获取今日完成任务次数
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<long> GetUserDayTaskNum(long userId);
-        /// <summary>
         ///  获取用户信息
         /// </summary>
         /// <param name="userId"></param>
