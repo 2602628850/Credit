@@ -91,7 +91,8 @@ public class PayeeBankCardService : IPayeeBankCardService
         payeeBankCard.MinPayeeAmount = input.MinPayeeAmount;
         payeeBankCard.MaxPayeeAmount = input.MaxPayeeAmount;
         payeeBankCard.IsEnable = input.IsEnable;
-        await _freeSql.Update<PayeeBankCard>(payeeBankCard).ExecuteAffrowsAsync();
+        await _freeSql.Update<PayeeBankCard>().SetSource(payeeBankCard).ExecuteAffrowsAsync();
+       //await _freeSql.Update<PayeeBankCard>(payeeBankCard).ExecuteAffrowsAsync();
     }
     
     /// <summary>
@@ -111,7 +112,7 @@ public class PayeeBankCardService : IPayeeBankCardService
         payeeBankCard.IsDeleted = 1;
         payeeBankCard.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         payeeBankCard.DeleteUserId = deleteUserId;
-        await _freeSql.Update<PayeeBankCard>(payeeBankCard).ExecuteAffrowsAsync();
+        await _freeSql.Update<PayeeBankCard>().SetSource(payeeBankCard).ExecuteAffrowsAsync();
     }
 
     /// <summary>

@@ -18,7 +18,7 @@
 				{{ scope.row.isEnable=="1"?"启用":"禁用"}}
 			</template>
 		</el-table-column>
-    <el-table-column prop="" label="操作" align="center" width="130">
+    <el-table-column prop="" label="操作" align="center" width="130"  fixed="right">
 			<template #default="scope">
 				<el-space>
 					<el-button type="primary" size="small" plain @click="updItem(scope.row)">修改</el-button>

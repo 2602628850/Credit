@@ -50,9 +50,9 @@ public class AdminPayeeBankCardController : BaseAdminController
     /// </summary>
     /// <param name="bankCardId"></param>
     [HttpPost]
-    public async Task PayeeBankCardDelete([FromBody]long bankCardId)
+    public async Task PayeeBankCardDelete([FromBody] PayeeBankCardInput bankCard)
     {
-        await _payeeBankCardService.PayeeBankCardDelete(bankCardId, CurrentAdmin.UserId);
+        await _payeeBankCardService.PayeeBankCardDelete(bankCard.Id, CurrentAdmin.UserId);
     }
 
     /// <summary>

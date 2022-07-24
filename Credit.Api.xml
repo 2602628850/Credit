@@ -202,7 +202,7 @@
             </summary>
             <param name="input"></param>
         </member>
-        <member name="M:Credit.Api.Controllers.AdminPayeeBankCardController.PayeeBankCardDelete(System.Int64)">
+        <member name="M:Credit.Api.Controllers.AdminPayeeBankCardController.PayeeBankCardDelete(Credit.PayeeBankCardServices.Dtos.PayeeBankCardInput)">
             <summary>
              收款银行卡删除
             </summary>

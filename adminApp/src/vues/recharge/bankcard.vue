@@ -36,7 +36,7 @@
 		</el-table-column>
    <el-table-column prop="startTime" label="开启时间" width="200" align="center">	</el-table-column>
     <el-table-column prop="endTime" label="关闭时间" width="200" align="center"></el-table-column>
-		<el-table-column prop="" label="操作" align="center" width="130">
+		<el-table-column prop="" label="操作" align="center" width="130"  fixed="right">
 			<template #default="scope">
 				<el-space>
 					<el-button type="primary" size="small" plain @click="updItem(scope.row)">修改</el-button>
@@ -100,39 +100,35 @@
 <el-row>
       <el-col :span="11" :offset="1">
 					<el-form-item label="最低收款金额：">
-		<el-input  v-model="editItem.bindRealName" class="in-input160"></el-input>
+		<el-input  v-model="editItem.minPayeeAmount" class="in-input160"></el-input>
 			</el-form-item>
       </el-col>
       <el-col :span="11" :offset="1">
 				<el-form-item label="最高收款金额：">
-        <el-input  v-model="editItem.bankAddress" class="in-input160"></el-input>
+        <el-input  v-model="editItem.maxPayeeAmount" class="in-input160"></el-input>
 				</el-form-item>
       </el-col>
 			</el-row>
-		
-			<!-- <el-space>
-				<div class="in-title">序号</div>
-				<el-input class="in-input" v-model="editItem.levelSort"></el-input>
-			</el-space>
-			<el-space>
-				<div class="in-title">查卡次数</div>
-				<el-input class="in-input" v-model="editItem.chakaNum"></el-input>
-			</el-space>
-			<el-space>
-				<div class="in-title">收益比例</div>
-				<el-input class="in-input" v-model="editItem.profit">
-					<template #append>%</template>
-				</el-input>
-			</el-space>
-			<el-space>
+			<el-row>
+      <el-col :span="11" :offset="1">
+					<el-form-item label="是否启用：">
+		<el-radio-group v-model="editItem.isEnable"  class="in-input">
+        <el-radio label="1" >启用</el-radio>
+        <el-radio label="0" >禁用</el-radio>
+      </el-radio-group>
+			</el-form-item>
+      </el-col>
+     
+			</el-row>
+					<el-space>
 				<el-button type="primary" @click="saveItem">保存</el-button>
-			</el-space> -->
+			</el-space>
 	</el-dialog>
 </template>
 
 <script>
 	export default {
-		name: "credit-level-manager",
+		name: "BankCard",
 		beforeRouteEnter(to, from, next) {
 			next(vm => {
 				vm.getTableHeight();
@@ -166,18 +162,18 @@
       this.$Http.get('AdminBank/GetBankList').then(res => {
 				this.banks=res.data.data;
 			})
-  
     },
 		methods: {
 			delItem(item) {
 				this.$msgbox({
 					title: '提示',
-					message: '确认删除' + item.levelName + '?',
+					message: '确认删除' + item.cardNo + '?',
 					showCancelButton: true,
 					beforeClose: (action,instance,done) => {
 						if (action == 'confirm') {
 							this.loading = true;
-							this.$Http.post('AdminCreditLevel/CreditLevelDelete', {id: item.id}).then(() => {
+								const urldelete = decodeURI(encodeURI('AdminPayeeBankCard​/PayeeBankCardDelete').replace(/%E2%80%8B/g, ""));
+							this.$Http.post(urldelete, {id: item.id}).then(() => {
 								this.loadData();
 								done();
 							}).catch(res => {
@@ -191,30 +187,36 @@
 				})
 			},
 			saveItem() {
-				if (!this.editItem.levelName) {
-					this.$message.error('请输入等级名称');
+				if (!this.editItem.bankId) {
+					this.$message.error('请选择银行');
 					return;
 				}
-				if (!this.editItem.creditValue) {
-					this.$message.error('请输入等级信用值');
+				if (!this.editItem.cardNo) {
+					this.$message.error('请输入卡号');
 					return;
 				}
-				if (this.$ObjectUtil.isEmpty(this.editItem.levelSort)) {
-					this.$message.error('请输入序号');
+			if (!this.editItem.bindRealName) {
+					this.$message.error('请输入银行卡绑定人');
 					return;
 				}
-				if (!this.editItem.chakaNum) {
-					this.$message.error('请输入查卡次数');
+				if (!this.editItem.bankAddress) {
+					this.$message.error('请输入开户行地址');
 					return;
 				}
-				if (!this.editItem.profit) {
-					this.$message.error('请输入收益比例');
+					if (!this.editItem.minPayeeAmount) {
+					this.$message.error('请输入最低收款金额');
 					return;
 				}
-
+					if (!this.editItem.maxPayeeAmount) {
+					this.$message.error('请输入最高收款金额');
+					return;
+				}
 				this.windowSaving = true;
+				this.editItem.startTime=this.start1+":"+this.start2+":"+this.start3;
+				this.editItem.endTime=this.end1+":"+this.end2+":"+this.end3;
 				if (this.editItem.id) {
-					this.$Http.post('AdminCreditLevel/CreditLevelUpdate', this.editItem).then(() => {
+					const urlcread = decodeURI(encodeURI('AdminPayeeBankCard​/PayeeBankCardUpdate').replace(/%E2%80%8B/g, ""));
+					this.$Http.post(urlcread, this.editItem).then(() => {
 						this.windowStatus = false;
 						this.loadData()
 					}).catch(res => {
@@ -222,7 +224,8 @@
 						this.$message.error(res.data.message)
 					})
 				} else {
-					this.$Http.post('AdminCreditLevel/CreditLevelCreate', this.editItem).then(() => {
+					const urlupdate = decodeURI(encodeURI('AdminPayeeBankCard​/PayeeBankCardCreate').replace(/%E2%80%8B/g, ""));
+					this.$Http.post(urlupdate, this.editItem).then(() => {
 						this.windowStatus = false;
 						this.loadData()
 					}).catch(res => {
@@ -236,11 +239,21 @@
 				this.editItem = {};
 				this.windowStatus = true;
 				this.windowSaving = false;
+			this.editItem.isEnable ='1';
 			},
 			updItem(item) {
 				this.windowStatus = true;
 				this.windowSaving = false;
 				this.editItem = JSON.parse(JSON.stringify(item));
+				var startArray=this.editItem.startTime.split(':');
+				var endArray=this.editItem.endTime.split(':');
+					this.start1=startArray[0];
+					this.start2=startArray[1];
+					this.start3=startArray[2];
+					this.end1=endArray[0];
+					this.end2=endArray[1];
+					this.end3=endArray[2];
+			this.editItem.isEnable =''+ item.isEnable+'';
 			},
 			getTime(time) {
 				return this.$DateUtil.formatUnix(time / 1000);
