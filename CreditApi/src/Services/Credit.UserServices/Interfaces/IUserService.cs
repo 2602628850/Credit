@@ -50,6 +50,13 @@ namespace Credit.UserServices
         /// <returns></returns>
         Task<string> UpdateUserPwd(long userId, string oldPwd, string newPwd);
 
+
+        /// <summary>
+        ///  获取今日完成任务次数
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<long> GetUserDayTaskNum(long userId);
         /// <summary>
         ///  获取用户信息
         /// </summary>

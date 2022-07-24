@@ -65,6 +65,8 @@
 				})
 			},
 			upload() {
+				let token = uni.getStorageSync('token')
+				console.log(token)
 				uni.chooseImage({
 					count: 1,
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
@@ -76,12 +78,11 @@
 							filePath: tempFilePaths[0],
 							name: 'file',
 							formData: {
-								'user': 'test'
+								token: token
 							},
 							success: res => {
 								var data = JSON.parse(JSON.stringify(res.data))
 								var obj = JSON.parse(data)
-								console.log(obj)
 								///this.editItem.xxxx="yyyyy"
 								//console.log(this.editItem) 
 								this.editItem.headImage = obj.data.imgUrl;

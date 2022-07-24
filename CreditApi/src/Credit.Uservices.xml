@@ -339,42 +339,57 @@
              团队注册人数
             </summary>
         </member>
-        <member name="T:Credit.UserServices.Dtos.UserTeamImfoDto">
+        <member name="T:Credit.UserServices.Dtos.UserTaskCompletedCountDto">
+            <summary>
+             用户任务完成次数
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserTaskCompletedCountDto.DayCardRepayCount">
+            <summary>
+              今日信用卡还款次数
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserTaskCompletedCountDto.WeekLoanRepayCount">
+            <summary>
+             本周贷款还款次数
+            </summary>
+        </member>
+        <member name="T:Credit.UserServices.Dtos.UserTeamInfoDto">
             <summary>
             用户团队收益
             </summary>
         </member>
-        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.UserId">
+        <member name="P:Credit.UserServices.Dtos.UserTeamInfoDto.UserId">
             <summary>
             用户Id
             </summary>
         </member>
-        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.TeamRegister">
+        <member name="P:Credit.UserServices.Dtos.UserTeamInfoDto.TeamRegister">
             <summary>
             团队注册人数
             </summary>
         </member>
-        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.TeamMember">
+        <member name="P:Credit.UserServices.Dtos.UserTeamInfoDto.TeamMember">
             <summary>
             团队正式人数
             </summary>
         </member>
-        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.TeamRepayment">
+        <member name="P:Credit.UserServices.Dtos.UserTeamInfoDto.TeamRepayment">
             <summary>
             团队总还款
             </summary>
         </member>
-        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.TeamEstimateRepaymentRevenue">
+        <member name="P:Credit.UserServices.Dtos.UserTeamInfoDto.TeamEstimateRepaymentRevenue">
             <summary>
             预计还款收益
             </summary>
         </member>
-        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.TeamEstimatePurchaseRevenue">
+        <member name="P:Credit.UserServices.Dtos.UserTeamInfoDto.TeamEstimatePurchaseRevenue">
             <summary>
             预计理财购买收益
             </summary>
         </member>
-        <member name="P:Credit.UserServices.Dtos.UserTeamImfoDto.TotalRevenue">
+        <member name="P:Credit.UserServices.Dtos.UserTeamInfoDto.TotalRevenue">
             <summary>
             团队总收益
             </summary>
@@ -555,6 +570,13 @@
             </summary>
             <param name="userId"></param>
         </member>
+        <member name="M:Credit.UserServices.UserService.GetUserTaskCompletedCount(System.Int64)">
+            <summary>
+             获取用户任务完成情况
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
         <member name="M:Credit.UserServices.UserService.TeamChildMembers(System.Int64,System.Collections.Generic.List{Credit.UserModels.Users},System.Int32,System.Int32)">
             <summary>
             获取子级成员
@@ -609,6 +631,13 @@
         <member name="M:Credit.UserServices.IUserService.UpdateUserPwd(System.Int64,System.String,System.String)">
             <summary>
              修改密码
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.GetUserDayTaskNum(System.Int64)">
+            <summary>
+             获取今日完成任务次数
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -710,6 +739,13 @@
         <member name="M:Credit.UserServices.IUserService.UpdateCreditLevel(System.Int64)">
             <summary>
              更新用户信用等级
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.GetUserTaskCompletedCount(System.Int64)">
+            <summary>
+             获取用户完成任务次数
             </summary>
             <param name="userId"></param>
             <returns></returns>

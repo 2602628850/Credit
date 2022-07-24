@@ -43,8 +43,6 @@
 		</view>
 
 	</app-content-view>
-	<button @click="quitLogin()" type="primary"
-		style="background-color:#fce1e1;color: red;">{{$t('setUp.LoginOut')}}</button>
 </template>
 
 <script>
@@ -93,12 +91,6 @@
 				uni.navigateTo({
 					url: uri
 				})
-			},
-			quitLogin() {
-				// location.reload()
-				localStorage.clear()
-				window.sessionStorage.clear()
-				this.$router.push('/pages/login/login')
 			},
 			getLineStyle(item, index) {
 				if (item.length == 1) {

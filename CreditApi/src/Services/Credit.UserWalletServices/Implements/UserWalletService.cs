@@ -51,7 +51,7 @@ public class UserWalletService : IUserWalletService
     /// </summary>
     /// <param name="input"></param>
     /// <param name="userId"></param>
-    public async Task<string> MoneyApplyCreate(MoneyApplyInput input,long userId)
+    public async Task<string> MoneyApplyCreate(MoneyApplyInput input, long userId)
     {
         if (input.Amount <= 0)
             return "Please enter the amount";
@@ -80,7 +80,7 @@ public class UserWalletService : IUserWalletService
                 if (input.PayeeBankCardId == 0)
                     return "Please contact customer service";
                 //查找对应收款卡
-                var bankCard = await _payeeBankCardService.GetAvailablePayeeBankCards(bankCardId:input.PayeeBankCardId);
+                var bankCard = await _payeeBankCardService.GetAvailablePayeeBankCards(bankCardId: input.PayeeBankCardId);
                 if (bankCard == null)
                     return "Please contact customer service";
                 var payText = $"卡号：{bankCard.CardNo}, 收到充值款{input.Amount}.";
@@ -97,7 +97,7 @@ public class UserWalletService : IUserWalletService
             //线上支付
             else if (input.Type?.ToLower() == PayTypeConsts.Payment)
             {
-            
+
             }
             else
             {
@@ -110,7 +110,7 @@ public class UserWalletService : IUserWalletService
             //提款金额
             if (input.Amount > user.Balance)
                 return "Insufficient balance";
-            
+
             //查找用户银行卡
             var userBankCard = await _userBankCardService.GetUserBankCardList(userId, input.PayeeBankCardId);
             if (userBankCard.Count == 0)
@@ -125,7 +125,7 @@ public class UserWalletService : IUserWalletService
             using (var uow = _freeSql.CreateUnitOfWork())
             {
                 //添加申请
-                 await _freeSql.Insert(moneyApply).InsertTableTime(TableTimeFormat.Year).ExecuteAffrowsAsync();
+                await _freeSql.Insert(moneyApply).InsertTableTime(TableTimeFormat.Year).ExecuteAffrowsAsync();
                 await WalletRecordCreate(new UserWalletRecordInput
                 {
                     UserId = userId,
@@ -179,7 +179,7 @@ public class UserWalletService : IUserWalletService
             //线上支付
             else if (input.Type?.ToLower() == PayTypeConsts.Payment)
             {
-            
+
             }
             else
             {
@@ -193,33 +193,33 @@ public class UserWalletService : IUserWalletService
         return "0";
     }
 
-   /// <summary>
-   ///  获取资金变动申请列表
-   /// </summary>
-   /// <param name="input"></param>
-   /// <returns></returns>
-   public async Task<PagedOutput<MoneyApplyDto>> GetMoneyApplyPagedList(MoneyApplyPagedInput input)
-   {
-       if (!input.StartTime.HasValue)
-           input.StartTime = new DateTimeOffset(DateTime.UtcNow.Date).ToUnixTimeMilliseconds();
-       if (!input.EndTime.HasValue)
-           input.EndTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-       var list = await _freeSql.Select<UserMoneyApply>()
-           .WhereTableTime(TableTimeFormat.Year, input.StartTime.Value, input.EndTime.Value)
-           .WhereIf(input.UserId.HasValue, s => s.UserId == input.UserId)
-           .WhereIf(!string.IsNullOrEmpty(input.Username),
-               s => _freeSql.Select<Users>()
-                   .Where(u => u.Username.Contains(input.Username) || u.Nickname.Contains(input.Username))
-                   .ToList(u => u.Id).Contains(s.UserId))
-           .WhereIf(input.Source.HasValue, s => s.SourceType == input.Source)
-           .WhereIf(input.Status.HasValue, s => s.AuditStatus == input.Status)
-           .Where(s => s.CreateAt >= input.StartTime.Value && s.CreateAt <= input.EndTime.Value)
-           .Where(s => s.IsDeleted == 0)
-           .OrderByDescending(s => s.CreateAt)
-           .Count(out long totalCount)
-           .Page(input.PageIndex, input.PageSize)
-           .ToListAsync(s => new MoneyApplyDto
-           {
+    /// <summary>
+    ///  获取资金变动申请列表
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    public async Task<PagedOutput<MoneyApplyDto>> GetMoneyApplyPagedList(MoneyApplyPagedInput input)
+    {
+        if (!input.StartTime.HasValue)
+            input.StartTime = new DateTimeOffset(DateTime.UtcNow.Date).ToUnixTimeMilliseconds();
+        if (!input.EndTime.HasValue)
+            input.EndTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        var list = await _freeSql.Select<UserMoneyApply>()
+            .WhereTableTime(TableTimeFormat.Year, input.StartTime.Value, input.EndTime.Value)
+            .WhereIf(input.UserId.HasValue, s => s.UserId == input.UserId)
+            .WhereIf(!string.IsNullOrEmpty(input.Username),
+                s => _freeSql.Select<Users>()
+                    .Where(u => u.Username.Contains(input.Username) || u.Nickname.Contains(input.Username))
+                    .ToList(u => u.Id).Contains(s.UserId))
+            .WhereIf(input.Source.HasValue, s => s.SourceType == input.Source)
+            .WhereIf(input.Status.HasValue, s => s.AuditStatus == input.Status)
+            .Where(s => s.CreateAt >= input.StartTime.Value && s.CreateAt <= input.EndTime.Value)
+            .Where(s => s.IsDeleted == 0)
+            .OrderByDescending(s => s.CreateAt)
+            .Count(out long totalCount)
+            .Page(input.PageIndex, input.PageSize)
+            .ToListAsync(s => new MoneyApplyDto
+            {
                 ApplyId = s.Id,
                 Amount = s.Amount,
                 UserId = s.UserId,
@@ -233,411 +233,425 @@ public class UserWalletService : IUserWalletService
                 PayText = s.PayText,
                 Remark = s.Remark,
                 CreateAt = s.CreateAt
-           });
-       var userIds = list.Select(s => s.UserId);
-       var auditUserIds = list.Select(s => s.AuditUserId);
-       var paymentInfoIds = list.Select(s => s.PaymentInfoId);
-       var users = await _freeSql.Select<Users>().Where(s => userIds.Contains(s.Id)).ToListAsync();
-       var auditUsers = await _freeSql.Select<Users>().Where(s => auditUserIds.Contains(s.Id)).ToListAsync();
-       var paymentInfos = await _freeSql.Select<PaymentInfos>().Where(s => paymentInfoIds.Contains(s.Id)).ToListAsync();
-       list.ForEach(item =>
-       {
-           item.Username = users.FirstOrDefault(s => s.Id == item.UserId)?.Username ?? String.Empty;
-           item.Nickname = users.FirstOrDefault(s => s.Id == item.UserId)?.Nickname ?? String.Empty;
-           item.AuditUsername = auditUsers.FirstOrDefault(s => s.Id == item.AuditUserId)?.Username ?? string.Empty;
-           item.AuditNickname = auditUsers.FirstOrDefault(s => s.Id == item.AuditUserId)?.Nickname ?? string.Empty;
-           item.PaymentInfoName = paymentInfos.FirstOrDefault(s => s.Id == item.PaymentInfoId)?.DisplayName ?? string.Empty;
-           
-       });
+            });
+        var userIds = list.Select(s => s.UserId);
+        var auditUserIds = list.Select(s => s.AuditUserId);
+        var paymentInfoIds = list.Select(s => s.PaymentInfoId);
+        var users = await _freeSql.Select<Users>().Where(s => userIds.Contains(s.Id)).ToListAsync();
+        var auditUsers = await _freeSql.Select<Users>().Where(s => auditUserIds.Contains(s.Id)).ToListAsync();
+        var paymentInfos = await _freeSql.Select<PaymentInfos>().Where(s => paymentInfoIds.Contains(s.Id)).ToListAsync();
+        list.ForEach(item =>
+        {
+            item.Username = users.FirstOrDefault(s => s.Id == item.UserId)?.Username ?? String.Empty;
+            item.Nickname = users.FirstOrDefault(s => s.Id == item.UserId)?.Nickname ?? String.Empty;
+            item.AuditUsername = auditUsers.FirstOrDefault(s => s.Id == item.AuditUserId)?.Username ?? string.Empty;
+            item.AuditNickname = auditUsers.FirstOrDefault(s => s.Id == item.AuditUserId)?.Nickname ?? string.Empty;
+            item.PaymentInfoName = paymentInfos.FirstOrDefault(s => s.Id == item.PaymentInfoId)?.DisplayName ?? string.Empty;
 
-       var output = new PagedOutput<MoneyApplyDto>
-       {
-           TotalCount = totalCount,
-           Items = list
-       };
+        });
 
-       return output;
-   }
-    
+        var output = new PagedOutput<MoneyApplyDto>
+        {
+            TotalCount = totalCount,
+            Items = list
+        };
 
-   /// <summary>
-   ///  资金变动申请审核
-   /// </summary>
-   /// <param name="input"></param>
-   /// <param name="auditUserId"></param>
-   /// <returns></return
-   public async Task MoneyApplyAudit(MoneyApplyAuditInput input, long auditUserId)
-   {
-       if (input.Status == AuditStatusEnums.Ing)
-       {
-           await MoneyApplyAuditIng(input.MoneyApplyId,input.AuditText,auditUserId);
-       }
-       else if (input.Status == AuditStatusEnums.Success)
-       {
-           await MoneyApplyAuditSuccess(input.MoneyApplyId,input.AuditText,auditUserId);
-       }
-       else if (input.Status == AuditStatusEnums.Fail)
-       {
-           await MoneyApplyAuditFail(input.MoneyApplyId,input.AuditText,auditUserId);
-       }
-       else
-       {
-           throw new MyException("Review status error");
-       }
-   }
+        return output;
+    }
 
-   /// <summary>
-   ///  资金变动记录添加
-   /// </summary>
-   /// <param name="input"></param>
-   public async Task WalletRecordCreate(UserWalletRecordInput input)
-   {
-       var user = await _freeSql.Select<Users>()
-           .Where(s => s.IsDeleted == 0 && s.Id == input.UserId)
-           .ToOneAsync();
-       if (user == null)
-           throw new MyException("Data error");
-       WalletChangeEnums changeType = WalletChangeEnums.In;
 
-       #region 余额变动
+    /// <summary>
+    ///  资金变动申请审核
+    /// </summary>
+    /// <param name="input"></param>
+    /// <param name="auditUserId"></param>
+    /// <returns></return
+    public async Task MoneyApplyAudit(MoneyApplyAuditInput input, long auditUserId)
+    {
+        if (input.Status == AuditStatusEnums.Ing)
+        {
+            await MoneyApplyAuditIng(input.MoneyApplyId, input.AuditText, auditUserId);
+        }
+        else if (input.Status == AuditStatusEnums.Success)
+        {
+            await MoneyApplyAuditSuccess(input.MoneyApplyId, input.AuditText, auditUserId);
+        }
+        else if (input.Status == AuditStatusEnums.Fail)
+        {
+            await MoneyApplyAuditFail(input.MoneyApplyId, input.AuditText, auditUserId);
+        }
+        else
+        {
+            throw new MyException("Review status error");
+        }
+    }
 
-       if (input.SourceType == WalletSourceEnums.Recharge
-           || input.SourceType == WalletSourceEnums.WithdrawalReturn
-           || input.SourceType == WalletSourceEnums.WithdrawalUnFreeze
-           || input.SourceType == WalletSourceEnums.BuyFinancilReturn
-           || input.SourceType == WalletSourceEnums.SoldFinancil
-           || input.SourceType == WalletSourceEnums.CardRepayment
-           || input.SourceType == WalletSourceEnums.RepayProfit
-           || input.SourceType == WalletSourceEnums.FinancilProfit)
-       {
-           user.Balance += input.Amount;
-       }
-       else if (input.SourceType == WalletSourceEnums.WithdrawalApply
-                || input.SourceType == WalletSourceEnums.Withdrawal
-                || input.SourceType == WalletSourceEnums.BuyFinancil)
-       {
-           if (input.Amount >= user.Balance)
-               throw new MyException("Insufficient balance");
-           user.Balance -= input.Amount;
-           changeType = WalletChangeEnums.Out;
-       }
-       else
-       {
-           throw new MyException("Wallet source error");
-       }
+    /// <summary>
+    ///  资金变动记录添加
+    /// </summary>
+    /// <param name="input"></param>
+    public async Task WalletRecordCreate(UserWalletRecordInput input)
+    {
+        var user = await _freeSql.Select<Users>()
+            .Where(s => s.IsDeleted == 0 && s.Id == input.UserId)
+            .ToOneAsync();
+        if (user == null)
+            throw new MyException("Data error");
+        WalletChangeEnums changeType = WalletChangeEnums.In;
 
-       #endregion
+        #region 余额变动
 
-       #region 冻结资金变动
+        if (input.SourceType == WalletSourceEnums.Recharge
+            || input.SourceType == WalletSourceEnums.WithdrawalReturn
+            || input.SourceType == WalletSourceEnums.WithdrawalUnFreeze
+            || input.SourceType == WalletSourceEnums.BuyFinancilReturn
+            || input.SourceType == WalletSourceEnums.SoldFinancil
+            || input.SourceType == WalletSourceEnums.CardRepayment
+            || input.SourceType == WalletSourceEnums.RepayProfit
+            || input.SourceType == WalletSourceEnums.FinancilProfit)
+        {
+            user.Balance += input.Amount;
+        }
+        else if (input.SourceType == WalletSourceEnums.WithdrawalApply
+                 || input.SourceType == WalletSourceEnums.Withdrawal
+                 || input.SourceType == WalletSourceEnums.BuyFinancil)
+        {
+            if (input.Amount >= user.Balance)
+                throw new MyException("Insufficient balance");
+            user.Balance -= input.Amount;
+            changeType = WalletChangeEnums.Out;
+        }
+        else
+        {
+            throw new MyException("Wallet source error");
+        }
 
-       if (input.SourceType == WalletSourceEnums.WithdrawalApply)
-       {
-           user.FreezeFunds += input.Amount;
-       }
+        #endregion
 
-       if (input.SourceType == WalletSourceEnums.WithdrawalUnFreeze)
-       {
-           user.FreezeFunds -= input.Amount;
-       }
+        #region 冻结资金变动
 
-       #endregion
-   
-       var newRecord = new UserWalletRecord
-       {
-           Id = IdHelper.GetId(),
-           SourceType = input.SourceType,
-           UserId = input.UserId,
-           Amount = input.Amount,
-           ChangeType = changeType,
-           OperationType = input.OperateType,
-           OperateUserId = input.OperateUserId,
-           Balance = user.Balance
-       };
-       _freeSql.Transaction(() =>
-       {
+        if (input.SourceType == WalletSourceEnums.WithdrawalApply)
+        {
+            user.FreezeFunds += input.Amount;
+        }
+
+        if (input.SourceType == WalletSourceEnums.WithdrawalUnFreeze)
+        {
+            user.FreezeFunds -= input.Amount;
+        }
+
+        #endregion
+
+        var newRecord = new UserWalletRecord
+        {
+            Id = IdHelper.GetId(),
+            SourceType = input.SourceType,
+            UserId = input.UserId,
+            Amount = input.Amount,
+            ChangeType = changeType,
+            OperationType = input.OperateType,
+            OperateUserId = input.OperateUserId,
+            Balance = user.Balance
+        };
+        _freeSql.Transaction(() =>
+        {
            //修改用户余额信息
-           _freeSql.Update<Users>(user.Id)
-               .SetDto(new {FreezeFunds = user.FreezeFunds,Balance = user.Balance}).ExecuteAffrows();
+            _freeSql.Update<Users>(user.Id)
+                .SetDto(new { FreezeFunds = user.FreezeFunds, Balance = user.Balance }).ExecuteAffrows();
            //添加资金变动记录
-           _freeSql.Insert(newRecord).InsertTableTime(TableTimeFormat.Month).ExecuteAffrows();
-       });
-   }
+            _freeSql.Insert(newRecord).InsertTableTime(TableTimeFormat.Month).ExecuteAffrows();
+        });
+    }
 
-   /// <summary>
-   ///  获取资金变动明细列表
-   /// </summary>
-   /// <param name="input"></param>
-   /// <returns></returns>
-   /// <exception cref="NotImplementedException"></exception>
-   public async Task<PagedOutput<UserWalletRecordDto>> GetUserWalletRecordPagedList(WalletRecordPagedInput input)
-   {
-       if (input.StartTime == 0)
-           input.StartTime = DateTimeHelper.DayStart();
-       if (input.EndTime == 0)
-           input.StartTime = DateTimeHelper.UtcNow();
-       var list = await _freeSql.Select<UserWalletRecord>()
-           .WhereTableTime(TableTimeFormat.Month, input.StartTime, input.EndTime)
-           .WhereIf(input.UserId.HasValue, s => s.UserId == input.UserId)
-           .WhereIf(input.WalletSource.HasValue, s => s.SourceType == input.WalletSource)
-           .Where(s => s.CreateAt >= input.StartTime && s.CreateAt <= input.EndTime)
-           .Where(s => s.IsDeleted == 0)
-           .Count(out long totalCount)
-           .Page(input.PageIndex,input.PageSize)
-           .ToListAsync();
-       var items = list.MapToList<UserWalletRecordDto>();
-       var userIds = list.Select(s => s.UserId).Union(list.Select(s => s.OperateUserId));
-       var users = await _freeSql.Select<Users>()
-           .Where(s => userIds.Contains(s.Id))
-           .ToListAsync();
-       
-       items.ForEach(item =>
-       {
-           item.Username = users.FirstOrDefault(s => s.Id == item.UserId)?.Username ?? string.Empty;
-           item.Nickname = users.FirstOrDefault(s => s.Id == item.UserId)?.Nickname ?? string.Empty;
-           item.OperateNickname = users.FirstOrDefault(s => s.Id == item.OperateUserId)?.Nickname ?? string.Empty;
-           item.OperateUsername = users.FirstOrDefault(s => s.Id == item.OperateUserId)?.Username ?? string.Empty;
-           item.OperateTypeText = EnumHelper.GetDescription(item.OperateType);
-           item.SourceTypeText = EnumHelper.GetDescription(item.SourceType);
-           item.ChangeTypeText = item.ChangeType == WalletChangeEnums.In ? "+" : "-";
-       });
-       
-       var output = new PagedOutput<UserWalletRecordDto>
-       {
-           TotalCount = totalCount,
-           Items = items
-       };
-       return output;
-   }
+    /// <summary>
+    ///  获取资金变动明细列表
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public async Task<PagedOutput<UserWalletRecordDto>> GetUserWalletRecordPagedList(WalletRecordPagedInput input)
+    {
+        if (input.StartTime == 0)
+            input.StartTime = DateTimeHelper.DayStart();
+        if (input.EndTime == 0)
+            input.StartTime = DateTimeHelper.UtcNow();
+        var list = await _freeSql.Select<UserWalletRecord>()
+            .WhereTableTime(TableTimeFormat.Month, input.StartTime, input.EndTime)
+            .WhereIf(input.UserId.HasValue, s => s.UserId == input.UserId)
+            .WhereIf(input.WalletSource.HasValue, s => s.SourceType == input.WalletSource)
+            .Where(s => s.CreateAt >= input.StartTime && s.CreateAt <= input.EndTime)
+            .Where(s => s.IsDeleted == 0)
+            .Count(out long totalCount)
+            .Page(input.PageIndex, input.PageSize)
+            .ToListAsync();
+        var items = list.MapToList<UserWalletRecordDto>();
+        var userIds = list.Select(s => s.UserId).Union(list.Select(s => s.OperateUserId));
+        var users = await _freeSql.Select<Users>()
+            .Where(s => userIds.Contains(s.Id))
+            .ToListAsync();
 
-   /// <summary>
-   ///  获取资金申请（最多可获取一年前的数据）
-   /// </summary>
-   /// <param name="moneyApplyId"></param>
-   /// <returns></returns>
-   private async Task<UserMoneyApply> GetMoneyApply(long moneyApplyId)
-   {
-       //数据跨年查一次防止跨年数据
-       var timeStart = new DateTimeOffset(DateTime.UtcNow.AddYears(-1)).ToUnixTimeMilliseconds();
-       var timeEnd = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-       var moneyApply = await _freeSql.Select<UserMoneyApply>()
-           .WhereTableTime(TableTimeFormat.Year, timeStart, timeEnd)
-           .Where(s => s.Id == moneyApplyId)
-           .Where(s => s.IsDeleted == 0)
-           .ToOneAsync();
-       return moneyApply;
-   }
+        items.ForEach(item =>
+        {
+            item.Username = users.FirstOrDefault(s => s.Id == item.UserId)?.Username ?? string.Empty;
+            item.Nickname = users.FirstOrDefault(s => s.Id == item.UserId)?.Nickname ?? string.Empty;
+            item.OperateNickname = users.FirstOrDefault(s => s.Id == item.OperateUserId)?.Nickname ?? string.Empty;
+            item.OperateUsername = users.FirstOrDefault(s => s.Id == item.OperateUserId)?.Username ?? string.Empty;
+            item.OperateTypeText = EnumHelper.GetDescription(item.OperateType);
+            item.SourceTypeText = EnumHelper.GetDescription(item.SourceType);
+            item.ChangeTypeText = item.ChangeType == WalletChangeEnums.In ? "+" : "-";
+        });
 
-   /// <summary>
-   ///  资金变动申请标记审核中
-   /// </summary>
-   /// <param name="moneyApplyId"></param>
-   /// <param name="auditText"></param>
-   /// <param name="auditUserId"></param>
-   public async Task MoneyApplyAuditIng(long moneyApplyId,string auditText,long auditUserId)
-   {
-       var moneyApply = await GetMoneyApply(moneyApplyId);
-       if (moneyApply == null)
-           throw new MyException("Application does not exist");
-       if (moneyApply.AuditStatus == AuditStatusEnums.Ing)
-           throw new MyException("Review status has not changed");
-       if (moneyApply.AuditStatus != AuditStatusEnums.Default)
-           throw new MyException("Has been reviewed");
-       var utcNow = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-       //数据分表年份
-       var tableYear = DateTimeOffset.FromUnixTimeMilliseconds(moneyApply.CreateAt).Year;
-       //更新数据
-       await _freeSql.Update<UserMoneyApply>(moneyApply).UpdateTableTime(TableTimeFormat.Year,moneyApply.CreateAt)
-           .SetDto(new
-           {
-               AuditAt = utcNow,
-               AuditStatus = AuditStatusEnums.Ing,
-               AuditText = auditText,
-               AuditUserId = auditUserId,
-               UpdateAt = utcNow
-           }).ExecuteAffrowsAsync();
-   }
+        var output = new PagedOutput<UserWalletRecordDto>
+        {
+            TotalCount = totalCount,
+            Items = items
+        };
+        return output;
+    }
 
-   /// <summary>
-   ///  资金变动申请标记失败
-   /// </summary>
-   /// <param name="moneyApplyId"></param>
-   /// <param name="auditText"></param>
-   /// <param name="auditUserId"></param>
-   public async Task MoneyApplyAuditFail(long moneyApplyId,string auditText,long auditUserId)
-   {
-       var moneyApply = await GetMoneyApply(moneyApplyId);
-       if (moneyApply == null)
-           throw new MyException("Application does not exist");
-       if (moneyApply.AuditStatus == AuditStatusEnums.Fail)
-           throw new MyException("Review status has not changed");
-       if (moneyApply.AuditStatus != AuditStatusEnums.Default && moneyApply.AuditStatus != AuditStatusEnums.Ing)
-           throw new MyException("Has been reviewed");
-       if (string.IsNullOrEmpty(auditText))
-           throw new MyException("Please fill in the reason for failure");
-       //如果提款审核失败，需要解冻用户资金
-       var user = await _freeSql.Select<Users>().Where(s => s.Id == moneyApply.UserId)
-           .Where(s => s.IsDeleted == 0)
-           .ToOneAsync();
-       //修改申请数据
-       var utcNow = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-       using (var uow = _freeSql.CreateUnitOfWork())
-       {
-           //更新修改申请信息
-           await _freeSql.Update<UserMoneyApply>(moneyApply.Id).UpdateTableTime(TableTimeFormat.Year,moneyApply.CreateAt)
-               .SetDto(new
-               {
-                   AuditAt = utcNow,
-                   AuditStatus = AuditStatusEnums.Fail,
-                   AuditText = auditText,
-                   AuditUserId = auditUserId,
-                   UpdateAt = utcNow
-               })
-               .ExecuteAffrowsAsync();
-           //添加用户资金记录
-           if (moneyApply.SourceType == WalletSourceEnums.WithdrawalApply)
-           {
-               await WalletRecordCreate(new UserWalletRecordInput
-               {
-                   UserId = moneyApply.UserId,
-                   SourceType = WalletSourceEnums.WithdrawalReturn,
-                   OperateUserId = auditUserId,
-                   Amount = moneyApply.Amount,
-                   OperateType = WalletOperateEnums.Admin
-               });
-           }
-       }
-   }
+    /// <summary>
+    ///  获取资金申请（最多可获取一年前的数据）
+    /// </summary>
+    /// <param name="moneyApplyId"></param>
+    /// <returns></returns>
+    private async Task<UserMoneyApply> GetMoneyApply(long moneyApplyId)
+    {
+        //数据跨年查一次防止跨年数据
+        var timeStart = new DateTimeOffset(DateTime.UtcNow.AddYears(-1)).ToUnixTimeMilliseconds();
+        var timeEnd = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        var moneyApply = await _freeSql.Select<UserMoneyApply>()
+            .WhereTableTime(TableTimeFormat.Year, timeStart, timeEnd)
+            .Where(s => s.Id == moneyApplyId)
+            .Where(s => s.IsDeleted == 0)
+            .ToOneAsync();
+        return moneyApply;
+    }
 
-   /// <summary>
-   ///  资金变动申请标记成功
-   /// </summary>
-   /// <param name="moneyApplyId"></param>
-   /// <param name="auditText"></param>
-   /// <param name="auditUserId"></param>
-   public async Task MoneyApplyAuditSuccess(long moneyApplyId,string auditText,long auditUserId)
-   {
-       var moneyApply = await GetMoneyApply(moneyApplyId);
-       if (moneyApply == null)
-           throw new MyException("Application does not exist");
-       if (moneyApply.AuditStatus == AuditStatusEnums.Success)
-           throw new MyException("Review status has not changed");
-       if (moneyApply.AuditStatus != AuditStatusEnums.Default && moneyApply.AuditStatus != AuditStatusEnums.Ing)
-           throw new MyException("Has been reviewed");
-       var user = await _freeSql.Select<Users>()
-           .Where(s => s.Id == moneyApply.UserId && s.IsDeleted == 0)
-           .ToOneAsync();
-       var repayProfitAmount = 0m;
-       var intergral = 0;
-       if (moneyApply.SourceType == WalletSourceEnums.CardRepayApply
+    /// <summary>
+    ///  资金变动申请标记审核中
+    /// </summary>
+    /// <param name="moneyApplyId"></param>
+    /// <param name="auditText"></param>
+    /// <param name="auditUserId"></param>
+    public async Task MoneyApplyAuditIng(long moneyApplyId, string auditText, long auditUserId)
+    {
+        var moneyApply = await GetMoneyApply(moneyApplyId);
+        if (moneyApply == null)
+            throw new MyException("Application does not exist");
+        if (moneyApply.AuditStatus == AuditStatusEnums.Ing)
+            throw new MyException("Review status has not changed");
+        if (moneyApply.AuditStatus != AuditStatusEnums.Default)
+            throw new MyException("Has been reviewed");
+        var utcNow = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        //数据分表年份
+        var tableYear = DateTimeOffset.FromUnixTimeMilliseconds(moneyApply.CreateAt).Year;
+        //更新数据
+        await _freeSql.Update<UserMoneyApply>(moneyApply).UpdateTableTime(TableTimeFormat.Year, moneyApply.CreateAt)
+            .SetDto(new
+            {
+                AuditAt = utcNow,
+                AuditStatus = AuditStatusEnums.Ing,
+                AuditText = auditText,
+                AuditUserId = auditUserId,
+                UpdateAt = utcNow
+            }).ExecuteAffrowsAsync();
+    }
+
+    /// <summary>
+    ///  资金变动申请标记失败
+    /// </summary>
+    /// <param name="moneyApplyId"></param>
+    /// <param name="auditText"></param>
+    /// <param name="auditUserId"></param>
+    public async Task MoneyApplyAuditFail(long moneyApplyId, string auditText, long auditUserId)
+    {
+        var moneyApply = await GetMoneyApply(moneyApplyId);
+        if (moneyApply == null)
+            throw new MyException("Application does not exist");
+        if (moneyApply.AuditStatus == AuditStatusEnums.Fail)
+            throw new MyException("Review status has not changed");
+        if (moneyApply.AuditStatus != AuditStatusEnums.Default && moneyApply.AuditStatus != AuditStatusEnums.Ing)
+            throw new MyException("Has been reviewed");
+        if (string.IsNullOrEmpty(auditText))
+            throw new MyException("Please fill in the reason for failure");
+        //如果提款审核失败，需要解冻用户资金
+        var user = await _freeSql.Select<Users>().Where(s => s.Id == moneyApply.UserId)
+            .Where(s => s.IsDeleted == 0)
+            .ToOneAsync();
+        //修改申请数据
+        var utcNow = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        using (var uow = _freeSql.CreateUnitOfWork())
+        {
+            //更新修改申请信息
+            await _freeSql.Update<UserMoneyApply>(moneyApply.Id).UpdateTableTime(TableTimeFormat.Year, moneyApply.CreateAt)
+                .SetDto(new
+                {
+                    AuditAt = utcNow,
+                    AuditStatus = AuditStatusEnums.Fail,
+                    AuditText = auditText,
+                    AuditUserId = auditUserId,
+                    UpdateAt = utcNow
+                })
+                .ExecuteAffrowsAsync();
+            //添加用户资金记录
+            if (moneyApply.SourceType == WalletSourceEnums.WithdrawalApply)
+            {
+                await WalletRecordCreate(new UserWalletRecordInput
+                {
+                    UserId = moneyApply.UserId,
+                    SourceType = WalletSourceEnums.WithdrawalReturn,
+                    OperateUserId = auditUserId,
+                    Amount = moneyApply.Amount,
+                    OperateType = WalletOperateEnums.Admin
+                });
+            }
+        }
+    }
+
+    /// <summary>
+    ///  资金变动申请标记成功
+    /// </summary>
+    /// <param name="moneyApplyId"></param>
+    /// <param name="auditText"></param>
+    /// <param name="auditUserId"></param>
+    public async Task MoneyApplyAuditSuccess(long moneyApplyId, string auditText, long auditUserId)
+    {
+        var moneyApply = await GetMoneyApply(moneyApplyId);
+        if (moneyApply == null)
+            throw new MyException("Application does not exist");
+        if (moneyApply.AuditStatus == AuditStatusEnums.Success)
+            throw new MyException("Review status has not changed");
+        if (moneyApply.AuditStatus != AuditStatusEnums.Default && moneyApply.AuditStatus != AuditStatusEnums.Ing)
+            throw new MyException("Has been reviewed");
+        var user = await _freeSql.Select<Users>()
+            .Where(s => s.Id == moneyApply.UserId && s.IsDeleted == 0)
+            .ToOneAsync();
+        var repayProfitAmount = 0m;
+        var intergral = 0;
+        var creditvalue = 0;
+        if (moneyApply.SourceType == WalletSourceEnums.CardRepayApply
            || moneyApply.SourceType == WalletSourceEnums.LoanRepayApply)
-       {
-           var repayCard = await _freeSql.Select<RepayBankCard>()
-               .Where(s => s.Id == moneyApply.PayeeBankCardId)
-               .ToOneAsync();
-           var repayLevel = await _freeSql.Select<RepayLevel>()
-               .Where(s => s.Id == repayCard.RepayLevelId)
-               .ToOneAsync();
-           repayProfitAmount = moneyApply.Amount * repayLevel.ProfitRate * 0.01m;
-           
-           //获取用户今日完成信用卡代还任务次数
-           var userTaskCount = await _userService.GetUserTaskCompletedCount(moneyApply.UserId);
-           //获取积分任务设置
-           var taskIntergralSetting = await _settingService.GetSetting<TaskIntegralSetting>();
-           if (moneyApply.SourceType == WalletSourceEnums.CardRepayApply)
-           {
-               if (userTaskCount.DayCardRepayCount < taskIntergralSetting.CardRepayIntegralCountLimit)
-               {
-                   intergral = taskIntergralSetting.CardRepayIntegral;
-               }
-           }
-           else
-           {
-               if (userTaskCount.WeekLoanRepayCount < taskIntergralSetting.LoanRepayIntegralCountLimit)
-               {
-                   intergral = taskIntergralSetting.LoanRepayIntegral;
-               }
-           }
-       }
+        {
+            var repayCard = await _freeSql.Select<RepayBankCard>()
+                .Where(s => s.Id == moneyApply.PayeeBankCardId)
+                .ToOneAsync();
+            var repayLevel = await _freeSql.Select<RepayLevel>()
+                .Where(s => s.Id == repayCard.RepayLevelId)
+                .ToOneAsync();
+            repayProfitAmount = moneyApply.Amount * repayLevel.ProfitRate * 0.01m;
 
-       var utcNow = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            //获取用户今日完成信用卡代还任务次数
+            var userTaskCount = await _userService.GetUserTaskCompletedCount(moneyApply.UserId);
+            //获取积分任务设置
+            var taskIntergralSetting = await _settingService.GetSetting<TaskIntegralSetting>();
+            var everydayTaskCreditSetting = await _settingService.GetSetting<TaskCreditSetting>();
+            if (moneyApply.SourceType == WalletSourceEnums.CardRepayApply)
+            {
+                if (userTaskCount.DayCardRepayCount < taskIntergralSetting.CardRepayIntegralCountLimit)
+                {
+                    intergral = taskIntergralSetting.CardRepayIntegral;
 
-       using (var uow = _freeSql.CreateUnitOfWork())
-       {
-           //修改资金申请信息
-           await _freeSql.Update<UserMoneyApply>(moneyApply.Id).UpdateTableTime(TableTimeFormat.Year,moneyApply.CreateAt)
-               .SetDto(new
-               {
-                   AuditAt = utcNow,
-                   AuditStatus = AuditStatusEnums.Success,
-                   AuditText = auditText,
-                   AuditUserId = auditUserId,
-                   UpdateAt = utcNow
-               }).ExecuteAffrowsAsync();
-           //添加用户充值流水
-           if (moneyApply.SourceType == WalletSourceEnums.RechargeApply)
-           {
-               await WalletRecordCreate(new UserWalletRecordInput
-               {
-                   Amount = moneyApply.Amount,
-                   SourceType = WalletSourceEnums.Recharge,
-                   OperateUserId = auditUserId,
-                   UserId = moneyApply.UserId
-               });
-           }
+                }
+                if (userTaskCount.DayCardRepayCount < everydayTaskCreditSetting.TaskCountLimit)
+                {
+                    creditvalue = everydayTaskCreditSetting.TaskCreditValue;
 
-           if (moneyApply.SourceType == WalletSourceEnums.WithdrawalApply)
-           {
-               //解冻资金
-               await WalletRecordCreate(new UserWalletRecordInput
-               {
-                   Amount = moneyApply.Amount,
-                   SourceType = WalletSourceEnums.WithdrawalUnFreeze,
-                   OperateUserId = auditUserId,
-                   UserId = moneyApply.UserId
-               });
-               //提款
-               await WalletRecordCreate(new UserWalletRecordInput
-               {
-                   Amount = moneyApply.Amount,
-                   SourceType = WalletSourceEnums.Withdrawal,
-                   OperateUserId = auditUserId,
-                   UserId = moneyApply.UserId
-               });
-           }
+                }
 
-           if (moneyApply.SourceType == WalletSourceEnums.CardRepayApply
-               || moneyApply.SourceType == WalletSourceEnums.LoanRepayApply)
-           {
-               //添加代还流水
-               var source = moneyApply.SourceType == WalletSourceEnums.CardRepayApply
-                   ? WalletSourceEnums.CardRepayment
-                   : WalletSourceEnums.LoanRepayment;
-               await WalletRecordCreate(new UserWalletRecordInput
-               {
-                   Amount = moneyApply.Amount,
-                   SourceType = source,
-                   OperateUserId = auditUserId,
-                   UserId = moneyApply.UserId
-               });
-               //添加还款收益流水
-               await WalletRecordCreate(new UserWalletRecordInput
-               {
-                   Amount = repayProfitAmount,
-                   SourceType = WalletSourceEnums.RepayProfit,
-                   OperateUserId = auditUserId,
-                   UserId = moneyApply.UserId
-               });
-               //更新用户为团队成员
-               await _userService.UserBecomeTeamUser(moneyApply.UserId);
-               
-               //用户获取积分
-               if (intergral > 0)
-               {
-                   await _userService.AddUserJF(moneyApply.UserId, intergral);
-               }
-           }
-       }
-   }
+            }
+            else
+            {
+                if (userTaskCount.WeekLoanRepayCount < taskIntergralSetting.LoanRepayIntegralCountLimit)
+                {
+                    intergral = taskIntergralSetting.LoanRepayIntegral;
+                }
+            }
+        }
+
+        var utcNow = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+        using (var uow = _freeSql.CreateUnitOfWork())
+        {
+            //修改资金申请信息
+            await _freeSql.Update<UserMoneyApply>(moneyApply.Id).UpdateTableTime(TableTimeFormat.Year, moneyApply.CreateAt)
+                .SetDto(new
+                {
+                    AuditAt = utcNow,
+                    AuditStatus = AuditStatusEnums.Success,
+                    AuditText = auditText,
+                    AuditUserId = auditUserId,
+                    UpdateAt = utcNow
+                }).ExecuteAffrowsAsync();
+            //添加用户充值流水
+            if (moneyApply.SourceType == WalletSourceEnums.RechargeApply)
+            {
+                await WalletRecordCreate(new UserWalletRecordInput
+                {
+                    Amount = moneyApply.Amount,
+                    SourceType = WalletSourceEnums.Recharge,
+                    OperateUserId = auditUserId,
+                    UserId = moneyApply.UserId
+                });
+            }
+
+            if (moneyApply.SourceType == WalletSourceEnums.WithdrawalApply)
+            {
+                //解冻资金
+                await WalletRecordCreate(new UserWalletRecordInput
+                {
+                    Amount = moneyApply.Amount,
+                    SourceType = WalletSourceEnums.WithdrawalUnFreeze,
+                    OperateUserId = auditUserId,
+                    UserId = moneyApply.UserId
+                });
+                //提款
+                await WalletRecordCreate(new UserWalletRecordInput
+                {
+                    Amount = moneyApply.Amount,
+                    SourceType = WalletSourceEnums.Withdrawal,
+                    OperateUserId = auditUserId,
+                    UserId = moneyApply.UserId
+                });
+            }
+
+            if (moneyApply.SourceType == WalletSourceEnums.CardRepayApply
+                || moneyApply.SourceType == WalletSourceEnums.LoanRepayApply)
+            {
+                //添加代还流水
+                var source = moneyApply.SourceType == WalletSourceEnums.CardRepayApply
+                    ? WalletSourceEnums.CardRepayment
+                    : WalletSourceEnums.LoanRepayment;
+                await WalletRecordCreate(new UserWalletRecordInput
+                {
+                    Amount = moneyApply.Amount,
+                    SourceType = source,
+                    OperateUserId = auditUserId,
+                    UserId = moneyApply.UserId
+                });
+                //添加还款收益流水
+                await WalletRecordCreate(new UserWalletRecordInput
+                {
+                    Amount = repayProfitAmount,
+                    SourceType = WalletSourceEnums.RepayProfit,
+                    OperateUserId = auditUserId,
+                    UserId = moneyApply.UserId
+                });
+                //更新用户为团队成员
+                await _userService.UserBecomeTeamUser(moneyApply.UserId);
+
+                //用户获取积分
+                if (intergral > 0)
+                {
+                    await _userService.AddUserJF(moneyApply.UserId, intergral);
+                }
+                //用户增加信用值
+                if (creditvalue > 0)
+                {
+                    await _userService.AddUserXYZ(moneyApply.UserId, creditvalue);
+                }
+            }
+        }
+    }
     /// <summary>
     ///  获取当前用户当年的所有提现记录
     /// </summary>
@@ -657,15 +671,15 @@ public class UserWalletService : IUserWalletService
         {
             item.WalletSourceName = item.WalletSource.ToDescriptionOrString();
             item.Balance = user.Balance;
-            if (item.WalletSource== WalletSourceEnums.Recharge) 
-                item.ChangeName = "+ $" + item.Amount; 
+            if (item.WalletSource == WalletSourceEnums.Recharge)
+                item.ChangeName = "+ $" + item.Amount;
             if (item.WalletSource == WalletSourceEnums.Withdrawal)
                 item.ChangeName = "- $" + item.Amount;
 
         }
         return userMoneyApply;
     }
-    
+
     /// <summary>
     /// 获取今日剩余查卡次数
     /// </summary>
@@ -677,9 +691,9 @@ public class UserWalletService : IUserWalletService
         long time = DateTimeHelper.GetToday();//获取今天的开始时间
         var year = DateTimeOffset.UtcNow.Year;
         List<UserMoneyApply> userMoneyApplys = _freeSql.Select<UserMoneyApply>()
-            .AsTable((type, table) => $"{table}_{year}").Where(m=>m.IsDeleted==0&&m.CreateAt>= time&&m.SourceType== WalletSourceEnums.CardRepayApply&&m.UserId==userid)
+            .AsTable((type, table) => $"{table}_{year}").Where(m => m.IsDeleted == 0 && m.CreateAt >= time && m.SourceType == WalletSourceEnums.CardRepayApply && m.UserId == userid)
             .ToList();
-       //获取当前用户
+        //获取当前用户
         var user = await _freeSql.Select<Users>()
                   .Where(s => s.Id == userid)
                   .ToOneAsync();
@@ -687,19 +701,19 @@ public class UserWalletService : IUserWalletService
         var userleavel = await _freeSql.Select<CreditLevel>()
                  .Where(s => s.Id == user.Level)
                  .ToOneAsync();
-        int count= userleavel==null?0: userleavel.ChakaNum - userMoneyApplys.Count;
+        int count = userleavel == null ? 0 : userleavel.ChakaNum - userMoneyApplys.Count;
         repayIndexDto.RemainingTime = count;//剩余还款次数
         repayIndexDto.RepaymentTimes = userMoneyApplys.Count;//已还款次数
         //算代还款收益,AuditAt因为审核通过后才会有收益,所以今天审核通过的才算是今日收益
         List<UserMoneyApply> audutsuccess = _freeSql.Select<UserMoneyApply>()
-           .AsTable((type, table) => $"{table}_{year}").Where(m => m.IsDeleted == 0 && m.AuditAt >= time && m.SourceType == WalletSourceEnums.CardRepayApply&&m.AuditStatus== AuditStatusEnums.Success&& m.UserId == userid)
+           .AsTable((type, table) => $"{table}_{year}").Where(m => m.IsDeleted == 0 && m.AuditAt >= time && m.SourceType == WalletSourceEnums.CardRepayApply && m.AuditStatus == AuditStatusEnums.Success && m.UserId == userid)
            .ToList();
         if (userleavel != null)
         {
 
             decimal profit = userleavel.Profit;
             repayIndexDto.RepaymentIncome = audutsuccess.Sum(m => ((m.Amount * profit) / 100));
-            
+
         }
         //获取用户账户余额
         repayIndexDto.Balance = user.Balance;
@@ -724,9 +738,10 @@ public class UserWalletService : IUserWalletService
             .Where(s => s.UserId == userid && s.IsDeleted == 0)
             .Where(s => s.SourceType == WalletSourceEnums.CardRepayApply).OrderByDescending(m => m.CreateAt)
             //带状态的查询
-            .WhereIf(moneyApplyDto.AuditStatus.HasValue, s=>s.AuditStatus== moneyApplyDto.AuditStatus)
+            .WhereIf(moneyApplyDto.AuditStatus.HasValue, s => s.AuditStatus == moneyApplyDto.AuditStatus)
             .ToListAsync<MoneyApplyDto>();
-        userMoneyApply.ForEach(m => {
+        userMoneyApply.ForEach(m =>
+        {
             m.Profits = (m.Amount * userleavel.Profit) / 100;
         });
         return userMoneyApply;

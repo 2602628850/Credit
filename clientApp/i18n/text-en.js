@@ -313,6 +313,7 @@ export default {
 		remark6:'6. In order to ensure your interests, the platform is recharge processing time is: 10:00-23:00. If you make recharge request at other time, it will be processed for you according to the above working hours.',
 	},
 	without:{
+		binding: 'Please bind your bank card first',
 		recode:'Application record',
 		title:'Bank card withdrawal application',
 		withsuc:'submit successful!',

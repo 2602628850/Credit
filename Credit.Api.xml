@@ -412,6 +412,30 @@
             </summary>
             <param name="taskIntegral"></param>
         </member>
+        <member name="M:Credit.Api.Controllers.AdminSettingController.GetEverydayTaskCreditSetting">
+            <summary>
+             获取每日任务信用值配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminSettingController.EverydayTaskCreditSetting(Credit.SettingServices.Dtos.TaskCreditSetting)">
+            <summary>
+             每日任务信用值设置
+            </summary>
+            <param name="taskIntegral"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminSettingController.GetWeekTaskCreditSetting">
+            <summary>
+             获取周任务信用值配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminSettingController.WeekTaskCreditSetting(Credit.SettingServices.Dtos.WeekTaskCreditSetting)">
+            <summary>
+             周任务信用值设置
+            </summary>
+            <param name="taskIntegral"></param>
+        </member>
         <member name="M:Credit.Api.Controllers.AdminSettingController.GetAlibabaCloudSetting">
             <summary>
              获取阿里巴巴服务设置
@@ -673,9 +697,15 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Credit.Api.Controllers.RepayController.RepayApplication(Credit.UserWalletServices.Dtos.MoneyApplyInput)">
+        <member name="M:Credit.Api.Controllers.RepayController.CardRepayApplication(Credit.UserWalletServices.Dtos.MoneyApplyInput)">
             <summary>
-             代还
+             信用卡代还
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.RepayController.LoanRepayApplication(Credit.UserWalletServices.Dtos.MoneyApplyInput)">
+            <summary>
+             贷款代还
             </summary>
             <param name="input"></param>
         </member>
@@ -732,7 +762,7 @@
             <param name="file"></param>[FromBody]
             <returns></returns>
         </member>
-        <member name="M:Credit.Api.Controllers.UploadController.HeadImage(Microsoft.AspNetCore.Http.IFormFile)">
+        <member name="M:Credit.Api.Controllers.UploadController.HeadImage(Microsoft.AspNetCore.Http.IFormFile,System.String)">
             <summary>
             上传头像
             </summary>

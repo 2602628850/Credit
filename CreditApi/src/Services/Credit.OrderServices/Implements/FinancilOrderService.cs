@@ -1,6 +1,8 @@
 using Credit.OrderModels;
 using Credit.OrderServices.Dtos;
 using Credit.ProductModels;
+using Credit.SettingServices;
+using Credit.SettingServices.Dtos;
 using Credit.TeamServices;
 using Credit.UserModels;
 using Credit.UserServices;
@@ -25,6 +27,7 @@ public class FinancilOrderService : IFinancilOrderService
 
     private readonly IUserService _userService;
     private readonly ITeamService _teamService;
+    private readonly ISettingService _settingService;
 
     /// <summary>
     ///  
@@ -32,12 +35,14 @@ public class FinancilOrderService : IFinancilOrderService
     public FinancilOrderService(IFreeSql freeSql
     , IUserWalletService userWalletService
     , ITeamService teamService
-    , IUserService userService)
+    , IUserService userService
+    , ISettingService settingService)
     {
         _freeSql = freeSql;
         _userWalletService = userWalletService;
         _teamService = teamService;
         _userService = userService;
+        _settingService = settingService;
     }
 
     /// <summary>
@@ -211,6 +216,12 @@ public class FinancilOrderService : IFinancilOrderService
         order.AuditText = auditText;
         order.AuditUserId = auditUserId;
         order.AuditAt = DateTimeHelper.UtcNow();
+        //每周任务设置
+        var creditvale = _settingService.GetSetting<WeekTaskCreditSetting>();
+
+        //获取完成每日任务次数 
+
+        var userTaskCount = await _userService.GetUserTaskCompletedCount(order.UserId);
         //修改下次结算时间
         var settleTimeDate = DateTime.UtcNow.AddDays(1).Date.AddDays(order.Cycle).AddDays(-1);
         var nextSettleDate = settleTimeDate.ToString("yyyyMMdd");
@@ -225,6 +236,14 @@ public class FinancilOrderService : IFinancilOrderService
             await _teamService.UserTeamMemberProfit(order.UserId, order.TotalAmount);
             //更新用户为团队成员
             await _userService.UserBecomeTeamUser(order.UserId);
+            ///判断每日任务完成次数是否上限
+            if (creditvale.Result.TaskCountLimit <= userTaskCount.WeekLoanRepayCount)
+            {
+                //增加用户信用值
+                await _userService.AddUserXYZ(order.UserId, creditvale.Result.TaskCreditValue);
+            }
+
+
         }
     }
 
@@ -372,10 +391,10 @@ public class FinancilOrderService : IFinancilOrderService
                 OperateType = WalletOperateEnums.Admin
             });
             //修改订单信息
-           await _freeSql.Update<FinancilOrder>()
-                .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
-                .SetSource(order)
-                .ExecuteAffrowsAsync();
+            await _freeSql.Update<FinancilOrder>()
+                 .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
+                 .SetSource(order)
+                 .ExecuteAffrowsAsync();
         }
     }
 
@@ -504,9 +523,9 @@ public class FinancilOrderService : IFinancilOrderService
                 using (var uow = _freeSql.CreateUnitOfWork())
                 {
                     //更新订单结算信息
-                     await _freeSql.Update<FinancilOrder>(order.Id)
-                        .SetDto(new { NextSettledDate = nextSettledDate, SettledCount = settledCount })
-                        .ExecuteAffrowsAsync();
+                    await _freeSql.Update<FinancilOrder>(order.Id)
+                       .SetDto(new { NextSettledDate = nextSettledDate, SettledCount = settledCount })
+                       .ExecuteAffrowsAsync();
                     //增加用户理财收益流水
                     await _userWalletService.WalletRecordCreate(new UserWalletRecordInput
                     {

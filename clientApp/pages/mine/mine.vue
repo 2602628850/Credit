@@ -45,6 +45,10 @@
 			</view>
 		</view>
 
+		<view class="mine-item-box"> 
+			<button @click="quitLogin()" type="primary"
+				style="background-color:#fce1e1;color: red;">{{$t('setUp.LoginOut')}}</button>
+		</view>
 		<view style="height: 1px"></view>
 
 	</app-content-view>
@@ -176,8 +180,13 @@
 				uni.navigateTo({
 					url: '/pages/recharge/createindex'
 				})
+			},			
+			quitLogin() {
+				// location.reload()
+				localStorage.clear()
+				window.sessionStorage.clear()
+				this.$router.push('/pages/login/login')
 			},
-			
 			towithout() {
 				uni.navigateTo({
 					url: '/pages/withdraw/createindex'

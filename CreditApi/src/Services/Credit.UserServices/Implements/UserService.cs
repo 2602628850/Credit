@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Credit.CreditLevelModels;
 using Credit.CreditLevelServices.Interfaces;
+using Credit.OrderModels;
 using Credit.SettingServices;
 using Credit.SettingServices.Dtos;
 using Credit.TeamModels;
@@ -770,7 +771,7 @@ namespace Credit.UserServices
             //获取本周贷款还款次数
             var weekStart = DateTimeHelper.WeekMondayStart();
             var weekLoanRepayCount = await _freeSql.Select<UserMoneyApply>()
-                .WhereTableTime(TableTimeFormat.Year, dayStart)
+                .WhereTableTime(TableTimeFormat.Year, weekStart)
                 .Where(s => s.SourceType == WalletSourceEnums.LoanRepayApply 
                             && s.UserId == userId)
                 .Where(s => s.AuditStatus == AuditStatusEnums.Success
@@ -826,5 +827,6 @@ namespace Credit.UserServices
             await _freeSql.Update<Users>().SetSource(UserInfo).ExecuteAffrowsAsync();
             return "success";
         }
+         
     }
 }
