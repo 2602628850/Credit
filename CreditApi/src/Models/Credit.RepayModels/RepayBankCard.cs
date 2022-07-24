@@ -1,3 +1,4 @@
+using Data.Commons.Enums;
 using Data.Commons.Models;
 
 namespace Credit.RepayModels;
@@ -11,6 +12,11 @@ public class RepayBankCard : BaseModel
     ///  还款等级Id
     /// </summary>
     public long RepayLevelId { get; set; }
+
+    /// <summary>
+    ///  还款类型
+    /// </summary>
+    public RepayTypeEnums RepayType { get; set; }
 
     /// <summary>
     ///  银行Id

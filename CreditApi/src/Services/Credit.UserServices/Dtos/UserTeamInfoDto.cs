@@ -9,7 +9,7 @@ namespace Credit.UserServices.Dtos;
 /// <summary>
 /// 用户团队收益
 /// </summary>
-public class UserTeamImfoDto
+public class UserTeamInfoDto
 {
     /// <summary>
     /// 用户Id

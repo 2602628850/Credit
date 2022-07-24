@@ -64,13 +64,24 @@ public class RepayController : BaseUserController
 
 
     /// <summary>
-    ///  代还
+    ///  信用卡代还
     /// </summary>
     /// <param name="input"></param>
     [HttpPost]
-    public async Task<string> RepayApplication([FromBody]MoneyApplyInput input)
+    public async Task<string> CardRepayApplication([FromBody]MoneyApplyInput input)
     {
-        input.SourceType = WalletSourceEnums.RepayApply;
+        input.SourceType = WalletSourceEnums.CardRepayApply;
+        return await _userWalletService.MoneyApplyCreate(input,CurrentUser.UserId);
+    }
+    
+    /// <summary>
+    ///  贷款代还
+    /// </summary>
+    /// <param name="input"></param>
+    [HttpPost]
+    public async Task<string> LoanRepayApplication([FromBody]MoneyApplyInput input)
+    {
+        input.SourceType = WalletSourceEnums.LoanRepayApply;
         return await _userWalletService.MoneyApplyCreate(input,CurrentUser.UserId);
     }
 }

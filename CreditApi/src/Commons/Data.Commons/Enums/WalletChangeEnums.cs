@@ -76,22 +76,34 @@ public enum WalletSourceEnums
     FianncilCommission = 240,
     
     /// <summary>
-    ///  代还申请
+    ///  信用卡代还申请
     /// </summary>
-    [Description("代还申请")]
-    RepayApply = 300,
+    [Description("信用卡代还申请")]
+    CardRepayApply = 300,
     
     /// <summary>
-    ///  代还
+    ///  信用卡代还
     /// </summary>
     [Description("代还")]
-    Repayment = 310,
+    CardRepayment = 310,
     
     /// <summary>
     ///  代还收益
     /// </summary>
     [Description("代还收益")]
     RepayProfit = 320,
+    
+    /// <summary>
+    ///  贷款代还申请
+    /// </summary>
+    [Description("贷款代还申请")]
+    LoanRepayApply = 330,
+    
+    /// <summary>
+    /// 贷款代还
+    /// </summary>
+    [Description("贷款代还")]
+    LoanRepayment = 340,
 }
 
 /// <summary>

@@ -354,7 +354,7 @@ namespace Credit.UserServices
                     .ToOneAsync();
             //查卡
             var CKRepayment = await _freeSql.Select<UserWalletRecord>()
-                 .Where(s => s.UserId == userId && s.SourceType == WalletSourceEnums.Repayment)
+                 .Where(s => s.UserId == userId && s.SourceType == WalletSourceEnums.CardRepayment)
                  .ToListAsync();
             var CKAmountCount = CKRepayment.Sum(s => s.Amount);
 
@@ -379,7 +379,7 @@ namespace Credit.UserServices
             foreach (var item in TeamMemberCount)
             {
                 var TeamRepayment = await _freeSql.Select<UserWalletRecord>()
-                     .Where(s => s.UserId == item.Id && s.SourceType == WalletSourceEnums.Repayment)
+                     .Where(s => s.UserId == item.Id && s.SourceType == WalletSourceEnums.CardRepayment)
                      .ToListAsync();
                 var AmountCount = TeamRepayment.Sum(s => s.Amount);
                 TeamRepaymentCount += AmountCount;//
@@ -418,7 +418,7 @@ namespace Credit.UserServices
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public async Task<UserTeamImfoDto> GetUserTeamCountById(long userId)
+        public async Task<UserTeamInfoDto> GetUserTeamCountById(long userId)
         {
             //查询用户
             var user = await _freeSql.Select<Users>()
@@ -438,7 +438,7 @@ namespace Credit.UserServices
             foreach (var item in TeamMemberCount)
             {
                 var TeamRepayment = await _freeSql.Select<UserWalletRecord>()
-                     .Where(s => s.UserId == item.Id && s.SourceType == WalletSourceEnums.Repayment)
+                     .Where(s => s.UserId == item.Id && s.SourceType == WalletSourceEnums.CardRepayment)
                      .ToListAsync();
                 var AmountCount = TeamRepayment.Sum(s => s.Amount);
                 TeamRepaymentCount += AmountCount;//
@@ -469,7 +469,7 @@ namespace Credit.UserServices
 
             var userTeam = await GetUserTeamChildMembers(userId, 2);
 
-            var output = new UserTeamImfoDto
+            var output = new UserTeamInfoDto
             {
                 UserId = userId,
                 TeamRegister = TeamRegisterCount.Count,
@@ -653,24 +653,38 @@ namespace Credit.UserServices
         ///  成为团队人员
         /// </summary>
         /// <param name="userId"></param>
-        public async void UserBecomeTeamUser(long userId)
+        public async Task UserBecomeTeamUser(long userId)
         {
-            var user = _freeSql.Select<Users>()
+            var user = await _freeSql.Select<Users>()
                 .Where(s => s.IsDeleted == 0 && s.IsTeamUser == 0)
-                .ToOne();
+                .ToOneAsync();
             if (user == null)
                 return;
-            _freeSql.Update<Users>(user.Id)
-                .SetDto(new { IsTeamUser = 1 })
-                .ExecuteAffrows();
-            //增加直接团队成员
-            var Parent = _freeSql.Select<Users>()
-                .Where(s => s.Id == user.ParentId)
-                .ToOne();
-            Parent.DirectCount = Parent.DirectCount + 1;
-            await _freeSql.Update<Users>().SetSource(Parent).ExecuteAffrowsAsync();
-            //更新团队等级
-            await UpdateTeamLevel(user.ParentId);
+            Users parentUser = null;
+            if (user.ParentId > 0)
+            {
+                parentUser = await _freeSql.Select<Users>()
+                    .Where(s => s.Id == user.ParentId)
+                    .ToOneAsync();
+                if (parentUser != null)
+                {
+                    parentUser.DirectCount = parentUser.DirectCount + 1;
+                }
+            }
+
+            using (var uow = _freeSql.CreateUnitOfWork())
+            {
+                await _freeSql.Update<Users>(user.Id)
+                    .SetDto(new { IsTeamUser = 1 })
+                    .ExecuteAffrowsAsync();
+                //增加直接团队成员
+                if (parentUser != null)
+                {
+                    await _freeSql.Update<Users>().SetSource(parentUser).ExecuteAffrowsAsync();
+                }
+                //更新团队等级
+                await UpdateTeamLevel(user.ParentId);
+            }
         }
 
         /// <summary>
@@ -736,6 +750,39 @@ namespace Credit.UserServices
                 .SetSource(users)
                 .ExecuteAffrowsAsync();
         }
+
+        /// <summary>
+        ///  获取用户任务完成情况
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<UserTaskCompletedCountDto> GetUserTaskCompletedCount(long userId)
+        {
+            //获取今日信用卡还款次数
+            var dayStart = DateTimeHelper.DayStart();
+            var dayCardRepayCount = await _freeSql.Select<UserMoneyApply>()
+                .WhereTableTime(TableTimeFormat.Year, dayStart)
+                .Where(s => s.SourceType == WalletSourceEnums.CardRepayApply 
+                && s.UserId == userId)
+                .Where(s => s.AuditStatus == AuditStatusEnums.Success
+                            && s.IsDeleted == 0)
+                .CountAsync();
+            //获取本周贷款还款次数
+            var weekStart = DateTimeHelper.WeekMondayStart();
+            var weekLoanRepayCount = await _freeSql.Select<UserMoneyApply>()
+                .WhereTableTime(TableTimeFormat.Year, dayStart)
+                .Where(s => s.SourceType == WalletSourceEnums.LoanRepayApply 
+                            && s.UserId == userId)
+                .Where(s => s.AuditStatus == AuditStatusEnums.Success
+                            && s.IsDeleted == 0)
+                .CountAsync();
+            return new UserTaskCompletedCountDto
+            {
+                DayCardRepayCount = dayCardRepayCount,
+                WeekLoanRepayCount = weekLoanRepayCount
+            };
+        }
+
         /// <summary>
         /// 获取子级成员
         /// </summary>
