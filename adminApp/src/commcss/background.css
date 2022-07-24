@@ -34,9 +34,26 @@
     align-items: center;
     justify-content: flex-end;
 }
+.in-titleleft {
+    width: 70px;
+    text-align: left;
+    height: 27px;
+    align-items: center;
+    justify-content: flex-end;
+}
 /*添加数据内容宽度*/
 .in-input {
     width: 250px;
+}
+/*添加数据内容宽度*/
+.in-input200 {
+    width: 200px;
+}
+.in-input163 {
+    width: 163px;
+}
+.in-input160 {
+    width: 150px;
 }
 /*顶部间距*/
 .mgt {

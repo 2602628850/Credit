@@ -49,19 +49,68 @@
 	<div class="w100 flex-row-end mgt" id="page">
 		<el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize"/>
 	</div>
-
-
-	<el-dialog v-model="windowStatus" v-loading="windowSaving" width="600px">
-		<el-space direction="vertical">
-			<el-space>
-				<div class="in-title">等级名称</div>
-				<el-input class="in-input" v-model="editItem.levelName"></el-input>
-			</el-space>
-			<el-space>
-				<div class="in-title">等级信用值</div>
-				<el-input class="in-input" v-model="editItem.creditValue"></el-input>
-			</el-space>
-			<el-space>
+	<el-dialog v-model="windowStatus" v-loading="windowSaving" width="700px">
+		<el-row>
+      <el-col :span="11" :offset="1">
+					<el-form-item label="银行：">
+				<el-select v-model="editItem.bankId" class="in-input200" size="large" placeholder="选择银行" >
+					<el-option
+      v-for="item in banks"
+      :key="item.bankId"
+      :label="item.bankName"
+      :value="item.bankId"
+        />
+         </el-select>
+			</el-form-item>
+      </el-col>
+      <el-col :span="11" :offset="1">
+				<el-form-item label="卡号：">
+        <el-input  v-model="editItem.cardNo" class="in-input200"></el-input>
+				</el-form-item>
+      </el-col>
+			</el-row>
+    <el-row>
+      <el-col :span="11" :offset="1">
+					<el-form-item label="开启时间：">
+			<el-input  style="width:50px;" v-model="start1" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2" ></el-input><span>：</span>
+			<el-input  style="width:50px;" v-model="start2" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2"></el-input><span>：</span>
+				<el-input  style="width:50px;" v-model="start3" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2" ></el-input><span></span>
+			</el-form-item>
+      </el-col>
+      <el-col :span="11" :offset="1">
+				<el-form-item label="关闭时间：">
+      <el-input  style="width:50px;" v-model="end1" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2" ></el-input><span>：</span>
+			<el-input  style="width:50px;" v-model="end2" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2"></el-input><span>：</span>
+				<el-input  style="width:50px;" v-model="end3" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2" ></el-input><span></span>
+			</el-form-item>
+      </el-col>
+			</el-row>
+    <el-row>
+      <el-col :span="11" :offset="1">
+					<el-form-item label="绑卡人姓名：">
+		<el-input  v-model="editItem.bindRealName" class="in-input163"></el-input>
+			</el-form-item>
+      </el-col>
+      <el-col :span="11" :offset="1">
+				<el-form-item label="开户行地址：">
+        <el-input  v-model="editItem.bankAddress" class="in-input163"></el-input>
+				</el-form-item>
+      </el-col>
+			</el-row>
+<el-row>
+      <el-col :span="11" :offset="1">
+					<el-form-item label="最低收款金额：">
+		<el-input  v-model="editItem.bindRealName" class="in-input160"></el-input>
+			</el-form-item>
+      </el-col>
+      <el-col :span="11" :offset="1">
+				<el-form-item label="最高收款金额：">
+        <el-input  v-model="editItem.bankAddress" class="in-input160"></el-input>
+				</el-form-item>
+      </el-col>
+			</el-row>
+		
+			<!-- <el-space>
 				<div class="in-title">序号</div>
 				<el-input class="in-input" v-model="editItem.levelSort"></el-input>
 			</el-space>
@@ -77,8 +126,7 @@
 			</el-space>
 			<el-space>
 				<el-button type="primary" @click="saveItem">保存</el-button>
-			</el-space>
-		</el-space>
+			</el-space> -->
 	</el-dialog>
 </template>
 
@@ -93,6 +141,12 @@
 		},
 		data() {
 			return {
+				start1:'00',
+				start2:'00',
+				start3:'00',
+				end1:'00',
+				end2:'00',
+				end3:'00',
 				bankId: '',
         banks :[],//银行下拉选择列表
 				contentHeight: '0px',

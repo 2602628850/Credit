@@ -101,7 +101,7 @@ export default {
           {id:71,authName:"理财产品",ico:"Coordinate",pathName:"Product"}
         ]},
           {
-              id: 5,authName: '订单管理',ico: 'box', children: [
+              id: 6,authName: '订单管理',ico: 'box', children: [
                   {id:501,authName: '信用订单管理',ico: 'Coordinate',pathName: 'financial'}
               ]
           }

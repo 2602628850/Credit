@@ -34,7 +34,7 @@ const router = createRouter({
                 {path: '/credit',component: IndexPath,name: 'credit' },
                 {path: 'UserLeavel', component: UserLeavelPath, name: "UserLeavel"},
                 {path: 'BankManager', component: BankPath, name: "BankManager"},
-                {path: 'financial',component: financialOrder, name: 'financial'}
+                {path: 'financial',component: financialOrder, name: 'financial'},
                 {path: 'Product', component: ProductPath, name: "Product"},
                 {path: 'BankCard', component: BankCardPath, name: "BankCard"},
 
