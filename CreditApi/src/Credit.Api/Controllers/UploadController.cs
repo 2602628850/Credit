@@ -6,6 +6,7 @@ using Data.Core.Controllers;
 using Data.Commons.Helpers;
 using Data.Commons.Runtime;
 using Microsoft.AspNetCore.Mvc;
+using Credit.UserServices.Dtos;
 
 namespace Credit.Api.Controllers;
 
@@ -15,7 +16,8 @@ namespace Credit.Api.Controllers;
 public class UploadController : BaseUserController
 {
     private readonly ISettingService _settingService;
-    
+    private readonly ITokenManager _tokenManager;
+
     /// <summary>
     /// 
     /// </summary>
@@ -23,6 +25,7 @@ public class UploadController : BaseUserController
         ,ISettingService settingService)
     :base(tokenManager)
     {
+        _tokenManager = tokenManager;
         _settingService = settingService;
     }
 
@@ -97,7 +100,7 @@ public class UploadController : BaseUserController
     /// <returns></returns>
     [HttpPost]
     [RequestFormLimits(MultipartBodyLengthLimit = int.MaxValue)]
-    public async Task<object> HeadImage(IFormFile file)
+    public async Task<object> HeadImage(IFormFile file,string token)
     {
         try
         {
@@ -118,8 +121,9 @@ public class UploadController : BaseUserController
                 {
                     return new { imgUrl = string.Empty,msg = "Please upload files under 50M"};
                 }
+                var userinfo = _tokenManager.DeserializeToken<UserLoginDto>(token).Result;
                 // savePath = Path.Combine(_hostingEnvironment.WebRootPath, rootDir, Tid, saveUser, saveDate);
-                src = $"/{rootDir}/HeadImage/{CurrentUser.UserId}/{saveDate}/{saveFilename}";
+                src = $"/{rootDir}/HeadImage/{userinfo.UserId}/{saveDate}/{saveFilename}";
 
                 var alibabaSetting = await _settingService.GetSetting<AlibabaCloudSetting>();
 

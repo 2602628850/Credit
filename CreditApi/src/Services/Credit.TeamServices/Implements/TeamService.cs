@@ -309,7 +309,7 @@ public class TeamService : ITeamService
             var commissionAmount = amount * tp.BuyProfitRate * 0.01m;
             if (commissionAmount > 0)
             {
-                _userWalletService.WalletRecordCreate(new UserWalletRecordDto
+                await _userWalletService.WalletRecordCreate(new UserWalletRecordDto
                 {
                     UserId = userId,
                     Amount = commissionAmount,

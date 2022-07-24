@@ -1,4 +1,5 @@
 using Data.Commons.Dtos;
+using Data.Commons.Enums;
 
 namespace Credit.RepayServices.Dtos;
 
@@ -26,4 +27,9 @@ public class RepayBankCardPagedInput : PagedInput
     ///   启用状态
     /// </summary>
     public int? IsEnable { get; set; }
+    
+    /// <summary>
+    ///  还款类型
+    /// </summary>
+    public RepayTypeEnums? RepayType { get; set; }
 }

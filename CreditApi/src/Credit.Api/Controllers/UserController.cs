@@ -291,7 +291,7 @@ namespace Credit.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<UserTeamImfoDto> GetUserTeamCountById()
+        public async Task<UserTeamInfoDto> GetUserTeamCountById()
         {
             return await _userService.GetUserTeamCountById(CurrentUser.UserId);
         }

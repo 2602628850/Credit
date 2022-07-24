@@ -1,3 +1,5 @@
+using Data.Commons.Enums;
+
 namespace Credit.RepayServices.Dtos;
 
 /// <summary>
@@ -33,6 +35,11 @@ public class RepayBankCardInput
     ///  还款银行卡Id
     /// </summary>
     public long Id { get; set; }
+    
+    /// <summary>
+    ///  还款类型
+    /// </summary>
+    public RepayTypeEnums RepayType { get; set; }
     
     /// <summary>
     ///  还款等级Id

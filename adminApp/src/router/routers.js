@@ -20,6 +20,8 @@ const BankCardPath = () => import (/* webpackChunkName: "BankCardList" */ './../
 //产品管理
 const ProductPath = () => import (/* webpackChunkName: "productList" */ './../vues/product/index.vue')
 
+const RepayPath = () => import (/* webpackChunkName: "repayList" */ './../vues/product/repay.vue')
+
 //创建路由, hash 模式。
 const router = createRouter({
     history: createWebHashHistory(),
@@ -36,6 +38,7 @@ const router = createRouter({
                 {path: 'BankManager', component: BankPath, name: "BankManager"},
                 {path: 'financial',component: financialOrder, name: 'financial'},
                 {path: 'Product', component: ProductPath, name: "Product"},
+                {path: 'Repay', component: RepayPath, name: "Repay"},
                 {path: 'BankCard', component: BankCardPath, name: "BankCard"},
 
             ]

@@ -50,6 +50,13 @@ namespace Credit.UserServices
         /// <returns></returns>
         Task<string> UpdateUserPwd(long userId, string oldPwd, string newPwd);
 
+
+        /// <summary>
+        ///  获取今日完成任务次数
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<long> GetUserDayTaskNum(long userId);
         /// <summary>
         ///  获取用户信息
         /// </summary>
@@ -88,7 +95,7 @@ namespace Credit.UserServices
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        Task<UserTeamImfoDto> GetUserTeamCountById(long userId);
+        Task<UserTeamInfoDto> GetUserTeamCountById(long userId);
 
         /// <summary>
         ///  获取用户收益信息
@@ -133,7 +140,7 @@ namespace Credit.UserServices
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        void UserBecomeTeamUser(long userId);
+        Task UserBecomeTeamUser(long userId);
 
         /// <summary>
         ///  更新用户团队等级
@@ -149,5 +156,12 @@ namespace Credit.UserServices
         /// <param name="userId"></param>
         /// <returns></returns>
         Task UpdateCreditLevel(long userId);
+
+        /// <summary>
+        ///  获取用户完成任务次数
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task<UserTaskCompletedCountDto> GetUserTaskCompletedCount(long userId);
     }
 }

@@ -12,11 +12,7 @@ namespace Data.Core
 
             var appsettingsName = envConf["SETTING_JSON"];
 
-            if (string.IsNullOrEmpty(appsettingsName))
-            {
-                appsettingsName = $"appsettings.json";
-            }
-
+            
             builder.AddJsonFile(appsettingsName,false);
         }
     }

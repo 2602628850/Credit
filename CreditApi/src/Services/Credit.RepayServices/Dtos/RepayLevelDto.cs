@@ -1,3 +1,5 @@
+using Data.Commons.Enums;
+
 namespace Credit.RepayServices.Dtos;
 
 /// <summary>
@@ -25,6 +27,11 @@ public class RepayLevelInput
     ///  等级名称
     /// </summary>
     public string LevelName { get; set; } = string.Empty;
+    
+    /// <summary>
+    ///  还款类型
+    /// </summary>
+    public RepayTypeEnums RepayType { get; set; }
 
     /// <summary>
     ///  封面图片

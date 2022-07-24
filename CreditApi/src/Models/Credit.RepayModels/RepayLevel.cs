@@ -1,3 +1,4 @@
+using Data.Commons.Enums;
 using Data.Commons.Models;
 using FreeSql.DataAnnotations;
 
@@ -8,6 +9,12 @@ namespace Credit.RepayModels;
 /// </summary>
 public class RepayLevel : BaseModel
 {
+    
+    /// <summary>
+    ///  还款类型
+    /// </summary>
+    public RepayTypeEnums RepayType { get; set; }
+    
     /// <summary>
     ///  等级名称
     /// </summary>

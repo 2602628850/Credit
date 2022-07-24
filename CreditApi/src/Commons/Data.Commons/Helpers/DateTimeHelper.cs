@@ -8,12 +8,18 @@ public static class DateTimeHelper
         return new DateTimeOffset(utcDate).ToUnixTimeMilliseconds();
     }
 
+    public static long WeekMondayStart()
+    {
+        var utcWeek = DateTime.UtcNow.AddDays(-Convert.ToInt32(DateTime.UtcNow.DayOfWeek) + 1).Date;
+        return new DateTimeOffset(utcWeek).ToUnixTimeMilliseconds();
+    }
+
     public static long UtcNow()
     {
         return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
     }
     /// <summary>
-    ///  UtcÊ±¼ä´Á×ªDateTime
+    ///  UtcÊ±ï¿½ï¿½ï¿½×ªDateTime
     /// </summary>
     /// <param name="unixTime"></param>
     /// <returns></returns>
@@ -24,12 +30,16 @@ public static class DateTimeHelper
         return dateTime;
     }
     /// <summary>
-    /// »ñÈ¡½ñÌìµÄ¿ªÊ¼Ê±¼ä
+    /// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½Ê¼Ê±ï¿½ï¿½
     /// </summary>
     /// <returns></returns>
     public static long GetToday()
     {
         var now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).Date;
         return new DateTimeOffset(now).ToUnixTimeMilliseconds();
+    }
+    public static long GetTime( DateTime time)
+    { 
+        return new DateTimeOffset(time).ToUnixTimeMilliseconds();
     }
 }

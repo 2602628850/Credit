@@ -76,6 +76,7 @@ public class RepayService : IRepayService
         level.ProfitRate = input.ProfitRate;
         level.IsEnable = input.IsEnable;
         level.UpdateAt = DateTimeHelper.UtcNow();
+        level.RepayType = input.RepayType;
         await _freeSql.Update<RepayLevel>().SetSource(level).ExecuteAffrowsAsync();
     }
 
@@ -175,6 +176,7 @@ public class RepayService : IRepayService
     {
         var list = await _freeSql.Select<RepayLevel>()
             .WhereIf(!string.IsNullOrEmpty(input.LevelName), s => s.LevelName.Contains(input.LevelName))
+            .WhereIf(input.RepayType.HasValue, s => s.RepayType == input.RepayType)
             .Where(s => s.IsDeleted == 0)
             .Count(out long totalCount)
             .OrderByDescending(s => s.CreateAt)
@@ -261,6 +263,7 @@ public class RepayService : IRepayService
         bankCard.BindUser = input.BindUser;
         bankCard.IsEnable = input.IsEnable;
         bankCard.RepayLevelId = input.RepayLevelId;
+        bankCard.RepayType = input.RepayType;
 
         await _freeSql.Update<RepayBankCard>()
             .SetSource(bankCard)
@@ -381,6 +384,7 @@ public class RepayService : IRepayService
             .WhereIf(input.RepayLevelId.HasValue, s => s.RepayLevelId == input.RepayLevelId)
             .WhereIf(!string.IsNullOrEmpty(input.BindUser), s => s.BindUser.Contains(input.BindUser))
             .WhereIf(input.IsEnable.HasValue, s => s.IsEnable == input.IsEnable)
+            .WhereIf(input.RepayType.HasValue,s => s.RepayType == input.RepayType)
             .Where(s => s.IsDeleted == 0)
             .OrderByDescending(s => s.CreateAt)
             .Count(out long totalCount)

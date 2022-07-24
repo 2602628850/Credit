@@ -98,7 +98,8 @@ export default {
           {id:65,authName:"收款银行卡",ico:"Calendar",pathName:"BankCard"}
         ]},
           {id:5,authName:"产品管理",ico:"Box",children:[
-          {id:71,authName:"理财产品",ico:"Coordinate",pathName:"Product"}
+          {id:71,authName:"理财产品",ico:"Coordinate",pathName:"Product"},
+          {id:72,authName:"信用代还 ",ico:"Coordinate",pathName:"Repay"}
         ]},
           {
               id: 6,authName: '订单管理',ico: 'box', children: [

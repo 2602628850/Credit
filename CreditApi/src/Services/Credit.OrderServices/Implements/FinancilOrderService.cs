@@ -1,6 +1,8 @@
 using Credit.OrderModels;
 using Credit.OrderServices.Dtos;
 using Credit.ProductModels;
+using Credit.SettingServices;
+using Credit.SettingServices.Dtos;
 using Credit.TeamServices;
 using Credit.UserModels;
 using Credit.UserServices;
@@ -25,6 +27,7 @@ public class FinancilOrderService : IFinancilOrderService
 
     private readonly IUserService _userService;
     private readonly ITeamService _teamService;
+    private readonly ISettingService _settingService;
 
     /// <summary>
     ///  
@@ -32,12 +35,14 @@ public class FinancilOrderService : IFinancilOrderService
     public FinancilOrderService(IFreeSql freeSql
     , IUserWalletService userWalletService
     , ITeamService teamService
-    , IUserService userService)
+    , IUserService userService
+    , ISettingService settingService)
     {
         _freeSql = freeSql;
         _userWalletService = userWalletService;
         _teamService = teamService;
         _userService = userService;
+        _settingService = settingService;
     }
 
     /// <summary>
@@ -101,10 +106,10 @@ public class FinancilOrderService : IFinancilOrderService
             SoldStatus = null,
             NextSettledDate = string.Empty
         };
-        _freeSql.Transaction(() =>
+        using (var uow = _freeSql.CreateUnitOfWork())
         {
             //用户产生订单流水
-            _userWalletService.WalletRecordCreate(new UserWalletRecordInput
+            await _userWalletService.WalletRecordCreate(new UserWalletRecordInput
             {
                 UserId = userId,
                 SourceType = WalletSourceEnums.BuyFinancil,
@@ -113,8 +118,8 @@ public class FinancilOrderService : IFinancilOrderService
                 OperateType = WalletOperateEnums.User,
             });
             //创建订单 表按年分表
-            _freeSql.Insert(newOrder).InsertTableTime(TableTimeFormat.Year).ExecuteAffrows();
-        });
+            await _freeSql.Insert(newOrder).InsertTableTime(TableTimeFormat.Year).ExecuteAffrowsAsync();
+        }
         return "add_success";
     }
 
@@ -211,18 +216,35 @@ public class FinancilOrderService : IFinancilOrderService
         order.AuditText = auditText;
         order.AuditUserId = auditUserId;
         order.AuditAt = DateTimeHelper.UtcNow();
+        //每周任务设置
+        var creditvale = _settingService.GetSetting<WeekTaskCreditSetting>();
+
+        //获取完成每日任务次数 
+
+        var userTaskCount = await _userService.GetUserTaskCompletedCount(order.UserId);
         //修改下次结算时间
         var settleTimeDate = DateTime.UtcNow.AddDays(1).Date.AddDays(order.Cycle).AddDays(-1);
         var nextSettleDate = settleTimeDate.ToString("yyyyMMdd");
         order.NextSettledDate = nextSettleDate;
-        await _freeSql.Update<FinancilOrder>()
-            .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
-            .SetSource(order)
-            .ExecuteAffrowsAsync();
-        //订单团队结算
-        await _teamService.UserTeamMemberProfit(order.UserId, order.TotalAmount);
-        //更新用户为团队成员
-        _userService.UserBecomeTeamUser(order.UserId);
+        using (var uow = _freeSql.CreateUnitOfWork())
+        {
+            await _freeSql.Update<FinancilOrder>()
+                .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
+                .SetSource(order)
+                .ExecuteAffrowsAsync();
+            //订单团队结算
+            await _teamService.UserTeamMemberProfit(order.UserId, order.TotalAmount);
+            //更新用户为团队成员
+            await _userService.UserBecomeTeamUser(order.UserId);
+            ///判断每日任务完成次数是否上限
+            if (creditvale.Result.TaskCountLimit <= userTaskCount.WeekLoanRepayCount)
+            {
+                //增加用户信用值
+                await _userService.AddUserXYZ(order.UserId, creditvale.Result.TaskCreditValue);
+            }
+
+
+        }
     }
 
     /// <summary>
@@ -247,10 +269,10 @@ public class FinancilOrderService : IFinancilOrderService
         order.AuditText = auditText;
         order.AuditUserId = auditUserId;
         order.AuditAt = DateTimeHelper.UtcNow();
-        _freeSql.Transaction(() =>
+        using (var uow = _freeSql.CreateUnitOfWork())
         {
             //退回用户购买订单流水
-            _userWalletService.WalletRecordCreate(new UserWalletRecordInput
+            await _userWalletService.WalletRecordCreate(new UserWalletRecordInput
             {
                 UserId = order.UserId,
                 SourceType = WalletSourceEnums.BuyFinancilReturn,
@@ -259,11 +281,11 @@ public class FinancilOrderService : IFinancilOrderService
                 Amount = order.TotalAmount
             });
             //修改订单审核信息
-            _freeSql.Update<FinancilOrder>()
+            await _freeSql.Update<FinancilOrder>()
                 .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
                 .SetSource(order)
-                .ExecuteAffrows();
-        });
+                .ExecuteAffrowsAsync();
+        }
     }
 
     /// <summary>
@@ -357,10 +379,10 @@ public class FinancilOrderService : IFinancilOrderService
         order.SoldAuditText = auditText;
         order.AuditUserId = auditUserId;
         order.AuditAt = DateTimeHelper.UtcNow();
-        _freeSql.Transaction(() =>
+        using (var uow = _freeSql.CreateUnitOfWork())
         {
             //用户产生出售理财产品流水
-            _userWalletService.WalletRecordCreate(new UserWalletRecordInput
+            await _userWalletService.WalletRecordCreate(new UserWalletRecordInput
             {
                 Amount = order.TotalAmount,
                 UserId = order.UserId,
@@ -369,11 +391,11 @@ public class FinancilOrderService : IFinancilOrderService
                 OperateType = WalletOperateEnums.Admin
             });
             //修改订单信息
-            _freeSql.Update<FinancilOrder>()
-                .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
-                .SetSource(order)
-                .ExecuteAffrows();
-        });
+            await _freeSql.Update<FinancilOrder>()
+                 .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
+                 .SetSource(order)
+                 .ExecuteAffrowsAsync();
+        }
     }
 
     /// <summary>
@@ -498,14 +520,14 @@ public class FinancilOrderService : IFinancilOrderService
             var amount = order.TotalAmount * order.DailyRate * 0.01m * order.Cycle;
             try
             {
-                _freeSql.Transaction(() =>
+                using (var uow = _freeSql.CreateUnitOfWork())
                 {
                     //更新订单结算信息
-                    _freeSql.Update<FinancilOrder>(order.Id)
-                        .SetDto(new { NextSettledDate = nextSettledDate, SettledCount = settledCount })
-                        .ExecuteAffrows();
+                    await _freeSql.Update<FinancilOrder>(order.Id)
+                       .SetDto(new { NextSettledDate = nextSettledDate, SettledCount = settledCount })
+                       .ExecuteAffrowsAsync();
                     //增加用户理财收益流水
-                    _userWalletService.WalletRecordCreate(new UserWalletRecordInput
+                    await _userWalletService.WalletRecordCreate(new UserWalletRecordInput
                     {
                         UserId = order.UserId,
                         Amount = amount,
@@ -513,7 +535,7 @@ public class FinancilOrderService : IFinancilOrderService
                         OperateType = WalletOperateEnums.Sytem,
                         OperateUserId = 0
                     });
-                });
+                }
             }
             catch (Exception e)
             {

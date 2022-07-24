@@ -37,7 +37,7 @@ public interface IUserWalletService
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    void WalletRecordCreate(UserWalletRecordInput input);
+    Task WalletRecordCreate(UserWalletRecordInput input);
 
 
     /// <summary>
