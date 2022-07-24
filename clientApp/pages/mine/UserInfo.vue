@@ -74,7 +74,7 @@
 					success: res => {
 						const tempFilePaths = res.tempFilePaths;
 						const uploadTask = uni.uploadFile({
-							url: 'http://localhost:8003/v1/Upload/HeadImage',
+							url: base.host + '/Upload/HeadImage',
 							filePath: tempFilePaths[0],
 							name: 'file',
 							formData: {
