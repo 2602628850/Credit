@@ -331,5 +331,15 @@ namespace Credit.Api.Controllers
         {
             return await _walletService.GetMoneyWithoutRecode(CurrentUser.UserId, moneyApplyDto);
         }
+
+        /// <summary>
+        ///  用户完成任务次数统计
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<UserTaskCompletedCountDto> GetUserCompleteTaskCount()
+        {
+            return await _userService.GetUserTaskCompletedCount(CurrentUser.UserId);
+        }
     }
 }

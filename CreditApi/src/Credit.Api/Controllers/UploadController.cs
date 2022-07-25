@@ -100,7 +100,7 @@ public class UploadController : BaseUserController
     /// <returns></returns>
     [HttpPost]
     [RequestFormLimits(MultipartBodyLengthLimit = int.MaxValue)]
-    public async Task<object> HeadImage(IFormFile file,string token)
+    public async Task<object> HeadImage(IFormFile file)
     {
         try
         {
@@ -121,9 +121,9 @@ public class UploadController : BaseUserController
                 {
                     return new { imgUrl = string.Empty,msg = "Please upload files under 50M"};
                 }
-                var userinfo = _tokenManager.DeserializeToken<UserLoginDto>(token).Result;
+                //var userinfo = _tokenManager.DeserializeToken<UserLoginDto>(token).Result;
                 // savePath = Path.Combine(_hostingEnvironment.WebRootPath, rootDir, Tid, saveUser, saveDate);
-                src = $"/{rootDir}/HeadImage/{userinfo.UserId}/{saveDate}/{saveFilename}";
+                src = $"/{rootDir}/HeadImage/{CurrentUser.UserId}/{saveDate}/{saveFilename}";
 
                 var alibabaSetting = await _settingService.GetSetting<AlibabaCloudSetting>();
 

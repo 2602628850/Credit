@@ -762,7 +762,7 @@
             <param name="file"></param>[FromBody]
             <returns></returns>
         </member>
-        <member name="M:Credit.Api.Controllers.UploadController.HeadImage(Microsoft.AspNetCore.Http.IFormFile,System.String)">
+        <member name="M:Credit.Api.Controllers.UploadController.HeadImage(Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
             上传头像
             </summary>
@@ -920,6 +920,12 @@
         <member name="M:Credit.Api.Controllers.UserController.GetUserMoneyWithoutList(Credit.UserWalletServices.Dtos.MoneyApplyDto)">
             <summary>
               获取当前用户当年的所有信用卡代还申请记录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.UserController.GetUserCompleteTaskCount">
+            <summary>
+             用户完成任务次数统计
             </summary>
             <returns></returns>
         </member>

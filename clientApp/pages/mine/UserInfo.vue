@@ -78,6 +78,9 @@
 							filePath: tempFilePaths[0],
 							name: 'file',
 							formData: {
+								// token: token
+							},
+							header:{
 								token: token
 							},
 							success: res => {
