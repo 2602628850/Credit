@@ -210,7 +210,7 @@
 			},
 			//还款
 			rePay() {
-				var url = "/Repay/RepayApplication";
+				var url = "/Repay/CardRepayApplication";
 				this.ApiPost(url, this.repayObj).then(res => {
 					if (res.data == "repay_success") {
 						var msg = this.$t('chaka.Charresult');

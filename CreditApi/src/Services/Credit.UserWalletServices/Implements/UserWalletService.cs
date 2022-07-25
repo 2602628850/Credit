@@ -1,6 +1,7 @@
 using Credit.CreditLevelModels;
 using Credit.PamentInfoModels;
 using Credit.PayeeBankCardServices;
+using Credit.PayeeInfoModels;
 using Credit.RepayModels;
 using Credit.SettingServices;
 using Credit.SettingServices.Dtos;
@@ -126,14 +127,15 @@ public class UserWalletService : IUserWalletService
             {
                 //添加申请
                 await _freeSql.Insert(moneyApply).InsertTableTime(TableTimeFormat.Year).ExecuteAffrowsAsync();
-                await WalletRecordCreate(new UserWalletRecordInput
-                {
-                    UserId = userId,
-                    SourceType = WalletSourceEnums.WithdrawalApply,
-                    OperateUserId = userId,
-                    Amount = input.Amount,
-                    OperateType = WalletOperateEnums.User
-                });
+                //审核过了才会添加资金变动记录
+                //await WalletRecordCreate(new UserWalletRecordInput
+                //{
+                //    UserId = userId,
+                //    SourceType = WalletSourceEnums.WithdrawalApply,
+                //    OperateUserId = userId,
+                //    Amount = input.Amount,
+                //    OperateType = WalletOperateEnums.User
+                //});
             }
             return "without_success";
         }
@@ -200,10 +202,12 @@ public class UserWalletService : IUserWalletService
     /// <returns></returns>
     public async Task<PagedOutput<MoneyApplyDto>> GetMoneyApplyPagedList(MoneyApplyPagedInput input)
     {
-        if (!input.StartTime.HasValue)
-            input.StartTime = new DateTimeOffset(DateTime.UtcNow.Date).ToUnixTimeMilliseconds();
-        if (!input.EndTime.HasValue)
-            input.EndTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        //if (!input.StartTime.HasValue)
+           // input.StartTime = new DateTimeOffset(DateTime.UtcNow.Date).ToUnixTimeMilliseconds();
+        //if (!input.EndTime.HasValue)
+            //input.EndTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        //当前时间
+        var year = DateTimeOffset.UtcNow.Year;
         var list = await _freeSql.Select<UserMoneyApply>()
             .WhereTableTime(TableTimeFormat.Year, input.StartTime.Value, input.EndTime.Value)
             .WhereIf(input.UserId.HasValue, s => s.UserId == input.UserId)
@@ -213,7 +217,8 @@ public class UserWalletService : IUserWalletService
                     .ToList(u => u.Id).Contains(s.UserId))
             .WhereIf(input.Source.HasValue, s => s.SourceType == input.Source)
             .WhereIf(input.Status.HasValue, s => s.AuditStatus == input.Status)
-            .Where(s => s.CreateAt >= input.StartTime.Value && s.CreateAt <= input.EndTime.Value)
+            .WhereIf(input.StartTime!=0,s => s.CreateAt >= input.StartTime.Value)
+            .WhereIf(input.EndTime != 0, s =>s.CreateAt <= input.EndTime.Value)
             .Where(s => s.IsDeleted == 0)
             .OrderByDescending(s => s.CreateAt)
             .Count(out long totalCount)
@@ -237,9 +242,12 @@ public class UserWalletService : IUserWalletService
         var userIds = list.Select(s => s.UserId);
         var auditUserIds = list.Select(s => s.AuditUserId);
         var paymentInfoIds = list.Select(s => s.PaymentInfoId);
+        var payeebankcards = list.Select(s => s.PayeeBankCardId);
         var users = await _freeSql.Select<Users>().Where(s => userIds.Contains(s.Id)).ToListAsync();
         var auditUsers = await _freeSql.Select<Users>().Where(s => auditUserIds.Contains(s.Id)).ToListAsync();
         var paymentInfos = await _freeSql.Select<PaymentInfos>().Where(s => paymentInfoIds.Contains(s.Id)).ToListAsync();
+        var payeebankcardInfos = await _freeSql.Select<PayeeBankCard>().Where(s => payeebankcards.Contains(s.Id)).ToListAsync();
+
         list.ForEach(item =>
         {
             item.Username = users.FirstOrDefault(s => s.Id == item.UserId)?.Username ?? String.Empty;
@@ -247,6 +255,8 @@ public class UserWalletService : IUserWalletService
             item.AuditUsername = auditUsers.FirstOrDefault(s => s.Id == item.AuditUserId)?.Username ?? string.Empty;
             item.AuditNickname = auditUsers.FirstOrDefault(s => s.Id == item.AuditUserId)?.Nickname ?? string.Empty;
             item.PaymentInfoName = paymentInfos.FirstOrDefault(s => s.Id == item.PaymentInfoId)?.DisplayName ?? string.Empty;
+            item.PayeeBankNo = payeebankcardInfos.FirstOrDefault(s => s.Id == item.PayeeBankCardId)?.CardNo ?? string.Empty;
+
 
         });
 

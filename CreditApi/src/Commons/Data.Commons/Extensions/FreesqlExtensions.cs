@@ -34,7 +34,7 @@ public static class FreesqlExtensions
     /// <returns></returns>
     public static ISelect<T> WhereTableTime<T>(this ISelect<T> query,TableTimeFormat format,long timeStart = 0,long timeEnd = 0)
     {
-        if (timeStart > timeEnd)
+        if (timeStart > timeEnd&& timeEnd!=0)
             throw new MyException("开始时间不能大于结束时间");
         if (timeStart == 0)
             timeStart = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();

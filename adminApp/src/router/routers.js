@@ -3,7 +3,7 @@ import {createRouter, createWebHashHistory} from 'vue-router'
 //  const App =()=>import (/* webpackChunkName: "pageFirst" */ './../vues/demo/demorouter/demo.vue')
 const App2 = () => import (/* webpackChunkName: "pageFirst" */ './../vues/demo/demorouter/demoto.vue')
 const App3 = () => import (/* webpackChunkName: "pageFirst" */ './../vues/demo/demorouter/demo.vue')
-//-------路由加载都采用赖加载,避免首页加载页面过多出现卡顿，测�
+//-------路由加载都采用赖加载,避免首页加载页面过多出现卡顿，测�
 const IndexPath = () => import (/* webpackChunkName: "pageFirst" */ './../vues/creditindex/index.vue')
 const LoginPath = () => import (/* webpackChunkName: "pageFirst" */ './../vues/user/login.vue')
 const RegisterPath = () => import (/* webpackChunkName: "pageFirst" */ './../vues/user/register.vue')
@@ -15,7 +15,7 @@ const UserLeavelPath = () => import (/* webpackChunkName: "UserLeavelContent" */
 const BankPath = () => import (/* webpackChunkName: "bankList" */ './../vues/recharge/bank.vue')
 // 理财订单
 const financialOrder =() => import(/* webpackChunkName: "bankList" */ '/src/vues/order/financial-order.vue')
-// 收款银行卡管�
+// 收款银行卡管�
 const BankCardPath = () => import (/* webpackChunkName: "BankCardList" */ './../vues/recharge/bankcard.vue')
 //产品管理
 const ProductPath = () => import (/* webpackChunkName: "productList" */ './../vues/product/index.vue')
@@ -26,9 +26,15 @@ const configs = () => import(/* webpackChunkName: "bankList" */ '/src/vues/confi
 const TeamLevelPath = () => import (/* webpackChunkName: "teamList" */ './../vues/team/teamLevel.vue')
 //团队分润
 const TeamProfitPath = () => import (/* webpackChunkName: "teamList" */ './../vues/team/teamProfit.vue')
+//充值管理
+const rechargeListPath = () => import (/* webpackChunkName: "rechargeAudit" */ './../vues/wallet/rechargemoney.vue')
+//体现管理
+const withListPath = () => import (/* webpackChunkName: "withAudit" */ './../vues/wallet/withmoney.vue')
+//还款管理
+const repayListPath = () => import (/* webpackChunkName: "repayAudit" */ './../vues/wallet/repaymoney.vue')
 
 
-//创建路由, hash 模式�
+//创建路由, hash 模式�
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [
@@ -36,8 +42,8 @@ const router = createRouter({
         {
             path: '/indexPath', component: IndexPath,
             children: [
-                {path: '', redirect: "/indexPath/axioxdemo"},
-                {path: 'axioxdemo', component: App3, name: "toapp3"},
+                {path: '', redirect: "/indexPath/index"},
+                {path: 'index', component: App3, name: "toapp3"},
                 {path: 'vuedemoto', component: App2, name: "toapp2"},
                 {path: '/credit',component: IndexPath,name: 'credit' },
                 {path: 'UserLeavel', component: UserLeavelPath, name: "UserLeavel"},
@@ -47,7 +53,10 @@ const router = createRouter({
                 {path: 'Repay', component: RepayPath, name: "Repay"},
                 {path: 'TeamLevel', component: TeamLevelPath, name: "TeamLevel"},
                 {path: 'TeamProfit', component: TeamProfitPath, name: "TeamProfit"},
-                
+                {path: 'rechargeList', component:rechargeListPath, name: "rechargeList"},
+                {path: 'withList', component:withListPath, name: "withList"},
+                {path: 'repayList', component:repayListPath, name: "repayList"},
+
                 {path: 'BankCard', component: BankCardPath, name: "BankCard"},
                 {path: 'aliConfig', component:configs, name: 'aliConfig'},
                 {path: 'taskIntegral', component:configs, name: 'taskIntegral'}

@@ -86,12 +86,6 @@ export default {
     // 获取所有的菜单数据
    getMenuList () {
       var data=[
-        {id:1,authName:"一级菜单一",ico:"ChatDotSquare",children:[
-          {id:51,authName:"子集一",ico:"Calendar",pathName:"toapp2"}, {id:52,authName:"子集二",ico:"DataAnalysis",pathName:"toapp3"}, {id:53,authName:"子集三",ico:"Discount",pathName:"toapp2"}
-        ]},
-         {id:2,authName:"一级菜单二",ico:"Box",children:[
-          {id:61,authName:"子集四",ico:"Coordinate",pathName:"toapp3"}, {id:62,authName:"子集五",ico:"CreditCard",pathName:"toapp2"}, {id:63,authName:"子集六",ico:"Fold",pathName:"toapp3"}
-        ]},
           {id:3,authName:"信用等级管理",ico:"Box",pathName:"UserLeavel",children:[]},
           {id:4,authName:"充值中心",ico:"Box",children:[
           {id:64,authName:"银行管理",ico:"Coordinate",pathName:"BankManager"},
@@ -101,13 +95,20 @@ export default {
           {id:71,authName:"理财产品",ico:"Coordinate",pathName:"Product"},
           {id:72,authName:"信用代还 ",ico:"Coordinate",pathName:"Repay"}
         ]},
-          {id:7,authName:"团队等级管理",ico:"Box",children:[
+          {id:8,authName:"团队等级管理",ico:"Box",children:[
           {id:81,authName:"团队等级",ico:"Coordinate",pathName:"TeamLevel"},
           {id:82,authName:"团队分润层级 ",ico:"Coordinate",pathName:"TeamProfit"}
         ]},
           {
               id: 6,authName: '订单管理',ico: 'box', children: [
                   {id:501,authName: '信用订单管理',ico: 'Coordinate',pathName: 'financial'}
+              ]
+          },
+           {
+              id: 9,authName: '钱包资金管理',ico: 'box', children: [
+                  {id:801,authName: '充值管理',ico: 'Coordinate',pathName: 'rechargeList'},
+                  {id:802,authName: '提现管理',ico: 'Coordinate',pathName: 'withList'},
+                  {id:803,authName: '还款管理',ico: 'Coordinate',pathName: 'repayList'}
               ]
           },
           {

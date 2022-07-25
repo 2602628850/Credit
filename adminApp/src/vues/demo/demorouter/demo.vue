@@ -1,111 +1,22 @@
 <template>
- <el-form :model="form">
-    <el-form-item label="上传图片：" :label-width="formLabelWidth" style="float:left;" >
-      <el-upload
-        ref="upload"
-        :action="uploadurl"
-        accept="image/png,image/gif,image/jpg,image/jpeg"
-        list-type="picture-card"
-        :limit=limitNum
-        :auto-upload="false"
-        :on-exceed="handleExceed"
-        :before-upload="handleBeforeUpload"
-        :on-preview="handlePictureCardPreview"
-        :on-remove="handleRemove"
-        :on-success="uploadSuccess">
-           <el-icon style=""><Plus /></el-icon>
-      </el-upload>
-      <el-dialog >
-        <img width="90%" :src="dialogImageUrl" alt="">
-      </el-dialog>
-    </el-form-item>
-    <el-form-item>
-      <el-button size="small" type="default"  @click="uploadFile" style="margin-left:10px;margin-top:30px;background-color:gray;color:white;">上传到服务</el-button>
-    </el-form-item>
-  </el-form>
+<!--<router-link :to="`/vuedemoto`" >路由demo</router-link>-->
+<!-- <router-link :to="{ name: 'toapp2',  query: {id:'1'} }">路由demo</router-link> -->
+<h1>首页</h1>
 </template>
-
 <script>
 export default {
-  name:"DS",
+  name: "DeMo",
   data() {
-    return{
-      uploadurl:  process.env.VUE_APP_AXIOS_BASEURL+ process.env.VUE_APP_AXIOS_API+"/Upload/Image",
-      fontsize:'0px',
-      dialogImageUrl: '',
-      dialogVisible: false,
-      formLabelWidth: '100px',
-      limitNum: 1,
-      form: {}
-    }
+    return {
+    };
+  },
+  components: {
+    
   },
   methods: {
-    // 上传文件之前的钩子
-    handleBeforeUpload(file){
-      console.log('before')
-      if(!(file.type === 'image/png' || file.type === 'image/gif' || file.type === 'image/jpg' || file.type === 'image/jpeg')) {
-        this.$notify.warning({
-          title: '警告',
-          message: '请上传格式为image/png, image/gif, image/jpg, image/jpeg的图片'
-        })
-      }
-      let size = file.size / 1024 / 1024
-      if(size > 5) {
-        this.$notify.warning({
-          title: '警告',
-          message: '图片大小不能大于5M'
-        })
-      }
+    gohone() {
+   
     },
-    // 文件超出个数限制时的钩子
-    handleExceed(files, fileList) {
-       console.log(files, fileList);
-    },
-    // 文件列表移除文件时的钩子
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    // 点击文件列表中已上传的文件时的钩子
-    handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
-    },
-    uploadFile() {
-      this.$refs.upload.submit()
-    },
-    uploadSuccess(obj){
-       if (obj.success) {
-    this.dialogImageUrl =obj.data.src // 后端返给我们的路径
-  } else {
-    // this.$message.error('操作失败')
-  }
-    },
-  } 
-}
+  },
+};
 </script>
-<style>
-               .el-upload--picture-card{
-                    width: 100px;
-                    height: 100px;
-                }
-                 .el-upload{
-                    width: 100px;
-                    height: 100px;
-                    
-                     
-                }
-                .el-upload-list--picture-card .el-upload-list__item{
-                    width: 100px;
-                    height: 100px;
-                    line-height: 100px;
-                }
-                .el-upload-list--picture-card .el-upload-list__item-thumbnail{
-                    width: 100px;
-                    height: 100px;
-                    line-height: 100px;
-                }
-                .avatar{
-                    width: 100px;
-                    height: 100px;
-                }
-</style>

@@ -94,7 +94,7 @@ public class MoneyApplyDto : UserMoneyApplyInput
     public decimal Balance { get; set; }
 
     /// <summary>
-    /// 当前余额
+    /// 申请类型
     /// </summary>
     public string ChangeName { get; set; }
 
@@ -161,4 +161,8 @@ public class MoneyApplyDto : UserMoneyApplyInput
     /// 还款收益
     /// </summary>
     public decimal Profits { get; set; }
+    /// <summary>
+    /// 银行卡号
+    /// </summary>
+    public string PayeeBankNo { get; set; }
 }

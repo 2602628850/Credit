@@ -22,16 +22,16 @@ public class MoneyApplyPagedInput : PagedInput
     ///  审核状态
     /// </summary>
     public AuditStatusEnums? Status { get; set; }
-    
+
     /// <summary>
     ///  开始时间
     /// </summary>
-    public long? StartTime { get; set; }
+    public long? StartTime { get; set; } = 0;
 
     /// <summary>
     ///  结束时间
     /// </summary>
-    public long? EndTime { get; set; }
+    public long? EndTime { get; set; } = 0;
 
     /// <summary>
     ///  用户Id
