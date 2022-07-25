@@ -21,6 +21,7 @@ const BankCardPath = () => import (/* webpackChunkName: "BankCardList" */ './../
 const ProductPath = () => import (/* webpackChunkName: "productList" */ './../vues/product/index.vue')
 
 const RepayPath = () => import (/* webpackChunkName: "repayList" */ './../vues/product/repay.vue')
+const configs = () => import(/* webpackChunkName: "bankList" */ '/src/vues/config/sys_config.vue')
 
 //创建路由, hash 模式。
 const router = createRouter({
@@ -40,7 +41,8 @@ const router = createRouter({
                 {path: 'Product', component: ProductPath, name: "Product"},
                 {path: 'Repay', component: RepayPath, name: "Repay"},
                 {path: 'BankCard', component: BankCardPath, name: "BankCard"},
-
+                {path: 'aliConfig', component:configs, name: 'aliConfig'},
+                {path: 'taskIntegral', component:configs, name: 'taskIntegral'}
             ]
         },
         {path: '/login', component: LoginPath, name: "LoginPath"},
