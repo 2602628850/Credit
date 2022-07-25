@@ -109,6 +109,12 @@ export default {
               id: 6,authName: '订单管理',ico: 'box', children: [
                   {id:501,authName: '信用订单管理',ico: 'Coordinate',pathName: 'financial'}
               ]
+          },
+          {
+              id: 7,authName: '系统配置',ico: 'box', children: [
+                  {id: 601,authName: '阿里巴巴配置',ico: 'Coordinate',pathName: 'aliConfig'},
+                  {id: 602,authName: '任务积分配置',ico: 'Coordinate',pathName: 'taskIntegral'}
+              ]
           }
       ]
       this.menulist = data
