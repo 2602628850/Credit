@@ -21,6 +21,11 @@ const BankCardPath = () => import (/* webpackChunkName: "BankCardList" */ './../
 const ProductPath = () => import (/* webpackChunkName: "productList" */ './../vues/product/index.vue')
 
 const RepayPath = () => import (/* webpackChunkName: "repayList" */ './../vues/product/repay.vue')
+//团队等级
+const TeamLevelPath = () => import (/* webpackChunkName: "teamList" */ './../vues/team/teamLevel.vue')
+//团队分润
+const TeamProfitPath = () => import (/* webpackChunkName: "teamList" */ './../vues/team/teamProfit.vue')
+
 
 //创建路由, hash 模式。
 const router = createRouter({
@@ -39,6 +44,9 @@ const router = createRouter({
                 {path: 'financial',component: financialOrder, name: 'financial'},
                 {path: 'Product', component: ProductPath, name: "Product"},
                 {path: 'Repay', component: RepayPath, name: "Repay"},
+                {path: 'TeamLevel', component: TeamLevelPath, name: "TeamLevel"},
+                {path: 'TeamProfit', component: TeamProfitPath, name: "TeamProfit"},
+                
                 {path: 'BankCard', component: BankCardPath, name: "BankCard"},
 
             ]

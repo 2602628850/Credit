@@ -101,6 +101,10 @@ export default {
           {id:71,authName:"理财产品",ico:"Coordinate",pathName:"Product"},
           {id:72,authName:"信用代还 ",ico:"Coordinate",pathName:"Repay"}
         ]},
+          {id:7,authName:"团队等级管理",ico:"Box",children:[
+          {id:81,authName:"团队等级",ico:"Coordinate",pathName:"TeamLevel"},
+          {id:82,authName:"团队分润层级 ",ico:"Coordinate",pathName:"TeamProfit"}
+        ]},
           {
               id: 6,authName: '订单管理',ico: 'box', children: [
                   {id:501,authName: '信用订单管理',ico: 'Coordinate',pathName: 'financial'}
