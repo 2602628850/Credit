@@ -1,7 +1,7 @@
 // #ifdef H5
 console.log('h5')
 // 请求域名http://localhost:8003/v1
-let host = 'http://localhost:8003/v1';
+let host = 'http://api.credit.ceshi-api.com/v1';
 //let host = 'http://localhost:8003/v1';
 // #endif
 // #ifdef APP-PLUS
