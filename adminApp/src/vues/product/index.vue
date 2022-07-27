@@ -80,7 +80,7 @@
 			</el-space>
 				<el-space>
 						<div class="in-title" style="margin-left:-60px;" >产品封面</div>
-              <upload-picture  v-model:logourl="CoverImage" ref="child">
+              <upload-picture  v-model:logourl="coverImage" ref="child">
 
 							</upload-picture>
 				</el-space>
@@ -118,9 +118,9 @@ import uploadFile  from "../../components/uploadPicture.vue"
 				tableData: [],
 				loading: false,
 				windowStatus: false,
-				editItem: {isEnable:"0",CoverImage:''},
+				editItem: {isEnable:"0",coverImage:''},
 				windowSaving: false,
-				CoverImage:'',
+				coverImage:'',
 			}
 		},
 	components: {
@@ -137,7 +137,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
             },
 						// 上传成功，获取返回的图片地址
             handleUpImage(res){
-                this.editItem.CoverImage = res.data.url;
+                this.editItem.coverImage = res.data.url;
             },
 			delItem(item) {
 				const ids=[];
@@ -221,7 +221,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 					return;
 				}
 				this.windowSaving = true;
-				this.editItem.CoverImage=this.CoverImage;//图片路径
+				this.editItem.coverImage=this.coverImage;//图片路径
 				if (this.editItem.id) {
 					this.$Http.post('AdminProduct/FinanacialProductUpdate', this.editItem).then(() => {
 						this.windowStatus = false;
@@ -249,7 +249,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 			},
 			updItem(item) {
 				setTimeout(()=>{
-					this.$refs.child.updateUrl(item.CoverImage)
+					this.$refs.child.updateUrl(item.coverImage)
 				},10)
 			
 				this.windowStatus = true;

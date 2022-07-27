@@ -5,6 +5,22 @@
 			<div>还款名称</div>
 			<el-input v-model="LevelName"></el-input>
 		</el-space>
+		<el-space class="search-input400">
+			<div>还款类型：</div>
+				<el-select v-model="repayTypes" class="in-input" size="large" placeholder="选择类型" >
+        <el-option
+      key=""
+      label="请选择"
+      value="请选择"
+    />
+				<el-option
+      v-for="item in repayTypedata"
+      :key="item.repayType"
+      :label="item.repayTypeName"
+      :value="item.repayType"
+        />
+         </el-select> 
+		</el-space>
 	</el-space>
 	<div class="w100 mgt flex-row-between" id="search-button">
 		<el-button type="primary" @click="loadData(1)">查询</el-button>
@@ -13,7 +29,7 @@
 	<el-table v-loading="loading" class="mgt w100" stripe :data="tableData" style="flex: 1" border :height="contentHeight">
 		<el-table-column prop="levelName" label="还款名称" width="200" align="center"></el-table-column>
 		
-		<el-table-column prop="levelName" label="还款图片" width="150" align="center"></el-table-column>
+		<el-table-column prop="levelName" label="还款类型" width="150" align="center"></el-table-column>
 		<el-table-column prop="unlockBalance" label="余额限制（$）" width="120" align="center"></el-table-column>
 		<el-table-column prop="profitRate" label="收益" width="120" align="center"></el-table-column>
 		<el-table-column prop="minRepayAmount" label="最低还款限制" width="120" align="center"></el-table-column>
@@ -42,6 +58,17 @@
 
 	<el-dialog v-model="windowStatus" v-loading="windowSaving" width="600px">
 		<el-space direction="vertical">
+			<el-space>
+				<div class="in-title">还款类型：</div>
+				<el-select v-model="editItem.repayType" class="in-input" size="large" placeholder="选择类型" >
+					<el-option
+      v-for="item in repayTypedata"
+      :key="item.repayType"
+      :label="item.repayTypeName"
+      :value="item.repayType"
+        />
+         </el-select>
+			</el-space>
 			<el-space>
 				<div class="in-title">等级名称：</div>
 				<el-input class="in-input" v-model="editItem.levelName"></el-input>
@@ -102,16 +129,18 @@ import uploadFile  from "../../components/uploadPicture.vue"
 			return {
 			uploadUrl: 'http://localhost:8003/v1/Upload/Image',
 				levelName: '',
+				repayTypes:'',
 				contentHeight: '0px',
 				pageIndex: 1,
 				pageSize: 20,
 				total: 0,
 				tableData: [],
+        repayTypedata :[{repayType:0,repayTypeName:'信用卡还款'},{repayType:10,repayTypeName:'贷款还款'}],//还款类型下啦选项
 				loading: false,
 				windowStatus: false,
-				editItem: {isEnable:"0",CoverImage:''},
+				editItem: {isEnable:"0",coverImage:''},
 				windowSaving: false,
-				CoverImage:'',
+				coverImage:'',
 			}
 		},
 	components: {
@@ -128,7 +157,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
             },
 						// 上传成功，获取返回的图片地址
             handleUpImage(res){
-                this.editItem.CoverImage = res.data.url;
+                this.editItem.coverImage = res.data.url;
             },
 			delItem(item) {
 				const ids=[];
@@ -212,7 +241,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 					return;
 				}
 				this.windowSaving = true;
-				this.editItem.CoverImage=this.CoverImage;//图片路径
+				this.editItem.coverImage=this.coverImage;//图片路径
 				if (this.editItem.id) {
 					this.$Http.post('AdminRepay/RepayLevelUpdate', this.editItem).then(() => {
 						this.windowStatus = false;
@@ -240,7 +269,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 			},
 			updItem(item) {
 				setTimeout(()=>{
-					this.$refs.child.updateUrl(item.CoverImage)
+					this.$refs.child.updateUrl(item.coverImage)
 				},10)
 			
 				this.windowStatus = true;
@@ -265,10 +294,12 @@ import uploadFile  from "../../components/uploadPicture.vue"
 			},
 
 			loadData(page) {
-			
 				let param = {};
 				if (this.levelName) {
 					param.levelName = this.levelName;
+				}
+				if (this.repayTypes!=''||this.repayTypes!=null) {
+					param.repayType = this.repayTypes;
 				}
 				if (page) {
 					this.pageIndex = page-1;
