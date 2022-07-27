@@ -129,7 +129,7 @@
 				</uni-col>
 				<uni-col :span="4" :offset="2">
 					<view class="demo-uni-col-anniu light">
-						<text style="color: green;display: flex;">+${{remaining.repaymentIncome}}</text>
+						<text style="color: green;display: flex;">+${{remaining.todayIncome}}</text>
 						<text style="font-size: 13px;">{{ $t('indexpages.todayincome') }}</text>
 					</view>
 				</uni-col>
@@ -229,6 +229,7 @@
 			GetRemainingChaka() {//获取用户剩余查卡次数，今日查卡次数，今日收益
 				var url = "/User/GetRemainingChaka";
 				this.ApiGet(url).then(res => {
+					console.log(res.data)
 					this.remaining=res.data	
 				})
 			},

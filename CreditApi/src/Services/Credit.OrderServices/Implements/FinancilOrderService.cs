@@ -108,15 +108,16 @@ public class FinancilOrderService : IFinancilOrderService
         };
         using (var uow = _freeSql.CreateUnitOfWork())
         {
-            //用户产生订单流水
-            await _userWalletService.WalletRecordCreate(new UserWalletRecordInput
-            {
-                UserId = userId,
-                SourceType = WalletSourceEnums.BuyFinancil,
-                OperateUserId = userId,
-                Amount = amount,
-                OperateType = WalletOperateEnums.User,
-            });
+            ////订单审核过了才会向流水表里面加数据
+            ////用户产生订单流水
+            //await _userWalletService.WalletRecordCreate(new UserWalletRecordInput
+            //{
+            //    UserId = userId,
+            //    SourceType = WalletSourceEnums.BuyFinancil,
+            //    OperateUserId = userId,
+            //    Amount = amount,
+            //    OperateType = WalletOperateEnums.User,
+            //});
             //创建订单 表按年分表
             await _freeSql.Insert(newOrder).InsertTableTime(TableTimeFormat.Year).ExecuteAffrowsAsync();
         }
@@ -228,10 +229,27 @@ public class FinancilOrderService : IFinancilOrderService
         order.NextSettledDate = nextSettleDate;
         using (var uow = _freeSql.CreateUnitOfWork())
         {
+            //用户产生购买理财产品流水
+            await _userWalletService.WalletRecordCreate(new UserWalletRecordInput
+            {
+                Amount = order.TotalAmount,
+                UserId = order.UserId,
+                SourceType = WalletSourceEnums.SoldFinancil,
+                OperateUserId = auditUserId,
+                OperateType = WalletOperateEnums.Admin
+            });
             await _freeSql.Update<FinancilOrder>()
                 .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
                 .SetSource(order)
                 .ExecuteAffrowsAsync();
+            //添加购买理财产品收益流水
+            await _userWalletService.WalletRecordCreate(new UserWalletRecordInput
+            {
+                Amount = order.DailyRate * order.Cycle * order.TotalAmount*0.01m,
+                SourceType = WalletSourceEnums.FinancilProfit,
+                OperateUserId = auditUserId,
+                UserId = order.UserId
+            });
             //订单团队结算
             await _teamService.UserTeamMemberProfit(order.UserId, order.TotalAmount);
             //更新用户为团队成员
@@ -395,6 +413,15 @@ public class FinancilOrderService : IFinancilOrderService
                  .UpdateTableTime(TableTimeFormat.Year, order.CreateAt)
                  .SetSource(order)
                  .ExecuteAffrowsAsync();
+            //添加理财产品收益流水
+            await _userWalletService.WalletRecordCreate(new UserWalletRecordInput
+            {
+                Amount = order.DailyRate*order.Cycle*order.TotalAmount*0.01m,
+                SourceType = WalletSourceEnums.FinancilProfit,
+                OperateUserId = auditUserId,
+                UserId = order.UserId
+            }) ;
+
         }
     }
 

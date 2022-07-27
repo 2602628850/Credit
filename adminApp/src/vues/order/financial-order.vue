@@ -151,6 +151,7 @@
         methods: {
             doAudit() {
                 this.auditLoading = true;
+                this.auditItem.orderId=this.auditItem.id;
                 if (this.auditIsSold) {
                     // 售卖
                     this.$Http.post('AdminOrder/AuditSoldOrder',this.auditItem).then(()=>{

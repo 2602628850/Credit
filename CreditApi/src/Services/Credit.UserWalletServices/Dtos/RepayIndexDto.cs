@@ -20,6 +20,10 @@ namespace Credit.UserWalletServices.Dtos;
     /// </summary>
     public decimal RepaymentIncome { get; set; } = 0;
     /// <summary>
+    /// 今日收益
+    /// </summary>
+    public decimal TodayIncome { get; set; } = 0;
+    /// <summary>
     /// 账户余额
     /// </summary>
     public decimal Balance { get; set; }
