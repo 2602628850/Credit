@@ -116,10 +116,10 @@ public class UploadController : BaseUserController
                 var src = string.Empty;
                 var img = new string[] {".jpg", ".png", ".jpeg", ".mp4"};
                 if (!img.Contains(txt))
-                    return new { imgUrl = string.Empty,msg = "Only supports JPG, JPEG, PNG, MP4 formats"};
+                    throw new MyException("Only supports JPG, JPEG, PNG, MP4 formats");
                 if (file.Length > 50 * 1204 * 1000)
                 {
-                    return new { imgUrl = string.Empty,msg = "Please upload files under 50M"};
+                    throw new MyException("Please upload files under 50M");
                 }
                 //var userinfo = _tokenManager.DeserializeToken<UserLoginDto>(token).Result;
                 // savePath = Path.Combine(_hostingEnvironment.WebRootPath, rootDir, Tid, saveUser, saveDate);
@@ -147,13 +147,13 @@ public class UploadController : BaseUserController
                 return new {imgUrl = staticUrl.UriCombine(src),msg = "upload success"};
             }
             else
-            {
-                return new { imgUrl = string.Empty,msg = "file is empty"};
-            }
+             {
+                 throw new MyException("file is empty");
+             }
         }
         catch (Exception e)
         {
-            return new { imgUrl = string.Empty,msg = e.Message};
+            throw new MyException(e.Message);
         }
     }
 }
