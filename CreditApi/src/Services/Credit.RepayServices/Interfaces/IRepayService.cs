@@ -1,5 +1,6 @@
 using Credit.RepayServices.Dtos;
 using Data.Commons.Dtos;
+using Data.Commons.Enums;
 
 namespace Credit.RepayServices;
 
@@ -56,7 +57,7 @@ public interface IRepayService
     /// </summary>
     /// <param name="isEnable"></param>
     /// <returns></returns>
-    Task<List<RepayLevelDto>> GetRepayLevelList(int isEnable = 1);
+    Task<List<RepayLevelDto>> GetRepayLevelList(RepayTypeEnums repayType,int isEnable = 1);
 
     /// <summary>
     ///  获取还款等级列表

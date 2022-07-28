@@ -89,8 +89,6 @@
   },
 		methods: { 
 			delItem(item) {
-				const ids=[];
-				ids.push(item.id);
 				this.$msgbox({
 					title: '提示',
 					message: '确认删除' + item.levelName + '?',
@@ -98,7 +96,7 @@
 					beforeClose: (action,instance,done) => {
 						if (action == 'confirm') {
 							this.loading = true;
-							this.$Http.post('AdminTeam/TeamLevelDelete', {ids: ids}).then(() => {
+							this.$Http.post('AdminTeam/TeamLevelDelete', {id: item.id}).then(() => {
 								this.loadData();
 								done();
 							}).catch(res => {

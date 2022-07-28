@@ -7,7 +7,7 @@
 				<view class="page-card">
 					<view class="card-page margin-top">
 						<view class="credit-card position-relative">
-							<image class="card-bg position-absolute" src="/static/image/hall/product-info-credit.png">
+							<image class="card-bg position-absolute" src="/static/image/hall/product-info-credit.png" style="width: 100%;">
 							</image>
 							<view class="credit-info position-relative flex-1 justify-between">
 								<view class="flex-row justify-between">

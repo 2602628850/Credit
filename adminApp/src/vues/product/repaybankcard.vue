@@ -27,19 +27,18 @@
 		<el-button type="primary" @click="addItem">添加</el-button>
 	</div>
 	<el-table v-loading="loading" class="mgt w100" stripe :data="tableData" style="flex: 1" border :height="contentHeight">
-		<el-table-column prop="levelName" label="还款名称" width="200" align="center"></el-table-column>
+		<el-table-column prop="bankName" label="银行名称" width="200" align="center"></el-table-column>
 		
-		<el-table-column prop="repayType" label="还款类型" width="150" align="center"></el-table-column>
-		<el-table-column prop="unlockBalance" label="余额限制（$）" width="120" align="center"></el-table-column>
-		<el-table-column prop="profitRate" label="收益" width="120" align="center"></el-table-column>
-		<el-table-column prop="minRepayAmount" label="最低还款限制" width="120" align="center"></el-table-column>
-		<el-table-column prop="maxRepayAmount" label="最高还款限制" width="120" align="center"></el-table-column>
+		<el-table-column prop="levelName" label="等级名称" width="150" align="center"></el-table-column>
+		<el-table-column prop="cardNo" label="绑定卡号" width="200" align="center"></el-table-column>
+		<el-table-column prop="bindUser" label="绑定用户" width="120" align="center"></el-table-column>
+		<el-table-column prop="amount" label="还款金额" width="120" align="center"></el-table-column>
 		<el-table-column prop="isEnable" label="是否启用" width="100" align="center">
 			<template #default="scope">
 				{{ scope.row.isEnable=="1"?"启用":"禁用"}}
 			</template>
 		</el-table-column>
-    <el-table-column prop="" label="操作" align="center" width="200">
+    <el-table-column prop="" label="操作" align="center" width="200" fixed="right">
 			<template #default="scope">
 				<el-space>
 					<el-button type="danger" size="small" plain @click="upXJ(scope.row)" v-if="scope.row.isEnable==1">禁用</el-button>
@@ -59,35 +58,61 @@
 	<el-dialog v-model="windowStatus" v-loading="windowSaving" width="600px">
 		<el-space direction="vertical">
 			<el-space>
-				<div class="in-title">还款类型：</div>
+				<div class="in-title">绑定类型：</div>
 				<el-select v-model="editItem.repayType" class="in-input" size="large" placeholder="选择类型" >
-					<el-option
+				<el-option
+      key=""
+      label="请选择"
+      value="请选择"
+    />	<el-option
       v-for="item in repayTypedata"
       :key="item.repayType"
       :label="item.repayTypeName"
       :value="item.repayType"
+        @click="getrepayLevel(item.repayType)"/>
+         </el-select>
+			</el-space>
+			<el-space>
+				<div class="in-title">绑定产品：</div>
+				<el-select v-model="editItem.repayLevelId" class="in-input" size="large" placeholder="选择产品" >
+					<el-option
+      key=""
+      label="请选择"
+      value="请选择"
+    /><el-option
+      v-for="item in repayLeveldata"
+      :key="item.id"
+      :label="item.levelName"
+      :value="item.id"
         />
          </el-select>
 			</el-space>
 			<el-space>
-				<div class="in-title">等级名称：</div>
-				<el-input class="in-input" v-model="editItem.levelName"></el-input>
+				<div class="in-title">绑定银行：</div>
+				<el-select v-model="editItem.bankId" class="in-input" size="large" placeholder="选择产品" >
+					<el-option
+      key=""
+      label="请选择"
+      value="请选择"
+    /><el-option
+      v-for="item in bankdata"
+      :key="item.bankId"
+      :label="item.bankName"
+      :value="item.bankId"
+        />
+         </el-select>
 			</el-space>
 			<el-space>
-				<div class="in-title">余额限制：</div>
-				<el-input class="in-input" v-model="editItem.unlockBalance"></el-input>
+				<div class="in-title">卡号</div>
+				<el-input class="in-input" v-model="editItem.cardNo"></el-input>
 			</el-space>
 			<el-space>
-				<div class="in-title">收益（%）：</div>
-				<el-input class="in-input" v-model="editItem.profitRate"></el-input>
+				<div class="in-title">绑定用户：</div>
+				<el-input class="in-input" v-model="editItem.bindUser"></el-input>
 			</el-space>
 			<el-space>
-				<div class="in-title">最低还款：</div>
-				<el-input class="in-input" v-model="editItem.minRepayAmount"></el-input>
-			</el-space>
-			<el-space>
-				<div class="in-title">最高还款：</div>
-				<el-input class="in-input" v-model="editItem.maxRepayAmount"></el-input>
+				<div class="in-title">还款金额：</div>
+				<el-input class="in-input" v-model="editItem.amount"></el-input>
 			</el-space>
 			<el-space>
 				<div class="in-title">是否启用：</div>
@@ -96,18 +121,6 @@
         <el-radio label="0" >禁用</el-radio>
       </el-radio-group>
 			</el-space>
-				<el-space>
-						<div class="in-title" style="margin-left:-60px;" >图片</div>
-              <upload-picture  v-model:logourl="coverImage" ref="child">
-
-							</upload-picture>
-				</el-space>
-			<el-space>
-				<div class="in-title">产品简介：</div>
-				<el-input  :rows="3"  type="textarea" class="in-input" v-model="editItem.introduction"></el-input>
-			</el-space> 
-
-
 			<el-space>
 				<el-button type="primary" @click="saveItem">保存</el-button>
 			</el-space>
@@ -116,7 +129,6 @@
 </template>
 
 <script>
-import uploadFile  from "../../components/uploadPicture.vue"
 	export default {
 		name: "repay-manager",
 		beforeRouteEnter(to, from, next) {
@@ -135,30 +147,23 @@ import uploadFile  from "../../components/uploadPicture.vue"
 				pageSize: 20,
 				total: 0,
 				tableData: [],
+				repayLeveldata: [],
+				bankdata: [],
         repayTypedata :[{repayType:0,repayTypeName:'信用卡还款'},{repayType:10,repayTypeName:'贷款还款'}],//还款类型下啦选项
 				loading: false,
 				windowStatus: false,
-				editItem: {isEnable:"0",coverImage:''},
+				editItem: {isEnable:"0"},
 				windowSaving: false,
-				coverImage:'',
 			}
 		},
 	components: {
-  "upload-picture":uploadFile
   },
+    created(){
+      this.$Http.get('AdminBank/GetBankList').then(res => {
+				this.bankdata=res.data.data;
+			})
+    },
 		methods: {
-			// 上传前，限制的上传图片大小
-			beforeImageUpload(rawFile){
-                if(rawFile.size / 1024 / 1024 > 10){
-                    this.$message.error("单张图片大小不能超过10MB!");
-                    return false;
-                }
-                return true;
-            },
-						// 上传成功，获取返回的图片地址
-            handleUpImage(res){
-                this.editItem.coverImage = res.data.url;
-            },
 			delItem(item) {
 				const ids=[];
 				ids.push(item.id);
@@ -169,7 +174,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 					beforeClose: (action,instance,done) => {
 						if (action == 'confirm') {
 							this.loading = true;
-							this.$Http.post('AdminRepay/RepayLevelDelete', {ids: ids}).then(() => {
+							this.$Http.post('AdminRepay/RepayBankCardDelete', {ids: ids}).then(() => {
 								this.loadData();
 								done();
 							}).catch(res => {
@@ -193,7 +198,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 					beforeClose: (action,instance,done) => {
 						if (action == 'confirm') {
 							this.loading = true;
-							this.$Http.post('AdminRepay/RepayLevelEnable', {ids: ids}).then(() => {
+							this.$Http.post('AdminRepay/RepayBankCardEnable', {ids: ids}).then(() => {
 								this.loadData();
 								done();
 							}).catch(res => {
@@ -217,7 +222,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 					beforeClose: (action,instance,done) => {
 						if (action == 'confirm') {
 							this.loading = true;
-							this.$Http.post('AdminRepay/RepayLevelDisable', {ids: ids}).then(() => {
+							this.$Http.post('AdminRepay/RepayBankCardDisable', {ids: ids}).then(() => {
 								this.loadData();
 								done();
 							}).catch(res => {
@@ -231,9 +236,18 @@ import uploadFile  from "../../components/uploadPicture.vue"
 				})
 
 			},
+			getrepayLevel(item) {
+				let param = {};
+				param.repayType = item;
+				param.pageIndex = this.pageIndex;
+				param.pageSize = this.pageSize;
+				this.$Http.get('AdminRepay/GetRepayLevelPagedList', {params: param}).then(res => {
+					this.repayLeveldata = res.data.data.items; 
+				})
+			},
 			saveItem() {
-				if (!this.editItem.levelName) {
-					this.$message.error('请输入产品名称');
+				if (!this.editItem.cardNo) {
+					this.$message.error('请输入卡号');
 					return;
 				}
 				if (this.$ObjectUtil.isEmpty(this.editItem.isEnable)) {
@@ -241,9 +255,8 @@ import uploadFile  from "../../components/uploadPicture.vue"
 					return;
 				}
 				this.windowSaving = true;
-				this.editItem.coverImage=this.coverImage;//图片路径
 				if (this.editItem.id) {
-					this.$Http.post('AdminRepay/RepayLevelUpdate', this.editItem).then(() => {
+					this.$Http.post('AdminRepay/RepayBankCardUpdate', this.editItem).then(() => {
 						this.windowStatus = false;
 						this.loadData()
 					}).catch(res => {
@@ -251,7 +264,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 						this.$message.error(res.data.message)
 					})
 				} else {
-					this.$Http.post('AdminRepay/RepayLevelCreate', this.editItem).then(() => {
+					this.$Http.post('AdminRepay/RepayBankCardCreate', this.editItem).then(() => {
 						this.windowStatus = false;
 						this.loadData()
 					}).catch(res => {
@@ -268,10 +281,6 @@ import uploadFile  from "../../components/uploadPicture.vue"
         this.editItem.isEnable ='1';
 			},
 			updItem(item) {
-				setTimeout(()=>{
-					this.$refs.child.updateUrl(item.coverImage)
-				},10)
-			
 				this.windowStatus = true;
 				this.windowSaving = false;
 				this.editItem = JSON.parse(JSON.stringify(item));
@@ -307,7 +316,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 				param.pageIndex = this.pageIndex;
 				param.pageSize = this.pageSize;
 				this.loading = true;
-				this.$Http.get('AdminRepay/GetRepayLevelPagedList', {params: param}).then(res => {
+				this.$Http.get('AdminRepay/GetRepayBankCardPagedList', {params: param}).then(res => {
 				
 					this.tableData = res.data.data.items;
 					this.total = parseInt(res.data.data.totalCount);
