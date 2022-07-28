@@ -37,10 +37,15 @@
 			}
 		},
 		methods: {
-			 goBack() {
-				uni.navigateBack({
-					delta: 1
-				})
+			goBack() {
+				 const canNavBack = getCurrentPages()
+				 if (canNavBack && canNavBack.length > 1) {
+				 			 uni.navigateBack({
+				 				 delta: 1
+				 			 })
+				 		 } else {
+				 			 history.back()
+				 		 }
 			},
 			Laout(){
 				//退出登录
