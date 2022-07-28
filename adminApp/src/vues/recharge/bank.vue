@@ -18,12 +18,13 @@
 				{{ scope.row.isEnable=="1"?"启用":"禁用"}}
 			</template>
 		</el-table-column>
-    <el-table-column prop="" label="操作" align="center" width="130"  fixed="right">
+    <el-table-column prop="" label="操作" align="center" width="140"  fixed="right">
 			<template #default="scope">
 				<el-space>
 					<el-button type="primary" size="small" plain @click="updItem(scope.row)">修改</el-button>
-					<span></span>
-					<el-button type="danger" size="small" plain @click="delItem(scope.row)">删除</el-button>
+					
+					<el-button type="danger" v-show="isChooseDel==0" size="small" plain @click="delItem(scope.row,1)">删除</el-button>
+					<el-button type="danger" v-show="isChooseDel==1"  size="small" plain @click="delItem(scope.row,0)">删除</el-button>
 				</el-space>
 			</template>
 		</el-table-column>
@@ -79,6 +80,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 		data() {
 			return {
 			//: 'http://localhost:8003/v1/Upload/Image',
+			isChooseDel:0,
 				bankName: '',
 				contentHeight: '0px',
 				pageIndex: 1,
@@ -111,7 +113,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 				currentPage(pageindex){
           this.loadData(pageindex)
 				},
-			delItem(item) {
+			delItem(item,indexcho) {
 				this.$msgbox({
 					title: '提示',
 					message: '确认删除：' + item.bankName + '?',
@@ -122,7 +124,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 							this.$Http.post('AdminBank/BankDelete', {id: item.id}).then(() => {
 								done();
                 this.loadData();
-
+                this.isChooseDel=indexcho;
 							}).catch(res => {
 								this.$message.error(res.data.message);
 								this.loading = false;

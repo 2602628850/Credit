@@ -29,7 +29,9 @@
 					<el-button type="danger" size="small" plain @click="upXJ(scope.row)" v-if="scope.row.isEnable==1">下架</el-button>
 					<el-button type="primary" size="small" plain @click="upQY(scope.row)" v-else>上架</el-button>
 					<el-button type="primary" size="small" plain @click="updItem(scope.row)">修改</el-button>
-					<el-button type="danger" size="small" plain @click="delItem(scope.row)">删除</el-button>
+				
+					<el-button type="danger" v-show="isChooseDel==0" size="small" plain @click="delItem(scope.row,1)">删除</el-button>
+					<el-button type="danger" v-show="isChooseDel==1"  size="small" plain @click="delItem(scope.row,0)">删除</el-button>
 				</el-space>
 			</template>
 		</el-table-column>
@@ -108,6 +110,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 		},
 		data() {
 			return {
+					isChooseDel:0,
 			uploadUrl: 'http://localhost:8003/v1/Upload/Image',
 				productName: '',
 				contentHeight: '0px',
@@ -141,7 +144,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
             handleUpImage(res){
                 this.editItem.coverImage = res.data.url;
             },
-			delItem(item) {
+			delItem(item,indexcho) {
 				const ids=[];
 				ids.push(item.id);
 				this.$msgbox({
@@ -154,6 +157,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 							this.$Http.post('AdminProduct/FinancialProductDelete', {ids: ids}).then(() => {
 								this.loadData();
 								done();
+							this.isChooseDel=indexcho;
 							}).catch(res => {
 								this.$message.error(res.data.message);
 								this.loading = false;
