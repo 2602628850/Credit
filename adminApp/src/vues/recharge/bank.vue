@@ -22,6 +22,7 @@
 			<template #default="scope">
 				<el-space>
 					<el-button type="primary" size="small" plain @click="updItem(scope.row)">修改</el-button>
+					<span></span>
 					<el-button type="danger" size="small" plain @click="delItem(scope.row)">删除</el-button>
 				</el-space>
 			</template>
@@ -29,7 +30,7 @@
 	</el-table>
 	<!--	</div>-->
 	<div class="w100 flex-row-end mgt" id="page">
-		<el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize"/>
+		<el-pagination background layout="prev, pager, next" @current-change="currentPage"  :total="total" :page-size="pageSize"/>
 	</div>
 
 
@@ -107,17 +108,21 @@ import uploadFile  from "../../components/uploadPicture.vue"
             handleUpImage(res){
                 this.editItem.logo = res.data.url;
             },
+				currentPage(pageindex){
+          this.loadData(pageindex)
+				},
 			delItem(item) {
 				this.$msgbox({
 					title: '提示',
-					message: '确认删除' + item.levelName + '?',
+					message: '确认删除：' + item.bankName + '?',
 					showCancelButton: true,
 					beforeClose: (action,instance,done) => {
 						if (action == 'confirm') {
 							this.loading = true;
 							this.$Http.post('AdminBank/BankDelete', {id: item.id}).then(() => {
-								this.loadData();
 								done();
+                this.loadData();
+
 							}).catch(res => {
 								this.$message.error(res.data.message);
 								this.loading = false;

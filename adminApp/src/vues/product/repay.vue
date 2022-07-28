@@ -52,7 +52,7 @@
 	</el-table>
 	<!--	</div>-->
 	<div class="w100 flex-row-end mgt" id="page">
-		<el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize"/>
+		<el-pagination background layout="prev, pager, next" @current-change="currentPage" :total="total" :page-size="pageSize"/>
 	</div>
 
 
@@ -147,6 +147,9 @@ import uploadFile  from "../../components/uploadPicture.vue"
   "upload-picture":uploadFile
   },
 		methods: {
+				currentPage(pageindex){
+          this.loadData(pageindex)
+				},
 			// 上传前，限制的上传图片大小
 			beforeImageUpload(rawFile){
                 if(rawFile.size / 1024 / 1024 > 10){

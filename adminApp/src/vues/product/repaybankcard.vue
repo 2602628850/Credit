@@ -51,7 +51,7 @@
 	</el-table>
 	<!--	</div>-->
 	<div class="w100 flex-row-end mgt" id="page">
-		<el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize"/>
+		<el-pagination background layout="prev, pager, next" @current-change="currentPage" :total="total" :page-size="pageSize"/>
 	</div>
 
 
@@ -164,6 +164,9 @@
 			})
     },
 		methods: {
+				currentPage(pageindex){
+          this.loadData(pageindex)
+				},
 			delItem(item) {
 				const ids=[];
 				ids.push(item.id);
