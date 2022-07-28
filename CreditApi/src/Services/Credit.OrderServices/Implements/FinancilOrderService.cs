@@ -497,6 +497,8 @@ public class FinancilOrderService : IFinancilOrderService
             .WhereIf(!string.IsNullOrEmpty(input.ProductKey), s =>
                 _freeSql.Select<FinancialProduct>().Where(p => p.ProductName.Contains(input.ProductKey))
                     .ToList(p => p.Id).Contains(s.ProductId))
+            .WhereIf(input.StartTime > 0,s => s.CreateAt >= input.StartTime)
+            .WhereIf(input.EndTime > 0,s => s.CreateAt <= input.EndTime)
             .Where(s => s.IsDeleted == 0)
             .OrderByDescending(s => s.CreateAt)
             .Count(out long totalCount)

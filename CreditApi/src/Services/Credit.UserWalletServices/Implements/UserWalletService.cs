@@ -714,19 +714,17 @@ public class UserWalletService : IUserWalletService
         int count = userleavel == null ? 0 : userleavel.ChakaNum - userMoneyApplys.Count;
         repayIndexDto.RemainingTime = count;//剩余还款次数
         repayIndexDto.RepaymentTimes = userMoneyApplys.Count;//已还款次数
-        //算还款收益.AsTable((type, table) => $"{table}_{year}")
-        List<UserWalletRecord> audutsuccess = _freeSql.Select<UserWalletRecord>()
-            .WhereTableTime(TableTimeFormat.Month,0,0)
-           .Where(m => m.IsDeleted == 0 && m.CreateAt >= time && (m.SourceType == WalletSourceEnums.RepayProfit|| m.SourceType == WalletSourceEnums.FinancilProfit) && m.UserId == userid)
+        //算代还款收益,AuditAt因为审核通过后才会有收益,所以今天审核通过的才算是今日收益
+        List<UserMoneyApply> audutsuccess = _freeSql.Select<UserMoneyApply>()
+           .AsTable((type, table) => $"{table}_{year}").Where(m => m.IsDeleted == 0 && m.AuditAt >= time && m.SourceType == WalletSourceEnums.CardRepayApply && m.AuditStatus == AuditStatusEnums.Success && m.UserId == userid)
            .ToList();
-        List<UserWalletRecord> repaylist = _freeSql.Select<UserWalletRecord>()
-            .WhereTableTime(TableTimeFormat.Month, 0, 0)
-           .Where(m => m.IsDeleted == 0 && m.CreateAt >= time && (m.SourceType == WalletSourceEnums.RepayProfit) && m.UserId == userid)
-           .ToList();
-       
-            repayIndexDto.RepaymentIncome = repaylist.Sum(m => m.Amount);//今日还款收益
-            repayIndexDto.TodayIncome= audutsuccess.Sum(m => m.Amount);//今日收益
+        if (userleavel != null)
+        {
 
+            decimal profit = userleavel.Profit;
+            repayIndexDto.RepaymentIncome = audutsuccess.Sum(m => ((m.Amount * profit) / 100));
+
+        }
         //获取用户账户余额
         repayIndexDto.Balance = user.Balance;
         return repayIndexDto;
@@ -752,16 +750,38 @@ public class UserWalletService : IUserWalletService
             //带状态的查询
             .WhereIf(moneyApplyDto.AuditStatus.HasValue, s => s.AuditStatus == moneyApplyDto.AuditStatus)
             .ToListAsync<MoneyApplyDto>();
-            for(int i=0;i< userMoneyApply.Count; i++) {
-            var repayCard = await _freeSql.Select<RepayBankCard>()
-               .Where(s => s.Id == userMoneyApply[i].PayeeBankCardId)
-               .ToOneAsync();
-            var repayLevel = await _freeSql.Select<RepayLevel>()
-                .Where(s => s.Id == repayCard.RepayLevelId)
-                .ToOneAsync();
-            userMoneyApply[i].Profits  = userMoneyApply[i].Amount * repayLevel.ProfitRate * 0.01m;
-            }
- 
+        userMoneyApply.ForEach(m =>
+        {
+            m.Profits = (m.Amount * userleavel.Profit) * 0.01M;
+        });
         return userMoneyApply;
+    }
+
+    /// <summary>
+    ///  获取未处理的申请数量统计
+    /// </summary>
+    /// <returns></returns>
+    public async Task<ApplyDefaultCountDto> GetApplyDefaultCount()
+    {
+        var yearStart = DateTimeHelper.YearStart();
+        var applys = await _freeSql.Select<UserMoneyApply>()
+            .WhereTableTime(TableTimeFormat.Year, yearStart)
+            .Where(s => s.IsDeleted == 0 && s.AuditStatus == AuditStatusEnums.Default)
+            .ToListAsync(s => new
+            {
+                Id = s.Id,
+                Source = s.SourceType
+            });
+        var rechargeCount = applys.Where(s => s.Source == WalletSourceEnums.RechargeApply).Count();
+        var withdrawlCount = applys.Where(s => s.Source == WalletSourceEnums.WithdrawalApply).Count();
+        var cardRepayCount = applys.Where(s => s.Source == WalletSourceEnums.CardRepayApply).Count();
+        var loanRepayCount = applys.Where(s => s.Source == WalletSourceEnums.LoanRepayApply).Count();
+        return new ApplyDefaultCountDto
+        {
+            RechargeCount = rechargeCount,
+            WithdrawalCount = withdrawlCount,
+            CardRepayCount = cardRepayCount,
+            LoanRepayCount = loanRepayCount
+        };
     }
 }

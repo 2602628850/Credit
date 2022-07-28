@@ -62,4 +62,10 @@ public interface IUserWalletService
     /// <param name="userid"></param>
     /// <returns></returns>
     Task<List<MoneyApplyDto>> GetMoneyWithoutRecode(long userid, MoneyApplyDto moneyApplyDto);
+
+    /// <summary>
+    ///  获取申请未处理数量统计
+    /// </summary>
+    /// <returns></returns>
+    Task<ApplyDefaultCountDto> GetApplyDefaultCount();
 }
