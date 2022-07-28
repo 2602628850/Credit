@@ -678,9 +678,15 @@
             <param name="repayService"></param>
             <param name="userWalletService"></param>
         </member>
-        <member name="M:Credit.Api.Controllers.RepayController.GetRepayLevelList">
+        <member name="M:Credit.Api.Controllers.RepayController.GetRepayDHLevelList">
             <summary>
              获取还款等级集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.RepayController.GetRepayDKLevelList">
+            <summary>
+             获取代还款等级集合
             </summary>
             <returns></returns>
         </member>

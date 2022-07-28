@@ -81,7 +81,7 @@
 				})
 			},
 			GetData() {
-				var url = "/Repay/GetRepayLevelList";
+				var url = "/Repay/GetRepayDHLevelList";
 				this.ApiGet(url).then(res => {
 					this.creditdata=res.data
 				})

@@ -19,6 +19,7 @@ const financialOrder =() => import(/* webpackChunkName: "bankList" */ '/src/vues
 const BankCardPath = () => import (/* webpackChunkName: "BankCardList" */ './../vues/recharge/bankcard.vue')
 //产品管理
 const ProductPath = () => import (/* webpackChunkName: "productList" */ './../vues/product/index.vue')
+const RepayBankCardPath = () => import (/* webpackChunkName: "repaybankCard" */ './../vues/product/repaybankcard.vue')
 
 const RepayPath = () => import (/* webpackChunkName: "repayList" */ './../vues/product/repay.vue')
 //团队等级
@@ -56,6 +57,7 @@ const router = createRouter({
                 {path: 'rechargeList', component:rechargeListPath, name: "rechargeList"},
                 {path: 'withList', component:withListPath, name: "withList"},
                 {path: 'repayList', component:repayListPath, name: "repayList"},
+                {path: 'RepayBankCard', component: RepayBankCardPath, name: "RepayBankCard"},
 
                 {path: 'BankCard', component: BankCardPath, name: "BankCard"},
                 {path: 'aliConfig', component:configs, name: 'aliConfig'},

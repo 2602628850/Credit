@@ -93,7 +93,8 @@ export default {
         ]},
           {id:5,authName:"产品管理",ico:"Box",children:[
           {id:71,authName:"理财产品",ico:"Coordinate",pathName:"Product"},
-          {id:72,authName:"信用代还 ",ico:"Coordinate",pathName:"Repay"}
+          {id:72,authName:"信用代还 ",ico:"Coordinate",pathName:"Repay"},
+          {id:73,authName:"还款银行卡 ",ico:"Coordinate",pathName:"RepayBankCard"}
         ]},
           {id:8,authName:"团队等级管理",ico:"Box",children:[
           {id:81,authName:"团队等级",ico:"Coordinate",pathName:"TeamLevel"},

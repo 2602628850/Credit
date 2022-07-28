@@ -37,9 +37,21 @@ public class RepayController : BaseUserController
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public async Task<List<RepayLevelDto>> GetRepayLevelList()
+    public async Task<List<RepayLevelDto>> GetRepayDHLevelList()
     {
-        return await _repayService.GetRepayLevelList();
+        var RepayType = RepayTypeEnums.Card;
+        return await _repayService.GetRepayLevelList(RepayType);
+    }
+
+    /// <summary>
+    ///  获取代还款等级集合
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public async Task<List<RepayLevelDto>> GetRepayDKLevelList()
+    {
+        var RepayType = RepayTypeEnums.Loan;
+        return await _repayService.GetRepayLevelList(RepayType);
     }
     /// <summary>
     ///  获取还款等级

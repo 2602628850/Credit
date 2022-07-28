@@ -13,7 +13,6 @@
 	<el-table v-loading="loading" class="mgt w100" stripe :data="tableData" style="flex: 1" border :height="contentHeight">
 		<el-table-column prop="productName" label="产品名称" width="150" align="center"></el-table-column>
 		
-		<el-table-column prop="productName" label="产品图片" width="150" align="center"></el-table-column>
 		<el-table-column prop="dailyRate" label="日收益比例（%）" width="120" align="center"></el-table-column>
 		<el-table-column prop="cycle" label="收益周期（天）" width="120" align="center"></el-table-column>
 		<el-table-column prop="price" label="价格" width="100" align="center"></el-table-column>

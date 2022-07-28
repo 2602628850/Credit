@@ -8,7 +8,7 @@
 	</el-space>
 	<!--信用等级管理--> 
 	<div class="w100 mgt flex-row-between" id="search-button">
-		<el-button type="primary" @click="loadData(1)">查询</el-button>
+		<el-button type="primary" @click="loadData(1)" style="display:none;" >查询</el-button>
 		<el-button type="primary" @click="addItem">添加</el-button>
 	</div>
 	<el-table v-loading="loading" class="mgt w100" stripe :data="tableData" style="flex: 1" border :height="contentHeight">

@@ -2,6 +2,7 @@ using Credit.BankModels;
 using Credit.RepayModels;
 using Credit.RepayServices.Dtos;
 using Data.Commons.Dtos;
+using Data.Commons.Enums;
 using Data.Commons.Extensions;
 using Data.Commons.Helpers;
 using Data.Commons.Runtime;
@@ -22,7 +23,7 @@ public class RepayService : IRepayService
 
     #region 还款等级
 
-     /// <summary>
+    /// <summary>
     ///  还款等级信息验证
     /// </summary>
     /// <param name="input"></param>
@@ -159,10 +160,10 @@ public class RepayService : IRepayService
     /// </summary>
     /// <param name="isEnable"></param>
     /// <returns></returns>
-    public async Task<List<RepayLevelDto>> GetRepayLevelList(int isEnable = 1)
+    public async Task<List<RepayLevelDto>> GetRepayLevelList(RepayTypeEnums repayType,int isEnable = 1)
     {
         var list = await _freeSql.Select<RepayLevel>()
-            .Where(s => s.IsDeleted == 0 && s.IsEnable == 1)
+            .Where(s => s.IsDeleted == 0 && s.IsEnable == 1 && s.RepayType == repayType)
             .ToListAsync();
         return list.MapToList<RepayLevelDto>();
     }
@@ -193,7 +194,7 @@ public class RepayService : IRepayService
 
 
     #endregion
-    
+
     #region 还款银行卡
 
     /// <summary>
@@ -362,7 +363,7 @@ public class RepayService : IRepayService
             .Limit(5)
             .ToListAsync();
         //页面显示卡号的时候取8位数字
-        for(int i=0;i< list.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
             if (list[i].CardNo.Length > 8)
             {
@@ -384,16 +385,23 @@ public class RepayService : IRepayService
             .WhereIf(input.RepayLevelId.HasValue, s => s.RepayLevelId == input.RepayLevelId)
             .WhereIf(!string.IsNullOrEmpty(input.BindUser), s => s.BindUser.Contains(input.BindUser))
             .WhereIf(input.IsEnable.HasValue, s => s.IsEnable == input.IsEnable)
-            .WhereIf(input.RepayType.HasValue,s => s.RepayType == input.RepayType)
+            .WhereIf(input.RepayType.HasValue, s => s.RepayType == input.RepayType)
             .Where(s => s.IsDeleted == 0)
             .OrderByDescending(s => s.CreateAt)
             .Count(out long totalCount)
             .Page(input.PageIndex, input.PageSize)
             .ToListAsync();
+        var itemList = list.MapToList<RepayBankCardDto>();
+        foreach (var item in itemList)
+        {
+            var level = await GetRepayLevel(item.RepayLevelId);
+            item.LevelName = level.LevelName;
+        }
         var output = new PagedOutput<RepayBankCardDto>
         {
             TotalCount = totalCount,
-            Items = list.MapToList<RepayBankCardDto>()
+            Items = itemList
+
         };
 
         return output;
