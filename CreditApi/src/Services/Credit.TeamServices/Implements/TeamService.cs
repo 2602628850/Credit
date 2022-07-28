@@ -193,7 +193,7 @@ public class TeamService : ITeamService
         //查看是否存在相同层级的设置
         var hierarchyAny = await _freeSql.Select<TeamBuyProfitSetting>()
             .Where(s => s.Hierarchy == input.Hierarchy)
-            .Where(s => s.Id != input.Id)
+            .Where(s => s.Id != input.Id && s.IsDeleted == 0)
             .AnyAsync();
         if (hierarchyAny)
             throw new MyException("There are settings at the same level");

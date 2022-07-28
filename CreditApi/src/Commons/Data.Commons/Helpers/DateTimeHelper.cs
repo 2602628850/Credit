@@ -38,8 +38,20 @@ public static class DateTimeHelper
         var now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).Date;
         return new DateTimeOffset(now).ToUnixTimeMilliseconds();
     }
-    public static long GetTime( DateTime time)
+    public static long GetTime(DateTime time)
     { 
         return new DateTimeOffset(time).ToUnixTimeMilliseconds();
+    }
+
+    public static long MonthStart()
+    {
+        var monthTime = DateTime.UtcNow.AddDays(1 - DateTime.UtcNow.Day).Date;
+        return GetTime(monthTime);
+    }
+
+    public static long YearStart()
+    {
+        var yearTime = new DateTime(DateTime.UtcNow.Year, 1, 1);
+        return GetTime(yearTime);
     }
 }

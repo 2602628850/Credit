@@ -66,4 +66,14 @@ public class AdminWalletController : BaseAdminController
     {
         await _userWalletService.MoneyApplyAudit(input, CurrentAdmin.UserId);
     }
+
+    /// <summary>
+    ///  获取申请未处理数量统计
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public async Task<ApplyDefaultCountDto> GetApplyDefaultCount()
+    {
+        return await _userWalletService.GetApplyDefaultCount();
+    }
 }

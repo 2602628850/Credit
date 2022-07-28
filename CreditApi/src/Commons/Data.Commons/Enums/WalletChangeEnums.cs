@@ -84,7 +84,7 @@ public enum WalletSourceEnums
     /// <summary>
     ///  信用卡代还
     /// </summary>
-    [Description("代还")]
+    [Description("信用卡代还")]
     CardRepayment = 310,
     
     /// <summary>
