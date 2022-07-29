@@ -40,14 +40,15 @@
 			<template #default="scope">
 				<el-space>
 					<el-button type="primary" size="small" plain @click="updItem(scope.row)">修改</el-button>
-					<el-button type="danger" size="small" plain @click="delItem(scope.row)">删除</el-button>
+					<el-button type="danger" size="small"  v-show="isChooseDel==0" plain @click="delItem(scope.row,1)">删除</el-button>
+					<el-button type="danger" size="small"  v-show="isChooseDel==1" plain @click="delItem(scope.row,0)">删除</el-button>
 				</el-space>
 			</template>
 		</el-table-column>
 	</el-table>
 	<!--	</div>-->
 	<div class="w100 flex-row-end mgt" id="page">
-		<el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize"/>
+		<el-pagination background layout="prev, pager, next" @current-change="currentPage" :total="total" :page-size="pageSize"/>
 	</div>
 	<el-dialog v-model="windowStatus" v-loading="windowSaving" width="700px">
 		<el-row>
@@ -137,6 +138,7 @@
 		},
 		data() {
 			return {
+				isChooseDel:0,
 				start1:'00',
 				start2:'00',
 				start3:'00',
@@ -164,7 +166,10 @@
 			})
     },
 		methods: {
-			delItem(item) {
+				currentPage(pageindex){
+          this.loadData(pageindex)
+				},
+			delItem(item,chooseindex) {
 				this.$msgbox({
 					title: '提示',
 					message: '确认删除' + item.cardNo + '?',
@@ -176,6 +181,7 @@
 							this.$Http.post(urldelete, {id: item.id}).then(() => {
 								this.loadData();
 								done();
+								this.isChooseDel=chooseindex
 							}).catch(res => {
 								this.$message.error(res.data.message);
 								this.loading = false;

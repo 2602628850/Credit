@@ -45,14 +45,16 @@
 					<el-button type="danger" size="small" plain @click="upXJ(scope.row)" v-if="scope.row.isEnable==1">禁用</el-button>
 					<el-button type="primary" size="small" plain @click="upQY(scope.row)" v-else>启用</el-button>
 					<el-button type="primary" size="small" plain @click="updItem(scope.row)">修改</el-button>
-					<el-button type="danger" size="small" plain @click="delItem(scope.row)">删除</el-button>
+				
+				<el-button type="danger" v-show="isChooseDel==0" size="small" plain @click="delItem(scope.row,1)">删除</el-button>
+					<el-button type="danger" v-show="isChooseDel==1"  size="small" plain @click="delItem(scope.row,0)">删除</el-button>
 				</el-space>
 			</template>
 		</el-table-column>
 	</el-table>
 	<!--	</div>-->
 	<div class="w100 flex-row-end mgt" id="page">
-		<el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize"/>
+		<el-pagination background layout="prev, pager, next" @current-change="currentPage" :total="total" :page-size="pageSize"/>
 	</div>
 
 
@@ -127,6 +129,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 		},
 		data() {
 			return {
+					isChooseDel:0,
 			uploadUrl: 'http://localhost:8003/v1/Upload/Image',
 				levelName: '',
 				repayTypes:'',
@@ -147,6 +150,9 @@ import uploadFile  from "../../components/uploadPicture.vue"
   "upload-picture":uploadFile
   },
 		methods: {
+				currentPage(pageindex){
+          this.loadData(pageindex)
+				},
 			// 上传前，限制的上传图片大小
 			beforeImageUpload(rawFile){
                 if(rawFile.size / 1024 / 1024 > 10){
@@ -159,7 +165,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
             handleUpImage(res){
                 this.editItem.coverImage = res.data.url;
             },
-			delItem(item) {
+			delItem(item,indexcho) {
 				const ids=[];
 				ids.push(item.id);
 				this.$msgbox({
@@ -172,6 +178,7 @@ import uploadFile  from "../../components/uploadPicture.vue"
 							this.$Http.post('AdminRepay/RepayLevelDelete', {ids: ids}).then(() => {
 								this.loadData();
 								done();
+								this.isChooseDel=indexcho;
 							}).catch(res => {
 								this.$message.error(res.data.message);
 								this.loading = false;
