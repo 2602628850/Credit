@@ -122,6 +122,14 @@
 		mounted(){
 			this.GetData()
 		},
+		created() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			return;
+			}
+		},
 		methods: {
 			toteam() {
 				uni.navigateTo({

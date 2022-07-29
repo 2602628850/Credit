@@ -63,6 +63,14 @@
 				}]
 			}
 		},
+		created() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			return;
+			}
+		},
 		mounted(){
 			this.numberinput=this.dataitem[0].count+'';
 			//要提交的数据

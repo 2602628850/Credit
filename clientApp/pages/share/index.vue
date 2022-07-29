@@ -35,12 +35,16 @@
 				copyurl: "http://credit.ceshi-api.com/#/pages/register/index?invCode="
 			}
 		},
-		mounted() {
+		created() {
 			if (!uni.getStorageSync('token')) {
 			uni.reLaunch({
 				url:'/pages/login/login'
 			})
+			return;
 			}
+		},
+		mounted() {
+			
 			this.GetUserinfo()
 			
 		},

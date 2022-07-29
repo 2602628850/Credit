@@ -134,6 +134,14 @@
 				]
 			}
 		},
+		created() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			return;
+			}
+		},
 		methods: {
 			getNextShowInfo(nextLevel,number) {
 				let showText = this.$t('level.nextLevel');

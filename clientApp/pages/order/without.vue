@@ -63,6 +63,14 @@
 			this.param.AuditStatus='';
 			this.withoutList();
 		},
+		created() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			return;
+			}
+		},
 		methods:{
 			//代还列表
 			withoutList() {

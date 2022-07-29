@@ -85,6 +85,14 @@
               protitle: this.$t('prohall.title')
 			}
 		},
+		created() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			return;
+			}
+		},
 		methods: {
 			tocredit() {
 				uni.navigateTo({

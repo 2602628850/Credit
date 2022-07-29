@@ -50,6 +50,14 @@
 				editItem: {oldPwd:'',newPwd:'' }, 
 			}
 		},
+		created() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			return;
+			}
+		},
 		methods: { 
 			showMsg(msg) {
 				uni.showToast({

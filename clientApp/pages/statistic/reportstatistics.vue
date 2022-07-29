@@ -81,13 +81,17 @@
 			};
 		},
 		mounted() {
+			
+			this.GetTeamCount()
+			this.getServerData()
+		},
+		created() {
 			if (!uni.getStorageSync('token')) {
 			uni.reLaunch({
 				url:'/pages/login/login'
 			})
+			return;
 			}
-			this.GetTeamCount()
-			this.getServerData()
 		},
 		methods: {
 			ToChange() {

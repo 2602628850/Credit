@@ -28,7 +28,15 @@
 	import RegisterInputItem from "../register/register-input-item";
 	export default {
 		name: "change-info",
-		components: {RegisterInputItem, AppContentView, NavigationBar}
+		components: {RegisterInputItem, AppContentView, NavigationBar},
+		created() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			return;
+			}
+		},
 	}
 </script>
 

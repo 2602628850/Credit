@@ -28,6 +28,14 @@
 		onLoad(){
 			
 		},
+		created() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			return;
+			}
+		},
 		methods:{
 			UpdateCurrent(obj){
 				this.current=obj;

@@ -83,6 +83,14 @@
 			this.param.Status='';
 			this.withoutList();
 		},
+		created() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			return;
+			}
+		},
 		methods: {
 			//购买产品订单列表
 			withoutList() {

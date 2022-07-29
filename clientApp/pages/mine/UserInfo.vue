@@ -43,12 +43,16 @@
 				},
 			}
 		},
-		mounted() {
+		created() {
 			if (!uni.getStorageSync('token')) {
-				uni.reLaunch({
-					url: '/pages/login/login'
-				})
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			return;
 			}
+		},
+		mounted() {
+			
 			this.GetUserinfo()
 		},
 		methods: {

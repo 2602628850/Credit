@@ -101,11 +101,17 @@
                 userinfo:{balance:0},
 			}
 		},
-		mounted() {
-
-		},
+		
 		onLoad: function(option) {
            this.GetUser();
+		},
+		created() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			return;
+			}
 		},
 		methods: {
 			toDetail() {

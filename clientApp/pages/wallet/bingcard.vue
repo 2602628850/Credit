@@ -116,6 +116,14 @@
 			//获取银行列表
 			this.GetBank();
 		},
+		created() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			return;
+			}
+		},
 		methods:{
 			countryChange(e) {
 				this.countryIndex = e.detail.value;

@@ -84,7 +84,7 @@
 		},
 		onLoad() {
 			this.getBalance();
-			this.getCardlist(); 
+			this.getCardlist();
 		},
 		mounted() {
 			//要提交的数据
@@ -93,7 +93,14 @@
 			this.withoutObj.PaymentInfoId = 0; //三方支付默认为0
 
 		},
-
+		created() {
+			if (!uni.getStorageSync('token')) {
+				uni.reLaunch({
+					url: '/pages/login/login'
+				})
+				return;
+			}
+		},
 		methods: {
 			//获取用户余额
 			getBalance() {
@@ -127,9 +134,8 @@
 			getCardlist() {
 				var url = "/User/GetUserBindCardList";
 				this.ApiGet(url).then(res => {
-					this.cardlist = res.data 
-					if(res.data.length==0)
-					{ 
+					this.cardlist = res.data
+					if (res.data.length == 0) {
 						var msg = this.$t('without.binding');
 						this.TitleResult(msg)
 						uni.navigateTo({

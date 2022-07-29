@@ -158,6 +158,14 @@
 			this.GetRemainingChaka();
 			this.GetRepayLevel();
 		},
+		created() {
+			if (!uni.getStorageSync('token')) {
+			uni.reLaunch({
+				url:'/pages/login/login'
+			})
+			return;
+			}
+		},
 		methods: {
 			//因为等级介绍内容可能很长,所以不建议通过url传过来
 			GetRepayLevel() {
