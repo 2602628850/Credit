@@ -218,7 +218,7 @@ public class FinancilOrderService : IFinancilOrderService
         order.AuditUserId = auditUserId;
         order.AuditAt = DateTimeHelper.UtcNow();
         //每周任务设置
-        var creditvale = _settingService.GetSetting<WeekTaskCreditSetting>();
+        var creditvale = _settingService.GetSetting<TaskIntegralSetting>();
 
         //获取完成每日任务次数 
 
@@ -255,10 +255,10 @@ public class FinancilOrderService : IFinancilOrderService
             //更新用户为团队成员
             await _userService.UserBecomeTeamUser(order.UserId);
             ///判断每日任务完成次数是否上限
-            if (creditvale.Result.TaskCountLimit <= userTaskCount.WeekLoanRepayCount)
+            if (creditvale.Result.WeekTaskCountLimit <= userTaskCount.WeekLoanRepayCount)
             {
                 //增加用户信用值
-                await _userService.AddUserXYZ(order.UserId, creditvale.Result.TaskCreditValue);
+                await _userService.AddUserXYZ(order.UserId, creditvale.Result.WeekTaskCreditValue);
             }
 
 

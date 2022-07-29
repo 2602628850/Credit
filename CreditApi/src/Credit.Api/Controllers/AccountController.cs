@@ -40,8 +40,7 @@ public class AccountController : BaseController
     public async Task<UserLoginOutput> UserLogin([FromBody]UserLoginInput input)
     {
         return await _userService.UserLogin(input);
-    }
-
+    } 
     /// <summary>
     ///  管理员登录
     /// </summary>

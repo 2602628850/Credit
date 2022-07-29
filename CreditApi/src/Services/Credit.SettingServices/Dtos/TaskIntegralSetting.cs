@@ -34,4 +34,22 @@ public class TaskIntegralSetting : ISetting
     ///  贷款代还积分次数限制
     /// </summary>
     public int LoanRepayIntegralCountLimit { get; set; }
+    /// <summary>
+    ///  每日任务信用值
+    /// </summary>
+    public int TaskCreditValue { get; set; }
+
+    /// <summary>
+    ///  每日信用值任务次数
+    /// </summary>
+    public int TaskCountLimit { get; set; }
+    /// <summary>
+    ///  每周任务信用值
+    /// </summary>
+    public int WeekTaskCreditValue { get; set; }
+
+    /// <summary>
+    ///  每周信用值任务次数
+    /// </summary>
+    public int WeekTaskCountLimit { get; set; }
 }

@@ -412,30 +412,6 @@
             </summary>
             <param name="taskIntegral"></param>
         </member>
-        <member name="M:Credit.Api.Controllers.AdminSettingController.GetEverydayTaskCreditSetting">
-            <summary>
-             获取每日任务信用值配置
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Credit.Api.Controllers.AdminSettingController.EverydayTaskCreditSetting(Credit.SettingServices.Dtos.TaskCreditSetting)">
-            <summary>
-             每日任务信用值设置
-            </summary>
-            <param name="taskIntegral"></param>
-        </member>
-        <member name="M:Credit.Api.Controllers.AdminSettingController.GetWeekTaskCreditSetting">
-            <summary>
-             获取周任务信用值配置
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Credit.Api.Controllers.AdminSettingController.WeekTaskCreditSetting(Credit.SettingServices.Dtos.WeekTaskCreditSetting)">
-            <summary>
-             周任务信用值设置
-            </summary>
-            <param name="taskIntegral"></param>
-        </member>
         <member name="M:Credit.Api.Controllers.AdminSettingController.GetAlibabaCloudSetting">
             <summary>
              获取阿里巴巴服务设置
@@ -524,6 +500,47 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:Credit.Api.Controllers.AdminUserController">
+            <summary>
+             用户接口管理
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminUserController.#ctor(Data.Commons.Helpers.ITokenManager,Credit.UserServices.IUserService,Credit.UserWalletServices.IUserWalletService,Credit.UserBankCardServices.IUserBankCardService,Credit.IntegralServices.IIntegralOrderService,Credit.IntegralServices.IIntegralRecodeService,Credit.PayeeBankCardServices.IPayeeBankCardService)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminUserController.CreateAdminUser(Credit.UserServices.Dtos.AdminUserDto)">
+            <summary>
+             用户新增
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminUserController.UpdateAdminUser(Credit.UserServices.Dtos.AdminUserDto)">
+            <summary>
+             用户新增
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminUserController.GetUserInfo">
+            <summary>
+             获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminUserController.AdminUserDelete(Data.Commons.Dtos.IdInput)">
+            <summary>
+             银行删除
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminUserController.GetAdminUserPagedList(Credit.UserServices.Dtos.UserPagedInput)">
+            <summary>
+             获取管理员列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:Credit.Api.Controllers.AdminWalletController">
             <summary>
              钱包资金管理
@@ -555,6 +572,12 @@
              申请审核
             </summary>
             <param name="input"></param>
+        </member>
+        <member name="M:Credit.Api.Controllers.AdminWalletController.GetApplyDefaultCount">
+            <summary>
+             获取申请未处理数量统计
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Credit.Api.Controllers.BankController">
             <summary>

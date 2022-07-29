@@ -4,6 +4,31 @@
         <name>Credit.UserServices</name>
     </assembly>
     <members>
+        <member name="P:Credit.UserServices.Dtos.AdminUserDto.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.AdminUserDto.Username">
+            <summary>
+             账号
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.AdminUserDto.Nickname">
+            <summary>
+             昵称
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.AdminUserDto.HeadImage">
+            <summary>
+             头像
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.AdminUserDto.Password">
+            <summary>
+             确认密码
+            </summary>
+        </member>
         <member name="T:Credit.UserServices.Dtos.TeamUsersDto">
             <summary>
              团队成员DTO
@@ -339,6 +364,16 @@
              团队注册人数
             </summary>
         </member>
+        <member name="T:Credit.UserServices.Dtos.UserPagedInput">
+            <summary>
+             管理员分页输入
+            </summary>
+        </member>
+        <member name="P:Credit.UserServices.Dtos.UserPagedInput.UserName">
+            <summary>
+             管理员名称
+            </summary>
+        </member>
         <member name="T:Credit.UserServices.Dtos.UserTaskCompletedCountDto">
             <summary>
              用户任务完成次数
@@ -588,6 +623,13 @@
             <param name="sort"></param>
             <returns></returns>
         </member>
+        <member name="M:Credit.UserServices.UserService.GetAdminUserPagedList(Credit.UserServices.Dtos.UserPagedInput)">
+            <summary>
+            管理员列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:Credit.UserServices.IUserService">
             <summary>
              用户管理接口定义
@@ -612,6 +654,27 @@
              管理员用户登录
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.CreateAdminUser(Credit.UserServices.Dtos.AdminUserDto)">
+            <summary>
+             用户新增管理员
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.UpdateAdminUser(Credit.UserServices.Dtos.AdminUserDto)">
+            <summary>
+             修改管理员资料
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.UserDelete(System.Int64,System.Int64)">
+            <summary>
+             人员删除
+            </summary>
+            <param name="userId"></param>
             <returns></returns>
         </member>
         <member name="M:Credit.UserServices.IUserService.CreateUser(Credit.UserServices.Dtos.UserInput)">
@@ -741,6 +804,13 @@
              获取用户完成任务次数
             </summary>
             <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Credit.UserServices.IUserService.GetAdminUserPagedList(Credit.UserServices.Dtos.UserPagedInput)">
+            <summary>
+             获取用户信息
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
     </members>

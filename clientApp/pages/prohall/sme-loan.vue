@@ -167,9 +167,9 @@
 					if(res.data=="add_success"){
 						var msg=this.$t('financialproduct.buysuc');
 						this.TitleResult(msg)
-						uni.navigateTo({
-							url: '/pages/prohall/sme'
-						})
+						// uni.navigateTo({
+						// 	url: '/pages/prohall/sme'
+						// })
 					}else{
 						var msg= res.data;
 						this.TitleResult(msg)

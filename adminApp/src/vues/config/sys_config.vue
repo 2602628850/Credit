@@ -25,6 +25,10 @@
                 <el-input v-if="scope.row.key == 'invitationIntegral'" v-model="scope.row.value"></el-input>
                 <el-input v-if="scope.row.key == 'cardRepayIntegralCountLimit'" v-model="scope.row.value"></el-input>
                 <el-input v-if="scope.row.key == 'loanRepayIntegralCountLimit'" v-model="scope.row.value"></el-input>
+                <el-input v-if="scope.row.key == 'taskCreditValue'" v-model="scope.row.value"></el-input>
+                <el-input v-if="scope.row.key == 'taskCountLimit'" v-model="scope.row.value"></el-input>
+                <el-input v-if="scope.row.key == 'weekTaskCreditValue'" v-model="scope.row.value"></el-input>
+                <el-input v-if="scope.row.key == 'weekTaskCountLimit'" v-model="scope.row.value"></el-input>
             </template>
         </el-table-column>
     </el-table>
@@ -118,6 +122,30 @@
                         label: '贷款代还积分次数限制',
                         mark: '',
                         key: 'loanRepayIntegralCountLimit',
+                        value: ''
+                    },
+                    {
+                        label: '信用卡代还信用值',
+                        mark: '',
+                        key: 'taskCreditValue',
+                        value: ''
+                    },
+                    {
+                        label: '信用卡代还信用值每日次数限制',
+                        mark: '',
+                        key: 'taskCountLimit',
+                        value: ''
+                    },
+                    {
+                        label: '贷款代还信用值',
+                        mark: '',
+                        key: 'weekTaskCreditValue',
+                        value: ''
+                    },
+                    {
+                        label: '贷款代还信用值每周次数限制',
+                        mark: '',
+                        key: 'weekTaskCountLimit',
                         value: ''
                     },
                 ]

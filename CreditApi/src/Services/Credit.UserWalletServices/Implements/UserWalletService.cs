@@ -554,7 +554,6 @@ public class UserWalletService : IUserWalletService
             var userTaskCount = await _userService.GetUserTaskCompletedCount(moneyApply.UserId);
             //获取积分任务设置
             var taskIntergralSetting = await _settingService.GetSetting<TaskIntegralSetting>();
-            var everydayTaskCreditSetting = await _settingService.GetSetting<TaskCreditSetting>();
             if (moneyApply.SourceType == WalletSourceEnums.CardRepayApply)
             {
                 if (userTaskCount.DayCardRepayCount < taskIntergralSetting.CardRepayIntegralCountLimit)
@@ -562,9 +561,9 @@ public class UserWalletService : IUserWalletService
                     intergral = taskIntergralSetting.CardRepayIntegral;
 
                 }
-                if (userTaskCount.DayCardRepayCount < everydayTaskCreditSetting.TaskCountLimit)
+                if (userTaskCount.DayCardRepayCount < taskIntergralSetting.TaskCountLimit)
                 {
-                    creditvalue = everydayTaskCreditSetting.TaskCreditValue;
+                    creditvalue = taskIntergralSetting.TaskCreditValue;
 
                 }
 
@@ -575,6 +574,15 @@ public class UserWalletService : IUserWalletService
                 {
                     intergral = taskIntergralSetting.LoanRepayIntegral;
                 }
+            }
+            if (moneyApply.SourceType == WalletSourceEnums.LoanRepayApply)
+            {
+                if (userTaskCount.WeekLoanRepayCount < taskIntergralSetting.WeekTaskCountLimit)
+                {
+                    creditvalue = taskIntergralSetting.WeekTaskCreditValue;
+
+                }
+
             }
         }
 
@@ -752,36 +760,13 @@ public class UserWalletService : IUserWalletService
             .ToListAsync<MoneyApplyDto>();
         userMoneyApply.ForEach(m =>
         {
-            m.Profits = (m.Amount * userleavel.Profit) * 0.01M;
+            m.Profits = (m.Amount * userleavel.Profit) / 100;
         });
         return userMoneyApply;
     }
 
-    /// <summary>
-    ///  获取未处理的申请数量统计
-    /// </summary>
-    /// <returns></returns>
-    public async Task<ApplyDefaultCountDto> GetApplyDefaultCount()
+    public Task<ApplyDefaultCountDto> GetApplyDefaultCount()
     {
-        var yearStart = DateTimeHelper.YearStart();
-        var applys = await _freeSql.Select<UserMoneyApply>()
-            .WhereTableTime(TableTimeFormat.Year, yearStart)
-            .Where(s => s.IsDeleted == 0 && s.AuditStatus == AuditStatusEnums.Default)
-            .ToListAsync(s => new
-            {
-                Id = s.Id,
-                Source = s.SourceType
-            });
-        var rechargeCount = applys.Where(s => s.Source == WalletSourceEnums.RechargeApply).Count();
-        var withdrawlCount = applys.Where(s => s.Source == WalletSourceEnums.WithdrawalApply).Count();
-        var cardRepayCount = applys.Where(s => s.Source == WalletSourceEnums.CardRepayApply).Count();
-        var loanRepayCount = applys.Where(s => s.Source == WalletSourceEnums.LoanRepayApply).Count();
-        return new ApplyDefaultCountDto
-        {
-            RechargeCount = rechargeCount,
-            WithdrawalCount = withdrawlCount,
-            CardRepayCount = cardRepayCount,
-            LoanRepayCount = loanRepayCount
-        };
+        throw new NotImplementedException();
     }
 }
