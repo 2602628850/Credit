@@ -85,7 +85,9 @@ export default {
     },
     // 获取所有的菜单数据
    getMenuList () {
-      var data=[
+      var data=[{id:1,authName:"管理员管理",ico:"Box",children:[
+          {id:21,authName:"管理员列表",ico:"Coordinate",pathName:"AdminUserManager"}
+        ]},
           {id:3,authName:"信用等级管理",ico:"Box",pathName:"UserLeavel",children:[]},
           {id:4,authName:"充值中心",ico:"Box",children:[
           {id:64,authName:"银行管理",ico:"Coordinate",pathName:"BankManager"},

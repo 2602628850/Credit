@@ -28,7 +28,26 @@ namespace Credit.UserServices
         /// <param name="input"></param>
         /// <returns></returns>
         Task<UserLoginOutput> AdminUserLogin(UserLoginInput input);
+        /// <summary>
+        ///  用户新增管理员
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task CreateAdminUser(AdminUserDto input);
 
+        /// <summary>
+        ///  修改管理员资料
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<string> UpdateAdminUser(AdminUserDto input);
+
+        /// <summary>
+        ///  人员删除
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task UserDelete(long userId, long deleteUserId);
         /// <summary>
         ///  用户新增
         /// </summary>
@@ -157,5 +176,12 @@ namespace Credit.UserServices
         /// <param name="userId"></param>
         /// <returns></returns>
         Task<UserTaskCompletedCountDto> GetUserTaskCompletedCount(long userId);
+
+        /// <summary>
+        ///  获取用户信息
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PagedOutput<AdminUserDto>> GetAdminUserPagedList(UserPagedInput input);
     }
 }

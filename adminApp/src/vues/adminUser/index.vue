@@ -2,42 +2,46 @@
 	<!--信用等级管理-->
 	<el-space wrap class="w100" id="search-info">
 		<el-space class="search-input">
-			<!-- <div>团队等级</div>
-			<el-input v-model="levelName"></el-input> -->
+			<div>登录账号</div>
+			<el-input v-model="username"></el-input>
 		</el-space>
 	</el-space>
-	<!--信用等级管理--> 
 	<div class="w100 mgt flex-row-between" id="search-button">
-		<el-button type="primary" @click="loadData(1)" style="display:none;" >查询</el-button>
+		<el-button type="primary" @click="loadData(1)">查询</el-button>
 		<el-button type="primary" @click="addItem">添加</el-button>
 	</div>
 	<el-table v-loading="loading" class="mgt w100" stripe :data="tableData" style="flex: 1" border :height="contentHeight">
-		<el-table-column prop="hierarchy" label="利润层级" width="500" align="center"></el-table-column>
-		<el-table-column prop="buyProfitRate" label="利润比例" width="500" align="center"></el-table-column>
-    <el-table-column prop="" label="操作" align="center" width="200" fixed="right">
+		<el-table-column prop="username" label="登录账号" width="500" align="center"></el-table-column>
+		
+		<el-table-column prop="nickname" label="昵称" width="500" align="center"></el-table-column> 
+    <el-table-column prop="" label="操作" align="center" width="200" fixed='right'>
 			<template #default="scope">
-				<el-space>
+				<el-space> 
 					<el-button type="primary" size="small" plain @click="updItem(scope.row)">修改</el-button>
-					
-				<el-button type="danger" v-show="isChooseDel==0" size="small" plain @click="delItem(scope.row,1)">删除</el-button>
-					<el-button type="danger" v-show="isChooseDel==1"  size="small" plain @click="delItem(scope.row,0)">删除</el-button>
+					<el-button type="danger" size="small" plain @click="delItem(scope.row)">删除</el-button>
 				</el-space>
 			</template>
 		</el-table-column>
 	</el-table>
 	<!--	</div>-->
 	<div class="w100 flex-row-end mgt" id="page">
-		<el-pagination background layout="prev, pager, next" @current-change="currentPage" :total="total" :page-size="pageSize"/>
+		<el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize"/>
 	</div>
+
+
 	<el-dialog v-model="windowStatus" v-loading="windowSaving" width="600px">
 		<el-space direction="vertical">
 			<el-space>
-				<div class="in-title">利润层级:</div>
-				<el-input class="in-input" v-model="editItem.hierarchy"></el-input>
+				<div class="in-title">登录名称：</div>
+				<el-input class="in-input" v-model="editItem.username"></el-input>
 			</el-space>
 			<el-space>
-				<div class="in-title">利润比例：</div>
-				<el-input class="in-input" v-model="editItem.buyProfitRate"></el-input>
+				<div class="in-title">昵称：</div>
+				<el-input class="in-input" v-model="editItem.nickname"></el-input>
+			</el-space>
+			<el-space>
+				<div class="in-title">管理员密码：</div>
+				<el-input class="in-input" v-model="editItem.password"></el-input>
 			</el-space>
 			<el-space>
 				<el-button type="primary" @click="saveItem">保存</el-button>
@@ -48,7 +52,7 @@
 
 <script>
 	export default {
-		name: "teamProfit-manager",
+		name: "adminuser-manager",
 		beforeRouteEnter(to, from, next) {
 			next(vm => {
 				vm.getTableHeight();
@@ -56,8 +60,8 @@
 			})
 		},
 		data() {
-			return { 
-					isChooseDel:0,
+			return {
+				username: '',
 				contentHeight: '0px',
 				pageIndex: 1,
 				pageSize: 20,
@@ -65,28 +69,25 @@
 				tableData: [],
 				loading: false,
 				windowStatus: false,
-				editItem: {},
+				editItem: {isEnable:"0",coverImage:''},
 				windowSaving: false,
+				coverImage:'',
 			}
 		},
 	components: {
   },
 		methods: {
-				currentPage(pageindex){
-          this.loadData(pageindex)
-				},
-			delItem(item,indexcho) {
+			delItem(item) {
 				this.$msgbox({
 					title: '提示',
-					message: '确认删除?',
+					message: '确认删除' + item.username + '?',
 					showCancelButton: true,
 					beforeClose: (action,instance,done) => {
 						if (action == 'confirm') {
 							this.loading = true;
-							this.$Http.post('AdminTeam/TeamProfitDelete', {Id: item.id}).then(() => {
+							this.$Http.post('AdminUser/AdminUserDelete', {id: item.id}).then(() => {
 								this.loadData();
 								done();
-								this.isChooseDel=indexcho;
 							}).catch(res => {
 								this.$message.error(res.data.message);
 								this.loading = false;
@@ -97,11 +98,15 @@
 					}
 				})
 
-			},
+			}, 
 			saveItem() {
+				if (!this.editItem.username) {
+					this.$message.error('请输入产品名称');
+					return;
+				}
 				this.windowSaving = true;
 				if (this.editItem.id) {
-					this.$Http.post('AdminTeam/TeamProfitUpdate', this.editItem).then(() => {
+					this.$Http.post('AdminUser/UpdateAdminUser', this.editItem).then(() => {
 						this.windowStatus = false;
 						this.loadData()
 					}).catch(res => {
@@ -109,7 +114,7 @@
 						this.$message.error(res.data.message)
 					})
 				} else {
-					this.$Http.post('AdminTeam/TeamProfitCreate', this.editItem).then(() => {
+					this.$Http.post('AdminUser/CreateAdminUser', this.editItem).then(() => {
 						this.windowStatus = false;
 						this.loadData()
 					}).catch(res => {
@@ -126,9 +131,14 @@
         this.editItem.isEnable ='1';
 			},
 			updItem(item) {
+				setTimeout(()=>{
+					this.$refs.child.updateUrl(item.coverImage)
+				},10)
+			
 				this.windowStatus = true;
 				this.windowSaving = false;
-				this.editItem = JSON.parse(JSON.stringify(item)); 
+				this.editItem = JSON.parse(JSON.stringify(item));
+        this.editItem.isEnable =''+ item.isEnable+'';
 				
 			},
 			getTime(time) {
@@ -147,14 +157,18 @@
 			},
 
 			loadData(page) {
-				let param = {}; 
+			
+				let param = {};
+				if (this.username) {
+					param.username = this.username;
+				}
 				if (page) {
 					this.pageIndex = page-1;
 				}
 				param.pageIndex = this.pageIndex;
 				param.pageSize = this.pageSize;
 				this.loading = true;
-				this.$Http.get('AdminTeam/GetTeamProfitPagedList', {params: param}).then(res => {
+				this.$Http.get('AdminUser/GetAdminUserPagedList', {params: param}).then(res => {
 				
 					this.tableData = res.data.data.items;
 					this.total = parseInt(res.data.data.totalCount);

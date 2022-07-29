@@ -77,10 +77,10 @@
 								</view>
 								<view class="flex-1">
 									<text class="text-lg text-bold margin-bottom-xs">
-										<span>{{$t('level.Dailytask')}}(0/3)</span>
+										<span>{{$t('level.Dailytask')}}({{completeTask.dayCardRepayCount}}/{{CreditLevleSet.taskCountLimit}})</span>
 									</text>
 									<text class="text-secondary text-xs"><span>{{$t('level.daytask')}}
-											+3</span></text>
+											+{{CreditLevleSet.taskCreditValue}}</span></text>
 								</view>
 								<view class="btn-go margin-top-sm margin-left">
 									<text class="text-white text-small margin-left-xs">
@@ -97,10 +97,10 @@
 								</view>
 								<view class="flex-1">
 									<text class="text-lg text-bold margin-bottom-xs">
-										<span>{{$t('level.Eweektask')}}(0/1)</span>
+										<span>{{$t('level.Eweektask')}}({{completeTask.weekLoanRepayCount}}/{{CreditLevleSet.weekTaskCountLimit}})</span>
 									</text>
 									<text class="text-secondary text-xs"><span>{{$t('level.weektask')}}
-											+20</span></text>
+											+{{CreditLevleSet.weekTaskCreditValue}}</span></text>
 								</view>
 								<view class="btn-go margin-top-sm margin-left">
 									<text class="text-white text-small margin-left-xs">
@@ -202,7 +202,9 @@
 					}
 				],
 				Vipdata: [],
-				CreditLevle:{}
+				CreditLevle:{},
+				completeTask:{},
+				CreditLevleSet:{}
 
 			}
 		},
@@ -210,6 +212,8 @@
 		mounted(){
 			this.GetData()
 			this.GetUserCreditinfo()
+			this.GetCreditLevleSet()
+			this.GetcompleteTask()
 		},
 		methods: {
 			SharedTo(uri) {
@@ -221,6 +225,18 @@
 				var url = "/User/GetCreditLevleById";
 				this.ApiGet(url).then(res => {
 					this.CreditLevle=res.data
+				})
+			},		
+			GetcompleteTask() {
+				var url = "/User/GetUserCompleteTaskCount";
+				this.ApiGet(url).then(res => {
+					this.completeTask=res.data
+				})
+			},	
+			GetCreditLevleSet() {
+				var url = "/AdminSetting/GetTaskIntegralSetting";
+				this.ApiGet(url).then(res => {
+					this.CreditLevleSet=res.data
 				})
 			},			
 			GetData() {

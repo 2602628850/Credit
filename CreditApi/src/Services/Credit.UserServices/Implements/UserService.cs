@@ -763,7 +763,7 @@ namespace Credit.UserServices
             var dayStart = DateTimeHelper.DayStart();
             var dayCardRepayCount = await _freeSql.Select<UserMoneyApply>()
                 .WhereTableTime(TableTimeFormat.Year, dayStart)
-                .Where(s => s.SourceType == WalletSourceEnums.CardRepayApply 
+                .Where(s => s.SourceType == WalletSourceEnums.CardRepayApply
                 && s.UserId == userId)
                 .Where(s => s.AuditStatus == AuditStatusEnums.Success
                             && s.IsDeleted == 0)
@@ -772,7 +772,7 @@ namespace Credit.UserServices
             var weekStart = DateTimeHelper.WeekMondayStart();
             var weekLoanRepayCount = await _freeSql.Select<UserMoneyApply>()
                 .WhereTableTime(TableTimeFormat.Year, weekStart)
-                .Where(s => s.SourceType == WalletSourceEnums.LoanRepayApply 
+                .Where(s => s.SourceType == WalletSourceEnums.LoanRepayApply
                             && s.UserId == userId)
                 .Where(s => s.AuditStatus == AuditStatusEnums.Success
                             && s.IsDeleted == 0)
@@ -827,6 +827,65 @@ namespace Credit.UserServices
             await _freeSql.Update<Users>().SetSource(UserInfo).ExecuteAffrowsAsync();
             return "success";
         }
-         
+
+        public async Task CreateAdminUser(AdminUserDto input)
+        {
+            var user = new Users
+            {
+                Id = IdHelper.GetId(),
+                Nickname = input.Nickname,
+                Username = input.Username,
+                Password = input.Password,
+                HeadImage = input.HeadImage,
+                IsAdmin = 1,
+            };
+            await _freeSql.Insert(user).ExecuteAffrowsAsync();
+        }
+
+        public async Task<string> UpdateAdminUser(AdminUserDto input)
+        {
+            var UserInfo = await _freeSql.Select<Users>()
+              .Where(s => s.Id == input.Id)
+              .ToOneAsync();
+            UserInfo.Nickname = input.Nickname;
+            UserInfo.HeadImage = input.HeadImage;
+            await _freeSql.Update<Users>().SetSource(UserInfo).ExecuteAffrowsAsync();
+            return "success";
+        }
+        /// <summary>
+        /// 管理员列表
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedOutput<AdminUserDto>> GetAdminUserPagedList(UserPagedInput input)
+        {
+            var list = await _freeSql.Select<Users>()
+            .Where(s => s.IsDeleted == 0 && s.IsAdmin == 1)
+            .WhereIf(!string.IsNullOrEmpty(input.UserName), s => s.Username.Contains(input.UserName))
+            .Count(out long totalCouunt)
+            .OrderByDescending(s => s.UpdateAt)
+            .Page(input.PageIndex, input.PageSize)
+            .ToListAsync();
+            var output = new PagedOutput<AdminUserDto>
+            {
+                TotalCount = totalCouunt,
+                Items = list.MapToList<AdminUserDto>()
+            };
+            return output;
+        }
+
+        public async Task UserDelete(long userId, long deleteUserId)
+        {
+            var user = await _freeSql.Select<Users>()
+           .Where(s => s.Id == userId)
+           .Where(s => s.IsDeleted == 0)
+           .ToOneAsync();
+            if (user == null)
+                throw new MyException("Delete data does not exist");
+            user.IsDeleted = 1;
+            user.UpdateAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            user.DeleteUserId = deleteUserId;
+            await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync(); 
+        }
     }
 }
