@@ -2,7 +2,7 @@
 	<navigation-bar :title="$t('share.title')"></navigation-bar>
 	<app-content-view style="width: 96%;margin-left: 2%;" :show-tab-bar="false" :show-navigation-bar="true">
 	<view class="imgvew">
-		<image src="/static/image/share/share.png" style="width: 150px; height: 150px;" draggable="true"></image>
+	 <canvas canvas-id="qrcode" />
 	</view>
 	<view style="width: 100%;color: green;font-size: 13px;text-align: center;"  v-on:click="copyUrl()" >
 		<text>
@@ -28,10 +28,11 @@
 </template>
 
 <script>
+	import uQRCode from '@/components/Sansnn-uQRCode/uqrcode/common/uqrcode.js'
 	export default {
 		data() {
-			return {
-				copyurl: "http://h5.credit.ceshi-api.com/#/pages/register/index?invCode="
+			return {			
+				copyurl: "http://credit.ceshi-api.com/#/pages/register/index?invCode="
 			}
 		},
 		mounted() {
@@ -41,13 +42,28 @@
 			})
 			}
 			this.GetUserinfo()
+			
 		},
 		methods: {
+			make() {
+				 uQRCode.make({
+				            canvasId: 'qrcode',
+				            componentInstance: this,
+				            text: this.copyurl,
+				            size: uni.upx2px(250),//二维码大小
+				            backgroundColor: '#ffffff',//背景颜色
+				            foregroundColor: '#000000',
+				            fileType: 'png',
+				            correctLevel: uQRCode.defaults.correctLevel,
+				            success: res => {         
+				            }
+				    })
+			},
 			GetUserinfo() {
 				var url = "/User/GetUserInfo";
 				this.ApiGet(url).then(res => { 
 					this.copyurl =this.copyurl+ res.data.invCode
-					
+					this.make();
 				})
 			},
 			copyUrl() {
@@ -121,10 +137,9 @@
 	}
 
 	.imgvew {
-		width: 150px;
-		height: 100px;
-		display: block;
-		margin: 20% auto;
+		margin-left: 35%;
+		margin-top: 10%;
+		
 	}
 
 

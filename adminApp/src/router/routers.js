@@ -44,7 +44,7 @@ const router = createRouter({
         {
             path: '/indexPath', component: IndexPath,
             children: [
-                {path: '', redirect: "/indexPath/UserLeavel"},//index
+                {path: '', redirect: "/indexPath/AdminUserManager"},//index
                 {path: 'index', component: App3, name: "toapp3"},
                 {path: 'vuedemoto', component: App2, name: "toapp2"},
                 {path: '/credit',component: IndexPath,name: 'credit' },
