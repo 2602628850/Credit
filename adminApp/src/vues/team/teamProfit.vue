@@ -12,11 +12,10 @@
 		<el-button type="primary" @click="addItem">添加</el-button>
 	</div>
 	<el-table v-loading="loading" class="mgt w100" stripe :data="tableData" style="flex: 1" border :height="contentHeight">
-		<el-table-column prop="id" label="Id" width="200" align="center"></el-table-column>
-		
-		<el-table-column prop="hierarchy" label="利润层级" width="200" align="center"></el-table-column>
-		<el-table-column prop="buyProfitRate" label="利润比例" width="200" align="center"></el-table-column>
-    <el-table-column prop="" label="操作" align="center" width="200">
+	
+		<el-table-column prop="hierarchy" label="利润层级" width="400" align="center"></el-table-column>
+		<el-table-column prop="buyProfitRate" label="利润比例" width="400" align="center"></el-table-column>
+    <el-table-column prop="" label="操作" align="center" width="400">
 			<template #default="scope">
 				<el-space>
 					<el-button type="primary" size="small" plain @click="updItem(scope.row)">修改</el-button>

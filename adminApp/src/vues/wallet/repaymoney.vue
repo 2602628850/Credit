@@ -29,7 +29,18 @@
   <el-table-column prop="amount" label="申请金额" width="200" align="center"></el-table-column>
 		<el-table-column prop="auditStatus" label="审核状态" width="200" align="center">
 			<template #default="scope">
-				{{ scope.row.auditStatus=="0"?"默认":scope.row.auditStatus=="10"?"处理中":scope.row.auditStatus=="20"?"成功":"失败"}}
+				<span v-if="scope.row.auditStatus==20" style="color:#1E90FF">
+					成功
+				</span>
+				<span v-if="scope.row.auditStatus==0" style="color:#8B8B7A;">
+					默认
+				</span>
+					<span v-if="scope.row.auditStatus==10" style="color:#006400;">
+					处理中
+				</span>
+					<span v-if="scope.row.auditStatus==30" style="color:red;">
+					失败
+				</span>
 			</template>
 		</el-table-column>
     <el-table-column prop="auditUsername" label="审核人" width="200" align="center"></el-table-column>
@@ -40,6 +51,7 @@
 				{{ getTime(scope.row.auditAt) }}
 			</template>
 		</el-table-column>
+		<el-table-column prop="auditText" label="审核意见" width="300" align="center"></el-table-column>
      <el-table-column prop="" label="操作" align="center" width="130" fixed="right">
             <template #default="scope">
                 <el-space>
@@ -102,6 +114,10 @@
 		},
 	components: {
   },
+		created(){
+		this.StartTime=new Date(new Date(new Date().toLocaleDateString()).getTime())
+		this.EndTime=new Date(new Date(new Date().toLocaleDateString()).getTime() + 24 * 60 * 60 * 1000 - 1)
+	},
 		methods: {
 	currentPage(pageindex){
           this.loadData(pageindex)

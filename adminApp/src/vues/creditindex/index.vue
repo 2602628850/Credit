@@ -107,9 +107,9 @@ export default {
           },
            {
               id: 9,authName: '钱包资金管理',ico: 'box', children: [
-                  {id:801,authName: '充值管理',ico: 'Coordinate',pathName: 'rechargeList'},
-                  {id:802,authName: '提现管理',ico: 'Coordinate',pathName: 'withList'},
-                  {id:803,authName: '还款管理',ico: 'Coordinate',pathName: 'repayList'}
+                  {id:801,authName: '充值申请列表',ico: 'Coordinate',pathName: 'rechargeList'},
+                  {id:802,authName: '提款申请列表',ico: 'Coordinate',pathName: 'withList'},
+                  {id:803,authName: '还款申请列表',ico: 'Coordinate',pathName: 'repayList'}
               ]
           },
           {

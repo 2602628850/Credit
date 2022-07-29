@@ -12,7 +12,6 @@
 	</div>
 	<!--	<div :style="{height: contentHeight}">-->
 	<el-table v-loading="loading" class="mgt w100" stripe :data="tableData" style="flex: 1" border :height="contentHeight">
-		<el-table-column prop="id" label="ID" width="200" align="center"></el-table-column>
 		<el-table-column prop="levelName" label="等级名称" width="200" align="center"></el-table-column>
 		<el-table-column prop="creditValue" label="等级信用值" width="200" align="center"></el-table-column>
 		<el-table-column prop="levelSort" label="序号" width="200" align="center"></el-table-column>

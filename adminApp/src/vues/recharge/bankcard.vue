@@ -179,6 +179,7 @@
 							this.loading = true;
 								const urldelete = decodeURI(encodeURI('AdminPayeeBankCard​/PayeeBankCardDelete').replace(/%E2%80%8B/g, ""));
 							this.$Http.post(urldelete, {id: item.id}).then(() => {
+								this.	bankId=''
 								this.loadData();
 								done();
 								this.isChooseDel=chooseindex
@@ -224,6 +225,7 @@
 					const urlcread = decodeURI(encodeURI('AdminPayeeBankCard​/PayeeBankCardUpdate').replace(/%E2%80%8B/g, ""));
 					this.$Http.post(urlcread, this.editItem).then(() => {
 						this.windowStatus = false;
+						this.	bankId=''
 						this.loadData()
 					}).catch(res => {
 						this.windowSaving = false;
@@ -233,6 +235,7 @@
 					const urlupdate = decodeURI(encodeURI('AdminPayeeBankCard​/PayeeBankCardCreate').replace(/%E2%80%8B/g, ""));
 					this.$Http.post(urlupdate, this.editItem).then(() => {
 						this.windowStatus = false;
+							this.	bankId=''
 						this.loadData()
 					}).catch(res => {
 						this.windowSaving = false;

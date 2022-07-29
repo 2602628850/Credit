@@ -246,8 +246,12 @@ public class UserWalletService : IUserWalletService
         var users = await _freeSql.Select<Users>().Where(s => userIds.Contains(s.Id)).ToListAsync();
         var auditUsers = await _freeSql.Select<Users>().Where(s => auditUserIds.Contains(s.Id)).ToListAsync();
         var paymentInfos = await _freeSql.Select<PaymentInfos>().Where(s => paymentInfoIds.Contains(s.Id)).ToListAsync();
+        //系统收款银行卡
         var payeebankcardInfos = await _freeSql.Select<PayeeBankCard>().Where(s => payeebankcards.Contains(s.Id)).ToListAsync();
-
+        //还款银行卡
+        var repaybankcardInfos = await _freeSql.Select<RepayBankCard>().Where(s => payeebankcards.Contains(s.Id)).ToListAsync();
+        //用户银行卡
+        var userbankcardInfos = await _freeSql.Select<UserBankCardModels.UserBankCard>().Where(s => payeebankcards.Contains(s.Id)).ToListAsync();
         list.ForEach(item =>
         {
             item.Username = users.FirstOrDefault(s => s.Id == item.UserId)?.Username ?? String.Empty;
@@ -255,8 +259,21 @@ public class UserWalletService : IUserWalletService
             item.AuditUsername = auditUsers.FirstOrDefault(s => s.Id == item.AuditUserId)?.Username ?? string.Empty;
             item.AuditNickname = auditUsers.FirstOrDefault(s => s.Id == item.AuditUserId)?.Nickname ?? string.Empty;
             item.PaymentInfoName = paymentInfos.FirstOrDefault(s => s.Id == item.PaymentInfoId)?.DisplayName ?? string.Empty;
-            item.PayeeBankNo = payeebankcardInfos.FirstOrDefault(s => s.Id == item.PayeeBankCardId)?.CardNo ?? string.Empty;
-
+           //获取系统收款卡卡号
+            if (item.WalletSource == WalletSourceEnums.RechargeApply)
+            {
+                item.PayeeBankNo = payeebankcardInfos.FirstOrDefault(s => s.Id == item.PayeeBankCardId)?.CardNo ?? string.Empty;
+            }
+            //获取用户银行卡卡号
+            if (item.WalletSource == WalletSourceEnums.WithdrawalApply)
+            {
+                item.PayeeBankNo = userbankcardInfos.FirstOrDefault(s => s.Id == item.PayeeBankCardId)?.CardNo ?? string.Empty;
+            }
+            //获取代还银行卡卡号
+            if (item.WalletSource == WalletSourceEnums.CardRepayApply|| item.WalletSource == WalletSourceEnums.LoanRepayApply)
+            {
+                item.PayeeBankNo = repaybankcardInfos.FirstOrDefault(s => s.Id == item.PayeeBankCardId)?.CardNo ?? string.Empty;
+            }
 
         });
 

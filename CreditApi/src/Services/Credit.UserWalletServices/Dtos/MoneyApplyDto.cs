@@ -79,7 +79,7 @@ public class MoneyApplyDto : UserMoneyApplyInput
     public long ApplyId { get; set; }
 
     /// <summary>
-    ///  收支来源  0 充值  10 提款
+    /// 申请类型
     /// </summary>
     public WalletSourceEnums WalletSource { get; set; }
 
