@@ -87,6 +87,8 @@ export default {
    getMenuList () {
       var data=[{id:1,authName:"管理员管理",ico:"Box",children:[
           {id:21,authName:"管理员列表",ico:"Coordinate",pathName:"AdminUserManager"}
+        ]},{id:2,authName:"用户管理",ico:"Box",children:[
+          {id:31,authName:"用户管理",ico:"Coordinate",pathName:"UserManager"}
         ]},
           {id:3,authName:"信用等级管理",ico:"Box",pathName:"UserLeavel",children:[]},
           {id:4,authName:"充值中心",ico:"Box",children:[

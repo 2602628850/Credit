@@ -813,5 +813,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:Credit.UserServices.IUserService.GetUserPagedList(Credit.UserServices.Dtos.UserPagedInput)">
+            <summary>
+             获取用户信息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

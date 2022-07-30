@@ -887,5 +887,22 @@ namespace Credit.UserServices
             user.DeleteUserId = deleteUserId;
             await _freeSql.Update<Users>().SetSource(user).ExecuteAffrowsAsync(); 
         }
+
+        public async Task<PagedOutput<UserDto>> GetUserPagedList(UserPagedInput input)
+        {
+            var list = await _freeSql.Select<Users>()
+           .Where(s => s.IsDeleted == 0 && s.IsAdmin == 0)
+           .WhereIf(!string.IsNullOrEmpty(input.UserName), s => s.Username.Contains(input.UserName))
+           .Count(out long totalCouunt)
+           .OrderByDescending(s => s.UpdateAt)
+           .Page(input.PageIndex, input.PageSize)
+           .ToListAsync();
+            var output = new PagedOutput<UserDto>
+            {
+                TotalCount = totalCouunt,
+                Items = list.MapToList<UserDto>()
+            };
+            return output;
+        }
     }
 }

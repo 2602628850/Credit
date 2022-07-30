@@ -34,6 +34,7 @@ const withListPath = () => import (/* webpackChunkName: "withAudit" */ './../vue
 //还款管理
 const repayListPath = () => import (/* webpackChunkName: "repayAudit" */ './../vues/wallet/repaymoney.vue')
 const adminUserPath = () => import (/* webpackChunkName: "adminUser" */ './../vues/adminUser/index.vue')
+const userPath = () => import (/* webpackChunkName: "user" */ './../vues/adminUser/user.vue')
 
 
 //创建路由, hash 模式�
@@ -64,6 +65,7 @@ const router = createRouter({
                 {path: 'aliConfig', component:configs, name: 'aliConfig'},
                 {path: 'taskIntegral', component:configs, name: 'taskIntegral'},
                 {path: 'AdminUserManager', component:adminUserPath, name: 'AdminUserManager'},
+                {path: 'UserManager', component:userPath, name: 'UserManager'},
                 
             ]
         },

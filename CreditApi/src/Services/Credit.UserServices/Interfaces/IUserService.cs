@@ -183,5 +183,11 @@ namespace Credit.UserServices
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedOutput<AdminUserDto>> GetAdminUserPagedList(UserPagedInput input);
+        /// <summary>
+        ///  获取用户信息
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PagedOutput<UserDto>> GetUserPagedList(UserPagedInput input);
     }
 }

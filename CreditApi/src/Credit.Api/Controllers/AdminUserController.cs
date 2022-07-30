@@ -99,5 +99,15 @@ namespace Credit.Api.Controllers
         {
             return await _userService.GetAdminUserPagedList(input);
         }
+        /// <summary>
+        ///  获取管理员列表
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<PagedOutput<UserDto>> GetUserPagedList([FromQuery] UserPagedInput input)
+        {
+            return await _userService.GetUserPagedList(input);
+        }
     }
 }
